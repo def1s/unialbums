@@ -1,0 +1,60 @@
+.list {
+	min-height: 400px;
+	background-color: rgb(14, 14, 14);
+	padding-top: 100px;
+	padding-bottom: 50px;
+	.list__content {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-around;
+		width: 1000px;
+		margin: 0 auto;
+		margin-top: 20px;
+		.list__item {
+			width: 291px;
+			cursor: pointer;
+			height: 428px;
+			background-color: rgb(26, 26, 26);
+			border-radius: 30px;
+			border-style: solid;
+			border-color: rgb(39, 39, 39);
+			border-width: 1px;
+			transition: all .5s;
+			&:nth-child(n + 4) {
+				margin-top: 40px;
+			}
+			img {
+				width: 269px;
+				height: 269px;
+				margin-left: 11px;
+				margin-top: 11px;
+				border-radius: 20px;
+			}
+			&-title-album {
+				font-size: 24px;
+				color: #fff;
+				text-align: center;
+				margin-top: 20px;
+			}
+			&-artist {
+				font-size: 20px;
+				color: #fff;
+				text-align: center;
+			}
+			&-rating {
+				border-radius: 100%;
+				width: 33px;
+				height: 33px;
+				background-color: #fff;
+				margin: 0 auto;
+				margin-top: 10px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			&:hover {
+				scale: 1.08;
+			}
+		}
+	}
+}

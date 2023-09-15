@@ -1,0 +1,31 @@
+.filters {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	width: 300px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgb(29, 28, 33);
+	border-radius: 20px;
+	height: 45px;
+	&__item {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 22px;
+		background-color: rgb(0, 0, 0);
+		height: 40px;
+		// width: 100px;
+		margin: 0 5px 0 5px;
+		padding: 5px 10px 5px 10px;
+		color: #fff;
+		border-radius: 15px;
+		cursor: pointer;
+		transition: .5s;
+		&:hover {
+			scale: 1.08;
+		}
+	}
+}

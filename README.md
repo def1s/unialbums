@@ -14,7 +14,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### 'how to use json db?'
+### `how to use json db?`
 Firsly, you need to install `npm i json-server`\
 Sedondly, use CLI json-server for launching rate.js\
 Input `json-server -w rate.js`\# rating-albums

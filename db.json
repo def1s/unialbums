@@ -1,0 +1,193 @@
+{
+  "albums": [
+    {
+      "cover": "https://upload.wikimedia.org/wikipedia/ru/9/94/Ballads_1.png",
+      "title": "BALLADS 1",
+      "artist": "JOJI",
+      "rating": "100",
+      "id": 1
+    },
+    {
+      "cover": "https://upload.wikimedia.org/wikipedia/en/2/21/Jpegmafia_AMHAC_1.jpg",
+      "title": "ALL MY HEROES ARE CORNBALLS",
+      "artist": "JPEGMAFIA",
+      "rating": "100",
+      "id": 2
+    },
+    {
+      "cover": "https://upload.wikimedia.org/wikipedia/en/thumb/1/19/Jpegmafia_LP%21.jpg/220px-Jpegmafia_LP%21.jpg",
+      "title": "LP!",
+      "artist": "JPEGMAFIA",
+      "rating": "100",
+      "id": 3
+    },
+    {
+      "cover": "https://images.genius.com/bbefe84e7405752e9d1262d1be3f3f73.1000x1000x1.png",
+      "title": "MARILYN MANSON",
+      "artist": "KAI ANGEL",
+      "rating": "39",
+      "id": 4
+    },
+    {
+      "cover": "https://tntmusic.ru/media/content/article@2x/2018-07-27_08-25-52__ac8338aa-9176-11e8-8578-914f52146014.jpg",
+      "title": "TEENAGE LOVE",
+      "artist": "LIZER",
+      "rating": "75",
+      "id": 5
+    },
+    {
+      "cover": "https://townsquare.media/site/722/files/2015/05/71ScD5gRleL._SL1200_.jpg?w=1200&h=0&zc=1&s=0&a=t&q=89",
+      "title": "NEVERMIND",
+      "artist": "NIRVANA",
+      "rating": "82",
+      "id": 9
+    },
+    {
+      "cover": "https://avatars.yandex.net/get-music-content/4404215/3023fb4e.a.14643705-1/m1000x1000?webp=false",
+      "title": "VICTORY",
+      "artist": "THOMAS MRAZ",
+      "rating": "73",
+      "id": 10
+    },
+    {
+      "cover": "https://sun6-20.userapi.com/impg/XN41wCJyfZ9l4BlgP7i2BPL-PiWOsEQ7n76yuw/0-eHoJkr3so.jpg?size=1440x1440&quality=95&sign=f6fc7162791fbb7c585993f5901154ab&c_uniq_tag=qibwhe8Z-u4UuSLRpPNjqTjvdY4E2Zprkqv2h0qpPZQ&type=album",
+      "title": "SMITHEREENS",
+      "artist": "JOJI",
+      "rating": "87",
+      "id": 11
+    },
+    {
+      "cover": "https://yt3.ggpht.com/ytc/AKedOLQ8OtSfsfEEk7wNYcyP5X6W_VMo4kDa44GdLqFxDQ=s900-c-k-c0x00ffffff-no-rj",
+      "title": "NECTAR",
+      "artist": "JOJI",
+      "rating": "82",
+      "id": 12
+    },
+    {
+      "cover": "https://avatars.yandex.net/get-music-content/5966316/c7aa3b11.a.9453927-2/m1000x1000?webp=false",
+      "title": "ПЛАНЕТЫ",
+      "artist": "PLOHOYPAREN",
+      "rating": "92",
+      "id": 13
+    },
+    {
+      "cover": "https://cdn42.zvuk.com/pic?type=release&id=7960960&ext=jpg&size=1920x1920",
+      "title": "HANGOVER",
+      "artist": "THOMAS MRAZ",
+      "rating": "100",
+      "id": 14
+    },
+    {
+      "cover": "https://is4-ssl.mzstatic.com/image/thumb/Music114/v4/67/ec/5a/67ec5af5-0bdb-f678-f7bd-9d61d53e646b/886449082629.jpg/1200x1200bf-60.jpg",
+      "title": "LIL CHILL",
+      "artist": "GONE.FULDD",
+      "rating": "95",
+      "id": 15
+    },
+    {
+      "cover": "https://text-pesni.net/uploads/posts/2020-12/gonefludd-lame-shit-1.jpg",
+      "title": "BOYS DONT CRY",
+      "artist": "GONE.FLUDD",
+      "rating": "100",
+      "id": 16
+    },
+    {
+      "cover": "https://www.melomanchick.ru/wp-content/uploads/2020/07/Gone.Fludd-VUDU.jpg",
+      "title": "VOODO CHILD",
+      "artist": "GONE.FLUDD",
+      "rating": "93",
+      "id": 17
+    },
+    {
+      "cover": "https://vsrap.ru/wp-content/uploads/2019/11/5weaiq6xj-4.jpg",
+      "title": "ОДИНОЧНАЯ ПСИХИЧЕСКАЯ АТАКА",
+      "artist": "GONE.FLUDD",
+      "rating": "80",
+      "id": 18
+    },
+    {
+      "cover": "https://cdn61.zvuk.com/pic?type=release&id=19628766&ext=jpg&size=1920x1920",
+      "title": "DIGITAL FANTAZY",
+      "artist": "GONE.FLUDD",
+      "rating": "82",
+      "id": 19
+    },
+    {
+      "cover": "https://www.melomanchick.ru/wp-content/uploads/2020/07/GONE.Fludd-SUPERCHUITS.jpg",
+      "title": "СУПЕРЧУИТС",
+      "artist": "GONE.FLUDD",
+      "rating": "100",
+      "id": 20
+    },
+    {
+      "cover": "https://is2-ssl.mzstatic.com/image/thumb/Music114/v4/3b/ae/7d/3bae7da6-8b46-2f08-cd60-57d9edfb7240/cover.jpg/1200x1200bf-60.jpg",
+      "title": "GHETTO GARDEN",
+      "artist": "MAYOT",
+      "rating": "76",
+      "id": 21
+    },
+    {
+      "cover": "https://sun9-14.userapi.com/impf/RRl3xYmNyQdPqOMDEZdmFC6hfEUto9RGY7m_hA/o0mvHk3t4no.jpg?size=2160x2160&quality=96&proxy=1&sign=a8d0d4561838e1cfd1fed03a58d77880&type=album",
+      "title": "ЗАПРАВКА КИД",
+      "artist": "MAYOT",
+      "rating": "95",
+      "id": 22
+    },
+    {
+      "cover": "https://freight.cargo.site/t/original/i/5508d53b2ee16a5449f115bce69633faaf7cc39391e4deb9947293df0c927351/j8uDkbd4cB8.jpg",
+      "title": "ЗАПРАВКА КИД 2",
+      "artist": "MAYOT",
+      "rating": "94",
+      "id": 23
+    },
+    {
+      "cover": "https://sun6-21.userapi.com/impg/IEh9yOR50GmYdOrHX5Id4n7BrxFGpnxv_g7TkQ/5VOVV4BJyj8.jpg?size=1280x1280&quality=95&sign=be52b18522a42019f59ea3230f9da7c5&c_uniq_tag=8-oiEpJfGFVYukyVAIM2ZYyxTyGnlu1ewvlHz-hiT10&type=album",
+      "title": "ЗАПРАВКА КИД 3",
+      "artist": "MAYOT",
+      "rating": "32",
+      "id": 24
+    },
+    {
+      "cover": "https://vsrap.ru/wp-content/uploads/2019/10/9iRhEIhZqfA.jpg",
+      "title": "ОПИАТЫ КРУГ",
+      "artist": "ПЛАТИНА",
+      "rating": "100",
+      "id": 25
+    },
+    {
+      "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/fe/bb/ce/febbce06-010e-4055-62b6-208fcee5cdcb/cover.jpg/1200x1200bf-60.jpg",
+      "title": "РНБ КЛУБ",
+      "artist": "ПЛАТИНА",
+      "rating": "100",
+      "id": 26
+    },
+    {
+      "cover": "https://images.genius.com/6fa2a1df192bb6b8deee5c45bef2188e.1000x1000x1.png",
+      "title": "SOSA MUZIK",
+      "artist": "ПЛАТИНА",
+      "rating": "69",
+      "id": 27
+    },
+    {
+      "cover": "https://zh.followlyrics.com/storage/131/1304258.jpg",
+      "title": "СЛАДКИХ СНОВ",
+      "artist": "ПЛАТИНА",
+      "rating": "66",
+      "id": 28
+    },
+    {
+      "cover": "https://t2.genius.com/unsafe/1266x0/https%3A%2F%2Fimages.genius.com%2Ff61487ae26e33e65f779e4f707a1d903.1000x1000x1.png",
+      "title": "индепендент",
+      "artist": "VACIO",
+      "rating": "94",
+      "id": 29
+    },
+    {
+      "cover": "https://t2.genius.com/unsafe/1266x0/https%3A%2F%2Fimages.genius.com%2F2ec32b9255870a307da76c59a33669e9.1000x1000x1.png",
+      "title": "88",
+      "artist": "VACIO",
+      "rating": "76",
+      "id": 30
+    }
+  ]
+}
