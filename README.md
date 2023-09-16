@@ -1,20 +1,23 @@
-# Getting Started with Create React App
+# Авторская база данных с оценкой альбомов
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Я являюсь меломаном и в этом проекте решил собрать все прослушанные мной альбомы, которые хотя бы как-то запомнились мне.\
+База данных реализована на плагине `json-server`, который позволяет быстро сделать локальную json БД (что и понятно из названия). Сайт стоит локально в моей сети вайфай, потому в нем нет никаких защит и авторизации. (в будущем, возможно, это поменяется).
 
-## Available Scripts
+## Функционал
 
-In the project directory, you can run:
+1. Отображение списка альбомов с json сервера.
+2. Добавление в БД и оценка альбома.
+3. Сортировка по некоторым критериям (могут меняться)
+4. Поиск конкретного альбома по БД.
+5. Оценка альбома по критериям (В РАЗРАБОТКЕ).
+6. Просмотр подробной информации об альбоме (В РАЗРАБОТКЕ).
+7. Добавление треков к каждому альбому и их последующая оценка (В РАЗРАБОТКЕ).
 
-### `npm start`
+## Как запустить?
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `how to use json db?`
-Firsly, you need to install `npm i json-server`\
-Sedondly, use CLI json-server for launching rate.js\
-Input `json-server -w rate.js`\# rating-albums
+Проект создан с помощью `create-react-app` и запускается следующим образом:
+1. Проект клонируется/скачивается.
+2. Прописывается `npm init`.
+3. Для запуска устанавливаем `json-server`.
+4. Запускаем БД: `json-server -p {порт} -w {JSON_файл, у меня в проекте db.json}`.
+5. И последнее: `npx start`.
