@@ -12,7 +12,8 @@
 			width: 14px;
 		}
 	}
-	&__cover {
+	/* &__cover {
+		width: 300px;
 		img {
 			width: 300px;
 			height: 300px;
@@ -21,7 +22,7 @@
 			position: absolute;
 			content: "\01F614   Изображение не загружено.";
 			background-color: #837c7c;
-			right: 30px;
+			right: 60px;
 			top: 30px;
 			width: 300px;
 			height: 300px;
@@ -31,12 +32,16 @@
 			box-shadow: 0 0 0 0.45em #837c7c, 0 1.2em 3.6em rgba(1, 7, 60, 0.3);
 			border-radius: 1px;
 		}
-	}
+		.final-rating {
+			color: #fff;
+			margin-top: 47px;
+			font-size: 24px;
+		}
+	} */
 	&__content {
 		animation: fade-in 0.2s ease-in;
 		position: relative;
-		width: 780px;
-		height: 400px;
+		width: 900px;
 		background-color: #000;
 		padding: 25px;
 		border-radius: 20px;
@@ -46,7 +51,6 @@
 		display: flex;
 		justify-content: space-around;
 		.form {
-			// background-color: #fff;
 			width: 400px;
 			display: flex;
 			flex-wrap: wrap;
@@ -73,12 +77,12 @@
 			}
 			&__input {
 				position: absolute;
-				right: 60px;
+				right: 0;
 				display: block;
 				border: none;
 				background-color:rgb(41, 40, 44);
 				border-radius: 10px;
-				width: 170px;
+				width: 200px;
 				height: 34px;
 				padding: 10px;
 				color: #fff;
@@ -89,6 +93,28 @@
 			&__descr {
 				font-size: 20px;
 				color: #fff;
+			}
+			&__rate {
+				display: flex;
+				align-items: center;
+				padding-left: 5px;
+				position: absolute;
+				right: 0px;
+				&-item {
+					width: 13px;
+					height: 18px;
+					background-color: #fff;
+					border-radius: 4px;
+					margin-right: 5px;
+					&_hover {
+						background-color: red;
+					}
+				}
+				&-value {
+					text-align: center;
+					color: #fff;
+					width: 20px;
+				}
 			}
 			.submit {
 				margin: 0 auto;

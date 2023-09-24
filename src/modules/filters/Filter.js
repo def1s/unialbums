@@ -28,8 +28,6 @@ export default function Filter({onSelectFilter, activeFilter}) {
 	}
 
 	const filtersOnPage = filters.map((filter, i) => {
-		// console.log(filter);
-		console.log(activeFilter);
 		return(
 			<div 
 				onClick={(e) => onSelectFilter(e)}

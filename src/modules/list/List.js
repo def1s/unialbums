@@ -21,7 +21,9 @@ export default function List(props) {
 
 							return (
 								<div className="list__item" key={id}>
-									<img src={cover} alt="Обложка альбома"/>
+									<div className="list__item-img">
+										<img src={cover} alt="Обложка альбома"/>
+									</div>
 									<div className="list__item-title-album">{title}</div>
 									<div className="list__item-artist">{artist}</div>
 									<div className="list__item-rating" style={stylez}>{rating}</div>
