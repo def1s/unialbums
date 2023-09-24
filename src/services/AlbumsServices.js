@@ -1,4 +1,4 @@
-class AlbumsServices {
+class AlbumsServices { //добавить обработки ошибок через .ok и .catch
 	getAlbums = async (url) => {
 		const res = await fetch(
 			url,

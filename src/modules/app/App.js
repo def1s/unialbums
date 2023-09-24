@@ -12,7 +12,7 @@ export default function App() {
 	const [albums, setAlbums] = useState([]);
 	const [searchStr, setSearchStr] = useState('');
 	const [modal, setModal] = useState(false);
-	const [filter, setFilter] = useState('');
+	const [filter, setFilter] = useState('СБРОС');
 
 	const onChangeInputSearch = (e) => {
 		setSearchStr(e.target.value);
@@ -33,16 +33,12 @@ export default function App() {
 	const onSelectFilter= (e) => {
 		setFilter(e.target.innerText);
 	}
-
-	const onOpenModal = () => { //объединить в одну функцию, переключающую хук
-		setModal(modal => modal = true);
+	
+	const onHandleModal = () => {
+		setModal(modal => !modal);
 	}
 
-	const onCloseModal = () => {
-		setModal(modal => modal = false);
-	}
-
-	const onFilter = (data, filter) => {
+	const onFilter = (data) => {
 		switch(filter) {
 			case 'ЛУЧШЕЕ':
 				return data.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
@@ -57,23 +53,24 @@ export default function App() {
 
 		const albumServices = new AlbumsServices(); //вынести в отдельную функцию
 		albumServices.getAlbums('http://localhost:3030/albums')
-			.then(response => setAlbums(response));
+			.then(response => setAlbums(response)); //добавить catch
 
 	}, []);
 
-	const visibleAlbums = onFilter(onSearch(albums, searchStr), filter);
+	const visibleAlbums = onFilter(onSearch(albums, searchStr));
 
 	return (
 		<>
 			<Header 
 				onChangeInputSearch={onChangeInputSearch} 
 				searchStr={searchStr}
-				onOpenModal={onOpenModal}
+				onOpenModal={onHandleModal}
 				onSelectFilter={onSelectFilter}
+				activeFilter={filter}
 			/>
 			<List albums={visibleAlbums}/>
 			
-			{modal ? <Modal onCloseModal={onCloseModal}/> : null}
+			{modal ? <Modal onCloseModal={onHandleModal}/> : null}
 		</>
 	);
 }

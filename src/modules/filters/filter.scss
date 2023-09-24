@@ -3,13 +3,27 @@
 	left: 50%;
 	top: 50%;
 	transform: translateX(-50%) translateY(-50%);
-	width: 300px;
+	width: 500px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	background-color: rgb(29, 28, 33);
 	border-radius: 20px;
 	height: 45px;
+	&__wrapper {
+		display: flex;
+		width: 400px;
+		overflow: hidden;
+		background-color: #4e4c4c;
+		height: 50px;
+		align-items: center;
+		border-radius: 20px;
+	}
+	&__window {
+		display: flex;
+		align-items: center;
+		transition: all .5s;
+	}
 	&__item {
 		display: flex;
 		justify-content: center;
@@ -17,7 +31,6 @@
 		font-size: 22px;
 		background-color: rgb(0, 0, 0);
 		height: 40px;
-		// width: 100px;
 		margin: 0 5px 0 5px;
 		padding: 5px 10px 5px 10px;
 		color: #fff;
@@ -26,6 +39,16 @@
 		transition: .5s;
 		&:hover {
 			scale: 1.08;
+		}
+		&_active {
+			background-color: rgb(197, 11, 11);
+		}
+	}
+	&__arrow {
+		width: 40px;
+		cursor: pointer;
+		&:first-child {
+			transform: rotateZ(180deg);
 		}
 	}
 }

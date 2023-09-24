@@ -2,11 +2,14 @@ import './header.scss';
 
 import Filter from '../filters/Filter';
 
-export default function Header({onChangeInputSearch, searchStr, onOpenModal, onSelectFilter}) {
+export default function Header({onChangeInputSearch, searchStr, onOpenModal, onSelectFilter, activeFilter}) {
 	return (
 		<header className="header">
 			<div className="container">
-				<Filter onSelectFilter={onSelectFilter}/>
+				<Filter 
+					onSelectFilter={onSelectFilter}
+					activeFilter={activeFilter}
+				/>
 				<div className="header__wrapper">
 					<button className='add-album-button' onClick={onOpenModal}>ДОБАВИТЬ АЛЬБОМ</button>
 

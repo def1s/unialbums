@@ -2,10 +2,10 @@ import './list.scss';
 
 export default function List(props) {
 	return (
-		<main class="list">
-			<div class="container">
+		<main className="list">
+			<div className="container">
 
-				<div class="list__content">
+				<div className="list__content">
 
 					{
 						props.albums.map(({title, artist, rating, cover, id}) => {
@@ -20,11 +20,11 @@ export default function List(props) {
 							}
 
 							return (
-								<div class="list__item" key={id}>
-									<img src={cover} alt=""/>
-									<div class="list__item-title-album">{title}</div>
-									<div class="list__item-artist">{artist}</div>
-									<div class="list__item-rating" style={stylez}>{rating}</div>
+								<div className="list__item" key={id}>
+									<img src={cover} alt="Обложка альбома"/>
+									<div className="list__item-title-album">{title}</div>
+									<div className="list__item-artist">{artist}</div>
+									<div className="list__item-rating" style={stylez}>{rating}</div>
 								</div>
 							);
 						})
