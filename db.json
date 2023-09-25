@@ -181,6 +181,83 @@
       "artist": "VACIO",
       "rating": "76",
       "id": 30
+    },
+    {
+      "cover": "https://avatars.yandex.net/get-music-content/2806365/fb81ba1c.a.8806511-2/m1000x1000",
+      "title": "NO LABEL",
+      "artist": "LIL KRYSTALLL",
+      "tracksRating": 8,
+      "atmosphereRating": 9,
+      "bitsRating": 8,
+      "textRating": 9,
+      "rating": 93,
+      "id": 32
+    },
+    {
+      "cover": "https://avatars.yandex.net/get-music-content/2789402/f6a0ef22.a.12760903-1/m1000x1000",
+      "title": "BORN TO TRAP",
+      "artist": "KIZARU",
+      "tracksRating": 7,
+      "atmosphereRating": 9,
+      "bitsRating": 9,
+      "textRating": 9,
+      "rating": 89,
+      "id": 33
+    },
+    {
+      "cover": "https://avatars.yandex.net/get-music-content/118603/38485663.a.6891115-1/m1000x1000",
+      "title": "IDC",
+      "artist": "YUNG DRUG",
+      "tracksRating": 8,
+      "atmosphereRating": 9,
+      "bitsRating": 9,
+      "textRating": 8,
+      "rating": 93,
+      "id": 35
+    },
+    {
+      "cover": "https://avatars.yandex.net/get-music-content/163479/b4158560.a.5943768-1/m1000x1000",
+      "title": "САМ ДАМБ ЩИТ (VOLUME 1)",
+      "artist": "THRILL PILL",
+      "tracksRating": 7,
+      "atmosphereRating": 9,
+      "bitsRating": 8,
+      "textRating": 9,
+      "rating": 88,
+      "id": 36
+    },
+    {
+      "cover": "https://avatars.yandex.net/get-music-content/1880735/8394f487.a.9221118-1/m1000x1000",
+      "title": "ОПГ СИТИ",
+      "artist": "OG BUDA",
+      "tracksRating": 5,
+      "atmosphereRating": 9,
+      "bitsRating": 9,
+      "textRating": 6,
+      "rating": 75,
+      "id": 37
+    },
+    {
+      "cover": "https://avatars.yandex.net/get-music-content/5234847/fcf7635c.a.16442117-1/m1000x1000",
+      "title": "РЭП АЛЬБОМ ДЕЛЮКС",
+      "artist": "ПОЛМАТЕРИ",
+      "tracksRating": 7,
+      "atmosphereRating": 9,
+      "bitsRating": 7,
+      "textRating": 9,
+      "rating": 87,
+      "id": 38
+    },
+    {
+      "cover": "https://avatars.yandex.net/get-music-content/5234847/86aca8a0.a.17156053-1/m1000x1000",
+      "title": "ПЛОХОЙ ПОЦ",
+      "artist": "PLOHOYPAREN",
+      "tracksRating": 7,
+      "atmosphereRating": 9,
+      "bitsRating": 9,
+      "textRating": 6,
+      "rating": 86,
+      "id": 39
     }
   ]
 }

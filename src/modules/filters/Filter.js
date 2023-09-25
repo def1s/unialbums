@@ -5,7 +5,7 @@ import './filter.scss';
 import arrow from '../../img/arrow.png';
 
 export default function Filter({onSelectFilter, activeFilter}) {
-	const filters = ['сброс', 'лучшее', 'худшее'];
+	const filters = ['сброс', 'лучшее', 'худшее', 'по_исполнителю', 'по_алфавиту']; //какой-то баг с добавлением фильтра из нескольких слов
 	const letterWidth = 18; //ширина одного символа в названии фильтра
 	const widthOfWindow = 400; //ширина видимого окна фильтров
 	const standartOffset = filters[0].length * letterWidth; //стандартный сдвиг

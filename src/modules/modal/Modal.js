@@ -5,7 +5,7 @@ import cross from '../../img/cross.png';
 import AlbumsServices from '../../services/AlbumsServices';
 import { useState, useEffect } from 'react';
 
-export default function Modal({onCloseModal}) {
+export default function Modal({onCloseModal, loadingAlbums}) {
 	const [img, setImg] = useState('');
 	const [title, setTitle] = useState('НАЗВАНИЕ');
 	const [artist, setArtist] = useState('ИСПОЛНИТЕЛЬ');
@@ -24,20 +24,30 @@ export default function Modal({onCloseModal}) {
 		setFinalRating(rating);
 	}, [likedTracksRating, currentAtmosphereRating, currentBitsRating, currentTextRating]);
 
-	const onAddAlbum = (e) => {	
+	const onAddAlbum = (e) => {	 //добавить проверку на пустые поля
 		e.preventDefault();
 
 		const albumServices = new AlbumsServices();
-		const album = { //в будущем отправлять не finalRating, а критерии оценки, чтобы отображать их на альбомах
+		const album = {
 			cover: e.target.cover.value,
 			title: e.target.title.value,
 			artist: e.target.artist.value,
+			tracksRating: likedTracksRating,
+			atmosphereRating: currentAtmosphereRating,
+			bitsRating: currentBitsRating,
+			textRating: currentTextRating,
 			rating: finalRating
 		}
 
 		albumServices.postAlbum('http://localhost:3030/albums', album);
 		e.target.reset();
 		setImg('');
+		setCurrentAtmosphereRating(0);
+		setLikedTracksRating(0);
+		setCurrentBitsRating(0);
+		setCurrentTextRating(0);
+
+		loadingAlbums();
 	}
 
 	const onChangeTitle = (e) => {

@@ -44,18 +44,46 @@ export default function App() {
 				return data.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
 			case 'ХУДШЕЕ':
 				return data.sort((a, b) => parseFloat(a.rating) - parseFloat(b.rating));
+			case 'ПО_ИСПОЛНИТЕЛЮ':
+				return data.sort((a, b) => {
+					if (a.artist > b.artist) {
+						return -1;
+					}
+					if (a.artist < b.artist) {
+						return 1;
+					}
+					return 0;
+				});
+			case 'ПО_АЛФАВИТУ':
+				return data.sort((a, b) => {
+					if (a.title > b.title) {
+						return 1;
+					}
+					if (a.title < b.title) {
+						return -1;
+					}
+					return 0;
+				});
 			default:
 				return data;
 		}
 	}
 
 	useEffect(() => {
+		loadingAlbums();
 
+		/* const albumServices = new AlbumsServices(); //вынести в отдельную функцию
+		albumServices.getAlbums('http://localhost:3030/albums')
+			.then(response => setAlbums(response)); //добавить catch */
+
+	}, []);
+
+	const loadingAlbums = () => {
 		const albumServices = new AlbumsServices(); //вынести в отдельную функцию
 		albumServices.getAlbums('http://localhost:3030/albums')
 			.then(response => setAlbums(response)); //добавить catch
 
-	}, []);
+	}
 
 	const visibleAlbums = onFilter(onSearch(albums, searchStr));
 
@@ -70,7 +98,7 @@ export default function App() {
 			/>
 			<List albums={visibleAlbums}/>
 			
-			{modal ? <Modal onCloseModal={onHandleModal}/> : null}
+			{modal ? <Modal onCloseModal={onHandleModal} loadingAlbums={loadingAlbums}/> : null}
 		</>
 	);
 }
