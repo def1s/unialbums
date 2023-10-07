@@ -1,29 +1,19 @@
-class AlbumsServices { //добавить обработки ошибок через .ok и .catch
-	getAlbums = async (url) => {
-		const res = await fetch(
-			url,
-			{
-				method: 'GET'
-			}
-	);
-		return await res.json();
+import { useHttp } from "../hooks/http.hook";
+
+const useAlbumsServices = () => { //добавить обработки ошибок через .ok и .catch
+	const {request, loading, error, clearError} = useHttp();
+
+	const getAlbums = async (url) => {
+		const res = request(url);
+		return await res;
 	}
 
-	postAlbum = async (url, album) => {
-		const res = await fetch(
-			url,
-			{
-				method: 'POST',
-				headers: {
-					'Content-type': 'application/json'
-				},
-				body: JSON.stringify(album)
-			}
-		)
-		.catch(error => new Error('Something went wrong...'));
-
-		return await res.json();
+	const postAlbum = async (url, album) => {
+		const res = await request(url, 'POST', album);
+		return await res;
 	}
+
+	return {getAlbums, postAlbum, loading, error, clearError};
 }
 
-export default AlbumsServices;
+export default useAlbumsServices;

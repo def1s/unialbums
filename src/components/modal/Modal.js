@@ -2,7 +2,9 @@ import './modal.scss';
 import '../list/list.scss';
 import cross from '../../img/cross.png';
 
-import AlbumsServices from '../../services/AlbumsServices';
+import useAlbumsServices from '../../services/AlbumsServices';
+import Loading from '../loading/Loading';
+
 import { useState, useEffect } from 'react';
 
 export default function Modal({onCloseModal, loadingAlbums}) {
@@ -16,6 +18,8 @@ export default function Modal({onCloseModal, loadingAlbums}) {
 	const [currentTextRating, setCurrentTextRating] = useState(0);
 	const [finalRating, setFinalRating] = useState(0);
 
+	const {postAlbum, loading, error} = useAlbumsServices();
+
 	useEffect(() => {
 		const multiplier = 8/3;
 		const rating = Math.floor(
@@ -27,7 +31,6 @@ export default function Modal({onCloseModal, loadingAlbums}) {
 	const onAddAlbum = (e) => {	 //добавить проверку на пустые поля
 		e.preventDefault();
 
-		const albumServices = new AlbumsServices();
 		const album = {
 			cover: e.target.cover.value,
 			title: e.target.title.value,
@@ -39,10 +42,10 @@ export default function Modal({onCloseModal, loadingAlbums}) {
 			rating: finalRating
 		}
 
-		albumServices.postAlbum('http://localhost:3030/albums', album);
+		postAlbum('http://localhost:3131/albums', JSON.stringify(album));
 		e.target.reset();
-		setImg('');
-		setCurrentAtmosphereRating(0);
+		setImg(''); //при сбросе картинки часть ее остается
+		setCurrentAtmosphereRating(0); //добавить сброс полей ввода
 		setLikedTracksRating(0);
 		setCurrentBitsRating(0);
 		setCurrentTextRating(0);
@@ -89,6 +92,9 @@ export default function Modal({onCloseModal, loadingAlbums}) {
 			onMouseDown={() => setCurrentTextRating(i)}
 		></div>)
 	}
+
+	const preview = !loading && !error ? <Preview img={img} title={title} artist={artist} finalRating={finalRating}/> : null;
+	const isLoading = loading && !error ? <Loading/> : null;
 
 	return (
 		<div className="modal">
@@ -180,16 +186,31 @@ export default function Modal({onCloseModal, loadingAlbums}) {
 					<button className="submit">ОТПРАВИТЬ</button>
 				</form>
 				<div className="modal__cover">
-					<div className="list__item list__item_scope-off">
+					{preview}
+					{isLoading}
+					{/* <div className="list__item list__item_scope-off">
 						<div className="list__item-img">
 							<img src={img} alt="Обложка альбома"/>
 						</div>
 						<div className="list__item-title-album">{title.length > 16 ? title.slice(0, 16) + '...' : title}</div>
 						<div className="list__item-artist">{artist.length > 20 ? artist.slice(0, 20) + '...' : artist}</div>
 						<div className="list__item-rating" >{finalRating}</div>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</div>
 	);
 }
+
+const Preview = ({img, title, artist, finalRating}) => {
+	return (
+		<div className="list__item list__item_scope-off">
+			<div className="list__item-img">
+				<img src={img} alt="Обложка альбома"/>
+			</div>
+			<div className="list__item-title-album">{title.length > 16 ? title.slice(0, 16) + '...' : title}</div>
+			<div className="list__item-artist">{artist.length > 20 ? artist.slice(0, 20) + '...' : artist}</div>
+			<div className="list__item-rating" >{finalRating}</div>
+		</div>
+	)
+} 

@@ -1,5 +1,7 @@
 import './list.scss';
 
+import { Link } from 'react-router-dom';
+
 export default function List(props) {
 	return (
 		<main className="list">
@@ -16,18 +18,19 @@ export default function List(props) {
 							
 							let stylez = {};
 							if (rating > 85) {
-								stylez = {'background-color': '#FF3300'};
+								stylez = {'backgroundColor': '#FF3300'};
 							}
 
 							return (
-								<div className="list__item" key={id}>
+								<Link to={`${id}`} className="list__item" key={id}>
 									<div className="list__item-img">
 										<img src={cover} alt="Обложка альбома"/>
 									</div>
 									<div className="list__item-title-album">{title}</div>
 									<div className="list__item-artist">{artist}</div>
+									<div className="divinder"></div>
 									<div className="list__item-rating" style={stylez}>{rating}</div>
-								</div>
+								</Link>
 							);
 						})
 					}

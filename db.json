@@ -258,6 +258,50 @@
       "textRating": 6,
       "rating": 86,
       "id": 39
+    },
+    {
+      "cover": "https://avatars.yandex.net/get-music-content/175191/609d01a8.a.6639985-1/m1000x1000",
+      "title": "САМ ДАМБ ЩИТ 2",
+      "artist": "THRILL PILL",
+      "tracksRating": 8,
+      "atmosphereRating": 9,
+      "bitsRating": 9,
+      "textRating": 7,
+      "rating": 92,
+      "id": 40
+    },
+    {
+      "cover": "https://avatars.yandex.net/get-music-content/8096180/699d52cd.a.25431818-1/m1000x1000",
+      "title": "8 СПОСОБОВ КАК БРОСИТЬ...",
+      "artist": "ПОШЛАЯ МОЛЛИ",
+      "tracksRating": 8,
+      "atmosphereRating": 9,
+      "bitsRating": 9,
+      "textRating": 8,
+      "rating": 93,
+      "id": 41
+    },
+    {
+      "cover": "https://avatars.yandex.net/get-music-content/8316823/0037443c.a.24718425-1/m1000x1000",
+      "title": "ГРУСТНАЯ ДЕВОЧКА С ГЛАЗАМИ КАК У СОБАКИ",
+      "artist": "ПОШЛАЯ МОЛЛИ",
+      "tracksRating": 7,
+      "atmosphereRating": 9,
+      "bitsRating": 9,
+      "textRating": 7,
+      "rating": 87,
+      "id": 42
+    },
+    {
+      "cover": "https://avatars.yandex.net/get-music-content/103235/a91bf8f0.a.7162677-1/m1000x1000",
+      "title": "SUPERWORLD",
+      "artist": "BASIC BOY",
+      "tracksRating": 4,
+      "atmosphereRating": 9,
+      "bitsRating": 8,
+      "textRating": 9,
+      "rating": 72,
+      "id": 43
     }
   ]
 }
