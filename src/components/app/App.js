@@ -10,12 +10,10 @@ import Header from '../header/Header';
 
 export default function App() {
 	return (
-		<div className="app">
 
 			<Router>
 				<Header/>
 
-				<main>
 					<Routes>
 						<Route path={'/'} element={<MainPage/>}/>
 
@@ -25,10 +23,8 @@ export default function App() {
 
 						<Route path={'*'} element={<div>404</div>}/> {/* дописать */}
 					</Routes>
-				</main>
 
 			</Router>
 
-		</div>
 	)
 }

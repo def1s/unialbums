@@ -12,7 +12,7 @@ export default function Header({onChangeInputSearch, searchStr}) {
 					<ul>
 						<li><NavLink 
 							end 
-							style={({isActive}) => isActive ? {'color': '#9F0013'} : null}
+							style={({isActive}) => isActive ? {'color': 'rgb(200, 26, 22)'} : null}
 							to={'/'}>BACK TO MAIN PAGE</NavLink></li>
 						{/* /
 						<li><NavLink  //придумать вывод истории на основании посещенных страниц

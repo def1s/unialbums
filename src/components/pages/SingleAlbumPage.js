@@ -2,8 +2,12 @@ import SingleAlbum from "../singleAlbum/SingleAlbum";
 
 const SingleAlbumPage = () => {
 	return (
-		<SingleAlbum/>
-	)
+		<>
+		
+			<SingleAlbum/>
+
+		</>
+	);
 }
 
 export default SingleAlbumPage;

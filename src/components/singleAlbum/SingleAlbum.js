@@ -31,11 +31,61 @@ const SingleAlbum = () => {
 
 const View = ({album}) => {
 	return (
-		<div className="album">
-			<div className="album__title">{album.title}</div>
-			<div className="album__artist">{album.artist}</div>
-		</div>
-	)
+		<>
+			<section className="single-album">
+				<div className="single-album__background">
+					<img src={album.cover} alt="" />
+				</div>
+
+				<div class="container">
+
+					<div class="single-album__wrapper">
+
+						<div class="single-album__cover">
+							<img src={album.cover} alt=""></img>
+						</div>
+
+						<div class="single-album__descr">
+
+							<div class="single-album__title">{album.title}</div>
+							<div class="single-album__artist">{album.artist}</div>
+							<div class="single-album__rating">{album.rating}</div>
+
+						</div>
+
+					</div>
+
+				</div>
+			</section>
+
+			<section class="liked-tracks">
+				<div class="container">
+
+					<div class="liked-tracks__wrapper">
+						
+						<div class="liked-tracks__list">
+							<div class="liked-tracks__label">Зашедшие треки:</div>
+							<div class="liked-tracks__items">
+
+								<div class="liked-tracks__item">ПЛАТИНА - Опиаты. Круг</div>
+								<div class="liked-tracks__item">ПЛАТИНА - MJ</div>
+								<div class="liked-tracks__item">ПЛАТИНА, OBLADAET - Бентли, Бенз и Бумер</div>
+								<div class="liked-tracks__item">ПЛАТИНА - Санта Клаус</div>
+
+							</div>
+						</div>
+
+						<div class="liked-tracks__best-track-wrapper">
+							лучший трек
+						</div>
+
+					</div>
+
+				</div>
+			</section>
+
+		</>
+	);
 }
 
 export default SingleAlbum;
