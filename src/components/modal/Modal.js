@@ -12,7 +12,7 @@ export default function Modal({onCloseModal, loadingAlbums}) {
 	const [title, setTitle] = useState('НАЗВАНИЕ');
 	const [artist, setArtist] = useState('ИСПОЛНИТЕЛЬ');
 
-	const [likedTracksRating, setLikedTracksRating] = useState(0); //затолкать это все в один объект
+	const [likedTracksRating, setLikedTracksRating] = useState(0);
 	const [currentAtmosphereRating, setCurrentAtmosphereRating] = useState(0);
 	const [currentBitsRating, setCurrentBitsRating] = useState(0);
 	const [currentTextRating, setCurrentTextRating] = useState(0);
@@ -39,7 +39,8 @@ export default function Modal({onCloseModal, loadingAlbums}) {
 			atmosphereRating: currentAtmosphereRating,
 			bitsRating: currentBitsRating,
 			textRating: currentTextRating,
-			rating: finalRating
+			rating: finalRating,
+			likedTracks: []
 		}
 
 		postAlbum('http://localhost:3131/albums', JSON.stringify(album));

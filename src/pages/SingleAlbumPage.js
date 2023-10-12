@@ -1,4 +1,4 @@
-import SingleAlbum from "../singleAlbum/SingleAlbum";
+import SingleAlbum from "../components/singleAlbum/SingleAlbum";
 
 const SingleAlbumPage = () => {
 	return (

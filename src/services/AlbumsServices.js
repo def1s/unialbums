@@ -13,7 +13,12 @@ const useAlbumsServices = () => { //добавить обработки ошиб
 		return await res;
 	}
 
-	return {getAlbums, postAlbum, loading, error, clearError};
+	const postLikedTracks = async (url, trackList) => {
+		const res = await request(url, 'PUT', trackList);
+		return await res;
+	}
+
+	return {getAlbums, postAlbum, loading, error, clearError, postLikedTracks};
 }
 
 export default useAlbumsServices;

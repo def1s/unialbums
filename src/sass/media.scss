@@ -1,5 +1,39 @@
 @media (max-width: 1140px) {
 	.header {
-		width: 1000px;
+		max-width: 1140px;
+	}
+	.container {
+		max-width: 900px;
+	}
+	.list {
+		&__content {
+			max-width: 100%;
+		}
+	}
+	#root {
+		.interaction {
+			max-width: 800px;
+		}
+	}
+}
+
+@media (max-width: 900px) {
+	.container {
+		max-width: 700px;
+	}
+	#root {
+		.list {
+			&__content {
+				margin-top: 0;
+			}
+			&__item {
+				&:nth-child(n + 1) {
+					margin-top: 40px;
+				}
+			}
+		}
+		.interaction {
+			max-width: 600px;
+		}
 	}
 }

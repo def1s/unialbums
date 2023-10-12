@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import useAlbumsServices from "../../services/AlbumsServices";
+import useAlbumsServices from "../services/AlbumsServices";
 
-import Header from "../header/Header";
-import List from "../list/List";
-import Modal from "../modal/Modal";
-import Loading from "../loading/Loading";
-import Interaction from "../interaction/Interaction";
+import Header from "../components/header/Header";
+import List from '../components/list/List';
+import Modal from '../components/modal/Modal'
+import Loading from "../components/loading/Loading";
+import Interaction from "../components/interaction/Interaction";
 
 const ListPage = () => {
 	const [albums, setAlbums] = useState([]);

@@ -1,5 +1,4 @@
-import { useCallback, useState } from "react"
-
+import { useCallback, useState } from "react";
 
 export const useHttp = () => {
 	const [loading, setLoading] = useState(false);
@@ -12,7 +11,7 @@ export const useHttp = () => {
 			const response = await fetch(url, {method, headers, body});
 
 			if (!response.ok) {
-				throw new Error('Something went wrong with code ' + response.status)
+				throw new Error('Something went wrong with code ' + response.status);
 			}
 			
 			setLoading(false);

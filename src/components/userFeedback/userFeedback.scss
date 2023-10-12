@@ -1,0 +1,18 @@
+.feedback {
+	width: 900px;
+	margin: 0 auto;
+	margin-top: 30px;
+	padding-bottom: 40px;
+	&__input {
+		background-color: rgb(26, 26, 26, 0.6);
+		color: #fff;
+		border-radius: 15px;
+		min-height: 200px;
+		overflow: visible;
+		padding: 20px;
+		width: 500px;
+		border-color: rgb(39, 39, 39);
+		display: block;
+		margin: 0 auto;
+	}
+}

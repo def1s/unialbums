@@ -4,6 +4,13 @@ body {
 
 .main {
 	padding-top: 100px;
+	.album-info {  //!!! сделать отдельный блок !!!
+		&__background {
+			img {
+				filter: blur(10px);
+			}
+		}
+	}
 	&__wrapper {
 		display: flex;
 		justify-content: space-between;
@@ -12,6 +19,7 @@ body {
 	}
 
 	&__card {
+		z-index: 2;
 		position: relative;
 		width: 300px;
 		height: 600px;
@@ -25,10 +33,10 @@ body {
 		background-position: 50% -80%;
 		background-size: cover;
 		&:first-child {
-			background-image: url('../../img/collage.JPEG');
+			background-image: url('../img/collage.JPEG');
 		}
 		&:last-child {
-			background-image: url('../../img/artists3.JPEG');
+			background-image: url('../img/artists3.JPEG');
 		}
 		&:hover {
 			scale: 1.02;

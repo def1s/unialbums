@@ -3,23 +3,66 @@ import { useEffect, useState } from "react";
 
 import useAlbumsServices from "../../services/AlbumsServices";
 import Loading from "../loading/Loading";
+import UserFeedback from "../userFeedback/UserFeedback";
 
 import './singleAlbum.scss';
 
 const SingleAlbum = () => {
 	const [album, setAlbum] = useState({});
+	const [likedTracks, setLikedTracks] = useState([]);
+	const [showAddForm, setShowAddForm] = useState(false);
 	const {albumId} = useParams();
-	const {getAlbums, loading, error} = useAlbumsServices();
-
-	console.log('render!');
+	const {getAlbums, loading, error, postLikedTracks} = useAlbumsServices();
 
 	useEffect(() => {
 		getAlbums(`http://localhost:3131/albums/${albumId}`)
-			.then(response => setAlbum(response));
+			.then(response => {
+				setAlbum(response);
+				setLikedTracks(response.likedTracks);
+			});
 	}, []);
 
+	const onClickAddForm = () => {
+		setShowAddForm(true);
+	}
+
+	const onAddTrack = (e) => { //сделать одну функцию
+		e.preventDefault();
+
+		const newLikedTracks = [...likedTracks, e.target.track.value];
+		setLikedTracks(newLikedTracks);
+
+		const upgradeAlbum = album;
+		upgradeAlbum.likedTracks = newLikedTracks;
+
+		postLikedTracks(`http://localhost:3131/albums/${albumId}`, JSON.stringify(upgradeAlbum));
+		setShowAddForm(false);
+	}
+
+	const onDeleteTrack = (index) => { //сделать одну функцию
+		const newLikedTracks = [...likedTracks.slice(0, index), ...likedTracks.slice(index + 1, likedTracks.length)];
+		setLikedTracks(newLikedTracks);
+
+		const upgradeAlbum = album;
+		upgradeAlbum.likedTracks = newLikedTracks;
+
+		postLikedTracks(`http://localhost:3131/albums/${albumId}`, JSON.stringify(upgradeAlbum));
+		setShowAddForm(false);
+	}
+
 	const isLoading = loading && !error ? <Loading/> : null;
-	const content = !loading && !error ? <View album={album}/> : null;
+
+	let content = null;
+	if (!loading && !error) {
+		content = <View 
+			album={album} 
+			likedTracks={likedTracks} 
+			onDeleteTrack={onDeleteTrack} 
+			showAddForm={showAddForm} 
+			onClickAddForm={onClickAddForm}
+			onAddTrack={onAddTrack}
+		/>
+	}
 
 	return (
 		<>
@@ -29,59 +72,74 @@ const SingleAlbum = () => {
 	)
 }
 
-const View = ({album}) => {
+const View = ({album, likedTracks, onDeleteTrack, showAddForm, onClickAddForm, onAddTrack}) => { //подумать, стоит ли создать отдельный компонент под некоторые вещи
+	const likedTracksOnPage = likedTracks.map((track, i) => {
+		return (
+			<div class="liked-tracks__item" key={i}>
+				{track}
+				<div className="cross" onClick={() => onDeleteTrack(i)}></div>
+			</div>
+		);
+	});
+
+	const input = (
+		<form className="liked-tracks__form" onSubmit={onAddTrack}>
+			<input type="text" className="liked-tracks__add-form" name="track"/>
+			<button className="liked-tracks__add-confirm"></button>
+		</form>
+	);
+
+	const addFormOnPage = showAddForm ? input : null;
+
 	return (
 		<>
-			<section className="single-album">
-				<div className="single-album__background">
+			<div className="background">
 					<img src={album.cover} alt="" />
-				</div>
+			</div>
 
-				<div class="container">
+			<section className="content">
+				<div className="album-info">
 
-					<div class="single-album__wrapper">
+						<div class="album-info__card">
 
-						<div class="single-album__cover">
-							<img src={album.cover} alt=""></img>
-						</div>
+							<div class="album-info__cover">
+								<img src={album.cover} alt=""></img>
+							</div>
 
-						<div class="single-album__descr">
+							<div class="album-info__descr">
 
-							<div class="single-album__title">{album.title}</div>
-							<div class="single-album__artist">{album.artist}</div>
-							<div class="single-album__rating">{album.rating}</div>
-
-						</div>
-
-					</div>
-
-				</div>
-			</section>
-
-			<section class="liked-tracks">
-				<div class="container">
-
-					<div class="liked-tracks__wrapper">
-						
-						<div class="liked-tracks__list">
-							<div class="liked-tracks__label">Зашедшие треки:</div>
-							<div class="liked-tracks__items">
-
-								<div class="liked-tracks__item">ПЛАТИНА - Опиаты. Круг</div>
-								<div class="liked-tracks__item">ПЛАТИНА - MJ</div>
-								<div class="liked-tracks__item">ПЛАТИНА, OBLADAET - Бентли, Бенз и Бумер</div>
-								<div class="liked-tracks__item">ПЛАТИНА - Санта Клаус</div>
+								<div class="album-info__title">{album.title}</div>
+								<div class="album-info__artist">{album.artist}</div>
+								<div className="album-info__year">2018</div>
+								<div class="album-info__rating">{album.rating}</div>
 
 							</div>
-						</div>
 
-						<div class="liked-tracks__best-track-wrapper">
-							лучший трек
 						</div>
-
-					</div>
 
 				</div>
+
+				<div class="liked-tracks">
+					<div class="liked-tracks__list">
+						<div class="liked-tracks__label">Зашедшие треки:</div>
+							<div class="liked-tracks__items">
+
+								{likedTracksOnPage}
+								{addFormOnPage}
+
+								<button className="liked-tracks__add-button">
+									Добавить трек
+									<div className="cross cross_add" onClick={onClickAddForm}></div>
+								</button>
+							</div>
+					</div>
+				</div>
+
+				<UserFeedback/>
+				{/* <div className="wrapper">
+					<UserFeedback/>
+				</div> */}
+
 			</section>
 
 		</>
