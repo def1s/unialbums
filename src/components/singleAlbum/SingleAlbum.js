@@ -15,10 +15,10 @@ const SingleAlbum = () => {
 	const {getAlbums, loading, error, postLikedTracks} = useAlbumsServices();
 
 	useEffect(() => {
-		getAlbums(`http://localhost:3131/albums/${albumId}`)
+		getAlbums(`/albums-db/${albumId}`)
 			.then(response => {
-				setAlbum(response);
-				setLikedTracks(response.likedTracks);
+				setAlbum(response[0]);
+				setLikedTracks(response[0].likedTracks.split(';'));
 			});
 	}, []);
 
@@ -32,10 +32,11 @@ const SingleAlbum = () => {
 		const newLikedTracks = [...likedTracks, e.target.track.value];
 		setLikedTracks(newLikedTracks);
 
-		const upgradeAlbum = album;
-		upgradeAlbum.likedTracks = newLikedTracks;
+		const data = {
+			newLikedTracks: newLikedTracks.join(';')
+		}
 
-		postLikedTracks(`http://localhost:3131/albums/${albumId}`, JSON.stringify(upgradeAlbum));
+		postLikedTracks(`/albums-db/${albumId}`, JSON.stringify(data));
 		setShowAddForm(false);
 	}
 
@@ -43,10 +44,11 @@ const SingleAlbum = () => {
 		const newLikedTracks = [...likedTracks.slice(0, index), ...likedTracks.slice(index + 1, likedTracks.length)];
 		setLikedTracks(newLikedTracks);
 
-		const upgradeAlbum = album;
-		upgradeAlbum.likedTracks = newLikedTracks;
+		const data = {
+			newLikedTracks: newLikedTracks.join(';')
+		}
 
-		postLikedTracks(`http://localhost:3131/albums/${albumId}`, JSON.stringify(upgradeAlbum));
+		postLikedTracks(`/albums-db/${albumId}`, JSON.stringify(data));
 		setShowAddForm(false);
 	}
 

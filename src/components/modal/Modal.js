@@ -43,7 +43,7 @@ export default function Modal({onCloseModal, loadingAlbums}) {
 			likedTracks: []
 		}
 
-		postAlbum('http://localhost:3131/albums', JSON.stringify(album));
+		postAlbum('/albums-db', JSON.stringify(album));
 		e.target.reset();
 		setImg(''); //при сбросе картинки часть ее остается
 		setCurrentAtmosphereRating(0); //добавить сброс полей ввода

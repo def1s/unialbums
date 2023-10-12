@@ -75,7 +75,7 @@ const ListPage = () => {
 	}, []);
 
 	const loadingAlbums = () => {
-		getAlbums('http://localhost:3131/albums')
+		getAlbums('/albums-db') //через прокси в package.json!!!!!!!!!!!!!!
 			.then(response => setAlbums(response));
 	}
 

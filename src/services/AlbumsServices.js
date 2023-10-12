@@ -14,7 +14,7 @@ const useAlbumsServices = () => { //добавить обработки ошиб
 	}
 
 	const postLikedTracks = async (url, trackList) => {
-		const res = await request(url, 'PUT', trackList);
+		const res = await request(url, 'POST', trackList);
 		return await res;
 	}
 
