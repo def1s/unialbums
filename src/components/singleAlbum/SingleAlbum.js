@@ -18,7 +18,7 @@ const SingleAlbum = () => {
 		getAlbums(`/albums-db/${albumId}`)
 			.then(response => {
 				setAlbum(response[0]);
-				setLikedTracks(response[0].likedTracks.split(';'));
+				setLikedTracks(response[0].likedTracks === '' ? [] : response[0].likedTracks.split(';')); //проверка на пустую строку
 			});
 	}, []);
 
