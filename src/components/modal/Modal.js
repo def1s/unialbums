@@ -205,7 +205,7 @@ export default function Modal({onCloseModal, loadingAlbums}) {
 
 const Preview = ({img, title, artist, finalRating}) => {
 	return (
-		<div className="list__item list__item_scope-off">
+		<div className="list__item list__item_scope-off list__item_margin-off">
 			<div className="list__item-img">
 				<img src={img} alt="Обложка альбома"/>
 			</div>
