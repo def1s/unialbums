@@ -19,9 +19,34 @@
 
 @media (max-width: 900px) {
 	.container {
-		max-width: 700px;
+		// max-width: 700px;
+		width: 100%;
 	}
 	#root {
+		.background {
+			width: 100%;
+			img {
+				width: 100%;
+				height: 100%;
+			}
+		}
+		.content {
+			.album-info {
+				padding-left: 10px;
+				padding-right: 10px;
+				&__card {
+					width: 100%;
+				}
+			}
+			.liked-tracks {
+				&__list {
+					width: 100%;
+				}
+			}
+			.feedback {
+				width: 100%;
+			}
+		}
 		.list {
 			&__content {
 				margin-top: 0;
@@ -34,6 +59,83 @@
 		}
 		.interaction {
 			max-width: 600px;
+		}
+		.header {
+			&__wrapper {
+				.search {
+					margin-right: 35px;
+				}
+			}
+		}	
+		.content {
+			.album-info {
+				&__descr {
+					width: 260px;
+				}
+				&__title {
+					// width: 260px;
+					font-size: 30px;
+				}
+				&__artist {
+					font-size: 20px;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 610px) {
+	#root {
+		.interaction {
+			max-width: 100%;
+			align-items: center;
+		}
+		.header {
+			&__wrapper {
+				ul {
+					li {
+						font-size: 20px;
+					}
+				}
+			}
+		}
+		.content {
+			.album-info {
+				&__card {
+					display: flex;
+					// align-items: center;
+					align-content: center;
+					justify-content: center;
+					flex-wrap: wrap;
+					// min-height: 300px;
+					height: 600px;
+					width: 291px;
+				}
+				&__descr {
+					width: 260px;
+					min-height: 100px;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 571px) {
+	#root {
+		.interaction {
+			justify-content: space-around;
+		}
+		.add-album-button {
+			margin-bottom: 20px;
+		}
+		.content {
+			.feedback {
+				padding-left: 10px;
+				padding-right: 10px;
+				&__input {
+					width: 100%;
+				}
+			}
 		}
 	}
 }
