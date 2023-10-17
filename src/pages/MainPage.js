@@ -7,18 +7,6 @@ import image from '../img/collage.JPEG';
 const MainPage = () => {
 	return (
 		<>
-{/* 			<header class="header">
-				<div class="container">
-
-					<div class="header__wrapper">
-
-
-
-					</div>
-
-				</div>
-			</header> */}
-
 			<section class="main">
 				<div class="container">
 					<div className="background">

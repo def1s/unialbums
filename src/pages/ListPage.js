@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import useAlbumsServices from "../services/AlbumsServices";
 
 import Header from "../components/header/Header";
@@ -8,38 +8,42 @@ import Loading from "../components/loading/Loading";
 import Interaction from "../components/interaction/Interaction";
 
 const ListPage = () => {
-	const [albums, setAlbums] = useState([]);
-	const [searchStr, setSearchStr] = useState('');
-	const [modal, setModal] = useState(false);
-	const [filter, setFilter] = useState('RESET');
+	const [albums, setAlbums] = useState([]); //текущие альбомы, полученные из базы данных
+	const [searchStr, setSearchStr] = useState(''); //строка поиска, по умолчанию пуста
+	const [modal, setModal] = useState(false); //модальное окно, по-умолчанию скрыто
+	const [filter, setFilter] = useState('RESET'); //фильтр
 
 	const {loading, error, getAlbums} = useAlbumsServices();
 
-	const onChangeInputSearch = (e) => {
-		setSearchStr(e.target.value);
-	};
+	useEffect(() => { //при рендере компонента будем получать альбомы для рендера
+		loadingAlbums();
+	}, []);
 
-	const onSearch = (albums, tmp) => {
-		const visibleAlbums = [];
+	const onSearch = (albums, tmp) => { //проводит фильтрацию входящих альбомов, по умолчанию проходят все
+		const visibleAlbums = []; //новые альбомы
 
 		for (let album of albums) {
-			if (album.title.toUpperCase().indexOf(tmp.toUpperCase()) !== -1) {
+			if (album.title.toUpperCase().indexOf(tmp.toUpperCase()) !== -1) { //если содержится - пропускаем
 				visibleAlbums.push(album);
 			}
 		}
 
-		return visibleAlbums;
+		return visibleAlbums; //возвращаем альбомы, прошедшие проверку на содержание строки
 	}
 
-	const onSelectFilter = (e) => {
+	const onChangeInputSearch = useCallback((e) => { //ф-я реагирует на изменение строки для поиска
+		setSearchStr(e.target.value); //изменяет стейт строки для поиска и запускает перерендер компонента
+	}, []);
+
+	const onSelectFilter = useCallback((e) => { //на изменение фильтра
 		setFilter(e.target.innerText);
-	}
+	}, []);
 	
-	const onHandleModal = () => {
+	const onHandleModal = useCallback(() => { //открытие модального окна
 		setModal(modal => !modal);
-	}
+	}, []);
 
-	const onFilter = (data) => {
+	const onFilter = useCallback((data) => { //оптимизация, мемоизируем функцию на переменную filter
 		switch(filter) {
 			case 'RATING↑':
 				return data.sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating));
@@ -68,21 +72,20 @@ const ListPage = () => {
 			default:
 				return data;
 		}
-	}
-
-	useEffect(() => {
-		loadingAlbums();
-	}, []);
+	}, [filter]);
 
 	const loadingAlbums = () => {
-		getAlbums('/albums-db') //через прокси в package.json!!!!!!!!!!!!!!
+		getAlbums('/albums-db')
 			.then(response => setAlbums(response));
 	}
 
-	const visibleAlbums = onFilter(onSearch(albums, searchStr));
+	const visibleAlbums = useMemo(() => { //оптимизация, будем получать новый список только при изменении переменных в массиве
+		onFilter(onSearch(albums, searchStr));
+	}, [albums, searchStr, onFilter]);
 
 	const content = !loading && !error ? <List albums={visibleAlbums}/> : null;
 	const isLoading = loading && !error ? <Loading/> : null;
+	//добавить сообщение об ошибке
 
 	return (
 		<>
