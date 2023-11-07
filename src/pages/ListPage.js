@@ -80,7 +80,7 @@ const ListPage = () => {
 	}
 
 	const visibleAlbums = useMemo(() => { //оптимизация, будем получать новый список только при изменении переменных в массиве
-		onFilter(onSearch(albums, searchStr));
+		return onFilter(onSearch(albums, searchStr));
 	}, [albums, searchStr, onFilter]);
 
 	const content = !loading && !error ? <List albums={visibleAlbums}/> : null;
