@@ -1,0 +1,17 @@
+.AlbumsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 10px;
+
+    @media (min-width: 400px) {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+
+    @media (min-width: 600px) {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    @media (min-width: 900px) {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+}
