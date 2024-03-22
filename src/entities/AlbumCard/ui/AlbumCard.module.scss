@@ -1,0 +1,71 @@
+.AlbumCard {
+    text-decoration: none;
+    width: 291px;
+    cursor: pointer;
+    height: 428px;
+    background-color: rgb(26, 26, 26);
+    border-radius: 30px;
+    border-style: solid;
+    border-color: rgb(39, 39, 39);
+    border-width: 1px;
+    transition: all .5s;
+    display: block;
+    //&:hover {
+    //    scale: 1.08;
+    //}
+    //&_scope-off {
+    //    &:hover {
+    //        scale: none;
+    //    }
+    //}
+    //&_margin-off {
+    //    margin-top: 0 !important;
+    //}
+}
+
+.title {
+    font-size: 24px;
+    color: #fff;
+    text-align: center;
+    margin-top: 20px;
+    height: 36px;
+}
+
+.cover {
+    margin-left: 11px;
+    margin-top: 11px;
+    width: 269px;
+    height: 269px;
+    img {
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+    }
+}
+
+.artist {
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    height: 36px;
+    font-weight: 300;
+}
+
+.rating {
+    border-radius: 100%;
+    width: 33px;
+    height: 33px;
+    background-color: #fff;
+    margin: 8px auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+}
+
+.divider {
+    width: 250px;
+    height: 2px;
+    background-color:rgb(41, 40, 44);
+    margin: 0 auto;
+}

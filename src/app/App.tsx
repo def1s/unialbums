@@ -5,7 +5,7 @@ import { AppRouter } from 'app/providers/router';
 const App = () => {
 	return (
 		<div className={'App'}>
-			<AppRouter/>s
+			<AppRouter/>
 		</div>
 	);
 };
