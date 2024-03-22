@@ -65,9 +65,13 @@ export const AlbumsGrid = ({ className }: AlbumsListProps) => {
 				artist="Artist name"
 				rating={5}
 			/>
-
-
-
+			<AlbumCard
+				id={3}
+				cover="https://via.placeholder.com/150"
+				title="Album title"
+				artist="Artist name"
+				rating={5}
+			/>
 		</div>
 	);
 };

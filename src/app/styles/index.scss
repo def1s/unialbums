@@ -1,5 +1,17 @@
 @import "reset";
+@import "variables/global";
 
 body {
     font-family: "Arial", sans-serif;
+    background-color: rgb(14, 14, 14);
+}
+
+.App {
+    min-height: 100vh;
+}
+
+.content-wrapper {
+    padding-top: var(--navbar-height);
+    max-width: 1140px;
+    margin: 0 auto;
 }

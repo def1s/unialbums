@@ -15,7 +15,8 @@ export const Navbar = ({ className }: NavbarProps) => {
 			<nav className={cls.linksWrapper}>
 				<ul className={cls.linksList}>
 					<li className={cls.link}>
-						<NavLink to={'/albums'}>Home</NavLink>
+						<NavLink to={'/'}>UNIALBUMS</NavLink>
+						<NavLink to={'/albums'}>My albums</NavLink>
 					</li>
 				</ul>
 			</nav>

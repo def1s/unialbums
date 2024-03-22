@@ -15,9 +15,10 @@ export const BuildWebpackConfig = (options: BuildOptions) => {
 		resolve: BuildResolvers(options),
 		entry: paths.entry,
 		output: {
-			filename: 'main.js',
+			filename: '[name][contenthash].js',
 			path: paths.build,
-			clean: true
+			clean: true,
+			publicPath: '/' // фикс проблемы с вложенными маршрутами
 		},
 		mode: mode,
 		plugins: BuildPlugins(options),

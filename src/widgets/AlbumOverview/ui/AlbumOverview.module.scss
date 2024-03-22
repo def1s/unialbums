@@ -1,0 +1,16 @@
+.AlbumOverview {
+    position: relative;
+}
+
+.backgroundImage {
+    width: calc(100vh - var(--navbar-height));
+    //height: 100vh;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    img {
+        width: 100%;
+        height: 100%;
+        filter: blur(15px);
+    }
+}
