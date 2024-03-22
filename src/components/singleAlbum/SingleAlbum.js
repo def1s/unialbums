@@ -11,7 +11,9 @@ const SingleAlbum = () => {
 	const [album, setAlbum] = useState({});
 	const [likedTracks, setLikedTracks] = useState([]);
 	const [showAddForm, setShowAddForm] = useState(false);
-	const {albumId} = useParams();
+
+	const {albumId} = useParams(); //получение id текущего альбома из url
+
 	const {getAlbums, loading, error, postLikedTracks} = useAlbumsServices();
 
 	useEffect(() => {
@@ -138,9 +140,6 @@ const View = ({album, likedTracks, onDeleteTrack, showAddForm, onClickAddForm, o
 				</div>
 
 				<UserFeedback/>
-				{/* <div className="wrapper">
-					<UserFeedback/>
-				</div> */}
 
 			</section>
 

@@ -5,7 +5,6 @@ import '../../sass/media.scss';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { ListPage, SingleAlbumPage, MainPage } from '../../pages';
-
 import Header from '../header/Header';
 
 export default function App() {
