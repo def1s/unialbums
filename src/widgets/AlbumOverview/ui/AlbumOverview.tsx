@@ -25,7 +25,6 @@ export const AlbumOverview = ({ className }: AlbumOverviewProps) => {
 				rating={98}
 			/>
 
-
 		</div>
 	);
 };

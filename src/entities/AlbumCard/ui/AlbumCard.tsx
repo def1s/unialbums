@@ -2,6 +2,7 @@ import cls from './AlbumCard.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Link } from 'react-router-dom';
 import React, { FC } from 'react';
+import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
 
 /**
  * Определение свойств для компонента AlbumCard
@@ -37,28 +38,14 @@ export const AlbumCard: FC<AlbumCardProps> = (props: AlbumCardProps): React.Reac
 		className
 	} = props;
 
-	/**
-	 * Функция для валидации текста
-	 * @param {string} text - Текст для валидации
-	 * @returns {string} - Валидированный текст
-	 */
-	const textValidation = (text: string) => {
-		if (text.length > 15) {
-			return text.slice(0, 16) + '...';
-		} else if (text.length === 0) {
-			return 'Неизвестно';
-		}
-		return text;
-	};
-
 	return (
 		// Компонент Link используется для создания ссылки на страницу альбома
 		<Link to={`${id}`} className={classNames(cls.AlbumCard, {}, [className])} key={id}>
 			<div className={cls.cover}>
 				<img src={cover} alt="Обложка альбома"/>
 			</div>
-			<div className={cls.title}>{textValidation(title)}</div>
-			<div className={cls.artist}>{textValidation(artist)}</div>
+			<div className={cls.title}>{textLengthValidation(title)}</div>
+			<div className={cls.artist}>{textLengthValidation(artist)}</div>
 			<div className={cls.divider}></div>
 			<div className={cls.rating}>{rating}</div>
 		</Link>
