@@ -7,16 +7,17 @@
     align-items: center;
     max-width: 900px;
     height: 300px;
-    background-color: rgba(26, 26, 26, 0.6);
+    background-color: rgb(26 26 26 / 60%);
     border-radius: 30px;
     border-style: solid;
-    border-color: rgb(39, 39, 39);
+    border-color: rgb(39 39 39);
     border-width: 1px;
 }
 
 .cover {
     height: 260px;
     width: 260px;
+
     img {
         border-radius: 15px;
         width: 100%;

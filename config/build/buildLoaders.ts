@@ -10,9 +10,21 @@ export const BuildLoaders = ({ isDev }: BuildOptions) => {
 		exclude: /node_modules/,
 	};
 
+	const babelLoader = {
+		test: /\.(js|jsx|tsx)$/,
+		exclude: /node_modules/,
+		use: {
+			loader: 'babel-loader',
+			options: {
+				presets: ['@babel/preset-env']
+			}
+		}
+	};
+
 	const scssLoader = buildScssLoader(isDev);
 
 	return [
+		babelLoader,
 		tsLoader,
 		scssLoader
 	];

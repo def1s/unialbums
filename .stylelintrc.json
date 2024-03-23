@@ -1,0 +1,13 @@
+{
+	"extends": "stylelint-config-standard-scss",
+	"rules": {
+		"selector-class-pattern": null,
+		"no-empty-source": [true,
+			{
+				"severity": "warning",
+				"message": "Empty scss file, fill or delete"
+			}
+		],
+		"scss/double-slash-comment-whitespace-inside": null
+	}
+}
