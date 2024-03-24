@@ -11,9 +11,9 @@
     "linter:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix",
     "linter:scss": "npx stylelint \"**/*.scss\"",
     "linter:scss:fix": "npx stylelint \"**/*.scss\" --fix",
+    "test:unit": "jest --config ./config/jest/jest.config.ts",
     "storybook": "storybook dev -p 6006 -c ./config/storybook",
-    "build-storybook": "storybook build -c ./config/storybook",
-    "unit": "jest --config ./config/jest/jest.config.ts"
+    "storybook:build": "storybook build -c ./config/storybook"
   },
   "keywords": [],
   "author": "",

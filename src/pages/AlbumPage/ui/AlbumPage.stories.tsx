@@ -4,7 +4,7 @@ import React from 'react';
 import { AlbumPage } from './AlbumPage';
 
 const meta: Meta<typeof AlbumPage> = {
-	title: 'pages/AlbumsPage',
+	title: 'pages/AlbumPage',
 	component: AlbumPage,
 	// декоратор для ссылок
 	decorators: [
