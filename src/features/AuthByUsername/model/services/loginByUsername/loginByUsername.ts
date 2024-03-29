@@ -31,6 +31,7 @@ export const loginByUsername = createAsyncThunk<User, LoginByUsernameProps, { re
 				throw new Error('Something went wrong...');
 			}
 
+			// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 			const { accessToken, type, ...userData } = response.data;
 			localStorage.setItem(ACCESS_TOKEN_LOCALSTORAGE_KEY, accessToken);
 			thunkApi.dispatch(userActions.setAuthData(userData));
