@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosRequestConfig } from 'axios';
-import { User, userActions } from 'entities/User';
+import { User, userActions, UserResponse } from 'entities/User';
+import { ACCESS_TOKEN_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
 
 interface LoginByUsernameProps {
 	username: string;
@@ -24,16 +25,18 @@ export const loginByUsername = createAsyncThunk<User, LoginByUsernameProps, { re
 				withCredentials: true
 			};
 
-			const response = await axios<User>(options);
+			const response = await axios<UserResponse>(options);
 
-			// if (!response) {
-			// 	throw new Error('Something went wrong...');
-			// }
-			//
-			// thunkApi.dispatch(userActions.setAuthData(response.data));
+			if (!response) {
+				throw new Error('Something went wrong...');
+			}
+
+			const { accessToken, type, ...userData } = response.data;
+			localStorage.setItem(ACCESS_TOKEN_LOCALSTORAGE_KEY, accessToken);
+			thunkApi.dispatch(userActions.setAuthData(userData));
 		} catch (error) {
 			console.log(error);
-			return thunkApi.rejectWithValue('Что-то не так...');
+			return thunkApi.rejectWithValue('Неверные имя пользователя или пароль');
 		}
 	}
 );
