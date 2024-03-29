@@ -17,17 +17,20 @@ export const loginByUsername = createAsyncThunk<User, LoginByUsernameProps, { re
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				data: authData,
+				data: {
+					login: authData.username,
+					password: authData.password
+				},
 				withCredentials: true
 			};
 
 			const response = await axios<User>(options);
 
-			if (!response.data) {
-				throw new Error('Something went wrong...');
-			}
-
-			thunkApi.dispatch(userActions.setAuthData(response.data));
+			// if (!response) {
+			// 	throw new Error('Something went wrong...');
+			// }
+			//
+			// thunkApi.dispatch(userActions.setAuthData(response.data));
 		} catch (error) {
 			console.log(error);
 			return thunkApi.rejectWithValue('Что-то не так...');

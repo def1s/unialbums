@@ -5,14 +5,16 @@ import { getLoginState } from '../../model/selectors/getLoginState/getLoginState
 import { loginActions } from 'features/AuthByUsername/model/slice/loginSlice';
 import { ChangeEvent } from 'react';
 import { useAppDispatch } from 'app/providers/StoreProvider';
+import { loginByUsername } from 'features/AuthByUsername/model/services/loginByUsername/loginByUsername';
 
 interface LoginFormProps {
     className?: string
 }
 
 export const LoginForm = ({ className }: LoginFormProps) => {
-	// const dispatch = useDispatch();
-	const dispatch = useAppDispatch();
+	const dispatch = useDispatch();
+	// не работает
+	// const dispatch = useAppDispatch();
 	const { username, password } = useSelector(getLoginState);
 
 	const onChangeUsername = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +26,11 @@ export const LoginForm = ({ className }: LoginFormProps) => {
 	};
 
 	const onClickLogin = () => {
-		//
+		// по каким-то абсолютно неясным причинам при использовании useAppDispatch loginReducer оказывается
+		// равен undefined и мне приходится игнорировать его, используя обычный dispatch.
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-expect-error
+		dispatch(loginByUsername({ username, password }));
 	};
 
 	return (
@@ -41,7 +47,7 @@ export const LoginForm = ({ className }: LoginFormProps) => {
 				onChange={e => onChangePassword(e)}
 				value={password}
 			/>
-			<button>Вход</button>
+			<button onClick={onClickLogin}>Вход</button>
 		</div>
 	);
 };

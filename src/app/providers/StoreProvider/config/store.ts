@@ -6,7 +6,7 @@ import { loginReducer } from 'features/AuthByUsername';
 export const configureReduxStore = () => {
 	const rootReducers: ReducersMapObject<StateSchema> = {
 		user: userReducer,
-		login: loginReducer
+		loginForm: loginReducer
 	};
 
 	return configureStore<StateSchema>({

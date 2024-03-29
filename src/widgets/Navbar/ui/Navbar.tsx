@@ -34,12 +34,10 @@ export const Navbar = ({ className }: NavbarProps) => {
 
 			<button onClick={onOpenLoginModal}>Sign in</button>
 
-			<Modal
+			<LoginModal
 				isOpen={isLoginModal}
 				onClose={onCloseLoginModal}
-			>
-				<LoginModal/>
-			</Modal>
+			/>
 
 			<SearchAlbumsByName/>
 		</header>
