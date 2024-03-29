@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import React, { useState } from 'react';
 import { SearchAlbumsByName } from 'features/SearchAlbumsByName';
 import { Modal } from 'shared/ui/Modal/Modal';
+import { LoginModal } from 'features/AuthByUsername';
 
 interface NavbarProps {
     className?: string
@@ -37,7 +38,7 @@ export const Navbar = ({ className }: NavbarProps) => {
 				isOpen={isLoginModal}
 				onClose={onCloseLoginModal}
 			>
-					Content
+				<LoginModal/>
 			</Modal>
 
 			<SearchAlbumsByName/>
