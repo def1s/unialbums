@@ -2,7 +2,7 @@
     position: fixed;
     right: 0;
     left: 0;
-    z-index: 1000;
+    z-index: var(--navbar-z-index);
     height: 70px;
     background-color: rgb(29 28 33);
     display: flex;
