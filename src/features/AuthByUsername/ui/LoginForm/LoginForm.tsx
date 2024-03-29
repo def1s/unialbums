@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getLoginState } from '../../model/selectors/getLoginState/getLoginState';
 import { loginActions } from 'features/AuthByUsername/model/slice/loginSlice';
 import { ChangeEvent } from 'react';
-import { useAppDispatch } from 'app/providers/StoreProvider';
 import { loginByUsername } from 'features/AuthByUsername/model/services/loginByUsername/loginByUsername';
 
 interface LoginFormProps {
