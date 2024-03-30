@@ -1,0 +1,12 @@
+.Button {
+    cursor: pointer;
+    padding: 5px;
+}
+
+.lightBg {
+    // ширина и высота задаются в зависимости от необходимости
+    background-color: var(--light-bg-color);
+    border: none;
+    color: white;
+    border-radius: var(--small-radius);
+}

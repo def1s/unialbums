@@ -3,8 +3,10 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { useDispatch, useSelector } from 'react-redux';
 import { getLoginState } from '../../model/selectors/getLoginState/getLoginState';
 import { loginActions } from 'features/AuthByUsername/model/slice/loginSlice';
-import { ChangeEvent } from 'react';
+import { useCallback } from 'react';
 import { loginByUsername } from 'features/AuthByUsername/model/services/loginByUsername/loginByUsername';
+import { Input } from 'shared/ui/Input/Input';
+import { Button } from 'shared/ui/Button/Button';
 
 interface LoginFormProps {
     className?: string
@@ -16,37 +18,42 @@ export const LoginForm = ({ className }: LoginFormProps) => {
 	// const dispatch = useAppDispatch();
 	const { username, password } = useSelector(getLoginState);
 
-	const onChangeUsername = (e: ChangeEvent<HTMLInputElement>) => {
-		dispatch(loginActions.setUsername(e.target.value));
-	};
+	const onChangeUsername = useCallback((value: string) => {
+		dispatch(loginActions.setUsername(value));
+	}, [dispatch]);
 
-	const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
-		dispatch(loginActions.setPassword(e.target.value));
-	};
+	const onChangePassword = useCallback((value: string) => {
+		dispatch(loginActions.setPassword(value));
+	}, [dispatch]);
 
-	const onClickLogin = () => {
+	const onClickLogin = useCallback(() => {
 		// по каким-то абсолютно неясным причинам при использовании useAppDispatch loginReducer оказывается
 		// равен undefined и мне приходится игнорировать его, используя обычный dispatch.
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-expect-error
 		dispatch(loginByUsername({ username, password }));
-	};
+	}, [dispatch, password, username]);
 
 	return (
 		<div className={classNames(cls.LoginForm, {}, [className])}>
-			<input
+			<Input
 				className={cls.input}
-				placeholder={'Username'}
-				onChange={e => onChangeUsername(e)}
+				placeholder={'Имя пользователя'}
+				onChange={onChangeUsername}
 				value={username}
 			/>
-			<input
+			<Input
 				className={cls.input}
-				placeholder={'Password'}
-				onChange={e => onChangePassword(e)}
+				placeholder={'Пароль'}
+				onChange={onChangePassword}
 				value={password}
 			/>
-			<button onClick={onClickLogin}>Вход</button>
+			<Button
+				onClick={onClickLogin}
+				className={cls.button}
+			>
+				Вход
+			</Button>
 		</div>
 	);
 };

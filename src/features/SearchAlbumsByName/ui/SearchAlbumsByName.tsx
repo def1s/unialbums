@@ -1,6 +1,7 @@
 import cls from './SearchAlbumsByName.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import React from 'react';
+import { Input } from 'shared/ui/Input/Input';
 
 interface SearchAlbumsByNameProps {
     className?: string
@@ -9,11 +10,10 @@ interface SearchAlbumsByNameProps {
 export const SearchAlbumsByName = ({ className }: SearchAlbumsByNameProps) => {
 
 	return (
-		<input
+		<Input
 			className={classNames(cls.SearchAlbumsByName, {}, [className])}
 			type='text'
 			placeholder='Поиск альбома'
-		>
-		</input>
+		/>
 	);
 };

@@ -4,7 +4,8 @@
 }
 
 .backgroundImage {
-    width: calc(100vh - var(--navbar-height));
+    width: calc(100vw - var(--sidebar-collapsed-width) - var(--large-padding));
+    max-width: 1000px;
 
     //height: 100vh;
     position: absolute;

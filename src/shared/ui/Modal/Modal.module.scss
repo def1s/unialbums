@@ -16,8 +16,9 @@
 }
 
 .content {
-    padding: 20px;
-    background-color: #549e4e;
+    padding: var(--medium-padding);
+    background-color: var(--default-bg-color);
+    border-radius: var(--medium-radius);
 }
 
 .isOpen {

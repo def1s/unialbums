@@ -5,6 +5,7 @@ import { SearchAlbumsByName } from 'features/SearchAlbumsByName';
 import { LoginModal } from 'features/AuthByUsername';
 import { useSelector } from 'react-redux';
 import { getUserAuthData } from 'entities/User';
+import { Button } from 'shared/ui/Button/Button';
 
 interface NavbarProps {
     className?: string
@@ -26,7 +27,7 @@ export const Navbar = ({ className }: NavbarProps) => {
 		<header className={classNames(cls.Navbar, {}, [className])}>
 			{
 				!user ?
-					<button onClick={onOpenLoginModal}>Sign in</button>
+					<Button className={cls.button} onClick={onOpenLoginModal}>Sign in</Button>
 					: <div>{`Привет, ${user.login}`}</div>
 			}
 
