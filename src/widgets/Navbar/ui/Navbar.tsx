@@ -1,6 +1,5 @@
 import cls from './Navbar.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { NavLink } from 'react-router-dom';
 import React, { useState } from 'react';
 import { SearchAlbumsByName } from 'features/SearchAlbumsByName';
 import { LoginModal } from 'features/AuthByUsername';
