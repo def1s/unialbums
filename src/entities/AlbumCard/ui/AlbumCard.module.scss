@@ -5,8 +5,8 @@
     //height: 428px;
     cursor: pointer;
     max-width: 582px;
-    background-color: rgb(26 26 26);
-    border-radius: 20px;
+    background-color: var(--default-bg-color);
+    border-radius: var(--large-radius);
     border-style: solid;
     border-color: rgb(39 39 39);
     border-width: 1px;
@@ -38,7 +38,7 @@
     img {
         width: 100%;
         height: 100%;
-        border-radius: 12px;
+        border-radius: var(--medium-radius);
     }
 }
 
@@ -66,6 +66,6 @@
 .divider {
     width: 100%;
     height: 2px;
-    background-color: rgb(41 40 44);
+    background-color: var(--light-bg-color);
     margin: 0 auto;
 }

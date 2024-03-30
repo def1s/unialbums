@@ -1,8 +1,27 @@
 :root {
     // размеры
     --navbar-height: 70px;
+    --sidebar-width: 200px;
+    --sidebar-collapsed-width: 80px;
+
+    // отступы
+    --small-padding: 10px;
+    --medium-padding: 20px;
+    --large-padding: 40px;
+
+    // закругления
+    --small-radius: 5px;
+    --medium-radius: 10px;
+    --large-radius: 20px;
+
+    // цвета
+    --app-bg-color: rgb(14 14 14);
+    --default-bg-color: rgb(26 26 26);
+    --default-bg-color-opacity: rgb(26 26 26 / 60%);
+    --light-bg-color: rgb(41 40 44);
 
     // z-индексы
     --navbar-z-index: 5;
     --modal-z-index: 10;
+    --sidebar-z-index: 5;
 }

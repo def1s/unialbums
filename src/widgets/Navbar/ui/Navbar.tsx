@@ -25,15 +25,6 @@ export const Navbar = ({ className }: NavbarProps) => {
 
 	return (
 		<header className={classNames(cls.Navbar, {}, [className])}>
-			<nav className={cls.linksWrapper}>
-				<ul className={cls.linksList}>
-					<li className={cls.link}>
-						<NavLink to={'/'}>UNIALBUMS</NavLink>
-						<NavLink to={'/albums'}>My albums</NavLink>
-					</li>
-				</ul>
-			</nav>
-
 			{
 				!user ?
 					<button onClick={onOpenLoginModal}>Sign in</button>

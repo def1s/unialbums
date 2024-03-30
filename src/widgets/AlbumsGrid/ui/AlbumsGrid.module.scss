@@ -1,7 +1,8 @@
 .AlbumsGrid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 10px;
+    padding-top: var(--medium-padding);
+    gap: var(--small-padding);
 
     @media (width >= 400px) {
         grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
