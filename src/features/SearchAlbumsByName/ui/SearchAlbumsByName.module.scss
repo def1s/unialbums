@@ -1,7 +1,7 @@
 .SearchAlbumsByName {
     border-style: none;
-    border-radius: 14px;
-    background-color: rgb(41 40 44);
+    border-radius: var(--medium-radius);
+    background-color: var(--light-bg-color);
     color: #fff;
     width: 300px;
     height: 40px;

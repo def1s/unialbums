@@ -3,15 +3,19 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: rgb(14 14 14);
+    background-color: var(--app-bg-color);
 }
 
 .App {
     min-height: 100vh;
 }
 
-.content-wrapper {
-    padding-top: var(--navbar-height);
+.content-page {
     max-width: 1140px;
     margin: 0 auto;
+    padding: 0 var(--medium-padding) 0 calc(var(--sidebar-collapsed-width) + var(--medium-padding));
+}
+
+.content-wrapper {
+    width: 100%;
 }

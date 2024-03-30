@@ -5,3 +5,8 @@ declare module '*.scss' { // декларация для css modules на имп
 }
 
 declare const __IS_DEV__: boolean;
+
+declare module '*.svg' {
+	const content: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
+	export default content;
+}

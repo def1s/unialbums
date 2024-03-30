@@ -1,13 +1,14 @@
 .Navbar {
-    position: fixed;
-    right: 0;
-    left: 0;
+    //position: fixed;
     z-index: var(--navbar-z-index);
     height: 70px;
-    background-color: rgb(29 28 33);
+    width: 100%;
+    border-radius: var(--medium-radius);
+    background-color: var(--default-bg-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 20px;
     padding: 0 10px;
 }
 

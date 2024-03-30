@@ -21,9 +21,15 @@ export const BuildLoaders = ({ isDev }: BuildOptions) => {
 		}
 	};
 
+	const svgLoader = {
+		test: /\.svg$/,
+		use: ['@svgr/webpack'],
+	};
+
 	const scssLoader = buildScssLoader(isDev);
 
 	return [
+		svgLoader,
 		babelLoader,
 		tsLoader,
 		scssLoader
