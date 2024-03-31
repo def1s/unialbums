@@ -3,6 +3,10 @@ import { WelcomePage } from 'pages/WelcomePage';
 import { AlbumsListPage } from 'pages/AlbumsListPage';
 import { AlbumPage } from 'pages/AlbumPage';
 
+export type AppRoutesProps = RouteProps & {
+	authOnly?: boolean;
+}
+
 // все маршруты
 export enum Routes {
 	WELCOME = 'welcome',
@@ -20,18 +24,20 @@ export const RoutesPaths: Record<Routes, string> = {
 };
 
 // сборка маршрутов и путей
-export const routerConfig: Record<Routes, RouteProps> = {
+export const routerConfig: Record<Routes, AppRoutesProps> = {
 	[Routes.WELCOME]: {
 		path: RoutesPaths.welcome,
 		element: <WelcomePage/>
 	},
 	[Routes.ALBUMS]: {
 		path: RoutesPaths.albums,
-		element: <AlbumsListPage/>
+		element: <AlbumsListPage/>,
+		authOnly: true
 	},
 	[Routes.ALBUM]: {
 		path: RoutesPaths.album,
-		element: <AlbumPage/>
+		element: <AlbumPage/>,
+		authOnly: true
 	},
 	[Routes.NOT_FOUND]: {
 		path: RoutesPaths.notFound,
