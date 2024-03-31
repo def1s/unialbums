@@ -1,13 +1,13 @@
-export interface User {
+export interface UserJWTDecode {
 	firstName: string;
-	lastName: string;
-	login: string;
-	avatarUrl?: string | null;
+	sub: string;
+	avatar?: string;
+	userId: number;
 }
 
-export interface UserResponse extends User {
-	accessToken: string;
-	type: string;
+// делаю так, потому что удобнее и понятнее работать с полем username, а не sub
+export interface User extends Omit<UserJWTDecode, 'sub'> {
+	username: string;
 }
 
 export interface UserSchema {

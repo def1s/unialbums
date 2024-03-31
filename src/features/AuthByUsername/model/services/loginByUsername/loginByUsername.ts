@@ -1,7 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosRequestConfig } from 'axios';
-import { User, userActions, UserResponse } from 'entities/User';
+import { User, userActions, UserJWTDecode } from 'entities/User';
 import { ACCESS_TOKEN_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
+import { ApiResponse, token } from 'shared/api/types/apiResponse';
+import { jwtDecode } from 'jwt-decode';
 
 interface LoginByUsernameProps {
 	username: string;
@@ -25,16 +27,17 @@ export const loginByUsername = createAsyncThunk<User, LoginByUsernameProps, { re
 				withCredentials: true
 			};
 
-			const response = await axios<UserResponse>(options);
+			const response = await axios<ApiResponse<token>>(options);
 
-			if (!response) {
+			if (!response.data) {
 				throw new Error('Something went wrong...');
 			}
 
-			// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
-			const { accessToken, type, ...userData } = response.data;
+			const accessToken = response.data.data.access_token;
+			const { sub, ...userData }: UserJWTDecode = jwtDecode(accessToken);
+
 			localStorage.setItem(ACCESS_TOKEN_LOCALSTORAGE_KEY, accessToken);
-			thunkApi.dispatch(userActions.setAuthData(userData));
+			thunkApi.dispatch(userActions.setAuthData({ username: sub, ...userData }));
 		} catch (error) {
 			console.log(error);
 			return thunkApi.rejectWithValue('Неверные имя пользователя или пароль');

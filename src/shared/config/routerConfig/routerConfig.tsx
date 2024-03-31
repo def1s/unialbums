@@ -1,11 +1,11 @@
 import { RouteProps } from 'react-router-dom';
-import { MainPage } from 'pages/MainPage';
+import { WelcomePage } from 'pages/WelcomePage';
 import { AlbumsListPage } from 'pages/AlbumsListPage';
 import { AlbumPage } from 'pages/AlbumPage';
 
 // все маршруты
 export enum Routes {
-	MAIN = 'main',
+	WELCOME = 'welcome',
 	ALBUMS = 'albums',
 	ALBUM = 'album',
 	NOT_FOUND = 'notFound'
@@ -13,7 +13,7 @@ export enum Routes {
 
 // все пути по маршрутам
 export const RoutesPaths: Record<Routes, string> = {
-	[Routes.MAIN]: '/',
+	[Routes.WELCOME]: '/',
 	[Routes.ALBUMS]: '/albums',
 	[Routes.ALBUM]: '/albums/:id',
 	[Routes.NOT_FOUND]: '*'
@@ -21,9 +21,9 @@ export const RoutesPaths: Record<Routes, string> = {
 
 // сборка маршрутов и путей
 export const routerConfig: Record<Routes, RouteProps> = {
-	[Routes.MAIN]: {
-		path: RoutesPaths.main,
-		element: <MainPage/>
+	[Routes.WELCOME]: {
+		path: RoutesPaths.welcome,
+		element: <WelcomePage/>
 	},
 	[Routes.ALBUMS]: {
 		path: RoutesPaths.albums,

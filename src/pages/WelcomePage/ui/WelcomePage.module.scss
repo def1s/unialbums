@@ -1,4 +1,4 @@
-.MainPage {
+.WelcomePage {
     padding-top: var(--medium-padding);
 }
 
@@ -16,6 +16,10 @@
     border-radius: var(--medium-radius);
     flex: 1;
     color: #fff;
+}
+
+.gradient {
+    background: linear-gradient(169deg, rgb(26 26 26 / 100%) 40%, rgb(172 22 22 / 100%) 95%);
 }
 
 .title {

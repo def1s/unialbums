@@ -16,7 +16,7 @@ export const Sidebar = ({ className }: SidebarProps) => {
 			<div className={cls.linksWrapper}>
 				<NavLink
 					className={cls.link}
-					to={RoutesPaths.main}
+					to={RoutesPaths.welcome}
 				>
 					<HomeIcon className={cls.icon}/>
 					<span className={cls.linkText}>Home</span>

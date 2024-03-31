@@ -1,21 +1,31 @@
-import cls from './MainPage.module.scss';
+import cls from './WelcomePage.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { FC } from 'react';
 import collage from '/src/shared/assets/collages/collage.jpeg';
+import { useSelector } from 'react-redux';
+import { getUserAuthData } from 'entities/User';
+import { Navigate } from 'react-router-dom';
+import { RoutesPaths } from 'shared/config/routerConfig/routerConfig';
 
-interface MainPageProps {
+interface WelcomePageProps {
     className?: string
 }
 
-export const MainPage: FC<MainPageProps> = (props) => {
+export const WelcomePage: FC<WelcomePageProps> = (props) => {
 	const {
 		className
 	} = props;
 
+	// перенаправляем пользователя после логина с welcome страницы
+	const user = useSelector(getUserAuthData);
+	if (user) {
+		return <Navigate to={RoutesPaths.albums}/>;
+	}
+
 	return (
-		<div className={classNames(cls.MainPage, {}, [className])}>
+		<div className={classNames(cls.WelcomePage, {}, [className])}>
 			<div className={cls.wrapper}>
-				<div className={cls.element}>
+				<div className={classNames(cls.element, {}, [cls.gradient])}>
 					<div className={cls.title}>UniAlbums</div>
 				</div>
 

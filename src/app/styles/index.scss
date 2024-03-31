@@ -3,21 +3,24 @@
 @import "fonts/san-francisco";
 
 body {
-    //font-family: Arial, sans-serif;
     font-family: 'SF UI Text', sans-serif;
     background-color: var(--app-bg-color);
 }
 
 .App {
     min-height: 100vh;
+    max-width: 1140px;
+    margin: 0 auto;
 }
 
 .content-page {
-    max-width: 1140px;
-    margin: 0 auto;
     padding: 0 var(--medium-padding) 0 calc(var(--sidebar-collapsed-width) + var(--medium-padding));
 }
 
 .content-wrapper {
     width: 100%;
+}
+
+.welcome-page {
+    padding: 0 var(--medium-padding);
 }
