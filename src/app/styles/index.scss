@@ -1,8 +1,10 @@
 @import "reset";
 @import "variables/global";
+@import "fonts/san-francisco";
 
 body {
-    font-family: Arial, sans-serif;
+    //font-family: Arial, sans-serif;
+    font-family: 'SF UI Text', sans-serif;
     background-color: var(--app-bg-color);
 }
 

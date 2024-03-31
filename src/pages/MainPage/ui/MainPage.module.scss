@@ -1,0 +1,54 @@
+.MainPage {
+    padding-top: var(--medium-padding);
+}
+
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: var(--medium-padding);
+    gap: var(--medium-padding);
+}
+
+.element {
+    height: 300px;
+    padding-right: var(--large-padding);
+    background-color: var(--default-bg-color);
+    border-radius: var(--medium-radius);
+    flex: 1;
+    color: #fff;
+}
+
+.title {
+    font-size: 64px;
+    margin-top: 180px;
+    margin-left: 60px;
+}
+
+.description {
+    font-size: 32px;
+    margin-top: 150px;
+    margin-left: 50px;
+}
+
+.movingImageContainer {
+    height: 300px;
+    border-radius: var(--medium-radius);
+    overflow: hidden;
+}
+
+.movingImage {
+    width: 300px; /* Ширина изображения */
+    height: 300px; /* Высота изображения */
+    display: flex;
+    animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}

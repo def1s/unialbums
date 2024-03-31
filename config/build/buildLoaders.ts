@@ -26,9 +26,19 @@ export const BuildLoaders = ({ isDev }: BuildOptions) => {
 		use: ['@svgr/webpack'],
 	};
 
+	const fileLoader = {
+		test: /\.(png|jpe?g|gif)$/i,
+		use: [
+			{
+				loader: 'file-loader',
+			},
+		],
+	};
+
 	const scssLoader = buildScssLoader(isDev);
 
 	return [
+		fileLoader,
 		svgLoader,
 		babelLoader,
 		tsLoader,

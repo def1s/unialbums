@@ -27,7 +27,7 @@ export const Navbar = ({ className }: NavbarProps) => {
 		<header className={classNames(cls.Navbar, {}, [className])}>
 			{
 				!user ?
-					<Button className={cls.button} onClick={onOpenLoginModal}>Sign in</Button>
+					<Button className={cls.button} onClick={onOpenLoginModal}>Войти</Button>
 					: <div>{`Привет, ${user.login}`}</div>
 			}
 
@@ -36,7 +36,11 @@ export const Navbar = ({ className }: NavbarProps) => {
 				onClose={onCloseLoginModal}
 			/>
 
-			<SearchAlbumsByName/>
+			{
+				user ?
+					<SearchAlbumsByName/>
+					: null
+			}
 		</header>
 	);
 };

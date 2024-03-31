@@ -41,12 +41,14 @@ export const LoginForm = ({ className }: LoginFormProps) => {
 				placeholder={'Имя пользователя'}
 				onChange={onChangeUsername}
 				value={username}
+				type='text'
 			/>
 			<Input
 				className={cls.input}
 				placeholder={'Пароль'}
 				onChange={onChangePassword}
 				value={password}
+				type='password'
 			/>
 			<Button
 				onClick={onClickLogin}
