@@ -7,7 +7,7 @@ import { useCallback } from 'react';
 import { loginByUsername } from 'features/AuthByUsername/model/services/loginByUsername/loginByUsername';
 import { Input } from 'shared/ui/Input/Input';
 import { Button } from 'shared/ui/Button/Button';
-import { Loader, ThemeLoader } from 'shared/ui/Loader/Loader';
+import { Loader } from 'shared/ui/Loader/Loader';
 
 interface LoginFormProps {
     className?: string

@@ -8,6 +8,7 @@
 				"message": "Empty scss file, fill or delete"
 			}
 		],
-		"scss/double-slash-comment-whitespace-inside": null
+		"scss/double-slash-comment-whitespace-inside": null,
+		"keyframes-name-pattern": null
 	}
 }
