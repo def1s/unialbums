@@ -3,7 +3,9 @@ import { User, UserJWTDecode, UserSchema } from '../../model/types/user';
 import { ACCESS_TOKEN_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
 import { jwtDecode } from 'jwt-decode';
 
-const initialState: UserSchema = {};
+const initialState: UserSchema = {
+	_inited: false
+};
 
 const userSlice = createSlice({
 	name: 'user',
@@ -26,6 +28,7 @@ const userSlice = createSlice({
 					console.log(error);
 				}
 			}
+			state._inited = true;
 		}
 	}
 });

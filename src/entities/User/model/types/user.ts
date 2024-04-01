@@ -12,4 +12,6 @@ export interface User extends Omit<UserJWTDecode, 'sub'> {
 
 export interface UserSchema {
 	authData?: User;
+
+	_inited: boolean;
 }

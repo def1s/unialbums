@@ -22,9 +22,8 @@ type Story = StoryObj<typeof AlbumCard>;
 export const Default: Story = {
 	args: {
 		title: 'Some title',
-		rating: 80,
 		cover: 'https://avatars.yandex.net/get-music-content/5496390/e9ae50ee.a.21527303-1/m1000x1000',
-		id: 1,
+		albumId: 1,
 		artist: 'Joji'
 	},
 };

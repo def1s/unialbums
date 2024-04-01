@@ -4,38 +4,31 @@ import { AppRouter } from 'app/providers/router';
 import { Navbar } from 'widgets/Navbar';
 import { Sidebar } from 'widgets/Sidebar';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserAuthData, userActions } from 'entities/User';
+import { getUserAuthData, getUserInited, userActions } from 'entities/User';
+import { classNames } from 'shared/lib/classNames/classNames';
 
 const App = () => {
 	const dispatch = useDispatch();
 	const user = useSelector(getUserAuthData);
+	const inited = useSelector(getUserInited);
 
 	useEffect(() => {
 		dispatch(userActions.iniAuthData());
 	}, [dispatch]);
 
-	if (user) {
-		return (
-			<div className={'App'}>
-				<div className="content-page">
-					<Sidebar/>
-					<div className="content-wrapper">
-						<Navbar/>
-						<AppRouter/>
-					</div>
-				</div>
-			</div>
-		);
-	} else {
-		return (
-			<div className={'App'}>
-				<div className="welcome-page">
+	return (
+		<div className='App'>
+			<div className={classNames('', { 'content-page': !!user })}>
+				{user && <Sidebar/>}
+				<div
+					className={classNames('', { 'content-wrapper': !!user, 'welcome-page': !user })}
+				>
 					<Navbar/>
-					<AppRouter/>
+					{inited && <AppRouter/>}
 				</div>
 			</div>
-		);
-	}
+		</div>
+	);
 };
 
 export default App;

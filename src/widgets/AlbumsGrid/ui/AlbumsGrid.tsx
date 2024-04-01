@@ -1,77 +1,46 @@
 import cls from './AlbumsGrid.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { AlbumCard } from 'entities/AlbumCard';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserAlbumsState } from 'entities/AlbumCard';
+import { getAlbumsByAccessToken } from 'entities/AlbumCard';
 
 interface AlbumsListProps {
     className?: string
 }
 
 export const AlbumsGrid = ({ className }: AlbumsListProps) => {
+	const { albums, isLoading, error } = useSelector(getUserAlbumsState);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-expect-error
+		dispatch(getAlbumsByAccessToken());
+	}, [dispatch]);
 
 	return (
 		<div className={classNames(cls.AlbumsGrid, {}, [className])}>
-			<AlbumCard
-				id={1}
-				cover="https://via.placeholder.com/150"
-				title="Album title"
-				artist="Artist name"
-				rating={5}
-			/>
-			<AlbumCard
-				id={2}
-				cover="https://via.placeholder.com/150"
-				title="Album title"
-				artist="Artist name"
-				rating={5}
-			/>
-			<AlbumCard
-				id={3}
-				cover="https://via.placeholder.com/150"
-				title="Album title"
-				artist="Artist name"
-				rating={5}
-			/>
-			<AlbumCard
-				id={3}
-				cover="https://via.placeholder.com/150"
-				title="Album title"
-				artist="Artist name"
-				rating={5}
-			/>
-			<AlbumCard
-				id={3}
-				cover="https://via.placeholder.com/150"
-				title="Album title"
-				artist="Artist name"
-				rating={5}
-			/>
-			<AlbumCard
-				id={3}
-				cover="https://via.placeholder.com/150"
-				title="Album title"
-				artist="Artist name"
-				rating={5}
-			/><AlbumCard
-				id={3}
-				cover="https://via.placeholder.com/150"
-				title="Album title"
-				artist="Artist name"
-				rating={5}
-			/><AlbumCard
-				id={3}
-				cover="https://via.placeholder.com/150"
-				title="Album title"
-				artist="Artist name"
-				rating={5}
-			/>
-			<AlbumCard
-				id={3}
-				cover="https://via.placeholder.com/150"
-				title="Album title"
-				artist="Artist name"
-				rating={5}
-			/>
+			{
+				isLoading && !error && 'Loading...'
+			}
+
+			{
+				!isLoading && error
+			}
+
+			{
+				albums && albums.map((album) => (
+					<AlbumCard
+						key={album.albumId}
+						albumId={album.albumId}
+						cover={album.cover}
+						title={album.title}
+						artist={album.artist}
+					/>
+				))
+			}
 		</div>
 	);
 };

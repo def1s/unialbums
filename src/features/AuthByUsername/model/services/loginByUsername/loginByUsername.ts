@@ -33,7 +33,7 @@ export const loginByUsername = createAsyncThunk<User, LoginByUsernameProps, { re
 				throw new Error('Something went wrong...');
 			}
 
-			const accessToken = response.data.data.access_token;
+			const accessToken = response.data.data[0].accessToken;
 			const { sub, ...userData }: UserJWTDecode = jwtDecode(accessToken);
 
 			localStorage.setItem(ACCESS_TOKEN_LOCALSTORAGE_KEY, accessToken);
