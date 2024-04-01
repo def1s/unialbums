@@ -7,6 +7,7 @@ import { useCallback } from 'react';
 import { loginByUsername } from 'features/AuthByUsername/model/services/loginByUsername/loginByUsername';
 import { Input } from 'shared/ui/Input/Input';
 import { Button } from 'shared/ui/Button/Button';
+import { Loader, ThemeLoader } from 'shared/ui/Loader/Loader';
 
 interface LoginFormProps {
     className?: string
@@ -16,7 +17,7 @@ export const LoginForm = ({ className }: LoginFormProps) => {
 	const dispatch = useDispatch();
 	// не работает
 	// const dispatch = useAppDispatch();
-	const { username, password } = useSelector(getLoginState);
+	const { username, password, isLoading } = useSelector(getLoginState);
 
 	const onChangeUsername = useCallback((value: string) => {
 		dispatch(loginActions.setUsername(value));
@@ -36,6 +37,9 @@ export const LoginForm = ({ className }: LoginFormProps) => {
 
 	return (
 		<div className={classNames(cls.LoginForm, {}, [className])}>
+
+			{ isLoading && <Loader /> }
+
 			<Input
 				className={cls.input}
 				placeholder={'Имя пользователя'}
@@ -53,6 +57,7 @@ export const LoginForm = ({ className }: LoginFormProps) => {
 			<Button
 				onClick={onClickLogin}
 				className={cls.button}
+				disabled={isLoading}
 			>
 				Вход
 			</Button>

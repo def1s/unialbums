@@ -1,6 +1,11 @@
 .Button {
     cursor: pointer;
     padding: 5px;
+
+    &:disabled {
+        cursor: not-allowed;
+        background: var(--light-grey-red-gradient);
+    }
 }
 
 .lightBg {

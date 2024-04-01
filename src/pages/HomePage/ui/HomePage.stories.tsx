@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
-import { AlbumsListPage } from './AlbumsListPage';
+import { HomePage } from './HomePage';
 
-const meta: Meta<typeof AlbumsListPage> = {
-	title: 'pages/AlbumsListPage',
-	component: AlbumsListPage,
+const meta: Meta<typeof HomePage> = {
+	title: 'pages/HomePage',
+	component: HomePage,
 	// декоратор для ссылок
 	decorators: [
 		(Story) => (
@@ -17,6 +17,6 @@ const meta: Meta<typeof AlbumsListPage> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof AlbumsListPage>;
+type Story = StoryObj<typeof HomePage>;
 
 export const Default: Story = {};

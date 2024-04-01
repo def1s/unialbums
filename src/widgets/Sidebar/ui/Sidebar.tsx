@@ -2,7 +2,7 @@ import cls from './Sidebar.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { NavLink } from 'react-router-dom';
 import { RoutesPaths } from 'shared/config/routerConfig/routerConfig';
-import AlbumsIcon from 'shared/assets/icons/albums.svg';
+import HomeIcon from 'shared/assets/icons/home.svg';
 
 interface SidebarProps {
     className?: string
@@ -15,10 +15,10 @@ export const Sidebar = ({ className }: SidebarProps) => {
 			<div className={cls.linksWrapper}>
 				<NavLink
 					className={cls.link}
-					to={RoutesPaths.albums}
+					to={RoutesPaths.home}
 				>
-					<AlbumsIcon className={cls.icon}/>
-					<span className={cls.linkText}>My albums</span>
+					<HomeIcon className={cls.icon}/>
+					<span className={cls.linkText}>Home</span>
 				</NavLink>
 			</div>
 		</div>

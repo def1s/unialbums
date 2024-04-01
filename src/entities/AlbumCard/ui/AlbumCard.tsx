@@ -35,7 +35,7 @@ export const AlbumCard: FC<AlbumCardProps> = (props: AlbumCardProps): React.Reac
 
 	return (
 		// Компонент Link используется для создания ссылки на страницу альбома
-		<Link to={`${albumId}`} className={classNames(cls.AlbumCard, {}, [className])} key={albumId}>
+		<Link to={`/albums/${albumId}`} className={classNames(cls.AlbumCard, {}, [className])} key={albumId}>
 			<div className={cls.cover}>
 				<img src={cover} alt="Обложка альбома"/>
 			</div>

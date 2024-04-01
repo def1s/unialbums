@@ -1,6 +1,6 @@
 import { RouteProps } from 'react-router-dom';
 import { WelcomePage } from 'pages/WelcomePage';
-import { AlbumsListPage } from 'pages/AlbumsListPage';
+import { HomePage } from 'pages/HomePage';
 import { AlbumPage } from 'pages/AlbumPage';
 
 export type AppRoutesProps = RouteProps & {
@@ -10,7 +10,7 @@ export type AppRoutesProps = RouteProps & {
 // все маршруты
 export enum Routes {
 	WELCOME = 'welcome',
-	ALBUMS = 'albums',
+	HOME = 'home',
 	ALBUM = 'album',
 	NOT_FOUND = 'notFound'
 }
@@ -18,7 +18,7 @@ export enum Routes {
 // все пути по маршрутам
 export const RoutesPaths: Record<Routes, string> = {
 	[Routes.WELCOME]: '/',
-	[Routes.ALBUMS]: '/albums',
+	[Routes.HOME]: '/home',
 	[Routes.ALBUM]: '/albums/:id',
 	[Routes.NOT_FOUND]: '*'
 };
@@ -29,9 +29,9 @@ export const routerConfig: Record<Routes, AppRoutesProps> = {
 		path: RoutesPaths.welcome,
 		element: <WelcomePage/>
 	},
-	[Routes.ALBUMS]: {
-		path: RoutesPaths.albums,
-		element: <AlbumsListPage/>,
+	[Routes.HOME]: {
+		path: RoutesPaths.home,
+		element: <HomePage/>,
 		authOnly: true
 	},
 	[Routes.ALBUM]: {

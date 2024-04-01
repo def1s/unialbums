@@ -19,7 +19,7 @@ export const WelcomePage: FC<WelcomePageProps> = (props) => {
 	// перенаправляем пользователя после логина с welcome страницы
 	const user = useSelector(getUserAuthData);
 	if (user) {
-		return <Navigate to={RoutesPaths.albums}/>;
+		return <Navigate to={RoutesPaths.home}/>;
 	}
 
 	return (
