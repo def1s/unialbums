@@ -1,22 +1,34 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { AlbumsGrid } from './AlbumsGrid';
-import { BrowserRouter } from 'react-router-dom';
-import React from 'react';
+import { Album } from 'entities/AlbumCard';
 
 const meta: Meta<typeof AlbumsGrid> = {
 	title: 'widgets/AlbumsGrid',
-	component: AlbumsGrid,
-	// декоратор для ссылок
-	decorators: [
-		(Story) => (
-			<BrowserRouter>
-				<Story/>
-			</BrowserRouter>
-		)
-	]
+	component: AlbumsGrid
 };
 
 export default meta;
 type Story = StoryObj<typeof AlbumsGrid>;
 
-export const Default: Story = {};
+const mockedAlbums: Album[] = [
+	{
+		albumId: 1,
+		artist: 'artist',
+		cover: 'cover',
+		title: 'title'
+	},
+	{
+		albumId: 2,
+		artist: 'artist',
+		cover: 'cover',
+		title: 'title'
+	},
+	{
+		albumId: 3,
+		artist: 'artist',
+		cover: 'cover',
+		title: 'title'
+	}
+];
+
+export const WithAlbums = () => <AlbumsGrid/>;

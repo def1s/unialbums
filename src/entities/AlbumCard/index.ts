@@ -3,3 +3,4 @@ export { userAlbumsActions, userAlbumsReducer } from './model/slice/userAlbumsSl
 export { UserAlbumsSchema } from './model/types/userAlbumsSchema';
 export { getUserAlbumsState } from './model/selectors/getUserAlbumsState/getUserAlbumsState';
 export { getAlbumsByAccessToken } from './model/services/getAlbumsByAccessToken/getAlbumsByAccessToken';
+export { Album } from './model/types/userAlbumsSchema';
