@@ -1,11 +1,10 @@
 import cls from './AlbumsGrid.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { AlbumCard } from 'entities/AlbumCard';
+import { AlbumCard, getAlbumsByAccessToken, getUserAlbumsState } from 'entities/AlbumCard';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserAlbumsState } from 'entities/AlbumCard';
-import { getAlbumsByAccessToken } from 'entities/AlbumCard';
 import { Loader } from 'shared/ui/Loader/Loader';
+import { Text, ThemeText } from 'shared/ui/Text/Text';
 
 interface AlbumsListProps {
     className?: string
@@ -25,7 +24,10 @@ export const AlbumsGrid = ({ className }: AlbumsListProps) => {
 		<div className={classNames(cls.AlbumsGrid, {}, [className])}>
 			{ isLoading && !error && <Loader/> }
 
-			{ !isLoading && error }
+			{
+				!isLoading && error &&
+				<Text title={error} text={'Попробуйте перезагрузить страницу'} theme={ThemeText.ERROR}/>
+			}
 
 			{
 				albums && albums.map((album) => (

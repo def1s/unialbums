@@ -1,8 +1,20 @@
 :root {
-    // размеры
+    // размеры элементов
     --navbar-height: 70px;
     --sidebar-width: 200px;
     --sidebar-collapsed-width: 80px;
+
+    // размеры шрифтов
+    --font-family-main: 'SF UI Text', sans-serif;
+    --font-size-m: 16px;
+    --font-line-m: 24px;
+    --font-m: var(--font-size-m) / var(--font-line-m) var(--font-family-main);
+    --font-size-l: 24px;
+    --font-line-l: 32px;
+    --font-l: var(--font-size-l) / var(--font-line-l) var(--font-family-main);
+    --font-size-xl: 32px;
+    --font-line-xl: 40px;
+    --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-main);
 
     // отступы
     --small-padding: 10px;
@@ -19,6 +31,7 @@
     --default-bg-color: rgb(26 26 26);
     --default-bg-color-opacity: rgb(26 26 26 / 60%);
     --light-bg-color: rgb(41 40 44);
+    --red-color: rgb(172 22 22);
 
     // градиенты
     --grey-red-gradient: linear-gradient(169deg, rgb(26 26 26 / 100%) 40%, rgb(172 22 22 / 100%) 95%);

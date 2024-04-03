@@ -3,7 +3,7 @@
 @import "fonts/san-francisco";
 
 body {
-    font-family: 'SF UI Text', sans-serif;
+    font-family: var(--font-family-main);
     background-color: var(--app-bg-color);
 }
 
