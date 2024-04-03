@@ -1,4 +1,4 @@
-import type { Meta, StoryFn, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { AlbumsGrid } from './AlbumsGrid';
 import { Album } from 'entities/AlbumCard';
 import { rest } from 'msw';
@@ -49,13 +49,13 @@ const mockedAlbums: ApiResponse<Album> = {
 	message: 'Ok'
 };
 
-const emptyAlbumsList: ApiResponse<null> = {
+const mockedEmptyAlbums: ApiResponse<null> = {
 	data: null,
 	message: 'Empty'
 };
 
 
-export const Default = {
+export const Default: Story = {
 	parameters: {
 		msw: {
 			handlers: [
@@ -69,13 +69,13 @@ export const Default = {
 	}
 };
 
-export const WithoutAlbums = {
+export const WithoutAlbums: Story = {
 	parameters: {
 		msw: {
 			handlers: [
 				rest.get('http://localhost:8081/albums/getByUserId', (req, res, ctx) => {
 					return res(
-						ctx.json(emptyAlbumsList)
+						ctx.json(mockedEmptyAlbums)
 					);
 				}),
 			]
@@ -83,27 +83,13 @@ export const WithoutAlbums = {
 	}
 };
 
-export const Error = {
+export const Error: Story = {
 	parameters: {
 		msw: {
 			handlers: [
 				rest.get('http://localhost:8081/albums/getByUserId', (req, res, ctx) => {
 					return res(
 						ctx.status(403)
-					);
-				}),
-			]
-		},
-	}
-};
-
-export const Loading = {
-	parameters: {
-		msw: {
-			handlers: [
-				rest.get('http://localhost:8081/albums/getByUserId', (req, res, ctx) => {
-					return res(
-						ctx.json(emptyAlbumsList)
 					);
 				}),
 			]

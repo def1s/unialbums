@@ -1,10 +1,7 @@
 .AlbumCard {
     text-decoration: none;
-
-    //width: 291px;
-    //height: 428px;
     cursor: pointer;
-    max-width: 582px;
+    max-width: 382px;
     background-color: var(--default-bg-color);
     border-radius: var(--large-radius);
     border-style: solid;
@@ -13,18 +10,6 @@
     transition: all .5s;
     display: block;
     padding: 8px;
-
-    //&:hover {
-    //    scale: 1.08;
-    //}
-    //&_scope-off {
-    //    &:hover {
-    //        scale: none;
-    //    }
-    //}
-    //&_margin-off {
-    //    margin-top: 0 !important;
-    //}
 }
 
 .title {

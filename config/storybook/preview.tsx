@@ -4,7 +4,9 @@ import { MemoryRouter } from 'react-router-dom';
 import { StoreProvider } from '../../src/app/providers/StoreProvider';
 import { initialize, mswLoader } from 'msw-storybook-addon';
 
-initialize();
+initialize({
+	onUnhandledRequest: 'bypass'
+});
 
 const preview: Preview = {
 	parameters: {
