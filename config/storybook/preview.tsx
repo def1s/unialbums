@@ -2,9 +2,9 @@ import type { Preview } from '@storybook/react';
 import '../../src/app/styles/index.scss';
 import { MemoryRouter } from 'react-router-dom';
 import { StoreProvider } from '../../src/app/providers/StoreProvider';
-// import { initialize, mswLoader } from 'msw-storybook-addon';
+import { initialize, mswLoader } from 'msw-storybook-addon';
 
-// initialize();
+initialize();
 
 const preview: Preview = {
 	parameters: {
@@ -13,9 +13,9 @@ const preview: Preview = {
 				color: /(background|color)$/i,
 				date: /Date$/i,
 			},
-		},
-		// loaders: [mswLoader]
+		}
 	},
+	loaders: [mswLoader],
 	decorators: [
 		(Story) => (
 			<MemoryRouter>
