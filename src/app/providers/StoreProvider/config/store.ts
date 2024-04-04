@@ -2,7 +2,7 @@ import { configureStore, ReducersMapObject } from '@reduxjs/toolkit';
 import { StateSchema } from './StateSchema';
 import { userReducer } from 'entities/User';
 import { loginReducer } from 'features/AuthByUsername';
-import { userAlbumsReducer } from 'entities/AlbumCard';
+import { userAlbumsReducer } from 'widgets/AlbumsGrid';
 
 export const configureReduxStore = (initialState?: StateSchema) => {
 	const rootReducers: ReducersMapObject<StateSchema> = {
