@@ -3,10 +3,10 @@ import { Album } from 'entities/AlbumCard';
 import axios, { AxiosRequestConfig } from 'axios';
 import { ApiResponse } from 'shared/api/types/apiResponse';
 import { ACCESS_TOKEN_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
-import { getUpdatedAccessToken } from 'shared/api/services/getUpdatedAccessToken/getUpdatedAccessToken';
+import { updateAccessToken } from 'shared/api/services/updateAccessToken/updateAccessToken';
 import { userActions } from 'entities/User';
 
-export const getAlbumsByAccessToken = createAsyncThunk<Album[], null, { rejectValue: string }>(
+export const getAlbumsByAccessToken = createAsyncThunk<Album[], undefined, { rejectValue: string }>(
 	'albums/getAlbumsByAccessToken',
 	async (_, thunkAPI) => {
 		const accessToken = localStorage.getItem(ACCESS_TOKEN_LOCALSTORAGE_KEY);
@@ -21,22 +21,31 @@ export const getAlbumsByAccessToken = createAsyncThunk<Album[], null, { rejectVa
 
 		try {
 			const response = await axios<ApiResponse<Album>>(options);
+
+			if (!response.data) {
+				throw new Error('Что-то пошло не так');
+			}
+
 			return response.data.data;
 		} catch (error) {
+
 			if (error.response && error.response.status === 403) {
 				try {
-					const updatedToken = await getUpdatedAccessToken();
-					if (updatedToken) {
-						localStorage.setItem(ACCESS_TOKEN_LOCALSTORAGE_KEY, updatedToken);
+					const isTokenUpdated = await updateAccessToken();
+
+					if (isTokenUpdated) {
+						const updatedToken = localStorage.getItem(ACCESS_TOKEN_LOCALSTORAGE_KEY);
 						options.headers['Authorization'] = `Bearer ${updatedToken}`;
 						const response = await axios<ApiResponse<Album>>(options);
 						return response.data.data;
-					}
-				} catch (error) {
-					if (error.response && error.response.status === 403) {
+					} else if (isTokenUpdated === null) {
+						return thunkAPI.rejectWithValue('Произошла неожиданная ошибка');
+					} else {
 						thunkAPI.dispatch(userActions.logout());
-						return thunkAPI.rejectWithValue('Необходима повторная авторизация');
 					}
+
+				} catch (error) {
+					console.log(error);
 				}
 			}
 
