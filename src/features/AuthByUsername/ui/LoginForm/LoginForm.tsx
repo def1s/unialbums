@@ -8,6 +8,7 @@ import { loginByUsername } from 'features/AuthByUsername/model/services/loginByU
 import { Input } from 'shared/ui/Input/Input';
 import { Button } from 'shared/ui/Button/Button';
 import { Loader } from 'shared/ui/Loader/Loader';
+import { Text, ThemeText } from 'shared/ui/Text/Text';
 
 interface LoginFormProps {
     className?: string
@@ -17,7 +18,7 @@ export const LoginForm = ({ className }: LoginFormProps) => {
 	const dispatch = useDispatch();
 	// не работает
 	// const dispatch = useAppDispatch();
-	const { username, password, isLoading } = useSelector(getLoginState);
+	const { username, password, isLoading, error } = useSelector(getLoginState);
 
 	const onChangeUsername = useCallback((value: string) => {
 		dispatch(loginActions.setUsername(value));
@@ -54,6 +55,9 @@ export const LoginForm = ({ className }: LoginFormProps) => {
 				value={password}
 				type='password'
 			/>
+
+			{ error &&  <Text text={error} theme={ThemeText.ERROR}/>}
+
 			<Button
 				onClick={onClickLogin}
 				className={cls.button}

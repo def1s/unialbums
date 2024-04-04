@@ -1,19 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { AlbumCard } from './AlbumCard';
-import { BrowserRouter } from 'react-router-dom';
-import React from 'react';
 
 const meta: Meta<typeof AlbumCard> = {
 	title: 'entities/AlbumCard',
-	component: AlbumCard,
-	// декоратор для ссылок
-	decorators: [
-		(Story) => (
-			<BrowserRouter>
-				<Story/>
-			</BrowserRouter>
-		)
-	]
+	component: AlbumCard
 };
 
 export default meta;

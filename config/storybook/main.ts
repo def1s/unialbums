@@ -4,6 +4,7 @@ import type { StorybookConfig } from '@storybook/react-webpack5';
 // @ts-expect-error
 const config: StorybookConfig = {
 	stories: ['../../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+	staticDirs: ['../../public'],
 	addons: [
 		'@storybook/addon-webpack5-compiler-swc',
 		'@storybook/addon-onboarding',
@@ -31,6 +32,6 @@ const config: StorybookConfig = {
 	}),
 	docs: {
 		autodocs: 'tag',
-	},
+	}
 };
 export default config;

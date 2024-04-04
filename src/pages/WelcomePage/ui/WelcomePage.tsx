@@ -5,7 +5,7 @@ import collage from '/src/shared/assets/collages/collage.jpeg';
 import { useSelector } from 'react-redux';
 import { getUserAuthData } from 'entities/User';
 import { Navigate } from 'react-router-dom';
-import { RoutesPaths } from 'shared/config/routerConfig/routerConfig';
+// import { RoutesPaths } from 'shared/config/routerConfig/routerConfig';
 
 interface WelcomePageProps {
     className?: string
@@ -19,7 +19,9 @@ export const WelcomePage: FC<WelcomePageProps> = (props) => {
 	// перенаправляем пользователя после логина с welcome страницы
 	const user = useSelector(getUserAuthData);
 	if (user) {
-		return <Navigate to={RoutesPaths.home}/>;
+		// при использовании RoutesPaths ломается сторибук
+		// return <Navigate to={RoutesPaths.home}/>;
+		return <Navigate to={'/home'}/>;
 	}
 
 	return (

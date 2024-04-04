@@ -30,7 +30,7 @@ export const loginByUsername = createAsyncThunk<User, LoginByUsernameProps, { re
 			const response = await axios<ApiResponse<token>>(options);
 
 			if (!response.data) {
-				throw new Error('Something went wrong...');
+				throw new Error('Что-то пошло не так');
 			}
 
 			const accessToken = response.data.data[0].accessToken;
@@ -39,8 +39,7 @@ export const loginByUsername = createAsyncThunk<User, LoginByUsernameProps, { re
 			localStorage.setItem(ACCESS_TOKEN_LOCALSTORAGE_KEY, accessToken);
 			thunkApi.dispatch(userActions.setAuthData({ username: sub, ...userData }));
 		} catch (error) {
-			console.log(error);
-			return thunkApi.rejectWithValue('Неверные имя пользователя или пароль');
+			return thunkApi.rejectWithValue(error.response.data.message || 'Непредвиденная ошибка');
 		}
 	}
 );
