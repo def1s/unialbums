@@ -15,7 +15,7 @@ import { Album } from '../model/types/userAlbumsSchema';
  * @property {number} rating - Рейтинг альбома
  * @property {string} className - Дополнительные классы CSS для компонента
  */
-export interface AlbumCardProps extends Album {
+interface AlbumCardProps extends Album {
     className?: string
 }
 

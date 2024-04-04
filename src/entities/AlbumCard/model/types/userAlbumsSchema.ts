@@ -8,9 +8,3 @@ export interface Album {
 	tracksRating?: number;
 	atmosphereRating?: number;
 }
-
-export interface UserAlbumsSchema {
-	albums: Album[];
-	isLoading: boolean;
-	error?: string;
-}

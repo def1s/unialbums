@@ -1,10 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Album } from '../../types/userAlbumsSchema';
+import { Album } from 'entities/AlbumCard';
 import axios, { AxiosRequestConfig } from 'axios';
 import { ApiResponse } from 'shared/api/types/apiResponse';
 import { ACCESS_TOKEN_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
 import { getUpdatedAccessToken } from 'shared/api/services/getUpdatedAccessToken/getUpdatedAccessToken';
-// ПОКА ЧТО ВРЕМЕННО НАРУШАЮ FSD
 import { userActions } from 'entities/User';
 
 export const getAlbumsByAccessToken = createAsyncThunk<Album[], null, { rejectValue: string }>(
@@ -35,7 +34,6 @@ export const getAlbumsByAccessToken = createAsyncThunk<Album[], null, { rejectVa
 					}
 				} catch (error) {
 					if (error.response && error.response.status === 403) {
-						// ПОКА ЧТО ВРЕМЕННО НАРУШАЮ FSD
 						thunkAPI.dispatch(userActions.logout());
 						return thunkAPI.rejectWithValue('Необходима повторная авторизация');
 					}

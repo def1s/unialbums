@@ -1,10 +1,12 @@
 import cls from './AlbumsGrid.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { AlbumCard, getAlbumsByAccessToken, getUserAlbumsState } from 'entities/AlbumCard';
+import { AlbumCard } from 'entities/AlbumCard';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loader } from 'shared/ui/Loader/Loader';
 import { Text, ThemeText } from 'shared/ui/Text/Text';
+import { getUserAlbumsState } from '../model/selectors/getUserAlbumsState/getUserAlbumsState';
+import { getAlbumsByAccessToken } from '../model/services/getAlbumsByAccessToken/getAlbumsByAccessToken';
 
 interface AlbumsListProps {
     className?: string
