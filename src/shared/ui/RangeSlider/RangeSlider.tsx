@@ -9,7 +9,8 @@ interface RangeSliderProps extends HTMLInputProps{
 	defaultValue: number;
 	min: number;
 	max: number;
-	onChange: (value: number) => void;
+	name?: string;
+	onChange: (value: number, field?: string) => void;
     className?: string
 }
 
@@ -20,11 +21,13 @@ export const RangeSlider = (props: RangeSliderProps) => {
 		min,
 		max,
 		onChange,
-		className
+		name,
+		className,
+		...otherProps
 	} = props;
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		onChange?.(+e.target.value);
+		onChange?.(+e.target.value, name);
 	};
 
 	return (
@@ -35,7 +38,9 @@ export const RangeSlider = (props: RangeSliderProps) => {
 				max={max}
 				defaultValue={defaultValue}
 				value={value}
+				name={name}
 				onChange={e => handleChange(e)}
+				{...otherProps}
 			/>
 		</div>
 	);
