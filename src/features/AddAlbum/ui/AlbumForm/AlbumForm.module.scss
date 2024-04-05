@@ -1,0 +1,39 @@
+.AlbumForm {
+    background-color: var(--default-bg-color);
+    border-radius: var(--small-radius);
+    padding: var(--medium-padding);
+    box-shadow: 0 0 20px rgb(0 0 0 / 30%);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.formGroup {
+    margin-bottom: var(--medium-padding);
+}
+
+.formLabel {
+    display: block;
+    margin-bottom: 5px;
+    font-size: var(--font-size-m);
+    color: #fff;
+}
+
+.formInput {
+    width: 100%;
+}
+
+.formSubmit {
+    width: 100%;
+    padding: 10px;
+    font-size: var(--font-size-m);
+    border: none;
+    border-radius: var(--small-radius);
+    background-color: var(--red-color);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: darkred;
+    }
+}
