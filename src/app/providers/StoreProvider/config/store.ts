@@ -22,7 +22,7 @@ export const configureReduxStore = (
 		preloadedState: initialState
 	});
 
-	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// eslint-disable-next-line
 	// @ts-expect-error
 	store.reducerManager = reducerManager;
 

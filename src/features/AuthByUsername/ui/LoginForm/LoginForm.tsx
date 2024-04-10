@@ -50,7 +50,7 @@ export const LoginForm = ({ className }: LoginFormProps) => {
 	return (
 		<DynamicModuleLoader
 			reducers={initialReducers}
-			removeAfterUnmount={true}
+			removeAfterUnmount
 		>
 			<div className={classNames(cls.LoginForm, {}, [className])}>
 

@@ -2,9 +2,11 @@ import { StoryFn } from '@storybook/react';
 import { StateSchema, StoreProvider } from 'app/providers/StoreProvider';
 import { loginReducer } from 'features/AuthByUsername/model/slice/loginSlice';
 import { ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import { albumFormReducer } from 'features/AddAlbum';
 
 const defaultAsyncReducers: ReducerList = {
-	loginForm: loginReducer
+	loginForm: loginReducer,
+	albumForm: albumFormReducer
 };
 
 export const StoreDecorator = (

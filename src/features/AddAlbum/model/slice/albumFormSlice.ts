@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AlbumFormSchema } from '../types/albumFormSchema';
+import { addAlbumToUser } from '../services/addAlbumToUser/addAlbumToUser';
 
 const initialState: AlbumFormSchema = {
 	cover: '',
@@ -9,7 +10,8 @@ const initialState: AlbumFormSchema = {
 	atmosphereRating: 1,
 	textRating: 1,
 	tracksRating: 1,
-	bitsRating: 1
+	bitsRating: 1,
+	isLoading: false
 };
 
 const albumFormSlice = createSlice({
@@ -18,13 +20,26 @@ const albumFormSlice = createSlice({
 	reducers: {
 		setFieldValue: (state, action: PayloadAction<{ field: string; value: string | number }>) => {
 			const { field, value } = action.payload;
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// eslint-disable-next-line
 			// @ts-expect-error
 			state[field] = value;
 		}
 	},
-	// extraReducers: (builder) => {
-	// }
+	extraReducers: (builder) => {
+		builder.addCase(addAlbumToUser.pending, (state) => {
+			state.error = undefined;
+			state.isLoading = true;
+		});
+
+		builder.addCase(addAlbumToUser.fulfilled, (state) => {
+			state.isLoading = false;
+		});
+
+		builder.addCase(addAlbumToUser.rejected, (state, action) => {
+			state.isLoading = false;
+			state.error = action.payload;
+		});
+	}
 });
 
 export const { actions: albumFormActions } = albumFormSlice;
