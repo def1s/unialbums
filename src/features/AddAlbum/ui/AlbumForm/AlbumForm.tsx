@@ -39,7 +39,7 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 			onSubmit={(e) => onSubmit(e)}
 		>
 			<div className={cls.formGroup}>
-				<label className={cls.formLabel} htmlFor="title">Название альбома:</label>
+				<label className={cls.formLabel}>Название альбома:</label>
 				<Input
 					type="text"
 					name="title"
@@ -50,7 +50,7 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 				/>
 			</div>
 			<div className={cls.formGroup}>
-				<label className={cls.formLabel} htmlFor="artist">Исполнитель:</label>
+				<label className={cls.formLabel}>Исполнитель:</label>
 				<Input
 					type="text"
 					name="artist"
@@ -61,7 +61,7 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 				/>
 			</div>
 			<div className={cls.formGroup}>
-				<label className={cls.formLabel} htmlFor="cover">Обложка (URL):</label>
+				<label className={cls.formLabel}>Обложка (URL):</label>
 				<Input
 					type="text"
 					name="cover"
@@ -72,7 +72,7 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 				/>
 			</div>
 			<div className={cls.formGroup}>
-				<label className={cls.formLabel} htmlFor="cover">Атмосфера: {atmosphereRating}</label>
+				<label className={cls.formLabel}>Атмосфера: {atmosphereRating}</label>
 				<RangeSlider
 					value={atmosphereRating}
 					onChange={onChange}
@@ -83,7 +83,7 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 				/>
 			</div>
 			<div className={cls.formGroup}>
-				<label className={cls.formLabel} htmlFor="cover">Текста: {textRating}</label>
+				<label className={cls.formLabel}>Текста: {textRating}</label>
 				<RangeSlider
 					value={textRating}
 					onChange={onChange}
@@ -94,7 +94,7 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 				/>
 			</div>
 			<div className={cls.formGroup}>
-				<label className={cls.formLabel} htmlFor="cover">Биты: {bitsRating}</label>
+				<label className={cls.formLabel}>Биты: {bitsRating}</label>
 				<RangeSlider
 					value={bitsRating}
 					onChange={onChange}
@@ -105,7 +105,7 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 				/>
 			</div>
 			<div className={cls.formGroup}>
-				<label className={cls.formLabel} htmlFor="cover">Треки: {tracksRating}</label>
+				<label className={cls.formLabel}>Треки: {tracksRating}</label>
 				<RangeSlider
 					value={tracksRating}
 					onChange={onChange}

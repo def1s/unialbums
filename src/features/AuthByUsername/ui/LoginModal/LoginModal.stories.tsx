@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { LoginModal } from './LoginModal';
-import { StoreProvider } from 'app/providers/StoreProvider';
 import { rest } from 'msw';
+import { StoreDecorator } from 'shared/config/storybook/StoreDecorator/StoreDecorator';
 
 const meta: Meta<typeof LoginModal> = {
 	title: 'features/LoginModal',
@@ -22,21 +22,11 @@ export const Loading: Story = {
 		isOpen: true
 	},
 	decorators: [
-		(Story) => (
-			<StoreProvider
-				initialState={{
-					loginForm: {
-						isLoading: true,
-						password: '',
-						username: ''
-					},
-					userAlbums: undefined,
-					user: undefined
-				}}
-			>
-				<Story/>
-			</StoreProvider>
-		)
+		StoreDecorator({
+			loginForm: {
+				isLoading: true
+			}
+		})
 	]
 };
 
@@ -45,22 +35,11 @@ export const Error: Story = {
 		isOpen: true
 	},
 	decorators: [
-		(Story) => (
-			<StoreProvider
-				initialState={{
-					loginForm: {
-						error: 'Error message',
-						isLoading: false,
-						password: '',
-						username: ''
-					},
-					userAlbums: undefined,
-					user: undefined
-				}}
-			>
-				<Story/>
-			</StoreProvider>
-		)
+		StoreDecorator({
+			loginForm: {
+				error: 'Error message'
+			}
+		})
 	]
 };
 
@@ -69,21 +48,11 @@ export const UnexpectedError: Story = {
 		isOpen: true
 	},
 	decorators: [
-		(Story) => (
-			<StoreProvider
-				initialState={{
-					loginForm: {
-						isLoading: false,
-						password: '',
-						username: 'для теста выполните вход'
-					},
-					userAlbums: undefined,
-					user: undefined
-				}}
-			>
-				<Story/>
-			</StoreProvider>
-		)
+		StoreDecorator({
+			loginForm: {
+				username: 'для теста выполните вход'
+			}
+		})
 	],
 	parameters: {
 		msw: {

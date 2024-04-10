@@ -33,10 +33,13 @@ export const Navbar = ({ className }: NavbarProps) => {
 		return (
 			<header className={classNames(cls.Navbar, {}, [className])}>
 				<Button className={cls.button} onClick={onOpenLoginModal}>Войти</Button>
-				<LoginModal
-					isOpen={isLoginModal}
-					onClose={onCloseLoginModal}
-				/>
+				{
+					isLoginModal &&
+						<LoginModal
+							isOpen={isLoginModal}
+							onClose={onCloseLoginModal}
+						/>
+				}
 			</header>
 		);
 	} else {

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AlbumFormFields, AlbumFormSchema } from '../types/albumFormSchema';
+import { AlbumFormSchema } from '../types/albumFormSchema';
 
 const initialState: AlbumFormSchema = {
 	cover: '',
