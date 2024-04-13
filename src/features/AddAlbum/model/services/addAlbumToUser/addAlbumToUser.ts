@@ -1,26 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios, { AxiosRequestConfig } from 'axios';
 import { ApiResponse } from 'shared/api/types/apiResponse';
 import { Album } from 'entities/AlbumCard';
-import { ACCESS_TOKEN_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
 import { userActions } from 'entities/User';
+import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 
 interface LoginByUsernameProps extends Omit<Album, 'albumId'> {}
+interface LoginByUsernameResult {
+	message: string;
+}
 
-export const addAlbumToUser = createAsyncThunk<null, LoginByUsernameProps, { rejectValue: string }>(
+export const addAlbumToUser = createAsyncThunk<LoginByUsernameResult, LoginByUsernameProps, { rejectValue: string }>(
 	'albumForm/addAlbumToUser',
 	async (albumData, thunkAPI) => {
-		// const accessToken = localStorage.getItem(ACCESS_TOKEN_LOCALSTORAGE_KEY);
 		const formData = new FormData();
 		const { cover, ...otherAlbumData } = albumData;
-		//
-		// const options: AxiosRequestConfig = {
-		// 	method: 'POST',
-		// 	url: 'http://localhost:8081/albums/create',
-		// 	headers: {
-		// 		'Authorization': `Bearer ${accessToken}`
-		// 	}
-		// };
 
 		try {
 			const blobImg = await fetch(cover).then(res => res.blob());
@@ -30,35 +23,12 @@ export const addAlbumToUser = createAsyncThunk<null, LoginByUsernameProps, { rej
 				formData.append(name, String(value));
 			});
 
-			// options.data = formData;
-
-			// const response = await axios<ApiResponse<null>>(options);
-			const response = await axios.post('http://localhost:8081/albums/create', formData);
-
-			if (!response.data) {
-				throw new Error('Что-то пошло не так');
-			}
+			await axiosInstance.post('/albums/create', formData);
+			const response = await axiosInstance.post<ApiResponse<null>>('/albums/create', formData);
+			return { message: response.data.message };
 		} catch (error) {
-
 			if (error.response && error.response.status === 403) {
 				thunkAPI.dispatch(userActions.logout());
-				// try {
-				// 	const isTokenUpdated = await updateAccessToken();
-				//
-				// 	if (isTokenUpdated) {
-				// 		const updatedToken = localStorage.getItem(ACCESS_TOKEN_LOCALSTORAGE_KEY);
-				// 		options.headers['Authorization'] = `Bearer ${updatedToken}`;
-				// 		const response = await axios<ApiResponse<null>>(options);
-				// 		return;
-				// 	} else if (isTokenUpdated === null) {
-				// 		return thunkAPI.rejectWithValue('Произошла неожиданная ошибка');
-				// 	} else {
-				// 		thunkAPI.dispatch(userActions.logout());
-				// 	}
-				//
-				// } catch (error) {
-				// 	console.log(error);
-				// }
 			}
 
 			return thunkAPI.rejectWithValue(error.response.data.message || 'Непредвиденная ошибка');

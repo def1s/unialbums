@@ -3,14 +3,13 @@ import { ACCESS_TOKEN_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
 import { ApiResponse, token } from 'shared/api/types/apiResponse';
 
 const axiosInstance = axios.create({
-	// baseURL: 'http://localhost:8081'
+	baseURL: 'http://localhost:8081'
 });
 
 axiosInstance.interceptors.request.use(config => {
 	const accessToken = localStorage.getItem(ACCESS_TOKEN_LOCALSTORAGE_KEY);
 	if (accessToken) {
 		config.headers.Authorization = `Bearer ${accessToken}`;
-		console.log('yes');
 	}
 	return config;
 });
