@@ -1,14 +1,38 @@
 .AlbumForm {
     background-color: var(--default-bg-color);
-    border-radius: var(--small-radius);
+    border-radius: var(--medium-radius);
     padding: var(--medium-padding);
     box-shadow: 0 0 20px rgb(0 0 0 / 30%);
-    max-width: 400px;
+    max-width: 800px;
     margin: 0 auto;
+    margin-top: var(--medium-padding);
+}
+
+.info {
+    display: flex;
+}
+
+.descriptionWrapper {
+    margin-left: var(--medium-padding);
+    display: flex;
+    gap: var(--medium-padding);
+    flex-direction: column;
+    flex: 1;
+}
+
+.ratingWrapper {
+    display: flex;
+    width: 100%;
+    gap: var(--medium-padding);
+    margin-top: var(--medium-padding);
+}
+
+.rangeSlider {
+    width: 100%;
 }
 
 .formGroup {
-    margin-bottom: var(--medium-padding);
+    width: 100%;
 }
 
 .formLabel {
@@ -24,16 +48,6 @@
 
 .formSubmit {
     width: 100%;
-    padding: 10px;
-    font-size: var(--font-size-m);
-    border: none;
-    border-radius: var(--small-radius);
-    background-color: var(--red-color);
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-        background-color: darkred;
-    }
+    height: 40px;
+    margin-top: var(--medium-padding);
 }

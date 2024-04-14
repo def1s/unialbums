@@ -3,7 +3,7 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { RangeSlider } from 'shared/ui/RangeSlider/RangeSlider';
 import { useDispatch, useSelector } from 'react-redux';
 import { Input } from 'shared/ui/Input/Input';
-import { ChangeEvent, FormEvent } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useRef } from 'react';
 import { albumFormActions, albumFormReducer } from '../../model/slice/albumFormSlice';
 import { AlbumFormFields } from '../../model/types/albumFormSchema';
 import { getAlbumFormTitle } from '../../model/selectors/getAlbumFormTitle/getAlbumFormTitle';
@@ -19,6 +19,8 @@ import {
 import { addAlbumToUser } from '../../model/services/addAlbumToUser/addAlbumToUser';
 import { getAlbumFormCover } from '../../model/selectors/getAlbumFormCover/getAlbumFormCover';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import { InputFile } from 'shared/ui/InputFile/InputFile';
+import { Button } from 'shared/ui/Button/Button';
 
 interface AlbumFormProps {
     className?: string
@@ -39,17 +41,32 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 	const tracksRating = useSelector(getAlbumFormTracksRating);
 	const cover = useSelector(getAlbumFormCover);
 
-	const onChange = (value: number | string, field: AlbumFormFields) => {
+	const localUrlImage = useRef('');
+
+	// очищение URL после размонтирования компонента
+	useEffect(() => {
+		return () => {
+			URL.revokeObjectURL(localUrlImage.current);
+		};
+	}, []);
+
+	const onChangeField = (value: number | string, field: AlbumFormFields) => {
 		dispatch(albumFormActions.setFieldValue({ value: value, field: field }));
 	};
 
-	const onCoverChange = (e: ChangeEvent<HTMLInputElement>) => {
+	const onCoverAdd = (e: ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
 		const { files } = e.target;
 
-		const localImageUrl = window.URL.createObjectURL(files[0]);
+		localUrlImage.current = window.URL.createObjectURL(files[0]);
 
-		onChange(localImageUrl, 'cover');
+		onChangeField(localUrlImage.current, 'cover');
+	};
+
+	const onCoverDelete = () => {
+		URL.revokeObjectURL(localUrlImage.current);
+		localUrlImage.current = '';
+		onChangeField('', 'cover');
 	};
 
 	const onSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -68,84 +85,88 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 				className={classNames(cls.AlbumForm, {}, [className])}
 				onSubmit={(e) => onSubmit(e)}
 			>
-				<div className={cls.wrapper}>
-					<div className={cls.formGroup}>
-						<label className={cls.formLabel}>Обложка:</label>
-						<input
-							type='file'
-							onChange={e => onCoverChange(e)}
-						/>
-					</div>
-
-					<div className={cls.formGroup}>
-						<label className={cls.formLabel}>Название альбома:</label>
+				<div className={cls.info}>
+					<InputFile
+						onChange={onCoverAdd}
+						selectedFile={cover}
+						onRemove={onCoverDelete}
+						label='Обложка'
+					/>
+					<div className={cls.descriptionWrapper}>
 						<Input
 							type="text"
 							name="title"
 							className={cls.formInput}
-							onChange={onChange}
+							onChange={onChangeField}
 							value={title}
+							placeholder='Название альбома'
 							required
 						/>
-					</div>
-					<div className={cls.formGroup}>
-						<label className={cls.formLabel}>Исполнитель:</label>
+
 						<Input
 							type="text"
 							name="artist"
 							className={cls.formInput}
-							onChange={onChange}
+							onChange={onChangeField}
 							value={artist}
+							placeholder='Исполнитель'
 							required
 						/>
 					</div>
 				</div>
 
-				<div className={cls.formGroup}>
-					<label className={cls.formLabel}>Атмосфера: {atmosphereRating}</label>
-					<RangeSlider
-						value={atmosphereRating}
-						onChange={onChange}
-						min={1}
-						max={10}
-						defaultValue={1}
-						name={'atmosphereRating'}
-					/>
+				<div className={cls.ratingWrapper}>
+					<div className={cls.formGroup}>
+						<label className={cls.formLabel}>Атмосфера: {atmosphereRating}</label>
+						<RangeSlider
+							className={cls.rangeSlider}
+							value={atmosphereRating}
+							onChange={onChangeField}
+							min={1}
+							max={10}
+							defaultValue={1}
+							name={'atmosphereRating'}
+						/>
+					</div>
+					<div className={cls.formGroup}>
+						<label className={cls.formLabel}>Текста: {textRating}</label>
+						<RangeSlider
+							className={cls.rangeSlider}
+							value={textRating}
+							onChange={onChangeField}
+							min={1}
+							max={10}
+							defaultValue={1}
+							name={'textRating'}
+						/>
+					</div>
 				</div>
-				<div className={cls.formGroup}>
-					<label className={cls.formLabel}>Текста: {textRating}</label>
-					<RangeSlider
-						value={textRating}
-						onChange={onChange}
-						min={1}
-						max={10}
-						defaultValue={1}
-						name={'textRating'}
-					/>
+
+				<div className={cls.ratingWrapper}>
+					<div className={cls.formGroup}>
+						<label className={cls.formLabel}>Биты: {bitsRating}</label>
+						<RangeSlider
+							value={bitsRating}
+							onChange={onChangeField}
+							min={1}
+							max={10}
+							defaultValue={1}
+							name={'bitsRating'}
+						/>
+					</div>
+					<div className={cls.formGroup}>
+						<label className={cls.formLabel}>Треки: {tracksRating}</label>
+						<RangeSlider
+							value={tracksRating}
+							onChange={onChangeField}
+							min={1}
+							max={10}
+							defaultValue={1}
+							name={'tracksRating'}
+						/>
+					</div>
 				</div>
-				<div className={cls.formGroup}>
-					<label className={cls.formLabel}>Биты: {bitsRating}</label>
-					<RangeSlider
-						value={bitsRating}
-						onChange={onChange}
-						min={1}
-						max={10}
-						defaultValue={1}
-						name={'bitsRating'}
-					/>
-				</div>
-				<div className={cls.formGroup}>
-					<label className={cls.formLabel}>Треки: {tracksRating}</label>
-					<RangeSlider
-						value={tracksRating}
-						onChange={onChange}
-						min={1}
-						max={10}
-						defaultValue={1}
-						name={'tracksRating'}
-					/>
-				</div>
-				<button type="submit" className={cls.formSubmit}>Добавить альбом</button>
+				<Button type="submit" className={cls.formSubmit}>Добавить альбом</Button>
 			</form>
 		</DynamicModuleLoader>
 	);

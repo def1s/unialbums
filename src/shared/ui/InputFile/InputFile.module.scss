@@ -1,0 +1,57 @@
+.InputFile {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.input {
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.inputLabel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--light-bg-color);
+    color: #fff;
+    border-radius: var(--medium-radius);
+    cursor: pointer;
+    width: 200px;
+    height: 200px;
+    &:hover {
+        background: var(--light-grey-red-gradient);
+    }
+
+}
+
+.imageContainer {
+    position: relative;
+    width: 200px; /* Ширина изображения */
+    height: 200px; /* Высота изображения */
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--medium-radius);
+}
+
+.removeButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgb(0 0 0 / 50%);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+}
