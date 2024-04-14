@@ -32,6 +32,7 @@
     --default-bg-color-opacity: rgb(26 26 26 / 60%);
     --light-bg-color: rgb(41 40 44);
     --red-color: rgb(172 22 22);
+    --green-color: rgb(75 216 76);
 
     // градиенты
     --grey-red-gradient: linear-gradient(169deg, rgb(26 26 26 / 100%) 40%, rgb(172 22 22 / 100%) 95%);
@@ -41,4 +42,5 @@
     --navbar-z-index: 5;
     --modal-z-index: 10;
     --sidebar-z-index: 5;
+    --blur-z-index: 15;
 }

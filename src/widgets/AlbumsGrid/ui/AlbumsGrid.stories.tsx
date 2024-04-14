@@ -89,7 +89,7 @@ export const Error: Story = {
 			handlers: [
 				rest.get('http://localhost:8081/albums/getByUserId', (req, res, ctx) => {
 					return res(
-						ctx.status(403)
+						ctx.status(404)
 					);
 				}),
 			]
