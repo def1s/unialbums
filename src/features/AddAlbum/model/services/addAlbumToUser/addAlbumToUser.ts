@@ -23,7 +23,6 @@ export const addAlbumToUser = createAsyncThunk<LoginByUsernameResult, LoginByUse
 				formData.append(name, String(value));
 			});
 
-			await axiosInstance.post('/albums/create', formData);
 			const response = await axiosInstance.post<ApiResponse<null>>('/albums/create', formData);
 			return { message: response.data.message };
 		} catch (error) {

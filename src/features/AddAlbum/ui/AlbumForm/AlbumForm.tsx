@@ -68,35 +68,39 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 				className={classNames(cls.AlbumForm, {}, [className])}
 				onSubmit={(e) => onSubmit(e)}
 			>
-				<div className={cls.formGroup}>
-					<label className={cls.formLabel}>Название альбома:</label>
-					<Input
-						type="text"
-						name="title"
-						className={cls.formInput}
-						onChange={onChange}
-						value={title}
-						required
-					/>
+				<div className={cls.wrapper}>
+					<div className={cls.formGroup}>
+						<label className={cls.formLabel}>Обложка:</label>
+						<input
+							type='file'
+							onChange={e => onCoverChange(e)}
+						/>
+					</div>
+
+					<div className={cls.formGroup}>
+						<label className={cls.formLabel}>Название альбома:</label>
+						<Input
+							type="text"
+							name="title"
+							className={cls.formInput}
+							onChange={onChange}
+							value={title}
+							required
+						/>
+					</div>
+					<div className={cls.formGroup}>
+						<label className={cls.formLabel}>Исполнитель:</label>
+						<Input
+							type="text"
+							name="artist"
+							className={cls.formInput}
+							onChange={onChange}
+							value={artist}
+							required
+						/>
+					</div>
 				</div>
-				<div className={cls.formGroup}>
-					<label className={cls.formLabel}>Исполнитель:</label>
-					<Input
-						type="text"
-						name="artist"
-						className={cls.formInput}
-						onChange={onChange}
-						value={artist}
-						required
-					/>
-				</div>
-				<div className={cls.formGroup}>
-					<label className={cls.formLabel}>Обложка:</label>
-					<input
-						type='file'
-						onChange={e => onCoverChange(e)}
-					/>
-				</div>
+
 				<div className={cls.formGroup}>
 					<label className={cls.formLabel}>Атмосфера: {atmosphereRating}</label>
 					<RangeSlider
