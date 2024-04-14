@@ -9,6 +9,7 @@
     right: 0;
     top: 0;
     opacity: 0;
+    height: 0;
 }
 
 .inputLabel {
@@ -21,6 +22,7 @@
     cursor: pointer;
     width: 200px;
     height: 200px;
+
     &:hover {
         background: var(--light-grey-red-gradient);
     }
