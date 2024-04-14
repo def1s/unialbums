@@ -3,6 +3,7 @@ import { AlbumsGrid } from './AlbumsGrid';
 import { Album } from 'entities/AlbumCard';
 import { rest } from 'msw';
 import { ApiResponse } from 'shared/api/types/apiResponse';
+import { StoreDecorator } from 'shared/config/storybook/StoreDecorator/StoreDecorator';
 
 const meta: Meta<typeof AlbumsGrid> = {
 	title: 'widgets/AlbumsGrid',
@@ -89,7 +90,7 @@ export const Error: Story = {
 			handlers: [
 				rest.get('http://localhost:8081/albums/getByUserId', (req, res, ctx) => {
 					return res(
-						ctx.status(403)
+						ctx.status(404)
 					);
 				}),
 			]

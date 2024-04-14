@@ -3,7 +3,7 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { RangeSlider } from 'shared/ui/RangeSlider/RangeSlider';
 import { useDispatch, useSelector } from 'react-redux';
 import { Input } from 'shared/ui/Input/Input';
-import { ChangeEvent, FormEvent, useEffect, useRef } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useRef } from 'react';
 import { albumFormActions, albumFormReducer } from '../../model/slice/albumFormSlice';
 import { AlbumFormFields } from '../../model/types/albumFormSchema';
 import { getAlbumFormTitle } from '../../model/selectors/getAlbumFormTitle/getAlbumFormTitle';
@@ -13,14 +13,18 @@ import {
 } from '../../model/selectors/getAlbumFormAtmosphereRating/getAlbumFormAtmosphereRating';
 import { getAlbumFormBitsRating } from '../../model/selectors/getAlbumFormBitsRating/getAlbumFormBitsRating';
 import { getAlbumFormTextRating } from '../../model/selectors/getAlbumFormTextRating/getAlbumFormTextRating';
-import {
-	getAlbumFormTracksRating
-} from '../../model/selectors/getAlbumFormTracksRating/getAlbumFormTracksRating';
+import { getAlbumFormTracksRating } from '../../model/selectors/getAlbumFormTracksRating/getAlbumFormTracksRating';
 import { addAlbumToUser } from '../../model/services/addAlbumToUser/addAlbumToUser';
 import { getAlbumFormCover } from '../../model/selectors/getAlbumFormCover/getAlbumFormCover';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { InputFile } from 'shared/ui/InputFile/InputFile';
 import { Button } from 'shared/ui/Button/Button';
+import { getAlbumFormIsLoading } from '../../model/selectors/getAlbumFormIsLoading/getAlbumFormIsLoading';
+import { getAlbumFormError } from '../../model/selectors/getAlbumFormError/getAlbumFormError';
+import { Loader } from 'shared/ui/Loader/Loader';
+import { Text, ThemeText } from 'shared/ui/Text/Text';
+import { Blur } from 'shared/ui/Blur/Blur';
+import { getAlbumFormMessage } from 'features/AddAlbum/model/selectors/getAlbumFormMessage/getAlbumFormMessage';
 
 interface AlbumFormProps {
     className?: string
@@ -40,6 +44,10 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 	const textRating = useSelector(getAlbumFormTextRating);
 	const tracksRating = useSelector(getAlbumFormTracksRating);
 	const cover = useSelector(getAlbumFormCover);
+
+	const isLoading = useSelector(getAlbumFormIsLoading);
+	const error = useSelector(getAlbumFormError);
+	const serverMessage = useSelector(getAlbumFormMessage);
 
 	const localUrlImage = useRef('');
 
@@ -85,6 +93,8 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 				className={classNames(cls.AlbumForm, {}, [className])}
 				onSubmit={(e) => onSubmit(e)}
 			>
+				{/*{isLoading && !error && <Blur/>}*/}
+
 				<div className={cls.info}>
 					<InputFile
 						onChange={onCoverAdd}
@@ -166,7 +176,32 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 						/>
 					</div>
 				</div>
-				<Button type="submit" className={cls.formSubmit}>Добавить альбом</Button>
+
+				{
+					isLoading && !error && (
+						<>
+							<Loader/>
+							<Blur/>
+						</>
+					)
+				}
+
+				{
+					!isLoading && error &&
+                    <Text text={error} theme={ThemeText.ERROR}/>
+				}
+
+				{
+					!isLoading && !error && serverMessage &&
+					<Text text={serverMessage} theme={ThemeText.SUCCESSFUL}/>
+				}
+				<Button
+					type="submit"
+					className={cls.formSubmit}
+					disabled={isLoading}
+				>
+					Добавить альбом
+				</Button>
 			</form>
 		</DynamicModuleLoader>
 	);

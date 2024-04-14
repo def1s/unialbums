@@ -3,7 +3,8 @@ import { classNames } from 'shared/lib/classNames/classNames';
 
 export enum ThemeText {
 	PRIMARY = 'primary',
-	ERROR = 'error'
+	ERROR = 'error',
+	SUCCESSFUL = 'successful'
 }
 
 interface TextProps {

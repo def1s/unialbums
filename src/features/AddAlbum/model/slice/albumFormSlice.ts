@@ -28,11 +28,13 @@ const albumFormSlice = createSlice({
 	extraReducers: (builder) => {
 		builder.addCase(addAlbumToUser.pending, (state) => {
 			state.error = undefined;
+			state.message = undefined;
 			state.isLoading = true;
 		});
 
-		builder.addCase(addAlbumToUser.fulfilled, (state) => {
+		builder.addCase(addAlbumToUser.fulfilled, (state, action) => {
 			state.isLoading = false;
+			state.message = action.payload.message;
 		});
 
 		builder.addCase(addAlbumToUser.rejected, (state, action) => {

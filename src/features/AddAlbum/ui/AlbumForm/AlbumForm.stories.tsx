@@ -10,8 +10,34 @@ const meta: Meta<typeof AlbumForm> = {
 export default meta;
 type Story = StoryObj<typeof AlbumForm>;
 
-export const Default: Story = {
+export const Default: Story = {};
+
+export const Loading: Story = {
 	decorators: [
-		StoreDecorator({})
+		StoreDecorator({
+			albumForm: {
+				isLoading: true
+			}
+		})
+	]
+};
+
+export const Error: Story = {
+	decorators: [
+		StoreDecorator({
+			albumForm: {
+				error: 'Сообщение об ошибке'
+			}
+		})
+	]
+};
+
+export const Successful: Story = {
+	decorators: [
+		StoreDecorator({
+			albumForm: {
+				message: 'Все прошло успешно'
+			}
+		})
 	]
 };

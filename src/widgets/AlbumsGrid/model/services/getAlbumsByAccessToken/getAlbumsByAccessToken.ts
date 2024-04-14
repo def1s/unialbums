@@ -21,7 +21,7 @@ export const getAlbumsByAccessToken = createAsyncThunk<Album[], undefined, { rej
 				thunkAPI.dispatch(userActions.logout());
 			}
 
-			return thunkAPI.rejectWithValue(error.response.data.message || 'Непредвиденная ошибка');
+			return thunkAPI.rejectWithValue(error.response?.data?.message || 'Непредвиденная ошибка');
 		}
 	}
 );

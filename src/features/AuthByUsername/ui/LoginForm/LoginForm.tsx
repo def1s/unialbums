@@ -13,6 +13,7 @@ import { getLoginPassword } from '../../model/selectors/getLoginPassword/getLogi
 import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';
 import { getLoginError } from '../../model/selectors/getLoginError/getLoginError';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import { Blur } from 'shared/ui/Blur/Blur';
 
 interface LoginFormProps {
     className?: string
@@ -54,7 +55,14 @@ export const LoginForm = ({ className }: LoginFormProps) => {
 		>
 			<div className={classNames(cls.LoginForm, {}, [className])}>
 
-				{isLoading && <Loader/>}
+				{
+					isLoading && !error && (
+						<>
+							<Loader/>
+							<Blur className={cls.blurBorder}/>
+						</>
+					)
+				}
 
 				<Input
 					className={cls.input}
