@@ -3,7 +3,6 @@ import { AlbumsGrid } from './AlbumsGrid';
 import { Album } from 'entities/AlbumCard';
 import { rest } from 'msw';
 import { ApiResponse } from 'shared/api/types/apiResponse';
-import { StoreDecorator } from 'shared/config/storybook/StoreDecorator/StoreDecorator';
 
 const meta: Meta<typeof AlbumsGrid> = {
 	title: 'widgets/AlbumsGrid',
