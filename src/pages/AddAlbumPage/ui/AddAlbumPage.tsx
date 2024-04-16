@@ -6,7 +6,7 @@ interface AddAlbumPageProps {
     className?: string
 }
 
-export const AddAlbumPage = ({ className }: AddAlbumPageProps) => {
+const AddAlbumPage = ({ className }: AddAlbumPageProps) => {
 
 	return (
 		<div className={classNames(cls.AddAlbumPage, {}, [className])}>
@@ -14,3 +14,5 @@ export const AddAlbumPage = ({ className }: AddAlbumPageProps) => {
 		</div>
 	);
 };
+
+export default AddAlbumPage;

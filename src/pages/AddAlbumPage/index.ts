@@ -1,1 +1,1 @@
-export { AddAlbumPage } from './ui/AddAlbumPage';
+export { AddAlbumPageAsync as AddAlbumPage } from './ui/AddAlbumPage.async';

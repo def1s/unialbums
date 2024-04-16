@@ -7,7 +7,7 @@ interface HomePageProps {
     className?: string
 }
 
-export const HomePage = ({ className }: HomePageProps) => {
+const HomePage = ({ className }: HomePageProps) => {
 
 	return (
 		<div className={classNames(cls.HomePage, {}, [className])}>
@@ -15,3 +15,5 @@ export const HomePage = ({ className }: HomePageProps) => {
 		</div>
 	);
 };
+
+export default HomePage;

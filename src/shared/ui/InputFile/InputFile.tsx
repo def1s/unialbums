@@ -1,6 +1,6 @@
 import cls from './InputFile.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { ChangeEvent, InputHTMLAttributes } from 'react';
+import { ChangeEvent, InputHTMLAttributes, memo } from 'react';
 
 type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'>;
 
@@ -12,7 +12,7 @@ interface InputFileProps extends HTMLInputProps {
 	label: string;
 }
 
-export const InputFile = (props: InputFileProps) => {
+export const InputFile = memo((props: InputFileProps) => {
 	const {
 		selectedFile,
 		className,
@@ -48,4 +48,4 @@ export const InputFile = (props: InputFileProps) => {
 			}
 		</div>
 	);
-};
+});

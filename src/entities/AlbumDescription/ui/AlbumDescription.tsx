@@ -1,6 +1,6 @@
 import cls from './AlbumDescription.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
-import React, { FC } from 'react';
+import React, { memo } from 'react';
 import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
 
 /**
@@ -29,7 +29,7 @@ interface AlbumDescriptionProps {
  * @param {AlbumDescriptionProps} props - Свойства компонента.
  * @returns {React.ReactNode} Компонент AlbumDescription.
  */
-export const AlbumDescription: FC<AlbumDescriptionProps> = (props: AlbumDescriptionProps): React.ReactNode => {
+export const AlbumDescription = memo((props: AlbumDescriptionProps): React.ReactNode => {
 	const {
 		cover,
 		title,
@@ -55,4 +55,4 @@ export const AlbumDescription: FC<AlbumDescriptionProps> = (props: AlbumDescript
 			</div>
 		</div>
 	);
-};
+});

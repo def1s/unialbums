@@ -10,9 +10,6 @@ interface StoreProviderProps {
 	asyncReducers?: DeepPartial<ReducersMapObject<StateSchema>>
 }
 
-// export const store = configureReduxStore();
-// export type AppDispatch = typeof store.dispatch;
-
 export const StoreProvider = (props: StoreProviderProps) => {
 	const {
 		children,

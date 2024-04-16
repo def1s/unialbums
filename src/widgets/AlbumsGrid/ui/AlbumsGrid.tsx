@@ -1,24 +1,23 @@
 import cls from './AlbumsGrid.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { AlbumCard } from 'entities/AlbumCard';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { memo, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Loader } from 'shared/ui/Loader/Loader';
 import { Text, ThemeText } from 'shared/ui/Text/Text';
 import { getUserAlbumsState } from '../model/selectors/getUserAlbumsState/getUserAlbumsState';
 import { getAlbumsByAccessToken } from '../model/services/getAlbumsByAccessToken/getAlbumsByAccessToken';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 
 interface AlbumsListProps {
     className?: string
 }
 
-export const AlbumsGrid = ({ className }: AlbumsListProps) => {
+export const AlbumsGrid = memo(({ className }: AlbumsListProps) => {
 	const { albums, isLoading, error } = useSelector(getUserAlbumsState);
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	useEffect(() => {
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-expect-error
 		dispatch(getAlbumsByAccessToken());
 	}, [dispatch]);
 
@@ -44,4 +43,4 @@ export const AlbumsGrid = ({ className }: AlbumsListProps) => {
 			}
 		</div>
 	);
-};
+});

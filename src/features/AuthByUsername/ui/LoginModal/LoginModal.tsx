@@ -2,6 +2,7 @@ import { LoginForm } from '../LoginForm/LoginForm';
 import { Modal } from 'shared/ui/Modal/Modal';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './LoginModal.module.scss';
+import { memo } from 'react';
 
 interface LoginModalProps {
     className?: string
@@ -9,7 +10,7 @@ interface LoginModalProps {
 	onClose: () => void;
 }
 
-export const LoginModal = ({ className, isOpen, onClose }: LoginModalProps) => {
+export const LoginModal = memo(({ className, isOpen, onClose }: LoginModalProps) => {
 
 	return (
 		<Modal
@@ -17,7 +18,9 @@ export const LoginModal = ({ className, isOpen, onClose }: LoginModalProps) => {
 			isOpen={isOpen}
 			onClose={onClose}
 		>
-			<LoginForm/>
+			<LoginForm
+				onSuccess={onClose}
+			/>
 		</Modal>
 	);
-};
+});

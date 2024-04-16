@@ -1,7 +1,7 @@
 import cls from './AlbumCard.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Link } from 'react-router-dom';
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
 import { Album } from '../model/types/userAlbumsSchema';
 
@@ -24,7 +24,7 @@ interface AlbumCardProps extends Album {
  * @param {AlbumCardProps} props - Свойства компонента AlbumCard
  * @returns {React.ReactNode} - Возвращаемый React компонент
  */
-export const AlbumCard: FC<AlbumCardProps> = (props: AlbumCardProps): React.ReactNode => {
+export const AlbumCard: FC<AlbumCardProps> = memo((props: AlbumCardProps): React.ReactNode => {
 	const {
 		albumId,
 		cover,
@@ -45,4 +45,4 @@ export const AlbumCard: FC<AlbumCardProps> = (props: AlbumCardProps): React.Reac
 			<div className={cls.rating}>100</div>
 		</Link>
 	);
-};
+});

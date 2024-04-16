@@ -1,1 +1,1 @@
-export { AlbumPage } from './ui/AlbumPage';
+export { AlbumPageAsync as AlbumPage } from './ui/AlbumPage.async';

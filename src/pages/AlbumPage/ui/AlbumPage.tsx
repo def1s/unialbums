@@ -7,7 +7,7 @@ interface AlbumPageProps {
     className?: string
 }
 
-export const AlbumPage = ({ className }: AlbumPageProps) => {
+const AlbumPage = ({ className }: AlbumPageProps) => {
 
 	return (
 		<div className={classNames(cls.AlbumPage, {}, [className])}>
@@ -15,3 +15,5 @@ export const AlbumPage = ({ className }: AlbumPageProps) => {
 		</div>
 	);
 };
+
+export default AlbumPage;

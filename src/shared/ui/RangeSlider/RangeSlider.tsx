@@ -1,6 +1,6 @@
 import cls from './RangeSlider.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { ChangeEvent, InputHTMLAttributes } from 'react';
+import { ChangeEvent, InputHTMLAttributes, memo } from 'react';
 
 type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>;
 
@@ -14,7 +14,7 @@ interface RangeSliderProps extends HTMLInputProps{
     className?: string
 }
 
-export const RangeSlider = (props: RangeSliderProps) => {
+export const RangeSlider = memo((props: RangeSliderProps) => {
 	const {
 		value,
 		defaultValue,
@@ -44,4 +44,4 @@ export const RangeSlider = (props: RangeSliderProps) => {
 			/>
 		</div>
 	);
-};
+});

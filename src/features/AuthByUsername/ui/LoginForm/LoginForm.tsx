@@ -1,8 +1,8 @@
 import cls from './LoginForm.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { loginActions, loginReducer } from '../../model/slice/loginSlice';
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { loginByUsername } from '../../model/services/loginByUsername/loginByUsername';
 import { Input } from 'shared/ui/Input/Input';
 import { Button } from 'shared/ui/Button/Button';
@@ -14,17 +14,19 @@ import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLo
 import { getLoginError } from '../../model/selectors/getLoginError/getLoginError';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { Blur } from 'shared/ui/Blur/Blur';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 
 interface LoginFormProps {
-    className?: string
+    className?: string;
+	onSuccess?: () => void;
 }
 
 const initialReducers: ReducerList = {
 	loginForm: loginReducer
 };
 
-export const LoginForm = ({ className }: LoginFormProps) => {
-	const dispatch = useDispatch();
+export const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
+	const dispatch = useAppDispatch();
 	// не работает
 	// const dispatch = useAppDispatch();
 	const username = useSelector(getLoginUsername);
@@ -40,13 +42,12 @@ export const LoginForm = ({ className }: LoginFormProps) => {
 		dispatch(loginActions.setPassword(value));
 	}, [dispatch]);
 
-	const onClickLogin = useCallback(() => {
-		// по каким-то абсолютно неясным причинам при использовании useAppDispatch loginReducer оказывается
-		// равен undefined и мне приходится игнорировать его, используя обычный dispatch.
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-expect-error
-		dispatch(loginByUsername({ username, password }));
-	}, [dispatch, password, username]);
+	const onClickLogin = useCallback(async () => {
+		const result = await dispatch(loginByUsername({ username, password }));
+		if (result.meta.requestStatus === 'fulfilled') {
+			onSuccess();
+		}
+	}, [dispatch, onSuccess, password, username]);
 
 	return (
 		<DynamicModuleLoader
@@ -91,4 +92,4 @@ export const LoginForm = ({ className }: LoginFormProps) => {
 			</div>
 		</DynamicModuleLoader>
 	);
-};
+});

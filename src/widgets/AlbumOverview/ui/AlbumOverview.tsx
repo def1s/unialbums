@@ -1,13 +1,13 @@
 import cls from './AlbumOverview.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
-import React from 'react';
+import React, { memo } from 'react';
 import { AlbumDescription } from 'entities/AlbumDescription';
 
 interface AlbumOverviewProps {
     className?: string
 }
 
-export const AlbumOverview = ({ className }: AlbumOverviewProps) => {
+export const AlbumOverview = memo(({ className }: AlbumOverviewProps) => {
 
 	return (
 		<div
@@ -27,4 +27,4 @@ export const AlbumOverview = ({ className }: AlbumOverviewProps) => {
 
 		</div>
 	);
-};
+});

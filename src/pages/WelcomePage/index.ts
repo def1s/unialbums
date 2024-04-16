@@ -1,1 +1,1 @@
-export { WelcomePage } from './ui/WelcomePage';
+export { WelcomePageAsync as WelcomePage } from './ui/WelcomePage.async';

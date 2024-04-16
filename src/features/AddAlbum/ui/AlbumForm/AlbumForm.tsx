@@ -1,9 +1,9 @@
 import cls from './AlbumForm.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { RangeSlider } from 'shared/ui/RangeSlider/RangeSlider';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Input } from 'shared/ui/Input/Input';
-import React, { ChangeEvent, FormEvent, useEffect, useRef } from 'react';
+import React, { ChangeEvent, FormEvent, memo, useCallback, useEffect, useRef } from 'react';
 import { albumFormActions, albumFormReducer } from '../../model/slice/albumFormSlice';
 import { AlbumFormFields } from '../../model/types/albumFormSchema';
 import { getAlbumFormTitle } from '../../model/selectors/getAlbumFormTitle/getAlbumFormTitle';
@@ -25,6 +25,7 @@ import { Loader } from 'shared/ui/Loader/Loader';
 import { Text, ThemeText } from 'shared/ui/Text/Text';
 import { Blur } from 'shared/ui/Blur/Blur';
 import { getAlbumFormMessage } from 'features/AddAlbum/model/selectors/getAlbumFormMessage/getAlbumFormMessage';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 
 interface AlbumFormProps {
     className?: string
@@ -34,8 +35,8 @@ const initialReducers: ReducerList = {
 	albumForm: albumFormReducer
 };
 
-export const AlbumForm = ({ className }: AlbumFormProps) => {
-	const dispatch = useDispatch();
+export const AlbumForm = memo(({ className }: AlbumFormProps) => {
+	const dispatch = useAppDispatch();
 
 	const title = useSelector(getAlbumFormTitle);
 	const artist = useSelector(getAlbumFormArtist);
@@ -58,29 +59,27 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 		};
 	}, []);
 
-	const onChangeField = (value: number | string, field: AlbumFormFields) => {
+	const onChangeField = useCallback((value: number | string, field: AlbumFormFields) => {
 		dispatch(albumFormActions.setFieldValue({ value: value, field: field }));
-	};
+	}, [dispatch]);
 
-	const onCoverAdd = (e: ChangeEvent<HTMLInputElement>) => {
+	const onCoverAdd = useCallback((e: ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
 		const { files } = e.target;
 
 		localUrlImage.current = window.URL.createObjectURL(files[0]);
 
 		onChangeField(localUrlImage.current, 'cover');
-	};
+	}, [onChangeField]);
 
-	const onCoverDelete = () => {
+	const onCoverDelete = useCallback(() => {
 		URL.revokeObjectURL(localUrlImage.current);
 		localUrlImage.current = '';
 		onChangeField('', 'cover');
-	};
+	}, [onChangeField]);
 
 	const onSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		// eslint-disable-next-line
-		// @ts-expect-error
 		dispatch(addAlbumToUser({ cover, title, tracksRating, atmosphereRating, textRating, bitsRating, artist }));
 	};
 
@@ -93,8 +92,6 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 				className={classNames(cls.AlbumForm, {}, [className])}
 				onSubmit={(e) => onSubmit(e)}
 			>
-				{/*{isLoading && !error && <Blur/>}*/}
-
 				<div className={cls.info}>
 					<InputFile
 						onChange={onCoverAdd}
@@ -205,4 +202,4 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 			</form>
 		</DynamicModuleLoader>
 	);
-};
+});
