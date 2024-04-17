@@ -3,6 +3,7 @@ import { WelcomePage } from 'pages/WelcomePage';
 import { HomePage } from 'pages/HomePage';
 import { AlbumPage } from 'pages/AlbumPage';
 import { AddAlbumPage } from 'pages/AddAlbumPage';
+import { ProfilePage } from 'pages/ProfilePage';
 
 export type AppRoutesProps = RouteProps & {
 	authOnly?: boolean;
@@ -14,6 +15,8 @@ export enum Routes {
 	HOME = 'home',
 	ALBUM = 'album',
 	ADD_ALBUM = 'addAlbum',
+	PROFILE = 'profile',
+	// последний
 	NOT_FOUND = 'notFound'
 }
 
@@ -23,6 +26,8 @@ export const RoutesPaths: Record<Routes, string> = {
 	[Routes.HOME]: '/home',
 	[Routes.ALBUM]: '/albums/:id',
 	[Routes.ADD_ALBUM]: '/addAlbum',
+	[Routes.PROFILE]: '/profile',
+	// последний
 	[Routes.NOT_FOUND]: '*'
 };
 
@@ -45,6 +50,11 @@ export const routerConfig: Record<Routes, AppRoutesProps> = {
 	[Routes.ADD_ALBUM]: {
 		path: RoutesPaths.addAlbum,
 		element: <AddAlbumPage/>,
+		authOnly: true
+	},
+	[Routes.PROFILE]: {
+		path: RoutesPaths.profile,
+		element: <ProfilePage/>,
 		authOnly: true
 	},
 	[Routes.NOT_FOUND]: {

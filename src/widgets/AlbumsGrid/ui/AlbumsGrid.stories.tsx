@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { AlbumsGrid } from './AlbumsGrid';
-import { Album } from 'entities/AlbumCard';
+import { Album } from 'entities/Albums';
 import { rest } from 'msw';
 import { ApiResponse } from 'shared/api/types/apiResponse';
 

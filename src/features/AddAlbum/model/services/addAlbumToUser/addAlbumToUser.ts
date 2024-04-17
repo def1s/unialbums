@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ApiResponse } from 'shared/api/types/apiResponse';
-import { Album } from 'entities/AlbumCard';
+import { Album } from 'entities/Albums';
 import { userActions } from 'entities/User';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 

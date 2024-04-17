@@ -3,7 +3,9 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { Link } from 'react-router-dom';
 import React, { FC, memo } from 'react';
 import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
-import { Album } from '../model/types/userAlbumsSchema';
+import { Album } from '../../model/types/album';
+import { calculateRating } from 'shared/lib/calculateRating/calculateRating';
+import { RATING_ALBUMS_MULTIPLIER } from 'shared/const/global';
 
 /**
  * Определение свойств для компонента AlbumCard
@@ -12,7 +14,6 @@ import { Album } from '../model/types/userAlbumsSchema';
  * @property {string} cover - URL обложки альбома
  * @property {string} title - Название альбома
  * @property {string} artist - Имя исполнителя
- * @property {number} rating - Рейтинг альбома
  * @property {string} className - Дополнительные классы CSS для компонента
  */
 interface AlbumCardProps extends Album {
@@ -30,8 +31,20 @@ export const AlbumCard: FC<AlbumCardProps> = memo((props: AlbumCardProps): React
 		cover,
 		title,
 		artist,
-		className
+		className,
+		bitsRating,
+		textRating,
+		tracksRating,
+		atmosphereRating
 	} = props;
+
+	const rating = calculateRating(
+		RATING_ALBUMS_MULTIPLIER,
+		+tracksRating,
+		+atmosphereRating,
+		+bitsRating,
+		+textRating
+	);
 
 	return (
 		// Компонент Link используется для создания ссылки на страницу альбома
@@ -42,7 +55,7 @@ export const AlbumCard: FC<AlbumCardProps> = memo((props: AlbumCardProps): React
 			<div className={cls.title}>{textLengthValidation(title)}</div>
 			<div className={cls.artist}>{textLengthValidation(artist)}</div>
 			<div className={cls.divider}></div>
-			<div className={cls.rating}>100</div>
+			<div className={cls.rating}>{rating}</div>
 		</Link>
 	);
 });

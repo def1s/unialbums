@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import HomePage from './HomePage';
 import { rest } from 'msw';
 import { ApiResponse } from 'shared/api/types/apiResponse';
-import { Album } from 'entities/AlbumCard';
+import { Album } from 'entities/Albums';
 
 const meta: Meta<typeof HomePage> = {
 	title: 'pages/HomePage',

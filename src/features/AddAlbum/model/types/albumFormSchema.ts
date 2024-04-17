@@ -1,4 +1,4 @@
-import { Album } from 'entities/AlbumCard';
+import { Album } from 'entities/Albums';
 
 export type AlbumForm = Omit<Album, 'albumId'>;
 

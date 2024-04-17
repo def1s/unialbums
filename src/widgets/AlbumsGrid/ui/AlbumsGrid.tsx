@@ -1,6 +1,6 @@
 import cls from './AlbumsGrid.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { AlbumCard } from 'entities/AlbumCard';
+import { AlbumCard } from 'entities/Albums';
 import React, { memo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Loader } from 'shared/ui/Loader/Loader';
@@ -34,10 +34,7 @@ export const AlbumsGrid = memo(({ className }: AlbumsListProps) => {
 				albums && albums.map((album) => (
 					<AlbumCard
 						key={album.albumId}
-						albumId={album.albumId}
-						cover={album.cover}
-						title={album.title}
-						artist={album.artist}
+						{...album}
 					/>
 				))
 			}
