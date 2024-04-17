@@ -14,7 +14,7 @@ const reducers: ReducerList = {
 const ProfilePage = ({ className }: ProfilePageProps) => {
 
 	return (
-		<DynamicModuleLoader reducers={reducers}>
+		<DynamicModuleLoader reducers={reducers} removeAfterUnmount>
 			<div className={classNames(cls.ProfilePage, {}, [className])}>
 
 			</div>

@@ -22,7 +22,7 @@ export const Modal = (props: ModalProps) => {
 		e.stopPropagation();
 	};
 
-	const mods: Record<string, boolean> = {
+	const mods: Record<string, boolean | undefined> = {
 		[cls.isOpen]: isOpen
 	};
 

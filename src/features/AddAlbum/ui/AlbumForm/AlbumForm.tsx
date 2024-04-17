@@ -59,7 +59,7 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 		};
 	}, []);
 
-	const onChangeField = useCallback((value: number | string, field: AlbumFormFields) => {
+	const onChangeField = useCallback((value: number | string, field: string) => {
 		dispatch(albumFormActions.setFieldValue({ value: value, field: field }));
 	}, [dispatch]);
 
@@ -67,9 +67,10 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 		e.preventDefault();
 		const { files } = e.target;
 
-		localUrlImage.current = window.URL.createObjectURL(files[0]);
-
-		onChangeField(localUrlImage.current, 'cover');
+		if (files) {
+			localUrlImage.current = window.URL.createObjectURL(files[0]);
+			onChangeField(localUrlImage.current, 'cover');
+		}
 	}, [onChangeField]);
 
 	const onCoverDelete = useCallback(() => {

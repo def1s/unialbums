@@ -8,4 +8,4 @@ export interface AlbumFormSchema extends AlbumForm {
 	message?: string;
 }
 
-export type AlbumFormFields = keyof AlbumFormSchema;
+export type AlbumFormFields = Exclude<keyof AlbumFormSchema, undefined>;

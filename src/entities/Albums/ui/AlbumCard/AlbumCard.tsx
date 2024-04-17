@@ -32,10 +32,10 @@ export const AlbumCard: FC<AlbumCardProps> = memo((props: AlbumCardProps): React
 		title,
 		artist,
 		className,
-		bitsRating,
-		textRating,
-		tracksRating,
-		atmosphereRating
+		bitsRating = 1,
+		textRating = 1,
+		tracksRating= 1,
+		atmosphereRating = 1
 	} = props;
 
 	const rating = calculateRating(

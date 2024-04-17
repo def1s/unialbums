@@ -9,8 +9,8 @@ interface RangeSliderProps extends HTMLInputProps{
 	defaultValue: number;
 	min: number;
 	max: number;
-	name?: string;
-	onChange: (value: number, field?: string) => void;
+	name: string;
+	onChange: (value: number | string, field: string) => void;
     className?: string
 }
 
