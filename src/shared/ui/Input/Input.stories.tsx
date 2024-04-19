@@ -12,5 +12,12 @@ type Story = StoryObj<typeof Input>;
 export const DefaultTheme: Story = {
 	args: {
 		placeholder: 'Placeholder text'
-	},
+	}
+};
+
+export const ReadonlyTheme: Story = {
+	args: {
+		readonly: true,
+		value: 'some text'
+	}
 };

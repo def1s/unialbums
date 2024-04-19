@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import { Input } from 'shared/ui/Input/Input';
 import React, { ChangeEvent, FormEvent, memo, useCallback, useEffect, useRef } from 'react';
 import { albumFormActions, albumFormReducer } from '../../model/slice/albumFormSlice';
-import { AlbumFormFields } from '../../model/types/albumFormSchema';
 import { getAlbumFormTitle } from '../../model/selectors/getAlbumFormTitle/getAlbumFormTitle';
 import { getAlbumFormArtist } from '../../model/selectors/getAlbumFormArtist/getAlbumFormArtist';
 import {
@@ -105,6 +104,8 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 							type="text"
 							name="title"
 							className={cls.formInput}
+							// eslint-disable-next-line
+							// @ts-expect-error
 							onChange={onChangeField}
 							value={title}
 							placeholder='Название альбома'
@@ -115,6 +116,8 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 							type="text"
 							name="artist"
 							className={cls.formInput}
+							// eslint-disable-next-line
+							// @ts-expect-error
 							onChange={onChangeField}
 							value={artist}
 							placeholder='Исполнитель'

@@ -1,22 +1,30 @@
 import cls from './ProfileCard.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { useSelector } from 'react-redux';
-import { getProfileIsLoading } from '../../model/selectors/getProfileIsLoading/getProfileIsLoading';
-import { getProfileError } from '../../model/selectors/getProfileError/getProfileError';
-import { getProfileData } from '../../model/selectors/getProfileData/getProfileData';
+import { Profile } from '../../model/types/profile';
+import { Input } from 'shared/ui/Input/Input';
 
 interface ProfileCardProps {
-    className?: string
+    className?: string;
+	data?: Profile;
+	isLoading?: boolean;
+	error?: string;
 }
 
-export const ProfileCard = ({ className }: ProfileCardProps) => {
-	const isLoading = useSelector(getProfileIsLoading);
-	const error = useSelector(getProfileError);
-	const profileData = useSelector(getProfileData);
+export const ProfileCard = (props: ProfileCardProps) => {
+	const {
+		className,
+		data,
+		isLoading,
+		error
+	} = props;
 
 	return (
 		<div className={classNames(cls.ProfileCard, {}, [className])}>
-
+			<img src={data?.avatar} alt="Аватар пользователя"/>
+			<Input placeholder={'Имя'}/>
+			<Input placeholder={'Фамилия'}/>
+			<Input placeholder={''}/>
+			<Input/>
 		</div>
 	);
 };

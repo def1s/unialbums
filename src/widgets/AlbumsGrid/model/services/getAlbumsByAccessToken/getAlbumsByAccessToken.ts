@@ -4,7 +4,7 @@ import { ApiResponse } from 'shared/api/types/apiResponse';
 import { userActions } from 'entities/User';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 
-export const getAlbumsByAccessToken = createAsyncThunk<Album[], undefined, { rejectValue: string }>(
+export const getAlbumsByAccessToken = createAsyncThunk<Album[], void, { rejectValue: string }>(
 	'albums/getAlbumsByAccessToken',
 	async (_, thunkAPI) => {
 		try {

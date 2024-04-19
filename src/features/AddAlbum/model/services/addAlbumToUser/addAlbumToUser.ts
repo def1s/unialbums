@@ -9,7 +9,11 @@ interface LoginByUsernameResult {
 	message: string;
 }
 
-export const addAlbumToUser = createAsyncThunk<LoginByUsernameResult, LoginByUsernameProps, { rejectValue: string }>(
+export const addAlbumToUser = createAsyncThunk<
+	LoginByUsernameResult,
+	LoginByUsernameProps,
+	{ rejectValue: string }
+>(
 	'albumForm/addAlbumToUser',
 	async (albumData, thunkAPI) => {
 		const formData = new FormData();
