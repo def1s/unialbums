@@ -1,18 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { UserAlbumsSchema } from '../types/userAlbumsSchema';
+import { HomePageSchema } from '../types/homePageSchema';
 import { getAlbumsByAccessToken } from '../services/getAlbumsByAccessToken/getAlbumsByAccessToken';
 
-const initialState: UserAlbumsSchema = {
+const initialState: HomePageSchema = {
 	albums: [],
 	isLoading: false
 };
 
-const userAlbumsSlice = createSlice({
-	name: 'userAlbums',
+const homePageSlice = createSlice({
+	name: 'homePage',
 	initialState,
-	reducers: {
-
-	},
+	reducers: {},
 	extraReducers: (builder) => {
 		builder.addCase(getAlbumsByAccessToken.pending, (state) => {
 			state.error = undefined;
@@ -31,5 +29,5 @@ const userAlbumsSlice = createSlice({
 	}
 });
 
-export const { actions: userAlbumsActions } = userAlbumsSlice;
-export const { reducer: userAlbumsReducer } = userAlbumsSlice;
+export const { actions: homePageActions } = homePageSlice;
+export const { reducer: homePageReducer } = homePageSlice;

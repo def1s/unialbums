@@ -5,11 +5,10 @@ import { userActions } from 'entities/User';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 
 export const getAlbumsByAccessToken = createAsyncThunk<Album[], void, { rejectValue: string }>(
-	'albums/getAlbumsByAccessToken',
+	'homePage/getAlbumsByAccessToken',
 	async (_, thunkAPI) => {
 		try {
 			const response = await axiosInstance.get<ApiResponse<Album>>('/albums/getByUserId');
-
 
 			if (!response.data) {
 				throw new Error('Что-то пошло не так');

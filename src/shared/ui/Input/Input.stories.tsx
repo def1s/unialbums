@@ -15,7 +15,7 @@ export const DefaultTheme: Story = {
 	}
 };
 
-export const ReadonlyTheme: Story = {
+export const Readonly: Story = {
 	args: {
 		readonly: true,
 		value: 'some text'

@@ -1,6 +1,6 @@
 import { Album } from 'entities/Albums';
 
-export interface UserAlbumsSchema {
+export interface HomePageSchema {
 	albums: Album[];
 	isLoading: boolean;
 	error?: string;

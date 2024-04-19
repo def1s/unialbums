@@ -25,7 +25,7 @@ Login.decorators = [
 					},
 					_inited: false
 				},
-				userAlbums: undefined
+				homePage: undefined
 			}}
 		>
 			<Story/>

@@ -1,16 +1,16 @@
 import { UserSchema } from 'entities/User';
 import { LoginSchema } from 'features/AuthByUsername';
-import { UserAlbumsSchema } from 'widgets/AlbumsGrid';
 import { AlbumFormSchema } from 'features/AddAlbum';
 import { Action, EnhancedStore, Reducer, ReducersMapObject } from '@reduxjs/toolkit';
 import { ProfileSchema } from 'entities/Profile/model/types/profile';
+import { HomePageSchema } from 'pages/HomePage/model/types/homePageSchema';
 
 export interface StateSchema {
 	user: UserSchema;
+	homePage: HomePageSchema;
 
 	// асинхронные редьюсеры
 	loginForm?: LoginSchema;
-	userAlbums: UserAlbumsSchema;
 	albumForm?: AlbumFormSchema;
 	profile?: ProfileSchema
 }
