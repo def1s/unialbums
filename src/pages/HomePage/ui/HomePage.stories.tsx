@@ -58,7 +58,7 @@ export const Default: Story = {
 	parameters: {
 		msw: {
 			handlers: [
-				rest.get('http://localhost:8081/albums/getByUserId', (req, res, ctx) => {
+				rest.get(`${__API_URL__}/albums/getByUserId`, (req, res, ctx) => {
 					return res(
 						ctx.json(mockedAlbums)
 					);
@@ -72,7 +72,7 @@ export const WithoutAlbums: Story = {
 	parameters: {
 		msw: {
 			handlers: [
-				rest.get('http://localhost:8081/albums/getByUserId', (req, res, ctx) => {
+				rest.get(`${__API_URL__}/albums/getByUserId`, (req, res, ctx) => {
 					return res(
 						ctx.json(mockedEmptyAlbums)
 					);

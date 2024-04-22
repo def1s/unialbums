@@ -16,7 +16,7 @@ export const loginByUsername = createAsyncThunk<void, LoginByUsernameProps, { re
 		try {
 			const options: AxiosRequestConfig = {
 				method: 'POST',
-				url: 'http://localhost:8081/login',
+				url: `${__API_URL__}/login`,
 				headers: {
 					'Content-Type': 'application/json'
 				},

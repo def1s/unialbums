@@ -57,7 +57,7 @@ export const UnexpectedError: Story = {
 	parameters: {
 		msw: {
 			handlers: [
-				rest.post('http://localhost:8081/login', (req, res, ctx) => {
+				rest.post(`${__API_URL__}/login`, (req, res, ctx) => {
 					return res(
 						ctx.status(404)
 					);

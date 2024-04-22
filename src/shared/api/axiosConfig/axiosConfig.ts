@@ -3,7 +3,7 @@ import { ACCESS_TOKEN_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
 import { ApiResponse, token } from 'shared/api/types/apiResponse';
 
 const axiosInstance = axios.create({
-	baseURL: 'http://localhost:8081'
+	baseURL: __API_URL__
 });
 
 axiosInstance.interceptors.request.use(config => {
@@ -26,7 +26,7 @@ axiosInstance.interceptors.response.use(response => {
 			// попытка обновления токена
 			const refreshOptions: AxiosRequestConfig = {
 				method: 'GET',
-				url: 'http://localhost:8081/refresh',
+				url: `${__API_URL__}/refresh}`,
 				withCredentials: true
 			};
 			const refreshResponse = await axios<ApiResponse<token>>(refreshOptions);
