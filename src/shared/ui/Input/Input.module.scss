@@ -1,6 +1,15 @@
 .Input {
     outline: none;
     display: block;
+    transition: background-color 0.3s ease; // Плавное изменение цвета фона при наведении
+
+    &:focus {
+        background-color: var(--default-bg-color-opacity); // Изменение цвета фона при наведении
+    }
+
+    &::placeholder {
+        color: rgb(255 255 255 / 50%); // Цвет плейсхолдера
+    }
 }
 
 .lightBg {

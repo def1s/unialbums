@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Profile } from '../../types/profile';
+import { Profile } from '../../../../../entities/Profile/model/types/profile';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 import { ApiResponse } from 'shared/api/types/apiResponse';
 import { userActions } from 'entities/User';
