@@ -3,6 +3,8 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { Profile, ProfileFieldType } from 'entities/Profile/model/types/profile';
 import { ProfileField } from 'entities/Profile';
 import { Avatar } from 'shared/ui/Avatar/Avatar';
+import { Text, ThemeText } from 'shared/ui/Text/Text';
+import { Loader } from 'shared/ui/Loader/Loader';
 
 interface EditableProfileCardProps {
     className?: string;
@@ -23,6 +25,26 @@ export const EditableProfileCard = (props: EditableProfileCardProps) => {
 		fields
 	} = props;
 
+	if (isLoading) {
+		return (
+			<div className={classNames(cls.EditableProfileCard, {}, [className])}>
+				<Loader/>
+			</div>
+		);
+	}
+
+	if (error) {
+		return (
+			<div className={classNames(cls.EditableProfileCard, {}, [className])}>
+				<Text
+					title={'Произошла ошибка'}
+					text={error}
+					theme={ThemeText.ERROR}
+				/>
+			</div>
+		);
+	}
+
 	return (
 		<div className={classNames(cls.EditableProfileCard, {}, [className])}>
 			<div className={cls.userBlock}>
@@ -34,6 +56,10 @@ export const EditableProfileCard = (props: EditableProfileCardProps) => {
 			</div>
 
 			<div className={cls.wrapper}>
+				<Text
+					title={'Персональная информация'}
+					text={'Здесь вы можете изменить персональную информацию о себе'}
+				/>
 				<div className={cls.fields}>
 					{
 						fields.map(field => (

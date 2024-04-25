@@ -5,6 +5,7 @@
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
+    min-height: 300px;
     max-width: 900px;
 
     .input {
@@ -23,6 +24,7 @@
     width: 100%;
     gap: var(--medium-padding);
     margin: 0 auto;
+    margin-top: var(--medium-padding);
 }
 
 .userBlock {

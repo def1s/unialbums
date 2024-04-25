@@ -10,10 +10,18 @@ import {
 import { getProfileError } from '../model/selectors/getProfileError/getProfileError';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { getProfileReadonly } from '../model/selectors/getProfileReadonly/getProfileReadonly';
+import { useEffect } from 'react';
+import { fetchProfileData } from '../model/services/fetchProfileData/fetchProfileData';
+import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import { profileReducer } from '../model/slice/profileSlice';
 
 interface EditableUserProfileProps {
     className?: string;
 }
+
+const reducers: ReducerList = {
+	profile: profileReducer
+};
 
 export const EditableUserProfile = ({ className }: EditableUserProfileProps) => {
 	const profileFields = useSelector(getProfileFields);
@@ -24,13 +32,24 @@ export const EditableUserProfile = ({ className }: EditableUserProfileProps) => 
 
 	const dispatch = useAppDispatch();
 
+	useEffect(() => {
+		dispatch(fetchProfileData());
+		// eslint-disable-next-line
+	}, []);
+
 	return (
-		<div className={classNames(cls.EditableUserProfile, {}, [className])}>
-			<EditableProfileCard
-				fields={profileFields}
-				readonly={readonly}
-				data={data}
-			/>
-		</div>
+		<DynamicModuleLoader
+			reducers={reducers}
+		>
+			<div className={classNames(cls.EditableUserProfile, {}, [className])}>
+				<EditableProfileCard
+					fields={profileFields}
+					readonly={readonly}
+					data={data}
+					isLoading={isLoading}
+					error={error}
+				/>
+			</div>
+		</DynamicModuleLoader>
 	);
 };

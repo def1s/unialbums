@@ -47,3 +47,15 @@ export const Changeable: Story = {
 		data: user
 	}
 };
+
+export const Loading: Story = {
+	args: {
+		isLoading: true
+	}
+};
+
+export const Error: Story = {
+	args: {
+		error: 'Сообщение об ошибке'
+	}
+};
