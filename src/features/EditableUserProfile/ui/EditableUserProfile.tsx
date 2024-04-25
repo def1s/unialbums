@@ -14,8 +14,8 @@ export const EditableUserProfile = ({ className }: EditableUserProfileProps) => 
 	return (
 		<div className={classNames(cls.EditableUserProfile, {}, [className])}>
 			<EditableProfileCard
-				readonly={true}
 				fields={profileFields}
+				readonly={true}
 			/>
 		</div>
 	);

@@ -22,33 +22,19 @@ export const EditableProfileCard = (props: EditableProfileCardProps) => {
 		fields
 	} = props;
 
-
-
 	return (
 		<div className={classNames(cls.EditableProfileCard, {}, [className])}>
-			<div className={cls.wrapper}>
+			<div className={cls.fields}>
 				{
-					fields?.map(field => (
+					fields.map(field => (
 						<ProfileField
 							label={field.label}
 							fieldValue={field.value}
 							key={field.label}
+							readonly={readonly}
 						/>
 					))
 				}
-
-				{/*<ProfileField*/}
-				{/*	label='Имя'*/}
-				{/*	fieldValue='Даниил'*/}
-				{/*/>*/}
-				{/*<ProfileField*/}
-				{/*	label='Фамилия'*/}
-				{/*	fieldValue='Федоров'*/}
-				{/*/>*/}
-				{/*<ProfileField*/}
-				{/*	label='Какое-то поле'*/}
-				{/*	fieldValue='Его значение'*/}
-				{/*/>*/}
 			</div>
 		</div>
 	);

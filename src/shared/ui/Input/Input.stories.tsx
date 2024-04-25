@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Input } from './Input';
+import { Input, ThemeInput } from './Input';
 
 const meta: Meta<typeof Input> = {
 	title: 'shared/Input',
@@ -19,5 +19,12 @@ export const Readonly: Story = {
 	args: {
 		readonly: true,
 		value: 'some text'
+	}
+};
+
+export const OnlyBorder: Story = {
+	args: {
+		placeholder: 'Only border',
+		theme: ThemeInput.ONLY_BORDER
 	}
 };

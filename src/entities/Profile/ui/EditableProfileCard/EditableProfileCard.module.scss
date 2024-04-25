@@ -1,5 +1,5 @@
 .EditableProfileCard {
-    background-color: var(--default-bg-color);
+    //background-color: var(--default-bg-color);
     border-radius: var(--medium-radius);
     padding: var(--medium-padding);
     display: flex;
@@ -10,7 +10,7 @@
     }
 }
 
-.wrapper {
+.fields {
     display: flex;
     flex-wrap: wrap;
     width: 650px;

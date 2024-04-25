@@ -9,4 +9,17 @@ const meta: Meta<typeof ProfileField> = {
 export default meta;
 type Story = StoryObj<typeof ProfileField>;
 
-export const Default: Story = {};
+export const Readonly: Story = {
+	args: {
+		label: 'Какое-то поле',
+		fieldValue: 'Его значение',
+		readonly: true
+	}
+};
+
+export const Changeable: Story = {
+	args: {
+		label: 'Какое-то поле',
+		fieldValue: 'Его значение'
+	}
+};

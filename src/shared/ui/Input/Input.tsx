@@ -5,12 +5,13 @@ import { ChangeEvent, InputHTMLAttributes, memo } from 'react';
 type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>;
 
 export enum ThemeInput {
-	LIGHT_BG = 'lightBg'
+	LIGHT_BG = 'lightBg',
+	ONLY_BORDER = 'onlyBorder'
 }
 
 interface InputProps extends HTMLInputProps {
 	className?: string;
-	value?: string;
+	value?: string | number;
 	onChange?: (value: string, field?: string) => void;
 	theme?: ThemeInput;
 	name?: string;

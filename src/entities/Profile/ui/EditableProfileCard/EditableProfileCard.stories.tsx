@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { EditableProfileCard } from './EditableProfileCard';
 import UserAvatar from 'shared/assets/storybook/avatar.jpg';
+import { ProfileFieldType } from 'entities/Profile/model/types/profile';
 
 const meta: Meta<typeof EditableProfileCard> = {
 	title: 'entities/EditableProfileCard',
@@ -10,25 +11,30 @@ const meta: Meta<typeof EditableProfileCard> = {
 export default meta;
 type Story = StoryObj<typeof EditableProfileCard>;
 
+const fields: ProfileFieldType[] = [
+	{
+		label: 'Пользователь',
+		value: 'def1s'
+	},
+	{
+		label: 'Имя',
+		value: 'Даниил'
+	},
+	{
+		label: 'Фамилия',
+		value: 'Федоров'
+	}
+];
+
 export const Default: Story = {
 	args: {
-		data: {
-			avatar: UserAvatar,
-			firstName: 'Имя',
-			lastName: 'Фамилия',
-			username: 'def1s'
-		}
+		fields,
+		readonly: true
 	}
 };
 
-export const Readonly: Story = {
+export const Changeable: Story = {
 	args: {
-		readonly: true,
-		data: {
-			avatar: UserAvatar,
-			firstName: 'Имя',
-			lastName: 'Фамилия',
-			username: 'def1s'
-		}
+		fields
 	}
 };
