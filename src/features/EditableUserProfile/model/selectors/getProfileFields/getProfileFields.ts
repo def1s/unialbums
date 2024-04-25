@@ -13,8 +13,8 @@ export const getProfileFields = createSelector(getProfileData, (profileData) => 
 			value: profileData?.lastName || 'Поле пусто'
 		},
 		{
-			label: 'Что-то еще',
-			value: 'Поле чего-то еще'
+			label: 'Тестовое поле',
+			value: 'Тестовое поле'
 		}
 	];
 

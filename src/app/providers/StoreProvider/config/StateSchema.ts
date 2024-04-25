@@ -2,7 +2,7 @@ import { UserSchema } from 'entities/User';
 import { LoginSchema } from 'features/AuthByUsername';
 import { AlbumFormSchema } from 'features/AddAlbum';
 import { Action, EnhancedStore, Reducer, ReducersMapObject } from '@reduxjs/toolkit';
-import { HomePageSchema } from 'pages/HomePage/model/types/homePageSchema';
+import { HomePageSchema } from 'pages/HomePage';
 import { EditableUserProfileSchema } from 'features/EditableUserProfile';
 
 export interface StateSchema {

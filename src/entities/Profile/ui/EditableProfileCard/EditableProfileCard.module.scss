@@ -3,6 +3,9 @@
     border-radius: var(--medium-radius);
     padding: var(--medium-padding);
     display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 900px;
 
     .input {
         margin-bottom: var(--small-padding); // Отступ между полями ввода
@@ -10,10 +13,28 @@
     }
 }
 
+.wrapper {
+    width: 650px;
+}
+
 .fields {
     display: flex;
     flex-wrap: wrap;
-    width: 650px;
+    width: 100%;
     gap: var(--medium-padding);
     margin: 0 auto;
+}
+
+.userBlock {
+    color: #fff;
+}
+
+.username {
+    margin-top: 15px;
+    font: var(--font-l);
+    font-weight: 400;
+}
+
+.person {
+
 }

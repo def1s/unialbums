@@ -26,15 +26,24 @@ const fields: ProfileFieldType[] = [
 	}
 ];
 
+const user = {
+	avatar: UserAvatar,
+	firstName: 'Даниил',
+	lastName: 'Федоров',
+	username: 'def1s'
+};
+
 export const Default: Story = {
 	args: {
 		fields,
-		readonly: true
+		readonly: true,
+		data: user
 	}
 };
 
 export const Changeable: Story = {
 	args: {
-		fields
+		fields,
+		data: user
 	}
 };

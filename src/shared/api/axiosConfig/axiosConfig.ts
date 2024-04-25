@@ -26,7 +26,7 @@ axiosInstance.interceptors.response.use(response => {
 			// попытка обновления токена
 			const refreshOptions: AxiosRequestConfig = {
 				method: 'GET',
-				url: `${__API_URL__}/refresh}`,
+				url: `${__API_URL__}/refresh`,
 				withCredentials: true
 			};
 			const refreshResponse = await axios<ApiResponse<token>>(refreshOptions);

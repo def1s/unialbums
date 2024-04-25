@@ -1,9 +1,4 @@
 export {
-	profileReducer,
-	profileActions
-} from 'features/EditableUserProfile/model/slice/profileSlice';
-
-export {
 	EditableProfileCard
 } from './ui/EditableProfileCard/EditableProfileCard';
 

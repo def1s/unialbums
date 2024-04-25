@@ -1,28 +1,21 @@
 .ProfileField {
     width: 315px;
     height: 125px;
-    background: var(--light-grey-red-gradient);
+    background-color: var(--default-bg-color);
     border-radius: var(--medium-radius);
-
-    //border-style: solid;
-    //border-width: 1px;
-    //border-color: #494343;
-
     padding: var(--medium-padding);
     color: #fff;
 }
 
 .label {
-    font-size: var(--font-line-m);
+    font: var(--font-l);
 }
 
 .fieldValue {
-    margin-top: var(--small-padding);
     font-weight: 300;
 }
 
 .input {
-    margin-top: var(--small-padding);
     font-weight: 300;
     height: var(--font-line-m);
 }
