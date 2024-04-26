@@ -18,7 +18,7 @@ export default ({ config }: {config: webpack.Configuration}) => {
 	config?.module?.rules?.push(buildScssLoader(true));
 
 	// для работы с svg
-	// eslint-disable-next-line
+
 	// @ts-expect-error
 	config!.module!.rules = config!.module!.rules!.map((rule: RuleSetRule) => {
 		if (/svg/.test(rule.test as string)) {

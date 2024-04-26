@@ -4,7 +4,10 @@ import { Button } from 'shared/ui/Button/Button';
 import { profileActions } from '../../model/slice/profileSlice';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { memo, useCallback } from 'react';
-import { updateProfileData } from 'features/EditableUserProfile/model/services/updateProfileData/updateProfileData';
+import { updateProfileData } from '../../model/services/updateProfileData/updateProfileData';
+import { useSelector } from 'react-redux';
+import { getProfileFormMessage } from '../../model/selectors/getProfileFormMessage/getProfileFormMessage';
+import { Text, ThemeText } from 'shared/ui/Text/Text';
 
 interface EditableUserProfileFooterProps {
     className?: string;
@@ -18,6 +21,7 @@ export const EditableUserProfileFooter = memo((props: EditableUserProfileFooterP
 	} = props;
 
 	const dispatch = useAppDispatch();
+	const serverMessage = useSelector(getProfileFormMessage);
 
 	const onEdit = useCallback(() => {
 		dispatch(profileActions.setReadonly(false));
@@ -31,26 +35,46 @@ export const EditableUserProfileFooter = memo((props: EditableUserProfileFooterP
 		}
 	}, [dispatch]);
 
-	return (
-		<div className={classNames(cls.EditableUserProfileFooter, {}, [className])}>
-			<div className={cls.buttonsWrapper}>
-				{
-					!readonly &&
+	const onReset = useCallback(() => {
+		dispatch(profileActions.resetForm());
+	}, [dispatch]);
+
+	if (!readonly) {
+		return (
+			<div className={classNames(cls.EditableUserProfileFooter, {}, [className])}>
+				<div className={cls.buttonsWrapper}>
 					<Button
 						className={cls.button}
 						onClick={onSave}
 					>
 						Сохранить
 					</Button>
-				}
 
-				<Button
-					className={cls.button}
-					onClick={onEdit}
-				>
-					Редактировать
-				</Button>
+					<Button
+						className={cls.button}
+						onClick={onReset}
+					>s
+						Сбросить изменения
+					</Button>
+				</div>
 			</div>
-		</div>
-	);
+		);
+	} else {
+		return (
+			<div className={classNames(cls.EditableUserProfileFooter, {}, [className])}>
+				<Text
+					text={serverMessage}
+					theme={ThemeText.SUCCESSFUL}
+				/>
+				<div className={cls.buttonsWrapper}>
+					<Button
+						className={cls.button}
+						onClick={onEdit}
+					>
+						Редактировать
+					</Button>
+				</div>
+			</div>
+		);
+	}
 });

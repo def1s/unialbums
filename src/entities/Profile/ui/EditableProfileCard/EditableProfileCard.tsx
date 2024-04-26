@@ -6,6 +6,7 @@ import { Avatar } from 'shared/ui/Avatar/Avatar';
 import { Text, ThemeText } from 'shared/ui/Text/Text';
 import { Loader } from 'shared/ui/Loader/Loader';
 import { memo } from 'react';
+import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
 
 interface EditableProfileCardProps {
     className?: string;
@@ -54,8 +55,8 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
 				<Avatar
 					src={data?.avatar}
 				/>
-				<div className={cls.username}>{data?.username}</div>
-				<div className={cls.person}>{data?.firstName} {data?.lastName}</div>
+				<div className={cls.username}>{textLengthValidation(data?.username || '')}</div>
+				<div className={cls.person}>{textLengthValidation(data?.firstName + ' ' + data?.lastName, 26)}</div>
 			</div>
 
 			<div className={cls.wrapper}>

@@ -6,4 +6,5 @@ export interface EditableUserProfileSchema {
 	isLoading: boolean;
 	error?: string;
 	readonly: boolean;
+	message?: string;
 }

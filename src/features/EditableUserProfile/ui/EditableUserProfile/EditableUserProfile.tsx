@@ -46,7 +46,7 @@ export const EditableUserProfile = memo(({ className }: EditableUserProfileProps
 	}, [dispatch]);
 
 	return (
-		<DynamicModuleLoader reducers={reducers}>
+		<DynamicModuleLoader reducers={reducers} removeAfterUnmount>
 			<div className={classNames(cls.EditableUserProfile, {}, [className])}>
 				<EditableProfileCard
 					fields={profileFields}

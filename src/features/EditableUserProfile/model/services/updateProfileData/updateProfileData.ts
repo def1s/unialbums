@@ -2,14 +2,20 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 import { ApiResponse } from 'shared/api/types/apiResponse';
 import { userActions } from 'entities/User';
-import { getAlbumFormData } from 'features/AddAlbum/model/selectors/getAlbumFormData/getAlbumFormData';
+import { getProfileForm } from '../../selectors/getProfileForm/getProfileForm';
 
-export const updateProfileData = createAsyncThunk<void, void, { rejectValue: string }>(
+interface UpdateProfileDataResult {
+	message: string;
+}
+
+export const updateProfileData = createAsyncThunk<UpdateProfileDataResult, void, { rejectValue: string }>(
 	'profile/updateProfileData',
 	async (_, thunkApi) => {
 		// TODO Сделать конфиг для типизации thunk
-		//@ts-expect-error
-		const formData = getAlbumFormData(thunkApi.getState());
+		// @ts-expect-error
+		const formData = getProfileForm(thunkApi.getState());
+
+		console.log(formData);
 
 		try {
 			const response =
@@ -19,6 +25,7 @@ export const updateProfileData = createAsyncThunk<void, void, { rejectValue: str
 				throw new Error('Что-то пошло не так');
 			}
 
+			return { message: response.data.message };
 		} catch (error) {
 			if (error.response && error.response?.status === 403) {
 				thunkApi.dispatch(userActions.logout());
