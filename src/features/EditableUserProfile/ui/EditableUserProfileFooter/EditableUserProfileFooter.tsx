@@ -4,6 +4,7 @@ import { Button } from 'shared/ui/Button/Button';
 import { profileActions } from '../../model/slice/profileSlice';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { memo, useCallback } from 'react';
+import { updateProfileData } from 'features/EditableUserProfile/model/services/updateProfileData/updateProfileData';
 
 interface EditableUserProfileFooterProps {
     className?: string;
@@ -22,8 +23,12 @@ export const EditableUserProfileFooter = memo((props: EditableUserProfileFooterP
 		dispatch(profileActions.setReadonly(false));
 	}, [dispatch]);
 
-	const onSave = useCallback(() => {
-		dispatch(profileActions.setReadonly(true));
+	const onSave = useCallback(async () => {
+		const result = await dispatch(updateProfileData());
+
+		if (result.meta.requestStatus === 'fulfilled') {
+			dispatch(profileActions.setReadonly(true));
+		}
 	}, [dispatch]);
 
 	return (
@@ -31,11 +36,12 @@ export const EditableUserProfileFooter = memo((props: EditableUserProfileFooterP
 			<div className={cls.buttonsWrapper}>
 				{
 					!readonly &&
-                    <Button
-                    	className={cls.button}
-                    >
-                        Сохранить
-                    </Button>
+					<Button
+						className={cls.button}
+						onClick={onSave}
+					>
+						Сохранить
+					</Button>
 				}
 
 				<Button

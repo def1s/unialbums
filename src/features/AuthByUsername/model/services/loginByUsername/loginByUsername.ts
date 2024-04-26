@@ -21,7 +21,7 @@ export const loginByUsername = createAsyncThunk<void, LoginByUsernameProps, { re
 					'Content-Type': 'application/json'
 				},
 				data: {
-					login: authData.username,
+					username: authData.username,
 					password: authData.password
 				},
 				withCredentials: true
