@@ -14,15 +14,18 @@ type Story = StoryObj<typeof EditableProfileCard>;
 const fields: ProfileFieldType[] = [
 	{
 		label: 'Пользователь',
-		value: 'def1s'
+		value: 'def1s',
+		fieldName: 'username'
 	},
 	{
 		label: 'Имя',
-		value: 'Даниил'
+		value: 'Даниил',
+		fieldName: 'firstName'
 	},
 	{
 		label: 'Фамилия',
-		value: 'Федоров'
+		value: 'Федоров',
+		fieldName: 'lastName'
 	}
 ];
 

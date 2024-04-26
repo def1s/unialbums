@@ -12,9 +12,8 @@ export enum ThemeInput {
 interface InputProps extends HTMLInputProps {
 	className?: string;
 	value?: string | number;
-	onChange?: (value: string, field?: string) => void;
+	onChange?: (value: string) => void;
 	theme?: ThemeInput;
-	name?: string;
 	readonly?: boolean;
 }
 
@@ -25,13 +24,12 @@ export const Input = memo((props: InputProps) => {
 		value,
 		onChange,
 		theme = ThemeInput.LIGHT_BG,
-		name,
 		readonly,
 		...otherProps
 	} = props;
 
 	const onHandleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		onChange?.(e.target.value, name);
+		onChange?.(e.target.value);
 	};
 
 	const additional = [

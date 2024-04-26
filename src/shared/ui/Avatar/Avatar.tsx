@@ -1,5 +1,6 @@
 import cls from './Avatar.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
+import { ButtonHTMLAttributes, ImgHTMLAttributes, memo } from 'react';
 
 export enum AvatarSize {
 	SMALL = 'small',
@@ -7,17 +8,17 @@ export enum AvatarSize {
 	LARGE = 'large',
 }
 
-interface AvatarProps {
+interface AvatarProps extends ImgHTMLAttributes<HTMLImageElement> {
     className?: string;
-	src?: string;
 	size?: AvatarSize;
 }
 
-export const Avatar = (props: AvatarProps) => {
+export const Avatar = memo((props: AvatarProps) => {
 	const {
 		className,
 		size = AvatarSize.MEDIUM,
-		src
+		src,
+		...otherProps
 	} = props;
 
 	const additional = [
@@ -30,6 +31,7 @@ export const Avatar = (props: AvatarProps) => {
 			className={classNames(cls.Avatar, {}, additional)}
 			src={src}
 			alt={'Аватар пользователя'}
+			{...otherProps}
 		/>
 	);
-};
+});

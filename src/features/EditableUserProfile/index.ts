@@ -3,4 +3,4 @@ export {
 	profileReducer,
 	profileActions
 } from './model/slice/profileSlice';
-export { EditableUserProfile } from './ui/EditableUserProfile';
+export { EditableUserProfile } from './ui/EditableUserProfile/EditableUserProfile';

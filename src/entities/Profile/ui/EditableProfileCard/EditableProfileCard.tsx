@@ -1,10 +1,11 @@
 import cls from './EditableProfileCard.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { Profile, ProfileFieldType } from 'entities/Profile/model/types/profile';
+import { Profile, ProfileFieldType, ProfileKey } from 'entities/Profile/model/types/profile';
 import { ProfileField } from 'entities/Profile';
 import { Avatar } from 'shared/ui/Avatar/Avatar';
 import { Text, ThemeText } from 'shared/ui/Text/Text';
 import { Loader } from 'shared/ui/Loader/Loader';
+import { memo } from 'react';
 
 interface EditableProfileCardProps {
     className?: string;
@@ -12,17 +13,19 @@ interface EditableProfileCardProps {
 	isLoading?: boolean;
 	error?: string;
 	readonly?: boolean;
-	fields: ProfileFieldType[]
+	fields: ProfileFieldType[];
+	onChangeField: (field: ProfileKey, value: string | number) => void;
 }
 
-export const EditableProfileCard = (props: EditableProfileCardProps) => {
+export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
 	const {
 		className,
 		data,
 		isLoading,
 		error,
 		readonly,
-		fields
+		fields,
+		onChangeField
 	} = props;
 
 	if (isLoading) {
@@ -62,12 +65,14 @@ export const EditableProfileCard = (props: EditableProfileCardProps) => {
 				/>
 				<div className={cls.fields}>
 					{
-						fields.map(field => (
+						fields.map(({ value, label, fieldName }) => (
 							<ProfileField
-								label={field.label}
-								fieldValue={field.value}
-								key={field.label}
+								label={label}
+								fieldValue={value}
+								key={label}
 								readonly={readonly}
+								onChangeField={onChangeField}
+								fieldName={fieldName}
 							/>
 						))
 					}
@@ -75,4 +80,4 @@ export const EditableProfileCard = (props: EditableProfileCardProps) => {
 			</div>
 		</div>
 	);
-};
+});

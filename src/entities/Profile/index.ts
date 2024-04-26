@@ -4,4 +4,4 @@ export {
 
 export { ProfileField } from './ui/ProfileField/ProfileField';
 
-export { Profile } from './model/types/profile';
+export { Profile, ProfileKey } from './model/types/profile';

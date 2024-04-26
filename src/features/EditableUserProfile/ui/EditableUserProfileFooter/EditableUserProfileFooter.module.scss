@@ -1,0 +1,14 @@
+.EditableUserProfileFooter {
+    margin-top: var(--medium-padding);
+}
+
+.buttonsWrapper {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--small-padding);
+}
+
+.button {
+    padding: 10px;
+    display: block;
+}

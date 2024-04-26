@@ -1,20 +1,18 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { getProfileData } from '../getProfileData/getProfileData';
 import { ProfileFieldType } from 'entities/Profile/model/types/profile';
+import { getProfileForm } from '../getProfileForm/getProfileForm';
 
-export const getProfileFields = createSelector(getProfileData, (profileData) => {
+export const getProfileFields = createSelector(getProfileForm, (profileData) => {
 	const profileFieldsList: ProfileFieldType[] = [
 		{
 			label: 'Имя',
-			value: profileData?.firstName || 'Поле пусто'
+			value: profileData?.firstName || '',
+			fieldName: 'firstName'
 		},
 		{
 			label: 'Фамилия',
-			value: profileData?.lastName || 'Поле пусто'
-		},
-		{
-			label: 'Тестовое поле',
-			value: 'Тестовое поле'
+			value: profileData?.lastName || '',
+			fieldName: 'lastName'
 		}
 	];
 

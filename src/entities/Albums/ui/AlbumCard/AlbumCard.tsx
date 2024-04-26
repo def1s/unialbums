@@ -52,8 +52,8 @@ export const AlbumCard: FC<AlbumCardProps> = memo((props: AlbumCardProps): React
 			<div className={cls.cover}>
 				<img src={cover} alt="Обложка альбома"/>
 			</div>
-			<div className={cls.title}>{textLengthValidation(title)}</div>
-			<div className={cls.artist}>{textLengthValidation(artist)}</div>
+			<div className={cls.title}>{textLengthValidation(title || '')}</div>
+			<div className={cls.artist}>{textLengthValidation(artist || '')}</div>
 			<div className={cls.divider}></div>
 			<div className={cls.rating}>{rating}</div>
 		</Link>
