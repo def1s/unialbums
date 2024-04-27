@@ -7,7 +7,7 @@ import { memo, useCallback } from 'react';
 import { updateProfileData } from '../../model/services/updateProfileData/updateProfileData';
 import { useSelector } from 'react-redux';
 import { getProfileFormMessage } from '../../model/selectors/getProfileFormMessage/getProfileFormMessage';
-import { Text, ThemeText } from 'shared/ui/Text/Text';
+import { Text, TextTheme } from 'shared/ui/Text/Text';
 
 interface EditableUserProfileFooterProps {
     className?: string;
@@ -65,7 +65,7 @@ export const EditableUserProfileFooter = memo((props: EditableUserProfileFooterP
 			<div className={classNames(cls.EditableUserProfileFooter, {}, [className])}>
 				<Text
 					text={serverMessage}
-					theme={ThemeText.SUCCESSFUL}
+					theme={TextTheme.SUCCESSFUL}
 				/>
 				<div className={cls.buttonsWrapper}>
 					<Button

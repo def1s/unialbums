@@ -7,7 +7,7 @@ import { loginByUsername } from '../../model/services/loginByUsername/loginByUse
 import { Input } from 'shared/ui/Input/Input';
 import { Button } from 'shared/ui/Button/Button';
 import { Loader } from 'shared/ui/Loader/Loader';
-import { Text, ThemeText } from 'shared/ui/Text/Text';
+import { Text, TextTheme } from 'shared/ui/Text/Text';
 import { getLoginUsername } from '../../model/selectors/getLoginUsername/getLoginUsername';
 import { getLoginPassword } from '../../model/selectors/getLoginPassword/getLoginPassword';
 import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';
@@ -78,7 +78,7 @@ export const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
 					type='password'
 				/>
 
-				{error && <Text text={error} theme={ThemeText.ERROR}/>}
+				{error && <Text text={error} theme={TextTheme.ERROR}/>}
 
 				<Button
 					onClick={onClickLogin}

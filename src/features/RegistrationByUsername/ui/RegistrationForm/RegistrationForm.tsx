@@ -24,7 +24,7 @@ import {
 import { useCallback } from 'react';
 import { Loader } from 'shared/ui/Loader/Loader';
 import { Blur } from 'shared/ui/Blur/Blur';
-import { Text, ThemeText } from 'shared/ui/Text/Text';
+import { Text, TextTheme } from 'shared/ui/Text/Text';
 import {
 	getRegistrationIsPasswordsEqual
 } from '../../model/selectors/getRegistrationIsPasswordsEqual/getRegistrationIsPasswordsEqual';
@@ -142,11 +142,11 @@ export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 					onChange={onChangeRepeatedPassword}
 				/>
 
-				{!isPasswordsEqual && <Text text={'Пароли не совпадают'} theme={ThemeText.ERROR}/>}
+				{!isPasswordsEqual && <Text text={'Пароли не совпадают'} theme={TextTheme.ERROR}/>}
 
-				{message && <Text text={message} theme={ThemeText.SUCCESSFUL}/>}
+				{message && <Text text={message} theme={TextTheme.SUCCESSFUL}/>}
 
-				{error && <Text text={error} theme={ThemeText.ERROR}/>}
+				{error && <Text text={error} theme={TextTheme.ERROR}/>}
 
 				<Button
 					className={cls.button}

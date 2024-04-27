@@ -2,7 +2,7 @@ import cls from './UserAlbums.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import React, { memo } from 'react';
 import { Loader } from 'shared/ui/Loader/Loader';
-import { Text, ThemeText } from 'shared/ui/Text/Text';
+import { Text, TextAlign, TextTheme } from 'shared/ui/Text/Text';
 import { AlbumsGrid } from 'entities/Albums/ui/AlbumsGrid/AlbumsGrid';
 import { Album } from 'entities/Albums';
 
@@ -27,7 +27,17 @@ export const UserAlbums = memo((props: UserAlbumsProps) => {
 
 			{
 				!isLoading && error &&
-				<Text title={error} text={'Попробуйте перезагрузить страницу'} theme={ThemeText.ERROR}/>
+				<Text title={error} text={'Попробуйте перезагрузить страницу'} theme={TextTheme.ERROR}/>
+			}
+
+			{
+				albums.length === 0 && !isLoading && !error &&
+				<Text
+					title={'У вас нет ни одного альбома!'}
+					text={'Добавьте их в специальной форме (в сайдбаре)'}
+					align={TextAlign.CENTER}
+					className={cls.message}
+				/>
 			}
 
 			<AlbumsGrid albums={albums}/>

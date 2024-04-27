@@ -12,7 +12,7 @@ import { Button } from 'shared/ui/Button/Button';
 import { getAlbumFormIsLoading } from '../../model/selectors/getAlbumFormIsLoading/getAlbumFormIsLoading';
 import { getAlbumFormError } from '../../model/selectors/getAlbumFormError/getAlbumFormError';
 import { Loader } from 'shared/ui/Loader/Loader';
-import { Text, ThemeText } from 'shared/ui/Text/Text';
+import { Text, TextTheme } from 'shared/ui/Text/Text';
 import { Blur } from 'shared/ui/Blur/Blur';
 import { getAlbumFormMessage } from '../../model/selectors/getAlbumFormMessage/getAlbumFormMessage';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
@@ -194,12 +194,12 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 
 				{
 					!isLoading && error &&
-                    <Text text={error} theme={ThemeText.ERROR}/>
+                    <Text text={error} theme={TextTheme.ERROR}/>
 				}
 
 				{
 					!isLoading && !error && serverMessage &&
-					<Text text={serverMessage} theme={ThemeText.SUCCESSFUL}/>
+					<Text text={serverMessage} theme={TextTheme.SUCCESSFUL}/>
 				}
 				<Button
 					type="submit"

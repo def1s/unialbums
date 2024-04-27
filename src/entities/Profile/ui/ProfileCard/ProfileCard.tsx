@@ -3,7 +3,7 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { Profile, ProfileFieldType, ProfileKey } from 'entities/Profile/model/types/profile';
 import { ProfileField } from 'entities/Profile';
 import { Avatar } from 'shared/ui/Avatar/Avatar';
-import { Text, ThemeText } from 'shared/ui/Text/Text';
+import { Text, TextTheme } from 'shared/ui/Text/Text';
 import { Loader } from 'shared/ui/Loader/Loader';
 import { memo } from 'react';
 import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
@@ -43,7 +43,7 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
 				<Text
 					title={'Произошла ошибка'}
 					text={error}
-					theme={ThemeText.ERROR}
+					theme={TextTheme.ERROR}
 				/>
 			</div>
 		);
