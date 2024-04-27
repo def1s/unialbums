@@ -15,6 +15,17 @@ export const Default: Story = {
 		title: 'Nectar',
 		year: 2020,
 		cover: 'https://upload.wikimedia.org/wikipedia/en/1/1b/Joji_-_Nectar.png',
+		rating: 85,
+		readonly: true
+	}
+};
+
+export const Changeable: Story = {
+	args: {
+		artist: 'Joji',
+		title: 'Nectar',
+		year: 2020,
+		cover: 'https://upload.wikimedia.org/wikipedia/en/1/1b/Joji_-_Nectar.png',
 		rating: 85
 	}
 };

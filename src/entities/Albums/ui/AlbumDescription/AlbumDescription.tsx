@@ -2,6 +2,7 @@ import cls from './AlbumDescription.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import React, { memo } from 'react';
 import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
+import { Input } from 'shared/ui/Input/Input';
 
 /**
  * Интерфейс для свойств компонента AlbumDescription.
@@ -20,13 +21,14 @@ interface AlbumDescriptionProps {
 	artist: string,
 	year: number,
 	rating: number,
-	className?: string
+	className?: string,
+	readonly?: boolean
 }
 
 /**
  * Компонент для отображения информации об альбоме.
  *
- * @param {AlbumDescriptionProps} props - Свойства компонента.
+ * @param {AlbumDescription} props - Свойства компонента.
  * @returns {React.ReactNode} Компонент AlbumDescription.
  */
 export const AlbumDescription = memo((props: AlbumDescriptionProps): React.ReactNode => {
@@ -36,23 +38,52 @@ export const AlbumDescription = memo((props: AlbumDescriptionProps): React.React
 		artist,
 		year,
 		rating,
-		className
+		className,
+		readonly = true
 	} = props;
 
-	return (
-		<div className={classNames(cls.AlbumDescription, {}, [className])}>
-			<div className={cls.cover}>
-				{/* Отображение обложки альбома */}
-				<img src={cover} alt="Обложка альбома"/>
-			</div>
+	if (readonly) {
+		return (
+			<div className={classNames(cls.AlbumDescription, {}, [className])}>
+				<div className={cls.cover}>
+					{/* Отображение обложки альбома */}
+					<img src={cover} alt="Обложка альбома"/>
+				</div>
 
-			{/* Отображение информации об альбоме с валидацией на длину некоторых полей */}
-			<div className={cls.wrapper}>
-				<div className={cls.title}>{textLengthValidation(title, 25)}</div>
-				<div className={cls.artist}>{textLengthValidation(artist, 25)}</div>
-				<div className={cls.year}>{year}</div>
-				<div className={cls.rating}>{rating}</div>
+				{/* Отображение информации об альбоме с валидацией на длину некоторых полей */}
+				<div className={cls.wrapper}>
+					<div className={cls.title}>{textLengthValidation(title, 25)}</div>
+					<div className={cls.artist}>{textLengthValidation(artist, 25)}</div>
+					<div className={cls.year}>{year}</div>
+					<div className={cls.rating}>{rating}</div>
+				</div>
 			</div>
-		</div>
-	);
+		);
+	} else {
+		return (
+			<div className={classNames(cls.AlbumDescription, {}, [className])}>
+				<div className={cls.cover}>
+					{/* Отображение обложки альбома */}
+					<img src={cover} alt="Обложка альбома"/>
+				</div>
+
+				<div className={cls.wrapper}>
+					<Input
+						className={cls.title}
+						value={title}
+					/>
+
+					<Input
+						className={cls.artist}
+						value={artist}
+					/>
+
+					<Input
+						className={cls.year}
+						value={year}
+					/>
+				</div>
+			</div>
+		);
+	}
 });

@@ -1,6 +1,6 @@
 export {
-	EditableProfileCard
-} from './ui/EditableProfileCard/EditableProfileCard';
+	ProfileCard
+} from './ui/ProfileCard/ProfileCard';
 
 export { ProfileField } from './ui/ProfileField/ProfileField';
 

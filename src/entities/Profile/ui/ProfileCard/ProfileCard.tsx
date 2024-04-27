@@ -1,4 +1,4 @@
-import cls from './EditableProfileCard.module.scss';
+import cls from './ProfileCard.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Profile, ProfileFieldType, ProfileKey } from 'entities/Profile/model/types/profile';
 import { ProfileField } from 'entities/Profile';
@@ -8,7 +8,7 @@ import { Loader } from 'shared/ui/Loader/Loader';
 import { memo } from 'react';
 import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
 
-interface EditableProfileCardProps {
+interface ProfileCardProps {
     className?: string;
 	data?: Profile;
 	isLoading?: boolean;
@@ -18,7 +18,7 @@ interface EditableProfileCardProps {
 	onChangeField: (field: ProfileKey, value: string | number) => void;
 }
 
-export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
+export const ProfileCard = memo((props: ProfileCardProps) => {
 	const {
 		className,
 		data,
@@ -31,7 +31,7 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
 
 	if (isLoading) {
 		return (
-			<div className={classNames(cls.EditableProfileCard, {}, [className])}>
+			<div className={classNames(cls.ProfileCard, {}, [className])}>
 				<Loader/>
 			</div>
 		);
@@ -39,7 +39,7 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
 
 	if (error) {
 		return (
-			<div className={classNames(cls.EditableProfileCard, {}, [className])}>
+			<div className={classNames(cls.ProfileCard, {}, [className])}>
 				<Text
 					title={'Произошла ошибка'}
 					text={error}
@@ -50,7 +50,7 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
 	}
 
 	return (
-		<div className={classNames(cls.EditableProfileCard, {}, [className])}>
+		<div className={classNames(cls.ProfileCard, {}, [className])}>
 			<div className={cls.userBlock}>
 				<Avatar
 					src={data?.avatar}

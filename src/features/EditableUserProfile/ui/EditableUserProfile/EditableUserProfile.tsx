@@ -1,6 +1,6 @@
 import cls from './EditableUserProfile.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { EditableProfileCard } from 'entities/Profile';
+import { ProfileCard } from 'entities/Profile';
 import { useSelector } from 'react-redux';
 import { getProfileFields } from '../../model/selectors/getProfileFields/getProfileFields';
 import {
@@ -48,7 +48,7 @@ export const EditableUserProfile = memo(({ className }: EditableUserProfileProps
 	return (
 		<DynamicModuleLoader reducers={reducers} removeAfterUnmount>
 			<div className={classNames(cls.EditableUserProfile, {}, [className])}>
-				<EditableProfileCard
+				<ProfileCard
 					fields={profileFields}
 					readonly={readonly}
 					data={formData}

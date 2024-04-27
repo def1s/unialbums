@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { EditableProfileCard } from './EditableProfileCard';
+import { ProfileCard } from './ProfileCard';
 import UserAvatar from 'shared/assets/storybook/avatar.jpg';
 import { ProfileFieldType } from 'entities/Profile/model/types/profile';
 
-const meta: Meta<typeof EditableProfileCard> = {
-	title: 'entities/EditableProfileCard',
-	component: EditableProfileCard
+const meta: Meta<typeof ProfileCard> = {
+	title: 'entities/ProfileCard',
+	component: ProfileCard
 };
 
 export default meta;
-type Story = StoryObj<typeof EditableProfileCard>;
+type Story = StoryObj<typeof ProfileCard>;
 
 const fields: ProfileFieldType[] = [
 	{
