@@ -10,7 +10,8 @@
     color: #fff;
 
     &:focus {
-        background-color: var(--default-bg-color-opacity); // Изменение цвета фона при наведении
+        //background-color: var(--default-bg-color-opacity); // Изменение цвета фона при наведении
+        background-color: var(--light-bg-color);
     }
 
     &::placeholder {
@@ -20,7 +21,8 @@
 
 .lightBg {
     // ширина и высота задается вручную для каждого случая
-    background-color: var(--light-bg-color);
+    //background-color: var(--light-bg-color);
+    background-color: var(--default-bg-color-opacity);
 }
 
 .onlyBorder {

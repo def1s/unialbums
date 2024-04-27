@@ -13,6 +13,11 @@ export const getProfileFields = createSelector(getProfileForm, (profileData) => 
 			label: 'Фамилия',
 			value: profileData?.lastName || '',
 			fieldName: 'lastName'
+		},
+		{
+			label: 'Имя пользователя',
+			value: profileData?.username || '',
+			fieldName: 'username'
 		}
 	];
 

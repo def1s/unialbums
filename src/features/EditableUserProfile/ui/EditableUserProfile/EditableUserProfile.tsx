@@ -56,9 +56,9 @@ export const EditableUserProfile = memo(({ className }: EditableUserProfileProps
 					error={error}
 					onChangeField={onChangeField}
 				/>
-				<EditableUserProfileFooter
+				{!isLoading && <EditableUserProfileFooter
 					readonly={readonly}
-				/>
+				/>}
 			</div>
 		</DynamicModuleLoader>
 	);

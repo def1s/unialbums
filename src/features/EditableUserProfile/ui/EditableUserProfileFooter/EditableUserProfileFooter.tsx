@@ -37,6 +37,7 @@ export const EditableUserProfileFooter = memo((props: EditableUserProfileFooterP
 
 	const onReset = useCallback(() => {
 		dispatch(profileActions.resetForm());
+		dispatch(profileActions.setReadonly(true));
 	}, [dispatch]);
 
 	if (!readonly) {
@@ -53,7 +54,7 @@ export const EditableUserProfileFooter = memo((props: EditableUserProfileFooterP
 					<Button
 						className={cls.button}
 						onClick={onReset}
-					>s
+					>
 						Сбросить изменения
 					</Button>
 				</div>
