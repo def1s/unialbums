@@ -8,6 +8,8 @@ import { getUserAuthData, userActions } from 'entities/User';
 import { Button } from 'shared/ui/Button/Button';
 import DefaultAvatar from 'shared/assets/icons/default-avatar.svg';
 import { Link } from 'react-router-dom';
+import { Text } from 'shared/ui/Text/Text';
+import { RegistrationModal } from 'features/RegistrationByUsername';
 
 interface NavbarProps {
     className?: string
@@ -15,6 +17,7 @@ interface NavbarProps {
 
 export const Navbar = memo(({ className }: NavbarProps) => {
 	const [isLoginModal, setIsLoginModal] = useState(false);
+	const [isRegistrationModal, setIsRegistrationModal] = useState(false);
 	const user = useSelector(getUserAuthData);
 	const dispatch = useDispatch();
 
@@ -30,15 +33,47 @@ export const Navbar = memo(({ className }: NavbarProps) => {
 		dispatch(userActions.logout());
 	};
 
+	const onOpenRegistrationModal = () => {
+		setIsRegistrationModal(true);
+	};
+
+	const onCloseRegistrationModal = () => {
+		setIsRegistrationModal(false);
+	};
+
 	if (!user) {
 		return (
 			<header className={classNames(cls.Navbar, {}, [className])}>
-				<Button className={cls.button} onClick={onOpenLoginModal}>Войти</Button>
+				<div className={cls.buttonsWrapper}>
+					<Button
+						className={cls.button}
+						onClick={onOpenLoginModal}
+					>
+						Войти
+					</Button>
+					<Text
+						text={'Нет аккаунта?'}
+					/>
+					<Button
+						className={cls.button}
+						onClick={onOpenRegistrationModal}
+					>
+						Создать
+					</Button>
+				</div>
 				{
 					isLoginModal &&
 						<LoginModal
 							isOpen={isLoginModal}
 							onClose={onCloseLoginModal}
+						/>
+				}
+
+				{
+					isRegistrationModal &&
+						<RegistrationModal
+							isOpen={isRegistrationModal}
+							onClose={onCloseRegistrationModal}
 						/>
 				}
 			</header>

@@ -27,8 +27,6 @@ const initialReducers: ReducerList = {
 
 export const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
 	const dispatch = useAppDispatch();
-	// не работает
-	// const dispatch = useAppDispatch();
 	const username = useSelector(getLoginUsername);
 	const password = useSelector(getLoginPassword);
 	const isLoading = useSelector(getLoginIsLoading);
