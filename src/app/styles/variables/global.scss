@@ -15,6 +15,9 @@
     --font-size-xl: 32px;
     --font-line-xl: 40px;
     --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-main);
+    --font-size-xxl: 40px;
+    --font-line-xxl: 48px;
+    --font-xxl: var(--font-size-xxl) / var(--font-line-xxl) var(--font-family-main);
 
     // отступы
     --small-padding: 10px;
@@ -37,6 +40,7 @@
     // градиенты
     --grey-red-gradient: linear-gradient(169deg, rgb(26 26 26 / 100%) 40%, rgb(172 22 22 / 100%) 95%);
     --light-grey-red-gradient: linear-gradient(169deg, rgb(41 40 44 / 100%) 40%, rgb(172 22 22 / 100%) 95%);
+    //--ligth-grey-white-gradient: linear-gradient(132deg, rgba(41,40,44,1) 36%, rgba(166,43,43,1) 100%);
 
     // z-индексы
     --navbar-z-index: 5;

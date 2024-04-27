@@ -1,16 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AlbumFormSchema } from '../types/albumFormSchema';
+import { AlbumForm, AlbumFormSchema } from '../types/albumFormSchema';
 import { addAlbumToUser } from '../services/addAlbumToUser/addAlbumToUser';
 
 const initialState: AlbumFormSchema = {
-	cover: '',
-	// year: 2000,
-	title: '',
-	artist: '',
-	atmosphereRating: 1,
-	textRating: 1,
-	tracksRating: 1,
-	bitsRating: 1,
+	data: {
+		cover: '',
+		title: '',
+		artist: '',
+		atmosphereRating: 1,
+		textRating: 1,
+		tracksRating: 1,
+		bitsRating: 1,
+	},
 	isLoading: false
 };
 
@@ -18,11 +19,11 @@ const albumFormSlice = createSlice({
 	name: 'albumForm',
 	initialState,
 	reducers: {
-		setFieldValue: (state, action: PayloadAction<{ field: string; value: string | number }>) => {
-			const { field, value } = action.payload;
-			// eslint-disable-next-line
-			// @ts-expect-error
-			state[field] = value;
+		setFieldValue: (state, action: PayloadAction<AlbumForm>) => {
+			state.data = {
+				...state.data,
+				...action.payload
+			};
 		}
 	},
 	extraReducers: (builder) => {

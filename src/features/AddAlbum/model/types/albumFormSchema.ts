@@ -2,10 +2,11 @@ import { Album } from 'entities/Albums';
 
 export type AlbumForm = Omit<Album, 'albumId'>;
 
-export interface AlbumFormSchema extends AlbumForm {
+export interface AlbumFormSchema {
+	data: AlbumForm;
 	isLoading: boolean;
 	error?: string;
 	message?: string;
 }
 
-export type AlbumFormFields = Exclude<keyof AlbumFormSchema, undefined>;
+export type AlbumFormKey = keyof AlbumForm;

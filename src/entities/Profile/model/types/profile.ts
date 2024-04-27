@@ -1,13 +1,14 @@
-export interface Profile {
-	firstName: string;
-	lastName: string;
-	username: string;
-	avatar: string;
+export interface ProfileFieldType {
+	label: string;
+	value: string | number;
+	fieldName: ProfileKey;
 }
 
-export interface ProfileSchema {
-	data?: Profile;
-	isLoading: boolean;
-	error?: string;
-	readonly: boolean;
+export interface Profile {
+	firstName?: string;
+	lastName?: string;
+	username?: string;
+	avatar?: string;
 }
+
+export type ProfileKey = keyof Profile;

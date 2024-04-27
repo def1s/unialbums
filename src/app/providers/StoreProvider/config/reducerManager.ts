@@ -20,7 +20,6 @@ export function createReducerManager(initialReducers: ReducersMapObject<StateSch
 				keysToRemove = [];
 			}
 
-			// eslint-disable-next-line
 			// @ts-expect-error
 			return combinedReducer(state, action);
 		},

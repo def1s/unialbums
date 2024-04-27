@@ -1,17 +1,33 @@
 .Input {
     outline: none;
-}
-
-.lightBg {
-    // ширина задается вручную для каждого случая
-    background-color: var(--light-bg-color);
-    height: 40px;
+    display: block;
+    transition: background-color 0.3s ease; // Плавное изменение цвета фона при наведении
     border-style: solid;
     border-width: 1px;
     border-radius: var(--medium-radius);
     border-color: var(--light-bg-color);
     padding: 0 10px;
     color: #fff;
+
+    &:focus {
+        //background-color: var(--default-bg-color-opacity); // Изменение цвета фона при наведении
+        background-color: var(--light-bg-color);
+    }
+
+    &::placeholder {
+        color: rgb(255 255 255 / 50%); // Цвет плейсхолдера
+    }
+}
+
+.lightBg {
+    // ширина и высота задается вручную для каждого случая
+    //background-color: var(--light-bg-color);
+    background-color: var(--default-bg-color-opacity);
+}
+
+.onlyBorder {
+    background: none;
+    border: solid 1px;
 }
 
 .readonly {

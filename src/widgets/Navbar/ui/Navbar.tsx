@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserAuthData, userActions } from 'entities/User';
 import { Button } from 'shared/ui/Button/Button';
 import DefaultAvatar from 'shared/assets/icons/default-avatar.svg';
+import { Link } from 'react-router-dom';
 
 interface NavbarProps {
     className?: string
@@ -46,15 +47,20 @@ export const Navbar = memo(({ className }: NavbarProps) => {
 		return (
 			<header className={classNames(cls.Navbar, {}, [className])}>
 				<div className={cls.userInfo}>
-					{
-						user.avatar ?
-							<img
-								src={user.avatar}
-								alt="user avatar"
-								className={cls.avatar}
-							/>
-							: <DefaultAvatar className={cls.avatar}/>
-					}
+					<Link
+						to={'/profile'}
+					>
+						{
+							user.avatar ?
+								<img
+									src={user.avatar}
+									alt="user avatar"
+									className={cls.avatar}
+								/>
+								: <DefaultAvatar className={cls.avatar}/>
+						}
+					</Link>
+
 					<span className={cls.username}>{user.username}</span>
 					<Button className={cls.button} onClick={onLogout}>Выйти</Button>
 				</div>
