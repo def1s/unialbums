@@ -4,6 +4,7 @@ import { AlbumFormSchema } from 'features/AddAlbum';
 import { Action, EnhancedStore, Reducer, ReducersMapObject } from '@reduxjs/toolkit';
 import { HomePageSchema } from 'pages/HomePage';
 import { EditableUserProfileSchema } from 'features/EditableUserProfile';
+import { RegistrationSchema } from 'features/RegistrationByUsername';
 
 export interface StateSchema {
 	user: UserSchema;
@@ -12,7 +13,8 @@ export interface StateSchema {
 	// асинхронные редьюсеры
 	loginForm?: LoginSchema;
 	albumForm?: AlbumFormSchema;
-	profile?: EditableUserProfileSchema
+	profile?: EditableUserProfileSchema;
+	registrationForm?: RegistrationSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;
