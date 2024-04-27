@@ -27,8 +27,17 @@ import { Blur } from 'shared/ui/Blur/Blur';
 import { Text, ThemeText } from 'shared/ui/Text/Text';
 import {
 	getRegistrationIsPasswordsEqual
-} from 'features/RegistrationByUsername/model/selectors/getRegistrationIsPasswordsEqual/getRegistrationIsPasswordsEqual';
-import { registration } from 'features/RegistrationByUsername/model/services/registration/registration';
+} from '../../model/selectors/getRegistrationIsPasswordsEqual/getRegistrationIsPasswordsEqual';
+import { registration } from '../../model/services/registration/registration';
+import {
+	getRegistrationFirstName
+} from '../../model/selectors/getRegistrationFirstName/getRegistrationFirstName';
+import {
+	getRegistrationLastName
+} from '../../model/selectors/getRegistrationLastName/getRegistrationLastName';
+import {
+	getRegistrationMessage
+} from 	'../../model/selectors/getRegistrationMessage/getRegistrationMessage';
 
 interface RegistrationFormProps {
     className?: string;
@@ -41,14 +50,25 @@ const initialReducers: ReducerList = {
 export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 	const dispatch = useAppDispatch();
 	const username = useSelector(getRegistrationUsername);
+	const firstName = useSelector(getRegistrationFirstName);
+	const lastName = useSelector(getRegistrationLastName);
 	const password = useSelector(getRegistrationPassword);
 	const repeatedPassword = useSelector(getRegistrationRepeatedPassword);
 	const isLoading = useSelector(getRegistrationIsLoading);
 	const error = useSelector(getRegistrationError);
 	const isPasswordsEqual = useSelector(getRegistrationIsPasswordsEqual);
+	const message = useSelector(getRegistrationMessage);
 
 	const onChangeUsername = useCallback((value: string) => {
 		dispatch(registrationActions.setUsername(value));
+	}, [dispatch]);
+
+	const onChangeFirstName = useCallback((value: string) => {
+		dispatch(registrationActions.setFirstName(value));
+	}, [dispatch]);
+
+	const onChangeLastName = useCallback((value: string) => {
+		dispatch(registrationActions.setLastName(value));
 	}, [dispatch]);
 
 	const onChangePassword = useCallback((value: string) => {
@@ -61,7 +81,12 @@ export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 
 	const onClickRegistration = () => {
 		if (isPasswordsEqual) {
-			dispatch(registration({ username, password }));
+			dispatch(registration({
+				username,
+				password,
+				firstName,
+				lastName
+			}));
 		}
 	};
 
@@ -89,6 +114,20 @@ export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 
 				<Input
 					className={cls.input}
+					placeholder={'Имя'}
+					value={firstName}
+					onChange={onChangeFirstName}
+				/>
+
+				<Input
+					className={cls.input}
+					placeholder={'Фамилия'}
+					value={lastName}
+					onChange={onChangeLastName}
+				/>
+
+				<Input
+					className={cls.input}
 					placeholder={'Пароль'}
 					value={password}
 					type={'password'}
@@ -105,12 +144,18 @@ export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 
 				{!isPasswordsEqual && <Text text={'Пароли не совпадают'} theme={ThemeText.ERROR}/>}
 
+				{message && <Text text={message} theme={ThemeText.SUCCESSFUL}/>}
+
 				{error && <Text text={error} theme={ThemeText.ERROR}/>}
 
 				<Button
 					className={cls.button}
 					onClick={onClickRegistration}
-					disabled={!isPasswordsEqual || password.length === 0}
+					disabled={
+						!isPasswordsEqual ||
+						password.length === 0 ||
+						repeatedPassword.length === 0
+					}
 				>
 					Зарегистрироваться
 				</Button>

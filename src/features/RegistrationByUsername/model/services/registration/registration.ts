@@ -6,6 +6,8 @@ import { userActions } from 'entities/User';
 interface RegistrationProps {
 	username: string;
 	password: string;
+	firstName: string;
+	lastName: string;
 }
 
 interface RegistrationResult {
