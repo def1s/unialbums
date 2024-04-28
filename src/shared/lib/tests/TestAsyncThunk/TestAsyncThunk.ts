@@ -7,7 +7,7 @@ type ActionCreatorType<Return, Arg, RejectedValue>
 export class TestAsyncThunk<Return, Arg, RejectedValue> {
 	// eslint-disable-next-line
 	dispatch: jest.MockedFn<any>;
-	getState: () => StateSchema;
+	getState: () => DeepPartial<StateSchema>;
 	actionCreator: ActionCreatorType<Return, Arg, RejectedValue>;
 
 	constructor(actionCreator: ActionCreatorType<Return, Arg, RejectedValue>) {

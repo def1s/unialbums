@@ -20,6 +20,7 @@ export const addAlbumToUser = createAsyncThunk<
 		// TODO Сделать конфиг для типизации thunk
 		// @ts-expect-error
 		const albumForm = getAlbumFormData(thunkAPI.getState());
+		console.log(albumForm);
 
 		if (!albumForm) {
 			return thunkAPI.rejectWithValue('Недопустимый ввод или пустое поле');
@@ -33,7 +34,9 @@ export const addAlbumToUser = createAsyncThunk<
 					formData.append(name, String(value));
 				});
 
-				const response = await axiosInstance.post<ApiResponse<null>>('/albums/create', formData);
+				const response =
+					await axiosInstance.post<ApiResponse<null>>('/albums/create', formData);
+
 				return { message: response.data.message };
 			} catch (error) {
 				if (error.response && error.response?.status === 403) {
