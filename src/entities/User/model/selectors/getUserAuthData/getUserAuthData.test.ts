@@ -14,8 +14,6 @@ describe('getUserAuthData', () => {
 
 		expect(getUserAuthData(state as StateSchema)).toEqual({
 			username: 'username',
-			userId: 1,
-			firstName: 'name',
 			avatar: 'avatar'
 		});
 	});

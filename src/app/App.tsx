@@ -17,6 +17,9 @@ const App = () => {
 		dispatch(userInitAuthData());
 	}, [dispatch]);
 
+	// TODO Возможно вынести на верхний уровень inited, чтобы при инициализации не отображался navbar
+	// TODO Или добавить isLoading и error в схему пользователя
+
 	return (
 		<div className='App'>
 			<div className={classNames('', { 'content-page': !!user })}>

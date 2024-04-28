@@ -1,9 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosRequestConfig } from 'axios';
-import { userActions } from 'entities/User';
 import { ACCESS_TOKEN_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
 import { ApiResponse, token } from 'shared/api/types/apiResponse';
-import { jwtDecode } from 'jwt-decode';
 
 interface LoginByUsernameProps {
 	username: string;

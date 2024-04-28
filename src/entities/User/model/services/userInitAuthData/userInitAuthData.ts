@@ -8,11 +8,13 @@ interface UserInitAuthDataResult {
 	avatar?: string;
 }
 
+// при инициализации будет использоваться токен, который автоматически приписывает к каждому запросу axiosInstance
+// если токена нет или он есть, но недействительный (как и refresh) и возвращается 403, то пользователя разлогинит
+
 export const userInitAuthData = createAsyncThunk<UserInitAuthDataResult, void, { rejectValue: string }>(
 	'user/userInitAuthData',
 	async (_, thunkAPI) => {
 		try {
-
 			const response = await axiosInstance.get<ApiResponse<UserInitAuthDataResult>>('/users/getUserInfo');
 
 			if (!response.data) {

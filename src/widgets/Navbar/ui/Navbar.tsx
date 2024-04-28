@@ -39,6 +39,7 @@ export const Navbar = memo(({ className }: NavbarProps) => {
 		setIsRegistrationModal(false);
 	};
 
+	// при успешном входе будет выполнено закрытие модалки и инициализация пользователя по полученному токену
 	const onSuccessAuth = () => {
 		onCloseLoginModal();
 		dispatch(userInitAuthData());
