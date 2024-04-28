@@ -31,17 +31,17 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
 		onChangeField
 	} = props;
 
-	if (error) {
-		return (
-			<div className={classNames(cls.ProfileCard, {}, [className])}>
-				<Text
-					title={'Произошла ошибка'}
-					text={error}
-					theme={TextTheme.ERROR}
-				/>
-			</div>
-		);
-	}
+	// if (error) {
+	// 	return (
+	// 		<div className={classNames(cls.ProfileCard, {}, [className])}>
+	// 			<Text
+	// 				title={'Произошла ошибка'}
+	// 				text={error}
+	// 				theme={TextTheme.ERROR}
+	// 			/>
+	// 		</div>
+	// 	);
+	// }
 
 	return (
 		<div className={classNames(cls.ProfileCard, {}, [className])}>

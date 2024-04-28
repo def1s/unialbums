@@ -7,8 +7,8 @@ import { memo, useCallback } from 'react';
 import { updateProfileData } from '../../model/services/updateProfileData/updateProfileData';
 import { useSelector } from 'react-redux';
 import { getProfileFormMessage } from '../../model/selectors/getProfileFormMessage/getProfileFormMessage';
-import { Text, TextTheme } from 'shared/ui/Text/Text';
 import { userInitAuthData } from 'entities/User';
+import { Notification } from 'shared/ui/Notification/Notification';
 
 interface EditableUserProfileFooterProps {
     className?: string;
@@ -22,7 +22,6 @@ export const EditableUserProfileFooter = memo((props: EditableUserProfileFooterP
 	} = props;
 
 	const dispatch = useAppDispatch();
-	const serverMessage = useSelector(getProfileFormMessage);
 
 	const onEdit = useCallback(() => {
 		dispatch(profileActions.setReadonly(false));
@@ -65,10 +64,6 @@ export const EditableUserProfileFooter = memo((props: EditableUserProfileFooterP
 	} else {
 		return (
 			<div className={classNames(cls.EditableUserProfileFooter, {}, [className])}>
-				<Text
-					text={serverMessage}
-					theme={TextTheme.SUCCESSFUL}
-				/>
 				<div className={cls.buttonsWrapper}>
 					<Button
 						className={cls.button}

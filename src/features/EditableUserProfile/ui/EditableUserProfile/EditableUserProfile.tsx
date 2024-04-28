@@ -1,11 +1,9 @@
 import cls from './EditableUserProfile.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { ProfileCard } from 'entities/Profile';
+import { ProfileCard, ProfileKey } from 'entities/Profile';
 import { useSelector } from 'react-redux';
 import { getProfileFields } from '../../model/selectors/getProfileFields/getProfileFields';
-import {
-	getProfileIsLoading
-} from '../../model/selectors/getProfileIsLoading/getProfileIsLoading';
+import { getProfileIsLoading } from '../../model/selectors/getProfileIsLoading/getProfileIsLoading';
 import { getProfileError } from '../../model/selectors/getProfileError/getProfileError';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { getProfileReadonly } from '../../model/selectors/getProfileReadonly/getProfileReadonly';
@@ -13,11 +11,10 @@ import { memo, useCallback, useEffect } from 'react';
 import { fetchProfileData } from '../../model/services/fetchProfileData/fetchProfileData';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { profileActions, profileReducer } from '../../model/slice/profileSlice';
-import {
-	EditableUserProfileFooter
-} from '../EditableUserProfileFooter/EditableUserProfileFooter';
+import { EditableUserProfileFooter } from '../EditableUserProfileFooter/EditableUserProfileFooter';
 import { getProfileForm } from '../../model/selectors/getProfileForm/getProfileForm';
-import { ProfileKey } from 'entities/Profile';
+import { getProfileFormMessage } from '../../model/selectors/getProfileFormMessage/getProfileFormMessage';
+import { Notification, NotificationTheme } from 'shared/ui/Notification/Notification';
 
 interface EditableUserProfileProps {
     className?: string;
@@ -31,6 +28,7 @@ export const EditableUserProfile = memo(({ className }: EditableUserProfileProps
 	const profileFields = useSelector(getProfileFields);
 	const isLoading = useSelector(getProfileIsLoading);
 	const error = useSelector(getProfileError);
+	const message = useSelector(getProfileFormMessage);
 	const readonly = useSelector(getProfileReadonly);
 	const formData = useSelector(getProfileForm);
 
@@ -56,9 +54,14 @@ export const EditableUserProfile = memo(({ className }: EditableUserProfileProps
 					error={error}
 					onChangeField={onChangeField}
 				/>
-				{!isLoading && <EditableUserProfileFooter
-					readonly={readonly}
-				/>}
+				{
+					!isLoading &&
+					<EditableUserProfileFooter
+						readonly={readonly}
+					/>
+				}
+				{message && <Notification message={message} theme={NotificationTheme.SUCCESSFUL}/>}
+				{error && <Notification message={error} theme={NotificationTheme.ERROR}/>}
 			</div>
 		</DynamicModuleLoader>
 	);
