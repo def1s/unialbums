@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosRequestConfig } from 'axios';
-import { User, userActions, UserJWTDecode } from 'entities/User';
+import { userActions } from 'entities/User';
 import { ACCESS_TOKEN_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
 import { ApiResponse, token } from 'shared/api/types/apiResponse';
 import { jwtDecode } from 'jwt-decode';
@@ -34,10 +34,8 @@ export const loginByUsername = createAsyncThunk<void, LoginByUsernameProps, { re
 			}
 
 			const accessToken = response.data.data[0].accessToken;
-			const { sub, ...userData }: UserJWTDecode = jwtDecode(accessToken);
 
 			localStorage.setItem(ACCESS_TOKEN_LOCALSTORAGE_KEY, accessToken);
-			thunkApi.dispatch(userActions.setAuthData({ username: sub, ...userData }));
 		} catch (error) {
 			return thunkApi.rejectWithValue(error.response.data.message || 'Непредвиденная ошибка');
 		}

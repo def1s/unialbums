@@ -4,7 +4,7 @@ import React, { memo, useState } from 'react';
 import { SearchAlbumsByName } from 'features/SearchAlbumsByName';
 import { LoginModal } from 'features/AuthByUsername';
 import { useSelector } from 'react-redux';
-import { getUserAuthData } from 'entities/User';
+import { getUserAuthData, userInitAuthData } from 'entities/User';
 import { Button } from 'shared/ui/Button/Button';
 import DefaultAvatar from 'shared/assets/icons/default-avatar.svg';
 import { Link } from 'react-router-dom';
@@ -39,6 +39,11 @@ export const Navbar = memo(({ className }: NavbarProps) => {
 		setIsRegistrationModal(false);
 	};
 
+	const onSuccessAuth = () => {
+		onCloseLoginModal();
+		dispatch(userInitAuthData());
+	};
+
 	const onLogout = () => {
 		dispatch(userLogout());
 	};
@@ -68,6 +73,7 @@ export const Navbar = memo(({ className }: NavbarProps) => {
 						<LoginModal
 							isOpen={isLoginModal}
 							onClose={onCloseLoginModal}
+							onSuccess={onSuccessAuth}
 						/>
 				}
 

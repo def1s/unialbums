@@ -8,9 +8,16 @@ interface LoginModalProps {
     className?: string
 	isOpen: boolean;
 	onClose: () => void;
+	onSuccess: () => void;
 }
 
-export const LoginModal = memo(({ className, isOpen, onClose }: LoginModalProps) => {
+export const LoginModal = memo((props: LoginModalProps) => {
+	const {
+		className,
+		isOpen,
+		onClose,
+		onSuccess
+	} = props;
 
 	return (
 		<Modal
@@ -19,7 +26,7 @@ export const LoginModal = memo(({ className, isOpen, onClose }: LoginModalProps)
 			onClose={onClose}
 		>
 			<LoginForm
-				onSuccess={onClose}
+				onSuccess={onSuccess}
 			/>
 		</Modal>
 	);

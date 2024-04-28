@@ -7,8 +7,6 @@ describe('getUserAuthData', () => {
 			user: {
 				authData: {
 					username: 'username',
-					userId: 1,
-					firstName: 'name',
 					avatar: 'avatar'
 				}
 			}
