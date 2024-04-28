@@ -27,10 +27,6 @@ export const registration = createAsyncThunk<RegistrationResult, RegistrationPro
 
 			return { message: response.data.message };
 		} catch (error) {
-			if (error.response && error.response.status === 403) {
-				thunkApi.dispatch(userActions.logout());
-			}
-
 			return thunkApi.rejectWithValue(error.response.data.message || 'Непредвиденная ошибка');
 		}
 	}

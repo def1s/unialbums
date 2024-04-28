@@ -38,8 +38,10 @@ axiosInstance.interceptors.response.use(response => {
 			return axiosInstance(originalRequest);
 		} catch (refreshError) {
 			console.log('Error refreshing access token: ', refreshError);
-			return refreshError;
+			throw refreshError;
 		}
+	} else {
+		throw error;
 	}
 });
 

@@ -36,7 +36,7 @@ export const addAlbumToUser = createAsyncThunk<
 				const response = await axiosInstance.post<ApiResponse<null>>('/albums/create', formData);
 				return { message: response.data.message };
 			} catch (error) {
-				if (error.response && error.response.status === 403) {
+				if (error.response && error.response?.status === 403 || error.response?.status === 404) {
 					thunkAPI.dispatch(userActions.logout());
 				}
 

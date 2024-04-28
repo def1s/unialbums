@@ -27,7 +27,7 @@ export const updateProfileData = createAsyncThunk<UpdateProfileDataResult, void,
 
 			return { message: response.data.message };
 		} catch (error) {
-			if (error.response && error.response?.status === 403) {
+			if (error.response && error.response?.status === 403 || error.response?.status === 404) {
 				thunkApi.dispatch(userActions.logout());
 			}
 
