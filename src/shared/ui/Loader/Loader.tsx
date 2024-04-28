@@ -2,23 +2,23 @@ import cls from './Loader.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { memo } from 'react';
 
-export enum ThemeLoader {
+export enum LoaderPosition {
 	CENTER = 'center',
-	// CENTER_BLEARY_BG = 'blearyBg'
+	// TOP_RIGHT = 'topRight'
 }
 
 interface LoaderProps {
     className?: string;
-	theme?: ThemeLoader
+	position?: LoaderPosition
 }
 
 export const Loader = memo((props: LoaderProps) => {
 	const {
 		className,
-		theme = ThemeLoader.CENTER
+		position = LoaderPosition.CENTER
 	} = props;
 
 	return (
-		<span className={classNames(cls.loader, {}, [className, cls[theme]])}></span>
+		<span className={classNames(cls.loader, {}, [className, cls[position]])}></span>
 	);
 });

@@ -2,7 +2,6 @@ import axios from 'axios';
 import { ApiResponse, token } from 'shared/api/types/apiResponse';
 import { loginByUsername } from './loginByUsername';
 import MockAdapter from 'axios-mock-adapter';
-import { userActions } from 'entities/User';
 import { TestAsyncThunk } from 'shared/lib/tests/TestAsyncThunk/TestAsyncThunk';
 
 describe('loginByUsername', () => {

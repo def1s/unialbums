@@ -56,9 +56,3 @@ export const Loading: Story = {
 		isLoading: true
 	}
 };
-
-export const Error: Story = {
-	args: {
-		error: 'Сообщение об ошибке'
-	}
-};

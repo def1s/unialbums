@@ -5,10 +5,7 @@ import { profileActions } from '../../model/slice/profileSlice';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { memo, useCallback } from 'react';
 import { updateProfileData } from '../../model/services/updateProfileData/updateProfileData';
-import { useSelector } from 'react-redux';
-import { getProfileFormMessage } from '../../model/selectors/getProfileFormMessage/getProfileFormMessage';
 import { userInitAuthData } from 'entities/User';
-import { Notification } from 'shared/ui/Notification/Notification';
 
 interface EditableUserProfileFooterProps {
     className?: string;

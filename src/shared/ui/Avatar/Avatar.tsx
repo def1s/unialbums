@@ -1,6 +1,6 @@
 import cls from './Avatar.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { ButtonHTMLAttributes, ImgHTMLAttributes, memo } from 'react';
+import { ImgHTMLAttributes, memo } from 'react';
 
 export enum AvatarSize {
 	SMALL = 'small',

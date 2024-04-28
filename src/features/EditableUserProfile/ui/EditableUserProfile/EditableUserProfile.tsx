@@ -28,7 +28,7 @@ export const EditableUserProfile = memo(({ className }: EditableUserProfileProps
 	const profileFields = useSelector(getProfileFields);
 	const isLoading = useSelector(getProfileIsLoading);
 	const error = useSelector(getProfileError);
-	const message = useSelector(getProfileFormMessage);
+	const serverMessage = useSelector(getProfileFormMessage);
 	const readonly = useSelector(getProfileReadonly);
 	const formData = useSelector(getProfileForm);
 
@@ -43,15 +43,32 @@ export const EditableUserProfile = memo(({ className }: EditableUserProfileProps
 		dispatch(profileActions.updateProfile({ [field]: value }));
 	}, [dispatch]);
 
+	// уведомления
+	const notifications = (
+		<>
+			{
+				!isLoading && !error && serverMessage &&
+                <Notification message={serverMessage} theme={NotificationTheme.SUCCESSFUL}/>
+			}
+
+			{
+				!isLoading && error &&
+                <Notification message={error} theme={NotificationTheme.ERROR}/>
+			}
+		</>
+	);
+
 	return (
 		<DynamicModuleLoader reducers={reducers} removeAfterUnmount>
 			<div className={classNames(cls.EditableUserProfile, {}, [className])}>
+				{/* уведомления */}
+				{notifications}
+
 				<ProfileCard
 					fields={profileFields}
 					readonly={readonly}
 					data={formData}
 					isLoading={isLoading}
-					error={error}
 					onChangeField={onChangeField}
 				/>
 				{
@@ -60,8 +77,6 @@ export const EditableUserProfile = memo(({ className }: EditableUserProfileProps
 						readonly={readonly}
 					/>
 				}
-				{message && <Notification message={message} theme={NotificationTheme.SUCCESSFUL}/>}
-				{error && <Notification message={error} theme={NotificationTheme.ERROR}/>}
 			</div>
 		</DynamicModuleLoader>
 	);

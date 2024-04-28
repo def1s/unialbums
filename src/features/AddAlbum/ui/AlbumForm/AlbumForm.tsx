@@ -12,11 +12,11 @@ import { Button } from 'shared/ui/Button/Button';
 import { getAlbumFormIsLoading } from '../../model/selectors/getAlbumFormIsLoading/getAlbumFormIsLoading';
 import { getAlbumFormError } from '../../model/selectors/getAlbumFormError/getAlbumFormError';
 import { Loader } from 'shared/ui/Loader/Loader';
-import { Text, TextTheme } from 'shared/ui/Text/Text';
 import { Blur } from 'shared/ui/Blur/Blur';
 import { getAlbumFormMessage } from '../../model/selectors/getAlbumFormMessage/getAlbumFormMessage';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { getAlbumFormData } from '../../model/selectors/getAlbumFormData/getAlbumFormData';
+import { Notification, NotificationTheme } from 'shared/ui/Notification/Notification';
 
 interface AlbumFormProps {
     className?: string
@@ -92,6 +92,21 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 		dispatch(addAlbumToUser());
 	};
 
+	// уведомления
+	const notifications = (
+		<>
+			{
+				!isLoading && error &&
+                <Notification message={error} theme={NotificationTheme.ERROR}/>
+			}
+
+			{
+				!isLoading && !error && serverMessage &&
+                <Notification message={serverMessage} theme={NotificationTheme.SUCCESSFUL}/>
+			}
+		</>
+	);
+
 	return (
 		<DynamicModuleLoader
 			reducers={initialReducers}
@@ -101,6 +116,19 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 				className={classNames(cls.AlbumForm, {}, [className])}
 				onSubmit={(e) => onSubmit(e)}
 			>
+				{/* уведомления */}
+				{notifications}
+
+				{/* лоадер */}
+				{
+					isLoading && !error && (
+						<>
+							<Loader/>
+							<Blur/>
+						</>
+					)
+				}
+
 				<div className={cls.info}>
 					<InputFile
 						onChange={onCoverAdd}
@@ -183,24 +211,6 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 					</div>
 				</div>
 
-				{
-					isLoading && !error && (
-						<>
-							<Loader/>
-							<Blur/>
-						</>
-					)
-				}
-
-				{
-					!isLoading && error &&
-                    <Text text={error} theme={TextTheme.ERROR}/>
-				}
-
-				{
-					!isLoading && !error && serverMessage &&
-					<Text text={serverMessage} theme={TextTheme.SUCCESSFUL}/>
-				}
 				<Button
 					type="submit"
 					className={cls.formSubmit}
@@ -209,6 +219,7 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 					Добавить альбом
 				</Button>
 			</form>
+
 		</DynamicModuleLoader>
 	);
 });
