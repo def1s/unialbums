@@ -8,6 +8,7 @@ import { updateProfileData } from '../../model/services/updateProfileData/update
 import { useSelector } from 'react-redux';
 import { getProfileFormMessage } from '../../model/selectors/getProfileFormMessage/getProfileFormMessage';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
+import { userInitAuthData } from 'entities/User';
 
 interface EditableUserProfileFooterProps {
     className?: string;
@@ -32,6 +33,7 @@ export const EditableUserProfileFooter = memo((props: EditableUserProfileFooterP
 
 		if (result.meta.requestStatus === 'fulfilled') {
 			dispatch(profileActions.setReadonly(true));
+			dispatch(userInitAuthData());
 		}
 	}, [dispatch]);
 

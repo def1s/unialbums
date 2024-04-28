@@ -17,9 +17,6 @@ const userSlice = createSlice({
 		}
 	},
 	extraReducers: builder => {
-		builder.addCase(userInitAuthData.pending, (state) => {
-			state._inited = false;
-		});
 		builder.addCase(userInitAuthData.fulfilled, (state, action) => {
 			state.authData = action.payload;
 			state._inited = true;

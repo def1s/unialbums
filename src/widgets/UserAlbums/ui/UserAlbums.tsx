@@ -34,7 +34,7 @@ export const UserAlbums = memo((props: UserAlbumsProps) => {
 				albums.length === 0 && !isLoading && !error &&
 				<Text
 					title={'У вас нет ни одного альбома!'}
-					text={'Добавьте их в специальной форме (в сайдбаре)'}
+					text={'Вы можете добавить их в специальной форме (в сайдбаре)'}
 					align={TextAlign.CENTER}
 					className={cls.message}
 				/>

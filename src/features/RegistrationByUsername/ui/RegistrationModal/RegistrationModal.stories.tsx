@@ -24,7 +24,8 @@ export const Loading: Story = {
 	decorators: [
 		StoreDecorator({
 			registrationForm: {
-				isLoading: true
+				isLoading: true,
+				isPasswordsEqual: true
 			}
 		})
 	]

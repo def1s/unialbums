@@ -38,6 +38,11 @@
     font-weight: 400;
 }
 
-.person {
+.avatar {
+    width: 100px;
+    height: 100px;
+}
 
+.blurBorder {
+    border-radius: var(--medium-radius);
 }

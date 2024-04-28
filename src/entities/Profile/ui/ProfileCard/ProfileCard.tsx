@@ -7,6 +7,8 @@ import { Text, TextTheme } from 'shared/ui/Text/Text';
 import { Loader } from 'shared/ui/Loader/Loader';
 import { memo } from 'react';
 import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
+import DefaultAvatar from 'shared/assets/icons/default-avatar.svg';
+import { Blur } from 'shared/ui/Blur/Blur';
 
 interface ProfileCardProps {
     className?: string;
@@ -29,14 +31,6 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
 		onChangeField
 	} = props;
 
-	if (isLoading) {
-		return (
-			<div className={classNames(cls.ProfileCard, {}, [className])}>
-				<Loader/>
-			</div>
-		);
-	}
-
 	if (error) {
 		return (
 			<div className={classNames(cls.ProfileCard, {}, [className])}>
@@ -51,10 +45,24 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
 
 	return (
 		<div className={classNames(cls.ProfileCard, {}, [className])}>
+			{
+				isLoading && (
+					<>
+						<Loader/>
+						<Blur className={cls.blurBorder}/>
+					</>
+				)
+			}
+
 			<div className={cls.userBlock}>
-				<Avatar
-					src={data?.avatar}
-				/>
+				{
+					data?.avatar ?
+						<Avatar
+							src={data?.avatar}
+						/>
+						:
+						<DefaultAvatar className={cls.avatar}/>
+				}
 				<div className={cls.username}>{textLengthValidation(data?.username || '')}</div>
 				<div className={cls.person}>{textLengthValidation(data?.firstName + ' ' + data?.lastName, 26)}</div>
 			</div>
