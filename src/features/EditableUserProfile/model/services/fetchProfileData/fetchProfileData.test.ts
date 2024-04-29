@@ -4,7 +4,6 @@ import { TestAsyncThunk } from 'shared/lib/tests/TestAsyncThunk/TestAsyncThunk';
 import { fetchProfileData } from './fetchProfileData';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 import { Profile } from 'entities/Profile';
-import { userActions } from 'entities/User';
 
 describe('userInitAuthData', () => {
 	const response: ApiResponse<Profile> = {

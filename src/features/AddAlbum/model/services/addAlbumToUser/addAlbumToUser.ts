@@ -18,7 +18,7 @@ export const addAlbumToUser = createAsyncThunk<
 		const formData = new FormData();
 
 		// TODO Сделать конфиг для типизации thunk
-		// @ts-expect-error
+		// @ts-expect-error отсутствует типизация для thunk
 		const albumForm = getAlbumFormData(thunkAPI.getState());
 		console.log(albumForm);
 

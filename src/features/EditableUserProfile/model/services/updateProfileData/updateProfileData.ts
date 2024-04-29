@@ -12,7 +12,7 @@ export const updateProfileData = createAsyncThunk<UpdateProfileDataResult, void,
 	'profile/updateProfileData',
 	async (_, thunkApi) => {
 		// TODO Сделать конфиг для типизации thunk
-		// @ts-expect-error
+		// @ts-expect-error отсутствует типизация для thunk
 		const formData = getProfileForm(thunkApi.getState());
 
 		console.log(formData);

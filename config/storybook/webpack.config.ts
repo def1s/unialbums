@@ -19,7 +19,6 @@ export default ({ config }: {config: webpack.Configuration}) => {
 
 	// для работы с svg
 
-	// @ts-expect-error
 	config!.module!.rules = config!.module!.rules!.map((rule: RuleSetRule) => {
 		if (/svg/.test(rule.test as string)) {
 			return { ...rule, exclude: /\.svg$/i };

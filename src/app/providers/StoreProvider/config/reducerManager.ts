@@ -20,7 +20,7 @@ export function createReducerManager(initialReducers: ReducersMapObject<StateSch
 				keysToRemove = [];
 			}
 
-			// @ts-expect-error
+			// @ts-expect-error проблема с типизацией возвращаемого значения
 			return combinedReducer(state, action);
 		},
 
