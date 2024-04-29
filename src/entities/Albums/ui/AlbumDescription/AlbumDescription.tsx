@@ -1,60 +1,61 @@
 import cls from './AlbumDescription.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
 import { Input } from 'shared/ui/Input/Input';
+import { Album } from '../../model/types/album';
+import { Loader } from 'shared/ui/Loader/Loader';
+import { Blur } from 'shared/ui/Blur/Blur';
+import { calculateRating } from 'shared/lib/calculateRating/calculateRating';
+import { RATING_ALBUMS_MULTIPLIER } from 'shared/const/global';
 
-/**
- * Интерфейс для свойств компонента AlbumDescription.
- *
- * @interface
- * @property {string} cover - URL обложки альбома.
- * @property {string} title - Название альбома.
- * @property {string} artist - Имя исполнителя альбома.
- * @property {number} year - Год выпуска альбома.
- * @property {number} rating - Рейтинг альбома.
- * @property {string} [className] - Дополнительные классы CSS для компонента.
- */
 interface AlbumDescriptionProps {
-	cover: string,
-	title: string,
-	artist: string,
-	year: number,
-	rating: number,
-	className?: string,
-	readonly?: boolean
+	data?: Album;
+	className?: string;
+	readonly?: boolean;
+	isLoading?: boolean;
+	onChangeTitle?: (value: string) => void;
+	onChangeArtist?: (value: string) => void;
 }
 
-/**
- * Компонент для отображения информации об альбоме.
- *
- * @param {AlbumDescription} props - Свойства компонента.
- * @returns {React.ReactNode} Компонент AlbumDescription.
- */
 export const AlbumDescription = memo((props: AlbumDescriptionProps): React.ReactNode => {
 	const {
-		cover,
-		title,
-		artist,
-		year,
-		rating,
+		data,
 		className,
-		readonly = true
+		readonly = true,
+		isLoading
 	} = props;
+
+	const rating = useMemo(() => calculateRating(
+		RATING_ALBUMS_MULTIPLIER,
+		data?.tracksRating || 1,
+		data?.atmosphereRating || 1,
+		data?.bitsRating || 1,
+		data?.textRating || 1
+	), [data?.atmosphereRating, data?.bitsRating, data?.textRating, data?.tracksRating]);
+
+	if (isLoading) {
+		return (
+			<div className={classNames(cls.AlbumDescription, {}, [className])}>
+				<Loader/>
+				<Blur/>
+			</div>
+		);
+	}
 
 	if (readonly) {
 		return (
 			<div className={classNames(cls.AlbumDescription, {}, [className])}>
 				<div className={cls.cover}>
 					{/* Отображение обложки альбома */}
-					<img src={cover} alt="Обложка альбома"/>
+					<img src={data?.cover} alt="Обложка альбома"/>
 				</div>
 
 				{/* Отображение информации об альбоме с валидацией на длину некоторых полей */}
 				<div className={cls.wrapper}>
-					<div className={cls.title}>{textLengthValidation(title, 25)}</div>
-					<div className={cls.artist}>{textLengthValidation(artist, 25)}</div>
-					<div className={cls.year}>{year}</div>
+					<div className={cls.title}>{textLengthValidation(data?.title || '', 25)}</div>
+					<div className={cls.artist}>{textLengthValidation(data?.artist || '', 25)}</div>
+					{/*<div className={cls.year}>{data.year}</div>*/}
 					<div className={cls.rating}>{rating}</div>
 				</div>
 			</div>
@@ -64,24 +65,24 @@ export const AlbumDescription = memo((props: AlbumDescriptionProps): React.React
 			<div className={classNames(cls.AlbumDescription, {}, [className])}>
 				<div className={cls.cover}>
 					{/* Отображение обложки альбома */}
-					<img src={cover} alt="Обложка альбома"/>
+					<img src={data?.cover} alt="Обложка альбома"/>
 				</div>
 
 				<div className={cls.wrapper}>
 					<Input
 						className={cls.title}
-						value={title}
+						value={data?.title}
 					/>
 
 					<Input
 						className={cls.artist}
-						value={artist}
+						value={data?.artist}
 					/>
 
-					<Input
-						className={cls.year}
-						value={year}
-					/>
+					{/*<Input*/}
+					{/*	className={cls.year}*/}
+					{/*	value={year}*/}
+					{/*/>*/}
 				</div>
 			</div>
 		);

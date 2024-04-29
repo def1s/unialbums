@@ -5,6 +5,9 @@ import { Action, EnhancedStore, Reducer, ReducersMapObject } from '@reduxjs/tool
 import { HomePageSchema } from 'pages/HomePage';
 import { EditableUserProfileSchema } from 'features/EditableUserProfile';
 import { RegistrationSchema } from 'features/RegistrationByUsername';
+import {
+	EditableAlbumDescriptionSchema
+} from 'features/EditableAlbumDescription';
 
 export interface StateSchema {
 	user: UserSchema;
@@ -15,6 +18,7 @@ export interface StateSchema {
 	albumForm?: AlbumFormSchema;
 	profile?: EditableUserProfileSchema;
 	registrationForm?: RegistrationSchema;
+	albumDescription?: EditableAlbumDescriptionSchema
 }
 
 export type StateSchemaKey = keyof StateSchema;
