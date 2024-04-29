@@ -12,6 +12,12 @@
     padding: 0 10px;
 }
 
+.buttonsWrapper {
+    display: flex;
+    align-items: center;
+    gap: var(--small-padding);
+}
+
 .linksWrapper {
     display: flex;
     height: 100%;
@@ -54,6 +60,7 @@
     width: 50px;
     height: 50px;
     border-radius: 100%;
+    cursor: pointer;
 }
 
 .username {

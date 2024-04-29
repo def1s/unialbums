@@ -3,10 +3,12 @@ import { StateSchema, StoreProvider } from 'app/providers/StoreProvider';
 import { loginReducer } from 'features/AuthByUsername/model/slice/loginSlice';
 import { ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { albumFormReducer } from 'features/AddAlbum';
+import { registrationReducer } from 'features/RegistrationByUsername';
 
 const defaultAsyncReducers: ReducerList = {
 	loginForm: loginReducer,
-	albumForm: albumFormReducer
+	albumForm: albumFormReducer,
+	registrationForm: registrationReducer
 };
 
 export const StoreDecorator = (

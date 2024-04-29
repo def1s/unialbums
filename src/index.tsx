@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { StoreProvider } from 'app/providers/StoreProvider';
 
 const domNode = document.getElementById('root');
-const root = createRoot(domNode);
+const root = createRoot(domNode as HTMLElement);
 root.render(
 	<StoreProvider>
 		<BrowserRouter>

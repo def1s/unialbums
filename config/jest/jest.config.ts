@@ -34,4 +34,7 @@ export default {
 		'\\.(s?css)$': 'identity-obj-proxy',
 	},
 	setupFilesAfterEnv: ['<rootDir>config/jest/setupTests.ts'],
+	globals: {
+		__API_URL__: ''
+	}
 };

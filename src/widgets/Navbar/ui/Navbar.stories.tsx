@@ -19,13 +19,11 @@ Login.decorators = [
 			initialState={{
 				user: {
 					authData: {
-						userId: 1,
-						firstName: 'first name',
 						username: 'username'
 					},
 					_inited: false
 				},
-				userAlbums: undefined
+				homePage: undefined
 			}}
 		>
 			<Story/>

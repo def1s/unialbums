@@ -3,18 +3,21 @@ import './styles/index.scss';
 import { AppRouter } from 'app/providers/router';
 import { Navbar } from 'widgets/Navbar';
 import { Sidebar } from 'widgets/Sidebar';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUserAuthData, getUserInited, userActions } from 'entities/User';
+import { useSelector } from 'react-redux';
+import { getUserAuthData, getUserInited, userInitAuthData } from 'entities/User';
 import { classNames } from 'shared/lib/classNames/classNames';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 
 const App = () => {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const user = useSelector(getUserAuthData);
 	const inited = useSelector(getUserInited);
 
 	useEffect(() => {
-		dispatch(userActions.iniAuthData());
+		dispatch(userInitAuthData());
 	}, [dispatch]);
+
+	// TODO Добавить isLoading и error в схему пользователя для уведомления пользователя о инициализации приложения
 
 	return (
 		<div className='App'>
@@ -23,8 +26,13 @@ const App = () => {
 				<div
 					className={classNames('', { 'content-wrapper': !!user, 'welcome-page': !user })}
 				>
-					<Navbar/>
-					{inited && <AppRouter/>}
+					{
+						inited &&
+						<>
+							<Navbar/>
+							<AppRouter/>
+						</>
+					}
 				</div>
 			</div>
 		</div>

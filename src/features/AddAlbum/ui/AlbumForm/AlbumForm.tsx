@@ -1,30 +1,22 @@
 import cls from './AlbumForm.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { RangeSlider } from 'shared/ui/RangeSlider/RangeSlider';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Input } from 'shared/ui/Input/Input';
-import React, { ChangeEvent, FormEvent, useEffect, useRef } from 'react';
+import React, { ChangeEvent, FormEvent, memo, useCallback, useEffect, useRef } from 'react';
 import { albumFormActions, albumFormReducer } from '../../model/slice/albumFormSlice';
-import { AlbumFormFields } from '../../model/types/albumFormSchema';
-import { getAlbumFormTitle } from '../../model/selectors/getAlbumFormTitle/getAlbumFormTitle';
-import { getAlbumFormArtist } from '../../model/selectors/getAlbumFormArtist/getAlbumFormArtist';
-import {
-	getAlbumFormAtmosphereRating
-} from '../../model/selectors/getAlbumFormAtmosphereRating/getAlbumFormAtmosphereRating';
-import { getAlbumFormBitsRating } from '../../model/selectors/getAlbumFormBitsRating/getAlbumFormBitsRating';
-import { getAlbumFormTextRating } from '../../model/selectors/getAlbumFormTextRating/getAlbumFormTextRating';
-import { getAlbumFormTracksRating } from '../../model/selectors/getAlbumFormTracksRating/getAlbumFormTracksRating';
 import { addAlbumToUser } from '../../model/services/addAlbumToUser/addAlbumToUser';
-import { getAlbumFormCover } from '../../model/selectors/getAlbumFormCover/getAlbumFormCover';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { InputFile } from 'shared/ui/InputFile/InputFile';
 import { Button } from 'shared/ui/Button/Button';
 import { getAlbumFormIsLoading } from '../../model/selectors/getAlbumFormIsLoading/getAlbumFormIsLoading';
 import { getAlbumFormError } from '../../model/selectors/getAlbumFormError/getAlbumFormError';
 import { Loader } from 'shared/ui/Loader/Loader';
-import { Text, ThemeText } from 'shared/ui/Text/Text';
 import { Blur } from 'shared/ui/Blur/Blur';
-import { getAlbumFormMessage } from 'features/AddAlbum/model/selectors/getAlbumFormMessage/getAlbumFormMessage';
+import { getAlbumFormMessage } from '../../model/selectors/getAlbumFormMessage/getAlbumFormMessage';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { getAlbumFormData } from '../../model/selectors/getAlbumFormData/getAlbumFormData';
+import { Notification, NotificationTheme } from 'shared/ui/Notification/Notification';
 
 interface AlbumFormProps {
     className?: string
@@ -34,17 +26,10 @@ const initialReducers: ReducerList = {
 	albumForm: albumFormReducer
 };
 
-export const AlbumForm = ({ className }: AlbumFormProps) => {
-	const dispatch = useDispatch();
+export const AlbumForm = memo(({ className }: AlbumFormProps) => {
+	const dispatch = useAppDispatch();
 
-	const title = useSelector(getAlbumFormTitle);
-	const artist = useSelector(getAlbumFormArtist);
-	const atmosphereRating = useSelector(getAlbumFormAtmosphereRating);
-	const bitsRating = useSelector(getAlbumFormBitsRating);
-	const textRating = useSelector(getAlbumFormTextRating);
-	const tracksRating = useSelector(getAlbumFormTracksRating);
-	const cover = useSelector(getAlbumFormCover);
-
+	const formData = useSelector(getAlbumFormData);
 	const isLoading = useSelector(getAlbumFormIsLoading);
 	const error = useSelector(getAlbumFormError);
 	const serverMessage = useSelector(getAlbumFormMessage);
@@ -58,31 +43,69 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 		};
 	}, []);
 
-	const onChangeField = (value: number | string, field: AlbumFormFields) => {
-		dispatch(albumFormActions.setFieldValue({ value: value, field: field }));
-	};
+	const onChangeCover = useCallback((cover: string) => {
+		dispatch(albumFormActions.setFieldValue({ cover: cover }));
+	}, [dispatch]);
 
-	const onCoverAdd = (e: ChangeEvent<HTMLInputElement>) => {
+	const onChangeTitle = useCallback((title: string) => {
+		dispatch(albumFormActions.setFieldValue({ title: title }));
+	}, [dispatch]);
+
+	const onChangeArtist = useCallback((artist: string) => {
+		dispatch(albumFormActions.setFieldValue({ artist: artist }));
+	}, [dispatch]);
+
+	const onChangeAtmosphereRating = useCallback((atmosphereRating: number | string) => {
+		dispatch(albumFormActions.setFieldValue({ atmosphereRating: +atmosphereRating }));
+	}, [dispatch]);
+
+	const onChangeTextRating = useCallback((textRating: number | string) => {
+		dispatch(albumFormActions.setFieldValue({ textRating: +textRating }));
+	}, [dispatch]);
+
+	const onChangeBitsRating = useCallback((bitsRating: number | string) => {
+		dispatch(albumFormActions.setFieldValue({ bitsRating: +bitsRating }));
+	}, [dispatch]);
+
+	const onChangeTracksRating = useCallback((tracksRating: number | string) => {
+		dispatch(albumFormActions.setFieldValue({ tracksRating: +tracksRating }));
+	}, [dispatch]);
+
+	const onCoverAdd = useCallback((e: ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
 		const { files } = e.target;
 
-		localUrlImage.current = window.URL.createObjectURL(files[0]);
+		if (files) {
+			localUrlImage.current = window.URL.createObjectURL(files[0]);
+			onChangeCover(localUrlImage.current);
+		}
+	}, [onChangeCover]);
 
-		onChangeField(localUrlImage.current, 'cover');
-	};
-
-	const onCoverDelete = () => {
+	const onCoverDelete = useCallback(() => {
 		URL.revokeObjectURL(localUrlImage.current);
 		localUrlImage.current = '';
-		onChangeField('', 'cover');
-	};
+		onChangeCover('');
+	}, [onChangeCover]);
 
 	const onSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		// eslint-disable-next-line
-		// @ts-expect-error
-		dispatch(addAlbumToUser({ cover, title, tracksRating, atmosphereRating, textRating, bitsRating, artist }));
+		dispatch(addAlbumToUser());
 	};
+
+	// уведомления
+	const notifications = (
+		<>
+			{
+				!isLoading && error &&
+                <Notification message={error} theme={NotificationTheme.ERROR}/>
+			}
+
+			{
+				!isLoading && !error && serverMessage &&
+                <Notification message={serverMessage} theme={NotificationTheme.SUCCESSFUL}/>
+			}
+		</>
+	);
 
 	return (
 		<DynamicModuleLoader
@@ -93,12 +116,23 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 				className={classNames(cls.AlbumForm, {}, [className])}
 				onSubmit={(e) => onSubmit(e)}
 			>
-				{/*{isLoading && !error && <Blur/>}*/}
+				{/* уведомления */}
+				{notifications}
+
+				{/* лоадер */}
+				{
+					isLoading && !error && (
+						<>
+							<Loader/>
+							<Blur/>
+						</>
+					)
+				}
 
 				<div className={cls.info}>
 					<InputFile
 						onChange={onCoverAdd}
-						selectedFile={cover}
+						selectedFile={formData?.cover}
 						onRemove={onCoverDelete}
 						label='Обложка'
 					/>
@@ -107,8 +141,8 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 							type="text"
 							name="title"
 							className={cls.formInput}
-							onChange={onChangeField}
-							value={title}
+							onChange={onChangeTitle}
+							value={formData?.title}
 							placeholder='Название альбома'
 							required
 						/>
@@ -117,8 +151,8 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 							type="text"
 							name="artist"
 							className={cls.formInput}
-							onChange={onChangeField}
-							value={artist}
+							onChange={onChangeArtist}
+							value={formData?.artist}
 							placeholder='Исполнитель'
 							required
 						/>
@@ -127,11 +161,11 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 
 				<div className={cls.ratingWrapper}>
 					<div className={cls.formGroup}>
-						<label className={cls.formLabel}>Атмосфера: {atmosphereRating}</label>
+						<label className={cls.formLabel}>Атмосфера: {formData?.atmosphereRating}</label>
 						<RangeSlider
 							className={cls.rangeSlider}
-							value={atmosphereRating}
-							onChange={onChangeField}
+							value={formData?.atmosphereRating || 1}
+							onChange={onChangeAtmosphereRating}
 							min={1}
 							max={10}
 							defaultValue={1}
@@ -139,11 +173,11 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 						/>
 					</div>
 					<div className={cls.formGroup}>
-						<label className={cls.formLabel}>Текста: {textRating}</label>
+						<label className={cls.formLabel}>Текста: {formData?.textRating}</label>
 						<RangeSlider
 							className={cls.rangeSlider}
-							value={textRating}
-							onChange={onChangeField}
+							value={formData?.textRating || 1}
+							onChange={onChangeTextRating}
 							min={1}
 							max={10}
 							defaultValue={1}
@@ -154,10 +188,10 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 
 				<div className={cls.ratingWrapper}>
 					<div className={cls.formGroup}>
-						<label className={cls.formLabel}>Биты: {bitsRating}</label>
+						<label className={cls.formLabel}>Биты: {formData?.bitsRating}</label>
 						<RangeSlider
-							value={bitsRating}
-							onChange={onChangeField}
+							value={formData?.bitsRating || 1}
+							onChange={onChangeBitsRating}
 							min={1}
 							max={10}
 							defaultValue={1}
@@ -165,10 +199,10 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 						/>
 					</div>
 					<div className={cls.formGroup}>
-						<label className={cls.formLabel}>Треки: {tracksRating}</label>
+						<label className={cls.formLabel}>Треки: {formData?.tracksRating}</label>
 						<RangeSlider
-							value={tracksRating}
-							onChange={onChangeField}
+							value={formData?.tracksRating || 1}
+							onChange={onChangeTracksRating}
 							min={1}
 							max={10}
 							defaultValue={1}
@@ -177,24 +211,6 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 					</div>
 				</div>
 
-				{
-					isLoading && !error && (
-						<>
-							<Loader/>
-							<Blur/>
-						</>
-					)
-				}
-
-				{
-					!isLoading && error &&
-                    <Text text={error} theme={ThemeText.ERROR}/>
-				}
-
-				{
-					!isLoading && !error && serverMessage &&
-					<Text text={serverMessage} theme={ThemeText.SUCCESSFUL}/>
-				}
 				<Button
 					type="submit"
 					className={cls.formSubmit}
@@ -203,6 +219,7 @@ export const AlbumForm = ({ className }: AlbumFormProps) => {
 					Добавить альбом
 				</Button>
 			</form>
+
 		</DynamicModuleLoader>
 	);
-};
+});

@@ -1,32 +1,32 @@
 import cls from './LoginForm.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { loginActions, loginReducer } from '../../model/slice/loginSlice';
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { loginByUsername } from '../../model/services/loginByUsername/loginByUsername';
 import { Input } from 'shared/ui/Input/Input';
 import { Button } from 'shared/ui/Button/Button';
 import { Loader } from 'shared/ui/Loader/Loader';
-import { Text, ThemeText } from 'shared/ui/Text/Text';
+import { Text, TextTheme } from 'shared/ui/Text/Text';
 import { getLoginUsername } from '../../model/selectors/getLoginUsername/getLoginUsername';
 import { getLoginPassword } from '../../model/selectors/getLoginPassword/getLoginPassword';
 import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';
 import { getLoginError } from '../../model/selectors/getLoginError/getLoginError';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { Blur } from 'shared/ui/Blur/Blur';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 
 interface LoginFormProps {
-    className?: string
+    className?: string;
+	onSuccess?: () => void;
 }
 
 const initialReducers: ReducerList = {
 	loginForm: loginReducer
 };
 
-export const LoginForm = ({ className }: LoginFormProps) => {
-	const dispatch = useDispatch();
-	// не работает
-	// const dispatch = useAppDispatch();
+export const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
+	const dispatch = useAppDispatch();
 	const username = useSelector(getLoginUsername);
 	const password = useSelector(getLoginPassword);
 	const isLoading = useSelector(getLoginIsLoading);
@@ -40,13 +40,12 @@ export const LoginForm = ({ className }: LoginFormProps) => {
 		dispatch(loginActions.setPassword(value));
 	}, [dispatch]);
 
-	const onClickLogin = useCallback(() => {
-		// по каким-то абсолютно неясным причинам при использовании useAppDispatch loginReducer оказывается
-		// равен undefined и мне приходится игнорировать его, используя обычный dispatch.
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-expect-error
-		dispatch(loginByUsername({ username, password }));
-	}, [dispatch, password, username]);
+	const onClickLogin = useCallback(async () => {
+		const result = await dispatch(loginByUsername({ username, password }));
+		if (result.meta.requestStatus === 'fulfilled' && onSuccess) {
+			onSuccess();
+		}
+	}, [dispatch, onSuccess, password, username]);
 
 	return (
 		<DynamicModuleLoader
@@ -79,7 +78,7 @@ export const LoginForm = ({ className }: LoginFormProps) => {
 					type='password'
 				/>
 
-				{error && <Text text={error} theme={ThemeText.ERROR}/>}
+				{error && <Text text={error} theme={TextTheme.ERROR}/>}
 
 				<Button
 					onClick={onClickLogin}
@@ -91,4 +90,4 @@ export const LoginForm = ({ className }: LoginFormProps) => {
 			</div>
 		</DynamicModuleLoader>
 	);
-};
+});

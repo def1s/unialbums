@@ -11,7 +11,7 @@ interface WelcomePageProps {
     className?: string
 }
 
-export const WelcomePage: FC<WelcomePageProps> = (props) => {
+const WelcomePage: FC<WelcomePageProps> = (props) => {
 	const {
 		className
 	} = props;
@@ -51,3 +51,5 @@ export const WelcomePage: FC<WelcomePageProps> = (props) => {
 		</div>
 	);
 };
+
+export default WelcomePage;

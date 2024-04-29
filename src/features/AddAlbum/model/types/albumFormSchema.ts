@@ -1,10 +1,12 @@
-import { Album } from 'entities/AlbumCard';
+import { Album } from 'entities/Albums';
 
-export interface AlbumFormSchema extends Omit<Album, 'albumId'> {
-	// year: number;
+export type AlbumForm = Omit<Album, 'albumId'>;
+
+export interface AlbumFormSchema {
+	data: AlbumForm;
 	isLoading: boolean;
 	error?: string;
 	message?: string;
 }
 
-export type AlbumFormFields = keyof AlbumFormSchema;
+export type AlbumFormKey = keyof AlbumForm;

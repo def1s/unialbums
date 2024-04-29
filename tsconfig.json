@@ -12,7 +12,9 @@
 		"baseUrl": ".",
 		"paths": {
 			"*": ["./src/*"]
-		}
+		},
+		"strict": true,
+		"useUnknownInCatchVariables": false
 	},
 	"ts-node": {
 		"compilerOptions": {
@@ -22,6 +24,6 @@
 	"include": [
 		"./config/jest/setupTests.ts",
 		"./src/**/*.ts",
-		"./src/**/*.tsx",
+		"./src/**/*.tsx"
 	]
 }
