@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
 	EditableAlbumDescriptionSchema
 } from '../types/editableAlbumDescriptionSchema';
@@ -15,7 +15,9 @@ const albumDescriptionSlice = createSlice({
 	name: 'albumDescription',
 	initialState,
 	reducers: {
-
+		setReadonly: (state, action: PayloadAction<boolean>) => {
+			state.readonly = action.payload;
+		}
 	},
 	extraReducers: (builder) => {
 		builder.addCase(fetchAlbumDescription.pending, (state) => {

@@ -1,6 +1,6 @@
 import cls from './AlbumDescription.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
-import React, { memo, useMemo } from 'react';
+import React, { memo, ReactNode, useMemo } from 'react';
 import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
 import { Input } from 'shared/ui/Input/Input';
 import { Album } from '../../model/types/album';
@@ -16,6 +16,7 @@ interface AlbumDescriptionProps {
 	isLoading?: boolean;
 	onChangeTitle?: (value: string) => void;
 	onChangeArtist?: (value: string) => void;
+	EditFeature?: ReactNode;
 }
 
 export const AlbumDescription = memo((props: AlbumDescriptionProps): React.ReactNode => {
@@ -23,7 +24,8 @@ export const AlbumDescription = memo((props: AlbumDescriptionProps): React.React
 		data,
 		className,
 		readonly = true,
-		isLoading
+		isLoading,
+		EditFeature
 	} = props;
 
 	const rating = useMemo(() => calculateRating(
@@ -58,6 +60,10 @@ export const AlbumDescription = memo((props: AlbumDescriptionProps): React.React
 					{/*<div className={cls.year}>{data.year}</div>*/}
 					<div className={cls.rating}>{rating}</div>
 				</div>
+
+				<div className={cls.editButtons}>
+					{EditFeature}
+				</div>
 			</div>
 		);
 	} else {
@@ -83,6 +89,10 @@ export const AlbumDescription = memo((props: AlbumDescriptionProps): React.React
 					{/*	className={cls.year}*/}
 					{/*	value={year}*/}
 					{/*/>*/}
+				</div>
+
+				<div className={cls.editButtons}>
+					{EditFeature}
 				</div>
 			</div>
 		);

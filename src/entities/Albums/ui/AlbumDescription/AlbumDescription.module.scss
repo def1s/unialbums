@@ -30,6 +30,7 @@
     padding: 30px;
     color: #fff;
     position: relative;
+    max-width: 300px;
 }
 
 .title {
@@ -55,4 +56,9 @@
     font-weight: 500;
     position: absolute;
     bottom: 20px;
+}
+
+.editButtons {
+    margin-left: auto;
+    margin-top: auto;
 }

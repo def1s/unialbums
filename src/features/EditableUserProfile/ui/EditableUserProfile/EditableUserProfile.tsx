@@ -11,7 +11,7 @@ import { memo, useCallback, useEffect } from 'react';
 import { fetchProfileData } from '../../model/services/fetchProfileData/fetchProfileData';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { profileActions, profileReducer } from '../../model/slice/profileSlice';
-import { EditableUserProfileFooter } from '../EditableUserProfileFooter/EditableUserProfileFooter';
+import { EditProfile } from 'features/EditableUserProfile/ui/EditProfile/EditProfile';
 import { getProfileForm } from '../../model/selectors/getProfileForm/getProfileForm';
 import { getProfileFormMessage } from '../../model/selectors/getProfileFormMessage/getProfileFormMessage';
 import { Notification, NotificationTheme } from 'shared/ui/Notification/Notification';
@@ -73,9 +73,7 @@ export const EditableUserProfile = memo(({ className }: EditableUserProfileProps
 				/>
 				{
 					!isLoading &&
-					<EditableUserProfileFooter
-						readonly={readonly}
-					/>
+					<EditProfile/>
 				}
 			</div>
 		</DynamicModuleLoader>

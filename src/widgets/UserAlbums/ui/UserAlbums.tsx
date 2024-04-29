@@ -21,22 +21,31 @@ export const UserAlbums = memo((props: UserAlbumsProps) => {
 		className
 	} = props;
 
+	if (isLoading) {
+		return (
+			<div className={classNames(cls.UserAlbums, {}, [className])}>
+				<Loader/>
+			</div>
+		);
+	}
+
+	if (error) {
+		return (
+			<div className={classNames(cls.UserAlbums, {}, [className])}>
+				<Text title={error} text={'Попробуйте перезагрузить страницу'} theme={TextTheme.ERROR}/>
+			</div>
+		);
+	}
+
 	return (
 		<div className={classNames(cls.UserAlbums, {}, [className])}>
-			{ isLoading && !error && <Loader/> }
-
-			{
-				!isLoading && error &&
-				<Text title={error} text={'Попробуйте перезагрузить страницу'} theme={TextTheme.ERROR}/>
-			}
-
 			{
 				albums.length === 0 && !isLoading && !error &&
 				<Text
-					title={'У вас нет ни одного альбома!'}
-					text={'Вы можете добавить их в специальной форме (в сайдбаре)'}
-					align={TextAlign.CENTER}
-					className={cls.message}
+				    title={'У вас нет ни одного альбома!'}
+				    text={'Вы можете добавить их в специальной форме (в сайдбаре)'}
+				    align={TextAlign.CENTER}
+				    className={cls.message}
 				/>
 			}
 

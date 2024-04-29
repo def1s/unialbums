@@ -16,6 +16,10 @@ import { albumDescriptionReducer } from '../../model/slice/albumDescriptionSlice
 import {
 	getAlbumDescriptionIsLoading
 } from '../../model/selectors/getAlbumDescriptionIsLoading/getAlbumDescriptionIsLoading';
+import { EditDescription } from 'features/EditableAlbumDescription/ui/EditDescription/EditDescription';
+import {
+	getAlbumDescriptionReadonly
+} from '../../model/selectors/getAlbumDescriptionReadonly/getAlbumDescriptionReadonly';
 
 interface EditableAlbumDescriptionProps {
     className?: string
@@ -30,6 +34,7 @@ export const EditableAlbumDescription = ({ className }: EditableAlbumDescription
 	const dispatch = useAppDispatch();
 	const data = useSelector(getAlbumDescriptionData);
 	const isLoading = useSelector(getAlbumDescriptionIsLoading);
+	const readonly = useSelector(getAlbumDescriptionReadonly);
 
 	useEffect(() => {
 		dispatch(fetchAlbumDescription({ id }));
@@ -44,6 +49,8 @@ export const EditableAlbumDescription = ({ className }: EditableAlbumDescription
 				<AlbumDescription
 					data={data}
 					isLoading={isLoading}
+					EditFeature={<EditDescription/>}
+					readonly={readonly}
 				/>
 			</div>
 		</DynamicModuleLoader>
