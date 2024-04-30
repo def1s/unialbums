@@ -8,7 +8,6 @@ import { Loader } from 'shared/ui/Loader/Loader';
 import { memo } from 'react';
 import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
 import DefaultAvatar from 'shared/assets/icons/default-avatar.svg';
-import { Blur } from 'shared/ui/Blur/Blur';
 
 interface ProfileCardProps {
     className?: string;
