@@ -29,17 +29,16 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
 		onChangeField
 	} = props;
 
+	if (isLoading) {
+		return (
+			<div className={classNames(cls.ProfileCard, {}, [className])}>
+				<Loader/>
+			</div>
+		);
+	}
+
 	return (
 		<div className={classNames(cls.ProfileCard, {}, [className])}>
-			{
-				isLoading && (
-					<>
-						<Loader/>
-						<Blur className={cls.blurBorder}/>
-					</>
-				)
-			}
-
 			<div className={cls.userBlock}>
 				{
 					data?.avatar ?

@@ -15,8 +15,6 @@ export const updateProfileData = createAsyncThunk<UpdateProfileDataResult, void,
 		// @ts-expect-error отсутствует типизация для thunk
 		const formData = getProfileForm(thunkApi.getState());
 
-		console.log(formData);
-
 		try {
 			const response =
 				await axiosInstance.put<ApiResponse<undefined>>('/users/myProfile', formData);
