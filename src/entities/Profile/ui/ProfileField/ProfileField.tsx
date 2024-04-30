@@ -38,7 +38,7 @@ export const ProfileField = memo((props: ProfileFieldProps) => {
 					<Input
 						value={fieldValue}
 						className={cls.input}
-						theme={ThemeInput.ONLY_BORDER}
+						theme={ThemeInput.ONLY_BOTTOM_BORDER}
 						onChange={onChange}
 					/>
 			}

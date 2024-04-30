@@ -10,3 +10,7 @@ export {
 export {
 	EditableAlbumDescription
 } from './ui/EditableAlbumDescription/EditableAlbumDescription';
+
+export {
+	getAlbumDescriptionForm
+} from './model/selectors/getAlbumDescriptionForm/getAlbumDescriptionForm';

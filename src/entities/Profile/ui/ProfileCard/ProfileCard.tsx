@@ -8,7 +8,6 @@ import { Loader } from 'shared/ui/Loader/Loader';
 import { memo } from 'react';
 import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
 import DefaultAvatar from 'shared/assets/icons/default-avatar.svg';
-import { Blur } from 'shared/ui/Blur/Blur';
 
 interface ProfileCardProps {
     className?: string;
@@ -29,17 +28,16 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
 		onChangeField
 	} = props;
 
+	if (isLoading) {
+		return (
+			<div className={classNames(cls.ProfileCard, {}, [className])}>
+				<Loader/>
+			</div>
+		);
+	}
+
 	return (
 		<div className={classNames(cls.ProfileCard, {}, [className])}>
-			{
-				isLoading && (
-					<>
-						<Loader/>
-						<Blur className={cls.blurBorder}/>
-					</>
-				)
-			}
-
 			<div className={cls.userBlock}>
 				{
 					data?.avatar ?

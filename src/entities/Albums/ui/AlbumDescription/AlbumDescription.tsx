@@ -2,7 +2,7 @@ import cls from './AlbumDescription.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import React, { memo, ReactNode, useMemo } from 'react';
 import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
-import { Input } from 'shared/ui/Input/Input';
+import { Input, ThemeInput } from 'shared/ui/Input/Input';
 import { Album } from '../../model/types/album';
 import { Loader } from 'shared/ui/Loader/Loader';
 import { Blur } from 'shared/ui/Blur/Blur';
@@ -25,7 +25,9 @@ export const AlbumDescription = memo((props: AlbumDescriptionProps): React.React
 		className,
 		readonly = true,
 		isLoading,
-		EditFeature
+		EditFeature,
+		onChangeArtist,
+		onChangeTitle
 	} = props;
 
 	const rating = useMemo(() => calculateRating(
@@ -78,17 +80,16 @@ export const AlbumDescription = memo((props: AlbumDescriptionProps): React.React
 					<Input
 						className={cls.title}
 						value={data?.title}
+						theme={ThemeInput.ONLY_BOTTOM_BORDER}
+						onChange={onChangeTitle}
 					/>
 
 					<Input
 						className={cls.artist}
 						value={data?.artist}
+						theme={ThemeInput.ONLY_BOTTOM_BORDER}
+						onChange={onChangeArtist}
 					/>
-
-					{/*<Input*/}
-					{/*	className={cls.year}*/}
-					{/*	value={year}*/}
-					{/*/>*/}
 				</div>
 
 				<div className={cls.editButtons}>

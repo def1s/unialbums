@@ -6,7 +6,8 @@ type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onC
 
 export enum ThemeInput {
 	LIGHT_BG = 'lightBg',
-	ONLY_BORDER = 'onlyBorder'
+	ONLY_BORDER = 'onlyBorder',
+	ONLY_BOTTOM_BORDER = 'onlyBottomBorder'
 }
 
 interface InputProps extends HTMLInputProps {

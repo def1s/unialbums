@@ -28,3 +28,10 @@ export const OnlyBorder: Story = {
 		theme: ThemeInput.ONLY_BORDER
 	}
 };
+
+export const OnlyBottomBorder: Story = {
+	args: {
+		placeholder: 'Only bottom border',
+		theme: ThemeInput.ONLY_BOTTOM_BORDER
+	}
+};
