@@ -11,6 +11,14 @@ function getApiUrl(mode: BuildMode, apiUrl?: string) {
 	return 'http://localhost:8081/api/v1';
 }
 
+function getMinioUrl(mode: BuildMode, minioUrl?: string) {
+	if (minioUrl) {
+		return minioUrl;
+	}
+
+	return 'http://localhost:9000/images';
+}
+
 export default (env: BuildEnv) => {
 	const paths: BuildPaths = {
 		entry: path.resolve(__dirname, 'src', 'index.tsx'),
@@ -23,13 +31,15 @@ export default (env: BuildEnv) => {
 	const PORT = env.port || 3000;
 	const isDev = mode === 'development';
 	const apiUrl = getApiUrl(mode, env?.apiUrl);
+	const minioUrl = getMinioUrl(mode, env?.apiUrl);
 
 	const config: webpack.Configuration = BuildWebpackConfig({
 		mode,
 		paths,
 		port: PORT,
 		isDev,
-		apiUrl
+		apiUrl,
+		minioUrl
 	});
 
 	return config;

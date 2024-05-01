@@ -11,6 +11,7 @@ export interface BuildEnv {
 	port: number;
 	mode: BuildMode;
 	apiUrl: string;
+	minioUrl: string;
 }
 
 export interface BuildOptions {
@@ -19,4 +20,5 @@ export interface BuildOptions {
 	port: number;
 	isDev: boolean;
 	apiUrl: string;
+	minioUrl: string;
 }

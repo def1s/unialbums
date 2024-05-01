@@ -13,7 +13,7 @@ import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicM
 import { profileActions, profileReducer } from '../../model/slice/profileSlice';
 import { EditProfile } from 'features/EditableUserProfile/ui/EditProfile/EditProfile';
 import { getProfileForm } from '../../model/selectors/getProfileForm/getProfileForm';
-import { getProfileFormMessage } from '../../model/selectors/getProfileFormMessage/getProfileFormMessage';
+import { getProfileFormServerMessage } from 'features/EditableUserProfile/model/selectors/getProfileFormServerMessage/getProfileFormServerMessage';
 import { Notification, NotificationTheme } from 'shared/ui/Notification/Notification';
 
 interface EditableUserProfileProps {
@@ -28,7 +28,7 @@ export const EditableUserProfile = memo(({ className }: EditableUserProfileProps
 	const profileFields = useSelector(getProfileFields);
 	const isLoading = useSelector(getProfileIsLoading);
 	const error = useSelector(getProfileError);
-	const serverMessage = useSelector(getProfileFormMessage);
+	const serverMessage = useSelector(getProfileFormServerMessage);
 	const readonly = useSelector(getProfileReadonly);
 	const formData = useSelector(getProfileForm);
 

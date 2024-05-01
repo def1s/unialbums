@@ -1,15 +1,15 @@
 import { StateSchema } from 'app/providers/StoreProvider';
-import { getProfileFormMessage } from './getProfileFormMessage';
+import { getProfileFormServerMessage } from './getProfileFormServerMessage';
 
-describe('getProfileFormMessage', () => {
+describe('getProfileFormServerMessage', () => {
 	test('should return profile form message from the state', () => {
 		const state= {
 			profile: {
-				message: 'Profile updated successfully'
+				serverMessage: 'Profile updated successfully'
 			}
 		};
 
-		const profileFormMessage = getProfileFormMessage(state as StateSchema);
+		const profileFormMessage = getProfileFormServerMessage(state as StateSchema);
 
 		expect(profileFormMessage).toEqual('Profile updated successfully');
 	});
@@ -17,7 +17,7 @@ describe('getProfileFormMessage', () => {
 	test('should return undefined if profile is not present in the state', () => {
 		const state = {};
 
-		const profileFormMessage = getProfileFormMessage(state as StateSchema);
+		const profileFormMessage = getProfileFormServerMessage(state as StateSchema);
 
 		expect(profileFormMessage).toBeUndefined();
 	});

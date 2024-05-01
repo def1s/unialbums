@@ -23,6 +23,7 @@ const profileSlice = createSlice({
 			};
 		},
 		resetForm: (state) => {
+			state.validateErrors = undefined;
 			state.form = state.data;
 		}
 	},
@@ -43,18 +44,18 @@ const profileSlice = createSlice({
 			})
 
 			.addCase(updateProfileData.pending, (state) => {
-				state.error = undefined;
-				state.message = undefined;
+				state.validateErrors = undefined;
+				state.serverMessage = undefined;
 				state.isLoading = true;
 			})
 			.addCase(updateProfileData.fulfilled, (state, action) => {
 				state.isLoading = false;
-				state.message = action.payload.message;
+				state.serverMessage = action.payload.message;
 				state.data = state.form;
 			})
 			.addCase(updateProfileData.rejected, (state, action) => {
 				state.isLoading = false;
-				state.error = action.payload;
+				state.validateErrors = action.payload;
 			});
 	}
 });

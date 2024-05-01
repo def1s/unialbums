@@ -15,6 +15,7 @@ const App = () => {
 
 	useEffect(() => {
 		dispatch(userInitAuthData());
+		document.body.style.backgroundImage = `url(${__MINIO_URL__}/bg.png)`;
 	}, [dispatch]);
 
 	// TODO Добавить isLoading и error в схему пользователя для уведомления пользователя о инициализации приложения
