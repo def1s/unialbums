@@ -31,7 +31,7 @@ export default (env: BuildEnv) => {
 	const PORT = env.port || 3000;
 	const isDev = mode === 'development';
 	const apiUrl = getApiUrl(mode, env?.apiUrl);
-	const minioUrl = getMinioUrl(mode, env?.apiUrl);
+	const minioUrl = getMinioUrl(mode, env?.minioUrl);
 
 	const config: webpack.Configuration = BuildWebpackConfig({
 		mode,
