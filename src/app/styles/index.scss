@@ -27,3 +27,9 @@ body {
 .welcome-page {
     padding: 0 var(--medium-padding);
 }
+
+@media (width <= 1020px) {
+   .content-page {
+       padding: 0 var(--medium-padding) 0 var(--medium-padding);
+   }
+}

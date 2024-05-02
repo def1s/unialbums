@@ -2,3 +2,15 @@
     max-width: 900px;
     margin: 0 auto;
 }
+
+@media (width <= 960px) {
+    .EditableUserProfile {
+        width: 500px;
+    }
+}
+
+@media (width <= 580px) {
+    .EditableUserProfile {
+        width: 300px;
+    }
+}

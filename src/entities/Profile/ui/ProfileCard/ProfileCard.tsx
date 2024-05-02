@@ -57,6 +57,7 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
 				<Text
 					title={'Персональная информация'}
 					text={'Здесь вы можете изменить персональную информацию о себе'}
+					className={cls.description}
 				/>
 				<div className={cls.fields}>
 					{

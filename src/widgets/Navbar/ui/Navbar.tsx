@@ -108,7 +108,7 @@ export const Navbar = memo(({ className }: NavbarProps) => {
 					<span className={cls.username}>{user.username}</span>
 					<Button className={cls.button} onClick={onLogout}>Выйти</Button>
 				</div>
-				<SearchAlbumsByName/>
+				{/*<SearchAlbumsByName/>*/}
 			</header>
 		);
 	}

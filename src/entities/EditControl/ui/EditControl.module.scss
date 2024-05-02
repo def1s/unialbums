@@ -4,8 +4,8 @@
 
 .buttonsWrapper {
     display: flex;
-    justify-content: flex-end;
     gap: var(--small-padding);
+    flex-direction: column;
 }
 
 .button {
