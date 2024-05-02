@@ -45,7 +45,7 @@ const WelcomePage: FC<WelcomePageProps> = (props) => {
 				</div>
 
 				<div className={cls.element}>
-					<div className={cls.description}>lorem lorem lorem lorem lorem lorem lorem</div>
+					<div className={cls.description}>Lorem ipsum!</div>
 				</div>
 			</div>
 		</div>
