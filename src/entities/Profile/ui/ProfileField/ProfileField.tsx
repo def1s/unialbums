@@ -1,16 +1,15 @@
 import cls from './ProfileField.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Input, ThemeInput } from 'shared/ui/Input/Input';
-import { ProfileKey } from 'entities/Profile';
 import { memo, useCallback } from 'react';
 
 interface ProfileFieldProps {
     className?: string;
 	label: string;
-	fieldValue: string | number;
+	fieldValue?: string | number;
 	readonly?: boolean;
-	fieldName: ProfileKey;
-	onChangeField: (field: ProfileKey, value: string | number) => void;
+	onChangeField?: (value: string) => void;
+	error?: string | undefined
 }
 
 export const ProfileField = memo((props: ProfileFieldProps) => {
@@ -19,16 +18,22 @@ export const ProfileField = memo((props: ProfileFieldProps) => {
 		label,
 		fieldValue,
 		readonly,
-		fieldName,
+		error,
 		onChangeField
 	} = props;
 
 	const onChange = useCallback((value: string) => {
-		onChangeField(fieldName, value);
-	}, [fieldName, onChangeField]);
+		if (onChangeField) {
+			onChangeField(value);
+		}
+	}, [onChangeField]);
+
+	const mods: Record<string, boolean> = {
+		[cls.error]: !!error
+	};
 
 	return (
-		<div className={classNames(cls.ProfileField, {}, [className])}>
+		<div className={classNames(cls.ProfileField, mods, [className])}>
 			<div className={cls.label}>{label}</div>
 
 			{
@@ -42,6 +47,8 @@ export const ProfileField = memo((props: ProfileFieldProps) => {
 						onChange={onChange}
 					/>
 			}
+
+			<div className={cls.errorMessage}>{error}</div>
 
 		</div>
 	);

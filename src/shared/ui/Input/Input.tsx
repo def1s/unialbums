@@ -16,6 +16,7 @@ interface InputProps extends HTMLInputProps {
 	onChange?: (value: string) => void;
 	theme?: ThemeInput;
 	readonly?: boolean;
+	error?: string;
 }
 
 
@@ -26,6 +27,7 @@ export const Input = memo((props: InputProps) => {
 		onChange,
 		theme = ThemeInput.LIGHT_BG,
 		readonly,
+		error,
 		...otherProps
 	} = props;
 
@@ -39,7 +41,8 @@ export const Input = memo((props: InputProps) => {
 	];
 
 	const mods: Record<string, boolean | undefined> = {
-		[cls.readonly]: readonly
+		[cls.readonly]: readonly,
+		[cls.error]: !!error?.length
 	};
 
 	return (

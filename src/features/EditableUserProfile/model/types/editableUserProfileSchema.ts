@@ -1,11 +1,11 @@
 import { Profile } from 'entities/Profile';
 
-export enum ValidateProfileError {
-	INCORRECT_FIRSTNAME = 'INCORRECT_FIRSTNAME',
-	INCORRECT_LASTNAME = 'INCORRECT_LASTNAME',
-	INCORRECT_USERNAME = 'INCORRECT_USERNAME',
-	NO_DATA = 'NO_DATA',
-	SERVER_ERROR = 'SERVER_ERROR',
+export interface ValidateProfileError {
+	INCORRECT_FIRSTNAME?: boolean;
+	INCORRECT_LASTNAME?: boolean;
+	INCORRECT_USERNAME?: boolean;
+	NO_DATA?: boolean;
+	SERVER_ERROR?: boolean;
 }
 
 export interface EditableUserProfileSchema {
@@ -15,5 +15,5 @@ export interface EditableUserProfileSchema {
 	error?: string;
 	readonly: boolean;
 	serverMessage?: string;
-	validateErrors?: ValidateProfileError[];
+	validateErrors?: ValidateProfileError;
 }

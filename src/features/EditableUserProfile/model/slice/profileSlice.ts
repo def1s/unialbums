@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Profile } from 'entities/Profile';
 import { fetchProfileData } from '../services/fetchProfileData/fetchProfileData';
-import { EditableUserProfileSchema } from '../types/editableUserProfileSchema';
+import { EditableUserProfileSchema, ValidateProfileError } from '../types/editableUserProfileSchema';
 import { updateProfileData } from '../services/updateProfileData/updateProfileData';
 
 const initialState: EditableUserProfileSchema = {
@@ -25,6 +25,9 @@ const profileSlice = createSlice({
 		resetForm: (state) => {
 			state.validateErrors = undefined;
 			state.form = state.data;
+		},
+		setValidateErrors: (state, action: PayloadAction<ValidateProfileError>) => {
+			state.validateErrors = action.payload;
 		}
 	},
 	extraReducers: (builder) => {

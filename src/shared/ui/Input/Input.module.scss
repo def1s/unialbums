@@ -35,6 +35,11 @@
     border: none;
 }
 
+.error {
+    color: var(--red-color);
+    border-color: var(--red-color);
+}
+
 .onlyBottomBorder {
     background: none;
     border-top: none;

@@ -1,6 +1,6 @@
 import cls from './ProfileCard.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { Profile, ProfileFieldType, ProfileKey } from '../../model/types/profile';
+import { Profile } from '../../model/types/profile';
 import { ProfileField } from 'entities/Profile';
 import { Avatar } from 'shared/ui/Avatar/Avatar';
 import { Text } from 'shared/ui/Text/Text';
@@ -8,14 +8,17 @@ import { Loader } from 'shared/ui/Loader/Loader';
 import { memo } from 'react';
 import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
 import DefaultAvatar from 'shared/assets/icons/default-avatar.svg';
+import { ValidateProfileError } from 'features/EditableUserProfile';
 
 interface ProfileCardProps {
     className?: string;
 	data?: Profile;
 	isLoading?: boolean;
 	readonly?: boolean;
-	fields: ProfileFieldType[];
-	onChangeField: (field: ProfileKey, value: string | number) => void;
+	validateErrors?: ValidateProfileError;
+	onChangeFirstName?: (value: string) => void;
+	onChangeLastName?: (value: string) => void;
+	onChangeUsername?: (value: string) => void;
 }
 
 export const ProfileCard = memo((props: ProfileCardProps) => {
@@ -24,9 +27,19 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
 		data,
 		isLoading,
 		readonly,
-		fields,
-		onChangeField
+		validateErrors,
+		onChangeFirstName,
+		onChangeLastName,
+		onChangeUsername
 	} = props;
+
+	// ошибки
+	const validateErrorsTranslates = {
+		SERVER_ERROR: 'Серверная ошибка',
+		INCORRECT_FIRSTNAME: 'Некорректно заполнено имя',
+		INCORRECT_LASTNAME: 'Некорректно заполнена фамилия',
+		INCORRECT_USERNAME: 'Некорректно заполнено имя пользователя'
+	};
 
 	if (isLoading) {
 		return (
@@ -60,18 +73,29 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
 					className={cls.description}
 				/>
 				<div className={cls.fields}>
-					{
-						fields.map(({ value, label, fieldName }) => (
-							<ProfileField
-								label={label}
-								fieldValue={value}
-								key={label}
-								readonly={readonly}
-								onChangeField={onChangeField}
-								fieldName={fieldName}
-							/>
-						))
-					}
+					<ProfileField
+						label={'Имя'}
+						error={validateErrors?.INCORRECT_FIRSTNAME ? validateErrorsTranslates.INCORRECT_FIRSTNAME : undefined}
+						fieldValue={data?.firstName}
+						onChangeField={onChangeFirstName}
+						readonly={readonly}
+					/>
+
+					<ProfileField
+						label={'Фамилия'}
+						error={validateErrors?.INCORRECT_LASTNAME ? validateErrorsTranslates.INCORRECT_LASTNAME : undefined}
+						fieldValue={data?.lastName}
+						onChangeField={onChangeLastName}
+						readonly={readonly}
+					/>
+
+					<ProfileField
+						label={'Имя пользователя'}
+						fieldValue={data?.username}
+						error={validateErrors?.INCORRECT_USERNAME ? validateErrorsTranslates.INCORRECT_USERNAME : undefined}
+						onChangeField={onChangeUsername}
+						readonly={readonly}
+					/>
 				</div>
 			</div>
 		</div>

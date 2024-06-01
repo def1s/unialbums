@@ -35,3 +35,11 @@ export const OnlyBottomBorder: Story = {
 		theme: ThemeInput.ONLY_BOTTOM_BORDER
 	}
 };
+
+export const Error: Story = {
+	args: {
+		placeholder: 'Error',
+		value: 'Значение',
+		error: 'Something went wrong'
+	}
+};

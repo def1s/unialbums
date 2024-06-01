@@ -13,7 +13,7 @@ interface UpdateProfileDataResult {
 export const updateProfileData = createAsyncThunk<
 	UpdateProfileDataResult,
 	void,
-	{ rejectValue: ValidateProfileError[] }
+	{ rejectValue: ValidateProfileError }
 	>(
 		'profile/updateProfileData',
 		async (_, thunkApi) => {
@@ -23,7 +23,7 @@ export const updateProfileData = createAsyncThunk<
 
 			const errors = validateProfileData(formData);
 
-			if (errors.length) {
+			if (Object.keys(errors).length) {
 				return thunkApi.rejectWithValue(errors);
 			}
 
@@ -41,7 +41,7 @@ export const updateProfileData = createAsyncThunk<
 					thunkApi.dispatch(userActions.logout());
 				}
 
-				return thunkApi.rejectWithValue([ValidateProfileError.SERVER_ERROR]);
+				return thunkApi.rejectWithValue({ SERVER_ERROR: true });
 			}
 		}
 	);

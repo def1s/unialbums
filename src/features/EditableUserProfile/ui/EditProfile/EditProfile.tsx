@@ -24,7 +24,6 @@ export const EditProfile = memo((props: EditProfileProps) => {
 	} = props;
 
 	const readonly = useSelector(getProfileReadonly);
-	const validateErrors = useSelector(getProfileValidateErrors);
 	const dispatch = useAppDispatch();
 
 	const onEdit = useCallback(() => {
@@ -45,14 +44,6 @@ export const EditProfile = memo((props: EditProfileProps) => {
 		dispatch(profileActions.setReadonly(true));
 	}, [dispatch]);
 
-	const validateErrorsTranslates = {
-		[ValidateProfileError.SERVER_ERROR]: 'Серверная ошибка',
-		[ValidateProfileError.NO_DATA]: 'Заполните все поля',
-		[ValidateProfileError.INCORRECT_FIRSTNAME]: 'Некорректно заполнено имя',
-		[ValidateProfileError.INCORRECT_LASTNAME]: 'Некорректно заполнена фамилия',
-		[ValidateProfileError.INCORRECT_USERNAME]: 'Неверно заполнено имя пользователя'
-	};
-
 	return (
 		<div className={classNames(cls.EditProfile, {}, [className])}>
 			<EditControl
@@ -62,17 +53,6 @@ export const EditProfile = memo((props: EditProfileProps) => {
 				onReset={onReset}
 				className={cls.editButtons}
 			/>
-
-			{/* ошибки валидации */}
-			{
-				validateErrors?.map(error => (
-					<Text
-						key={error}
-						text={validateErrorsTranslates[error]}
-						theme={TextTheme.ERROR}
-					/>
-				))
-			}
 		</div>
 	);
 });
