@@ -35,18 +35,22 @@
     background-color: var(--light-bg-color);
     transition: 0.2s width ease;
     overflow: hidden; // чтобы текст не вылезал при появлении за блок
+}
 
-    &:hover {
-        width: var(--sidebar-width);
+@media (width > 1020px) {
+    .Sidebar {
+        &:hover {
+            width: var(--sidebar-width);
 
-        .link {
-            padding-left: var(--medium-padding);
-        }
+            .link {
+                padding-left: var(--medium-padding);
+            }
 
-        .linkText {
-            opacity: 1;
-            margin-left: 10px;
-            width: auto;
+            .linkText {
+                opacity: 1;
+                margin-left: 10px;
+                width: auto;
+            }
         }
     }
 }
@@ -54,4 +58,83 @@
 .icon {
     width: 30px;
     height: 30px;
+}
+
+.burgerMenu {
+    display: none;
+    position: fixed;
+    left: var(--small-padding);
+    top: var(--small-padding);
+    padding: var(--small-padding);
+    z-index: var(--sidebar-toggle-button-z-index);
+}
+
+.arrow {
+    display: none;
+    position: fixed;
+    left: -18px;
+    top: 50%;
+    width: 30px;
+    height: 30px;
+    border-top: 3px solid #fff;
+    border-right: 3px solid #fff;
+    transform: rotate(45deg) translateY(-50%);
+}
+
+.cross {
+    position: relative;
+    width: 100%;
+    height: 30px;
+
+    &::before, &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 15px;
+        transform: translateX(50%);
+        width: 2px;
+        height: 100%;
+        background-color: #fff;
+    }
+
+    &::before {
+        transform: rotate(45deg);
+    }
+
+    &::after {
+        transform: rotate(-45deg);
+    }
+}
+
+@media (width <= 1020px) {
+    .Sidebar {
+        left: -100%;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        transition: left 0.3s ease;
+    }
+
+    .arrow {
+        display: block;
+    }
+
+    .link {
+        padding-left: var(--medium-padding);
+    }
+
+    .linkText {
+        opacity: 1;
+        margin-left: 10px;
+        width: auto;
+    }
+
+    .open {
+        left: 0;
+        border-radius: 0;
+
+        .arrow {
+            display: none;
+        }
+    }
 }

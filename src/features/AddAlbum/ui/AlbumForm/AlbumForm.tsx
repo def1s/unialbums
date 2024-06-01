@@ -134,6 +134,7 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 						onChange={onCoverAdd}
 						selectedFile={formData?.cover}
 						onRemove={onCoverDelete}
+						className={cls.cover}
 						label='Обложка'
 					/>
 					<div className={cls.descriptionWrapper}>

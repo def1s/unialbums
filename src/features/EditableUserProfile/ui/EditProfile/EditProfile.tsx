@@ -60,6 +60,7 @@ export const EditProfile = memo((props: EditProfileProps) => {
 				onEdit={onEdit}
 				onSave={onSave}
 				onReset={onReset}
+				className={cls.editButtons}
 			/>
 
 			{/* ошибки валидации */}
