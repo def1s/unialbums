@@ -20,7 +20,6 @@ export const addAlbumToUser = createAsyncThunk<
 		// TODO Сделать конфиг для типизации thunk
 		// @ts-expect-error отсутствует типизация для thunk
 		const albumForm = getAlbumFormData(thunkAPI.getState());
-		console.log(albumForm);
 
 		if (!albumForm) {
 			return thunkAPI.rejectWithValue('Недопустимый ввод или пустое поле');

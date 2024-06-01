@@ -3,7 +3,7 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { RangeSlider } from 'shared/ui/RangeSlider/RangeSlider';
 import { useSelector } from 'react-redux';
 import { Input } from 'shared/ui/Input/Input';
-import React, { ChangeEvent, FormEvent, memo, useCallback, useEffect, useRef } from 'react';
+import React, { ChangeEvent, FormEvent, memo, useCallback, useEffect } from 'react';
 import { albumFormActions, albumFormReducer } from '../../model/slice/albumFormSlice';
 import { addAlbumToUser } from '../../model/services/addAlbumToUser/addAlbumToUser';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
@@ -17,6 +17,7 @@ import { getAlbumFormMessage } from '../../model/selectors/getAlbumFormMessage/g
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { getAlbumFormData } from '../../model/selectors/getAlbumFormData/getAlbumFormData';
 import { Notification, NotificationTheme } from 'shared/ui/Notification/Notification';
+import { useImage } from 'shared/lib/hooks/useImage/useImage';
 
 interface AlbumFormProps {
     className?: string
@@ -34,13 +35,14 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 	const error = useSelector(getAlbumFormError);
 	const serverMessage = useSelector(getAlbumFormMessage);
 
-	const localUrlImage = useRef('');
+	const { localUrlImage, onCreateImage, onDeleteImage } = useImage();
 
 	// очищение URL после размонтирования компонента
 	useEffect(() => {
 		return () => {
-			URL.revokeObjectURL(localUrlImage.current);
+			onDeleteImage();
 		};
+		//eslint-disable-next-line
 	}, []);
 
 	const onChangeCover = useCallback((cover: string) => {
@@ -72,20 +74,14 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 	}, [dispatch]);
 
 	const onCoverAdd = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-		e.preventDefault();
-		const { files } = e.target;
-
-		if (files) {
-			localUrlImage.current = window.URL.createObjectURL(files[0]);
-			onChangeCover(localUrlImage.current);
-		}
-	}, [onChangeCover]);
+		onCreateImage(e);
+		onChangeCover(localUrlImage.current);
+	}, [localUrlImage, onChangeCover, onCreateImage]);
 
 	const onCoverDelete = useCallback(() => {
-		URL.revokeObjectURL(localUrlImage.current);
-		localUrlImage.current = '';
+		onDeleteImage();
 		onChangeCover('');
-	}, [onChangeCover]);
+	}, [onChangeCover, onDeleteImage]);
 
 	const onSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();

@@ -1,6 +1,6 @@
 import cls from './ProfileCard.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { Profile, ProfileFieldType, ProfileKey } from 'entities/Profile/model/types/profile';
+import { Profile, ProfileFieldType, ProfileKey } from '../../model/types/profile';
 import { ProfileField } from 'entities/Profile';
 import { Avatar } from 'shared/ui/Avatar/Avatar';
 import { Text } from 'shared/ui/Text/Text';
