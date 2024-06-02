@@ -46,13 +46,16 @@ export const Input = memo((props: InputProps) => {
 	};
 
 	return (
-		<input
-			className={classNames(cls.Input, mods, additional)}
-			value={value}
-			onChange={(e) => onHandleChange(e)}
-			readOnly={readonly}
-			{...otherProps}
-		>
-		</input>
+		<>
+			{error && <div className={cls.errorMessage}>{error}</div>}
+			<input
+				className={classNames(cls.Input, mods, additional)}
+				value={value}
+				onChange={(e) => onHandleChange(e)}
+				readOnly={readonly}
+				{...otherProps}
+			>
+			</input>
+		</>
 	);
 });

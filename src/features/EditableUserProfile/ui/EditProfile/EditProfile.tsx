@@ -8,11 +8,6 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './EditProfile.module.scss';
 import { useSelector } from 'react-redux';
 import { getProfileReadonly } from '../../model/selectors/getProfileReadonly/getProfileReadonly';
-import { Text, TextTheme } from 'shared/ui/Text/Text';
-import {
-	getProfileValidateErrors
-} from '../../model/selectors/getProfileValidateErrors/getProfileValidateErrors';
-import { ValidateProfileError } from '../../model/types/editableUserProfileSchema';
 
 interface EditProfileProps {
     className?: string;

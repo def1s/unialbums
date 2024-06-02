@@ -40,6 +40,11 @@
     border-color: var(--red-color);
 }
 
+.errorMessage {
+    font-size: var(--font-size-m);
+    color: var(--red-color);
+}
+
 .onlyBottomBorder {
     background: none;
     border-top: none;
@@ -47,6 +52,7 @@
     border-right: none;
     border-radius: 0;
     border-bottom: solid 1px;
+    padding-left: 0;
 
     &:focus {
         background: none;

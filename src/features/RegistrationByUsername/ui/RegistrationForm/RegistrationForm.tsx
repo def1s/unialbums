@@ -21,7 +21,7 @@ import {
 import {
 	getRegistrationError
 } from '../../model/selectors/getRegistrationError/getRegistrationError';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { Loader } from 'shared/ui/Loader/Loader';
 import { Blur } from 'shared/ui/Blur/Blur';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
@@ -38,6 +38,12 @@ import {
 import {
 	getRegistrationMessage
 } from 	'../../model/selectors/getRegistrationMessage/getRegistrationMessage';
+import {
+	validateRegistrationForm
+} from '../../model/services/validateRegistrationForm/validateRegistrationForm';
+import {
+	getRegistrationValidateErrors
+} from '../../model/selectors/getRegistrationValidateErrors/getRegistrationValidateErrors';
 
 interface RegistrationFormProps {
     className?: string;
@@ -58,22 +64,38 @@ export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 	const error = useSelector(getRegistrationError);
 	const isPasswordsEqual = useSelector(getRegistrationIsPasswordsEqual);
 	const message = useSelector(getRegistrationMessage);
+	const validateErrors = useSelector(getRegistrationValidateErrors);
 
-	const onChangeUsername = useCallback((value: string) => {
-		dispatch(registrationActions.setUsername(value));
-	}, [dispatch]);
+	const getDataForValidation = useCallback(() => ({
+		firstName,
+		lastName,
+		username,
+		password
+	}), [firstName, lastName, password, username]);
 
-	const onChangeFirstName = useCallback((value: string) => {
-		dispatch(registrationActions.setFirstName(value));
-	}, [dispatch]);
+	const onChangeUsername = useCallback((username: string) => {
+		const errors = validateRegistrationForm({ ...getDataForValidation(), username });
+		dispatch(registrationActions.setValidateErrors(errors));
+		dispatch(registrationActions.setUsername(username));
+	}, [getDataForValidation, dispatch]);
 
-	const onChangeLastName = useCallback((value: string) => {
-		dispatch(registrationActions.setLastName(value));
-	}, [dispatch]);
+	const onChangeFirstName = useCallback((firstName: string) => {
+		const errors = validateRegistrationForm({ ...getDataForValidation(), firstName });
+		dispatch(registrationActions.setValidateErrors(errors));
+		dispatch(registrationActions.setFirstName(firstName));
+	}, [getDataForValidation, dispatch]);
 
-	const onChangePassword = useCallback((value: string) => {
-		dispatch(registrationActions.setPassword(value));
-	}, [dispatch]);
+	const onChangeLastName = useCallback((lastName: string) => {
+		const errors = validateRegistrationForm({ ...getDataForValidation(), lastName });
+		dispatch(registrationActions.setValidateErrors(errors));
+		dispatch(registrationActions.setLastName(lastName));
+	}, [getDataForValidation, dispatch]);
+
+	const onChangePassword = useCallback((password: string) => {
+		const errors = validateRegistrationForm({ ...getDataForValidation(), password });
+		dispatch(registrationActions.setValidateErrors(errors));
+		dispatch(registrationActions.setPassword(password));
+	}, [getDataForValidation, dispatch]);
 
 	const onChangeRepeatedPassword = useCallback((value: string) => {
 		dispatch(registrationActions.setRepeatedPassword(value));
@@ -88,6 +110,14 @@ export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 				lastName
 			}));
 		}
+	};
+
+	// ошибки
+	const validateErrorsTranslates = {
+		INCORRECT_FIRSTNAME: 'Некорректно заполнено имя',
+		INCORRECT_LASTNAME: 'Некорректно заполнена фамилия',
+		INCORRECT_USERNAME: 'Некорректно заполнено имя пользователя',
+		INCORRECT_PASSWORD: 'Некорректно заполнен пароль'
 	};
 
 	return (
@@ -110,6 +140,7 @@ export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 					placeholder={'Имя пользователя'}
 					value={username}
 					onChange={onChangeUsername}
+					error={validateErrors?.INCORRECT_USERNAME ? validateErrorsTranslates.INCORRECT_USERNAME : undefined}
 				/>
 
 				<Input
@@ -117,6 +148,7 @@ export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 					placeholder={'Имя'}
 					value={firstName}
 					onChange={onChangeFirstName}
+					error={validateErrors?.INCORRECT_FIRSTNAME ? validateErrorsTranslates.INCORRECT_FIRSTNAME : undefined}
 				/>
 
 				<Input
@@ -124,6 +156,7 @@ export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 					placeholder={'Фамилия'}
 					value={lastName}
 					onChange={onChangeLastName}
+					error={validateErrors?.INCORRECT_LASTNAME ? validateErrorsTranslates.INCORRECT_LASTNAME : undefined}
 				/>
 
 				<Input
@@ -132,6 +165,7 @@ export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 					value={password}
 					type={'password'}
 					onChange={onChangePassword}
+					error={validateErrors?.INCORRECT_PASSWORD ? validateErrorsTranslates.INCORRECT_PASSWORD : undefined}
 				/>
 
 				<Input

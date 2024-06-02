@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RegistrationSchema } from '../types/registrationSchema';
-import { registration } from 'features/RegistrationByUsername/model/services/registration/registration';
+import { RegistrationSchema, ValidateRegistrationErrors } from '../types/registrationSchema';
+import { registration } from '../services/registration/registration';
 
 const initialState: RegistrationSchema = {
 	username: '',
@@ -35,6 +35,9 @@ const registrationSlice = createSlice({
 		setRepeatedPassword: (state, action: PayloadAction<string>) => {
 			state.isPasswordsEqual = state.password === action.payload;
 			state.repeatedPassword = action.payload;
+		},
+		setValidateErrors: (state, action: PayloadAction<ValidateRegistrationErrors>) => {
+			state.validateErrors = action.payload;
 		}
 	},
 	extraReducers: builder => {

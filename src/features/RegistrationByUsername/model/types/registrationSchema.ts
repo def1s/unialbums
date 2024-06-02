@@ -1,3 +1,10 @@
+export interface ValidateRegistrationErrors {
+	INCORRECT_FIRSTNAME?: boolean;
+	INCORRECT_LASTNAME?: boolean;
+	INCORRECT_USERNAME?: boolean;
+	INCORRECT_PASSWORD?: boolean;
+}
+
 export interface RegistrationSchema {
 	username: string;
 	firstName: string;
@@ -8,4 +15,5 @@ export interface RegistrationSchema {
 	error?: string;
 	message?: string;
 	isPasswordsEqual: boolean;
+	validateErrors?: ValidateRegistrationErrors;
 }
