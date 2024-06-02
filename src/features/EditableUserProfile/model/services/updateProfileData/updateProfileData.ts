@@ -44,7 +44,7 @@ export const updateProfileData = createAsyncThunk<
 				// если старая аватарка не совпадает с новой, то отправляем ее в запрос на обновление данных профиля
 				if (avatar !== profileData?.avatar) {
 					const blobImg = await fetch(avatar || '').then(res => res.blob());
-					formData.append('cover', blobImg);
+					formData.append('avatar', blobImg);
 				}
 
 				// добавляем каждый элемент из формы в запрос
