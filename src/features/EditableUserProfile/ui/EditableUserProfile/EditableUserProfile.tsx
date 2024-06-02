@@ -6,7 +6,7 @@ import { getProfileIsLoading } from '../../model/selectors/getProfileIsLoading/g
 import { getProfileError } from '../../model/selectors/getProfileError/getProfileError';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { getProfileReadonly } from '../../model/selectors/getProfileReadonly/getProfileReadonly';
-import { memo, useCallback, useEffect } from 'react';
+import { ChangeEvent, memo, useCallback, useEffect } from 'react';
 import { fetchProfileData } from '../../model/services/fetchProfileData/fetchProfileData';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { profileActions, profileReducer } from '../../model/slice/profileSlice';
@@ -14,12 +14,11 @@ import { EditProfile } from 'features/EditableUserProfile/ui/EditProfile/EditPro
 import { getProfileForm } from '../../model/selectors/getProfileForm/getProfileForm';
 import { getProfileFormServerMessage } from 'features/EditableUserProfile/model/selectors/getProfileFormServerMessage/getProfileFormServerMessage';
 import { Notification, NotificationTheme } from 'shared/ui/Notification/Notification';
-import { ValidateProfileError } from '../../model/types/editableUserProfileSchema';
 import {
 	getProfileValidateErrors
 } from '../../model/selectors/getProfileValidateErrors/getProfileValidateErrors';
 import { validateProfileData } from 'features/EditableUserProfile/model/services/validateProfileData/validateProfileData';
-import { f } from 'msw/lib/glossary-de6278a9';
+import { useImage } from 'shared/lib/hooks/useImage/useImage';
 
 interface EditableUserProfileProps {
     className?: string;
@@ -38,6 +37,12 @@ export const EditableUserProfile = memo(({ className }: EditableUserProfileProps
 	const validateErrors = useSelector(getProfileValidateErrors);
 
 	const dispatch = useAppDispatch();
+
+	const {
+		onCreateImage,
+		onDeleteImage,
+		localUrlImage
+	} = useImage();
 
 	useEffect(() => {
 		dispatch(fetchProfileData());
@@ -61,6 +66,20 @@ export const EditableUserProfile = memo(({ className }: EditableUserProfileProps
 		dispatch(profileActions.setValidateErrors(errors));
 		dispatch(profileActions.updateProfile({ username }));
 	}, [dispatch, formData]);
+
+	const onChangeAvatar = useCallback((avatar: string) => {
+		dispatch(profileActions.updateProfile({ avatar }));
+	}, [dispatch]);
+
+	const onAddAvatar = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+		onCreateImage(e);
+		onChangeAvatar(localUrlImage.current);
+	}, [localUrlImage, onChangeAvatar, onCreateImage]);
+
+	const onDeleteAvatar = useCallback(() => {
+		onDeleteImage();
+		onChangeAvatar('');
+	}, [onChangeAvatar, onDeleteImage]);
 
 	// уведомления
 	const notifications = (
@@ -91,6 +110,8 @@ export const EditableUserProfile = memo(({ className }: EditableUserProfileProps
 					onChangeLastName={onChangeLastName}
 					onChangeUsername={onChangeUsername}
 					validateErrors={validateErrors}
+					onAddAvatar={onAddAvatar}
+					onDeleteAvatar={onDeleteAvatar}
 				/>
 				{
 					!isLoading &&

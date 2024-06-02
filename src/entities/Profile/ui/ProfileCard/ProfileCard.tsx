@@ -5,10 +5,11 @@ import { ProfileField } from 'entities/Profile';
 import { Avatar } from 'shared/ui/Avatar/Avatar';
 import { Text } from 'shared/ui/Text/Text';
 import { Loader } from 'shared/ui/Loader/Loader';
-import { memo } from 'react';
+import { ChangeEvent, memo } from 'react';
 import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
 import DefaultAvatar from 'shared/assets/icons/default-avatar.svg';
 import { ValidateProfileError } from 'features/EditableUserProfile';
+import { InputFile, InputFileShape } from 'shared/ui/InputFile/InputFile';
 
 interface ProfileCardProps {
     className?: string;
@@ -19,6 +20,8 @@ interface ProfileCardProps {
 	onChangeFirstName?: (value: string) => void;
 	onChangeLastName?: (value: string) => void;
 	onChangeUsername?: (value: string) => void;
+	onAddAvatar?: (file: ChangeEvent<HTMLInputElement>) => void;
+	onDeleteAvatar?: () => void;
 }
 
 export const ProfileCard = memo((props: ProfileCardProps) => {
@@ -30,7 +33,9 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
 		validateErrors,
 		onChangeFirstName,
 		onChangeLastName,
-		onChangeUsername
+		onChangeUsername,
+		onAddAvatar,
+		onDeleteAvatar
 	} = props;
 
 	// ошибки
@@ -49,17 +54,32 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
 		);
 	}
 
-	return (
-		<div className={classNames(cls.ProfileCard, {}, [className])}>
-			<div className={cls.userBlock}>
-				{
+	const avatar =
+		<>
+			{
+				readonly ?
 					data?.avatar ?
 						<Avatar
 							src={data?.avatar}
 						/>
 						:
 						<DefaultAvatar className={cls.avatar}/>
-				}
+					:
+					<InputFile
+						label={'Аватарка'}
+						selectedFile={data?.avatar}
+						shape={InputFileShape.CIRCLE}
+						onChange={onAddAvatar}
+						onRemove={onDeleteAvatar}
+					/>
+			}
+		</>;
+
+	return (
+		<div className={classNames(cls.ProfileCard, {}, [className])}>
+			<div className={cls.userBlock}>
+				{/* аватарка */}
+				{ avatar }
 				<div className={cls.username}>{textLengthValidation(data?.username || '')}</div>
 				<div className={cls.person}>
 					{textLengthValidation(data?.firstName + ' ' + data?.lastName, 26)}
