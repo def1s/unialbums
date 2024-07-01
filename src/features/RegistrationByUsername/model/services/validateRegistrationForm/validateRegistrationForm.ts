@@ -38,7 +38,7 @@ export const validateRegistrationForm = (form: RegistrationForm) => {
 		errors.INCORRECT_LASTNAME = true;
 	}
 
-	if (username.length > 0 && (username.length < 4 || username.length > 14 || !usernameRegex.test(username))) {
+	if (username.length >= 0 && (username.length < 4 || username.length > 14 || !usernameRegex.test(username))) {
 		errors.INCORRECT_USERNAME = true;
 	}
 

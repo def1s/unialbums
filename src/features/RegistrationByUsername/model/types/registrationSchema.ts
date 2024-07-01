@@ -5,6 +5,8 @@ export interface ValidateRegistrationErrors {
 	INCORRECT_PASSWORD?: boolean;
 }
 
+export type ValidateRegistrationErrorsKeys = keyof ValidateRegistrationErrors;
+
 export interface RegistrationSchema {
 	username: string;
 	firstName: string;

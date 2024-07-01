@@ -21,7 +21,7 @@ import {
 import {
 	getRegistrationError
 } from '../../model/selectors/getRegistrationError/getRegistrationError';
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import { Loader } from 'shared/ui/Loader/Loader';
 import { Blur } from 'shared/ui/Blur/Blur';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
@@ -44,6 +44,7 @@ import {
 import {
 	getRegistrationValidateErrors
 } from '../../model/selectors/getRegistrationValidateErrors/getRegistrationValidateErrors';
+import { ValidateRegistrationErrorsKeys } from '../../model/types/registrationSchema';
 
 interface RegistrationFormProps {
     className?: string;
@@ -112,8 +113,8 @@ export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 		}
 	};
 
-	// ошибки
-	const validateErrorsTranslates = {
+	// ошибки валидации
+	const validateErrorsTranslates: Record<ValidateRegistrationErrorsKeys, string> = {
 		INCORRECT_FIRSTNAME: 'Некорректно заполнено имя',
 		INCORRECT_LASTNAME: 'Некорректно заполнена фамилия',
 		INCORRECT_USERNAME: 'Некорректно заполнено имя пользователя',
@@ -188,7 +189,8 @@ export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 					disabled={
 						!isPasswordsEqual ||
 						password.length === 0 ||
-						repeatedPassword.length === 0
+						repeatedPassword.length === 0 ||
+						validateErrors && !!Object.keys(validateErrors).length
 					}
 				>
 					Зарегистрироваться
