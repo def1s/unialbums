@@ -21,22 +21,35 @@ import {
 	getAlbumDescriptionForm
 } from '../../model/selectors/getAlbumDescriptionForm/getAlbumDescriptionForm';
 import {
-	getAlbumDescriptionMessage
-} from '../../model/selectors/getAlbumDescriptionMessage/getAlbumDescriptionMessage';
+	getAlbumDescriptionServerMessage
+} from '../../model/selectors/getAlbumDescriptionServerMessage/getAlbumDescriptionServerMessage';
 import { Notification, NotificationTheme } from 'shared/ui/Notification/Notification';
 import {
 	getAlbumDescriptionError
 } from '../../model/selectors/getAlbumDescriptionError/getAlbumDescriptionError';
 import { useImage } from 'shared/lib/hooks/useImage/useImage';
 
+/**
+ * Свойства для компонента EditableAlbumDescription.
+ */
 interface EditableAlbumDescriptionProps {
     className?: string
 }
 
+/**
+ * Начальные редюсеры для DynamicModuleLoader.
+ * @type {ReducerList}
+ */
 const initialReducers: ReducerList = {
 	albumDescription: albumDescriptionReducer
 };
 
+/**
+ * Компонент EditableAlbumDescription для редактирования описания альбома.
+ *
+ * @param {EditableAlbumDescriptionProps} props - Свойства компонента.
+ * @returns {JSX.Element} Компонент EditableAlbumDescription.
+ */
 export const EditableAlbumDescription = ({ className }: EditableAlbumDescriptionProps) => {
 	const { id } = useParams();
 	const dispatch = useAppDispatch();
@@ -44,37 +57,67 @@ export const EditableAlbumDescription = ({ className }: EditableAlbumDescription
 	const isLoading = useSelector(getAlbumDescriptionIsLoading);
 	const error = useSelector(getAlbumDescriptionError);
 	const readonly = useSelector(getAlbumDescriptionReadonly);
-	const serverMessage = useSelector(getAlbumDescriptionMessage);
+	const serverMessage = useSelector(getAlbumDescriptionServerMessage);
 
+	// Использую кастомный хук для работы с обложкой
 	const { onCreateImage, onDeleteImage, localUrlImage } = useImage();
 
 	useEffect(() => {
 		dispatch(fetchAlbumDescription({ id }));
+		return () => {
+			onDeleteImage();
+		};
+		// eslint-disable-next-line
 	}, [dispatch, id]);
 
+	/**
+	 * Обработчик изменения названия альбома.
+	 *
+	 * @param {string} value - Новое значение названия альбома.
+	 */
 	const onChangeTitle = useCallback((value: string) => {
 		dispatch(albumDescriptionActions.updateAlbumDescription({ title: value }));
 	}, [dispatch]);
 
+	/**
+	 * Обработчик изменения имени исполнителя.
+	 *
+	 * @param {string} value - Новое значение имени исполнителя.
+	 */
 	const onChangeArtist = useCallback((value: string) => {
 		dispatch(albumDescriptionActions.updateAlbumDescription({ artist: value }));
 	}, [dispatch]);
 
+	/**
+	 * Обработчик изменения обложки альбома.
+	 *
+	 * @param {string} value - Новый URL обложки альбома.
+	 */
 	const onChangeCover = useCallback((value: string) => {
 		dispatch(albumDescriptionActions.updateAlbumDescription({ cover: value }));
 	}, [dispatch]);
 
+	/**
+	 * Обработчик добавления новой обложки альбома.
+	 *
+	 * @param {ChangeEvent<HTMLInputElement>} e - Событие изменения input файла.
+	 */
 	const onAddCover = useCallback((e: ChangeEvent<HTMLInputElement>) => {
 		onCreateImage(e);
 		onChangeCover(localUrlImage.current);
 	}, [localUrlImage, onChangeCover, onCreateImage]);
 
+	/**
+	 * Обработчик удаления обложки альбома.
+	 */
 	const onDeleteCover = useCallback(() => {
 		onDeleteImage();
 		onChangeCover('');
 	}, [onChangeCover, onDeleteImage]);
 
-	// уведомления
+	/**
+	 * Уведомления.
+	 */
 	const notifications = (
 		<>
 			{
@@ -95,13 +138,13 @@ export const EditableAlbumDescription = ({ className }: EditableAlbumDescription
 			removeAfterUnmount
 		>
 			<div className={classNames(cls.EditableAlbumDescription, {}, [className])}>
-				{/* уведомления */}
+				{/* Уведомления */}
 				{notifications}
 
 				<AlbumDescription
 					data={data}
 					isLoading={isLoading}
-					EditFeature={<EditDescription/>}
+					EditFeature={<EditDescription />}
 					readonly={readonly}
 					onChangeArtist={onChangeArtist}
 					onChangeTitle={onChangeTitle}

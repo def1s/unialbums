@@ -1,10 +1,11 @@
-import { ValidateProfileError } from '../../types/editableUserProfileSchema';
-import { Profile } from 'entities/Profile';
+import { Profile, ValidateProfileError } from 'entities/Profile';
 
 export const validateProfileData = (data?: Profile) => {
 	if (!data) {
 		return {
-			NO_DATA: true
+			INCORRECT_USERNAME: true,
+			INCORRECT_LASTNAME: true,
+			INCORRECT_FIRSTNAME: true
 		};
 	}
 

@@ -13,7 +13,7 @@ import { getAlbumFormIsLoading } from '../../model/selectors/getAlbumFormIsLoadi
 import { getAlbumFormError } from '../../model/selectors/getAlbumFormError/getAlbumFormError';
 import { Loader } from 'shared/ui/Loader/Loader';
 import { Blur } from 'shared/ui/Blur/Blur';
-import { getAlbumFormMessage } from '../../model/selectors/getAlbumFormMessage/getAlbumFormMessage';
+import { getAlbumFormServerMessage } from '../../model/selectors/getAlbumFormServerMessage/getAlbumFormServerMessage';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { getAlbumFormData } from '../../model/selectors/getAlbumFormData/getAlbumFormData';
 import { Notification, NotificationTheme } from 'shared/ui/Notification/Notification';
@@ -37,7 +37,7 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 	const formData = useSelector(getAlbumFormData);
 	const isLoading = useSelector(getAlbumFormIsLoading);
 	const error = useSelector(getAlbumFormError);
-	const serverMessage = useSelector(getAlbumFormMessage);
+	const serverMessage = useSelector(getAlbumFormServerMessage);
 
 	const { localUrlImage, onCreateImage, onDeleteImage } = useImage();
 

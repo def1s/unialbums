@@ -1,15 +1,15 @@
-import { getAlbumFormMessage } from './getAlbumFormMessage';
+import { getAlbumFormServerMessage } from './getAlbumFormServerMessage';
 import { StateSchema } from 'app/providers/StoreProvider';
 
-describe('getAlbumFormMessage', () => {
+describe('getAlbumFormServerMessage', () => {
 	test('should return album form message from the state', () => {
 		const state = {
 			albumForm: {
-				message: 'Album created successfully'
+				serverMessage: 'Album created successfully'
 			}
 		};
 
-		const message = getAlbumFormMessage(state as StateSchema);
+		const message = getAlbumFormServerMessage(state as StateSchema);
 
 		expect(message).toEqual('Album created successfully');
 	});
@@ -19,7 +19,7 @@ describe('getAlbumFormMessage', () => {
 			albumForm: {}
 		};
 
-		const message = getAlbumFormMessage(state as StateSchema);
+		const message = getAlbumFormServerMessage(state as StateSchema);
 
 		expect(message).toBeUndefined();
 	});
@@ -27,7 +27,7 @@ describe('getAlbumFormMessage', () => {
 	test('should return undefined if albumForm is not present in the state', () => {
 		const state = {};
 
-		const message = getAlbumFormMessage(state as StateSchema);
+		const message = getAlbumFormServerMessage(state as StateSchema);
 
 		expect(message).toBeUndefined();
 	});

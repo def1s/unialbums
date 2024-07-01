@@ -1,6 +1,6 @@
 import cls from './ProfileCard.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { Profile } from '../../model/types/profile';
+import { Profile, ValidateProfileError, ValidateProfileErrorKeys } from '../../model/types/profile';
 import { ProfileField } from 'entities/Profile';
 import { Avatar } from 'shared/ui/Avatar/Avatar';
 import { Text } from 'shared/ui/Text/Text';
@@ -8,7 +8,6 @@ import { Loader } from 'shared/ui/Loader/Loader';
 import { ChangeEvent, memo } from 'react';
 import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
 import DefaultAvatar from 'shared/assets/icons/default-avatar.svg';
-import { ValidateProfileError } from 'features/EditableUserProfile';
 import { InputFile, InputFileShape } from 'shared/ui/InputFile/InputFile';
 
 interface ProfileCardProps {
@@ -39,8 +38,7 @@ export const ProfileCard = memo((props: ProfileCardProps) => {
 	} = props;
 
 	// ошибки
-	const validateErrorsTranslates = {
-		SERVER_ERROR: 'Серверная ошибка',
+	const validateErrorsTranslates: Record<ValidateProfileErrorKeys, string> = {
 		INCORRECT_FIRSTNAME: 'Некорректно заполнено имя',
 		INCORRECT_LASTNAME: 'Некорректно заполнена фамилия',
 		INCORRECT_USERNAME: 'Некорректно заполнено имя пользователя'

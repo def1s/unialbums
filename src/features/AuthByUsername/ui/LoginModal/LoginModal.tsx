@@ -8,7 +8,7 @@ interface LoginModalProps {
     className?: string
 	isOpen: boolean;
 	onClose: () => void;
-	onSuccess: () => void;
+	onSuccess: () => void; // если успешно - закроет модалку и обновит данные пользователя по полученному токену
 }
 
 export const LoginModal = memo((props: LoginModalProps) => {

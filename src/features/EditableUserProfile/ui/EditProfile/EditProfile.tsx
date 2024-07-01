@@ -8,6 +8,8 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './EditProfile.module.scss';
 import { useSelector } from 'react-redux';
 import { getProfileReadonly } from '../../model/selectors/getProfileReadonly/getProfileReadonly';
+import { validateProfileData } from '../../model/services/validateProfileData/validateProfileData';
+import { getProfileForm } from '../../model/selectors/getProfileForm/getProfileForm';
 
 interface EditProfileProps {
     className?: string;
@@ -20,19 +22,30 @@ export const EditProfile = memo((props: EditProfileProps) => {
 
 	const readonly = useSelector(getProfileReadonly);
 	const dispatch = useAppDispatch();
+	const formData = useSelector(getProfileForm);
 
 	const onEdit = useCallback(() => {
 		dispatch(profileActions.setReadonly(false));
 	}, [dispatch]);
 
 	const onSave = useCallback(async () => {
-		const result = await dispatch(updateProfileData());
+		const errors = validateProfileData(formData);
 
-		if (result.meta.requestStatus === 'fulfilled') {
-			dispatch(profileActions.setReadonly(true));
-			dispatch(userInitAuthData());
+		/*
+		* Проверяю на наличие ошибок валидации. Ошибки выставляю даже если они уже проверялись на этапе ввода
+		* пользователем, чтобы наверняка. Если ошибки есть, то данные не отправляю.
+		* */
+		if (Object.keys(errors).length) {
+			dispatch(profileActions.setValidateErrors(errors));
+		} else {
+			const result = await dispatch(updateProfileData());
+
+			if (result.meta.requestStatus === 'fulfilled') {
+				dispatch(profileActions.setReadonly(true));
+				dispatch(userInitAuthData());
+			}
 		}
-	}, [dispatch]);
+	}, [dispatch, formData]);
 
 	const onReset = useCallback(() => {
 		dispatch(profileActions.resetForm());

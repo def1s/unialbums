@@ -11,17 +11,32 @@ import { RATING_ALBUMS_MULTIPLIER } from 'shared/const/global';
 import { InputFile } from 'shared/ui/InputFile/InputFile';
 
 interface AlbumDescriptionProps {
+	/** Данные альбома, включающие название, исполнителя, обложку и рейтинги */
 	data?: Album;
+	/** Дополнительный класс для кастомизации стилей компонента */
 	className?: string;
+	/** Флаг, указывающий, что поля компонента только для чтения */
 	readonly?: boolean;
+	/** Флаг, указывающий, что данные загружаются */
 	isLoading?: boolean;
+	/** Обработчик изменения названия альбома */
 	onChangeTitle?: (value: string) => void;
+	/** Обработчик изменения имени исполнителя */
 	onChangeArtist?: (value: string) => void;
+	/** Обработчик добавления обложки альбома */
 	onAddCover?: (file: ChangeEvent<HTMLInputElement>) => void;
+	/** Обработчик удаления обложки альбома */
 	onDeleteCover?: () => void;
+	/** Дополнительный функционал редактирования, передаваемый как дочерний элемент */
 	EditFeature?: ReactNode;
 }
 
+/**
+ * Компонент для отображения и редактирования описания альбома.
+ *
+ * @param {AlbumDescriptionProps} props Свойства компонента.
+ * @returns {React.ReactNode} JSX элемент.
+ */
 export const AlbumDescription = memo((props: AlbumDescriptionProps): React.ReactNode => {
 	const {
 		data,
@@ -60,7 +75,7 @@ export const AlbumDescription = memo((props: AlbumDescriptionProps): React.React
 					<img src={data?.cover} alt="Обложка альбома"/>
 				</div>
 
-				{/* Отображение информации об альбоме с валидацией на длину некоторых полей */}
+				{/* Отображение информации об альбоме с валидацией на длину полей */}
 				<div className={cls.wrapper}>
 					<div className={cls.title}>{textLengthValidation(data?.title || '', 25)}</div>
 					<div className={cls.artist}>{textLengthValidation(data?.artist || '', 25)}</div>

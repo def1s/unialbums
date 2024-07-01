@@ -36,7 +36,7 @@ export const Successful: Story = {
 	decorators: [
 		StoreDecorator({
 			albumForm: {
-				message: 'Все прошло успешно'
+				serverMessage: 'Все прошло успешно'
 			}
 		})
 	]

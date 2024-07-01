@@ -1,12 +1,4 @@
-import { Profile } from 'entities/Profile';
-
-export interface ValidateProfileError {
-	INCORRECT_FIRSTNAME?: boolean;
-	INCORRECT_LASTNAME?: boolean;
-	INCORRECT_USERNAME?: boolean;
-	NO_DATA?: boolean;
-	SERVER_ERROR?: boolean;
-}
+import { Profile, ValidateProfileError } from 'entities/Profile';
 
 export interface EditableUserProfileSchema {
 	data?: Profile;

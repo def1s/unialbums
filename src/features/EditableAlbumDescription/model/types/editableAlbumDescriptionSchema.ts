@@ -6,5 +6,5 @@ export interface EditableAlbumDescriptionSchema {
 	isLoading: boolean;
 	error?: string;
 	readonly: boolean;
-	message?: string;
+	serverMessage?: string;
 }

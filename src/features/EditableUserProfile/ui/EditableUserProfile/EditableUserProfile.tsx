@@ -46,6 +46,9 @@ export const EditableUserProfile = memo(({ className }: EditableUserProfileProps
 
 	useEffect(() => {
 		dispatch(fetchProfileData());
+		return () => {
+			onDeleteImage();
+		};
 		// eslint-disable-next-line
 	}, []);
 

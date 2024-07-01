@@ -49,12 +49,12 @@ const albumDescriptionSlice = createSlice({
 
 		builder.addCase(updateAlbumDescription.pending, (state) => {
 			state.error = undefined;
-			state.message = undefined;
+			state.serverMessage = undefined;
 			state.isLoading = true;
 		});
 		builder.addCase(updateAlbumDescription.fulfilled, (state, action) => {
 			state.isLoading = false;
-			state.message = action.payload.message;
+			state.serverMessage = action.payload.serverMessage;
 			state.data = state.form;
 		});
 		builder.addCase(updateAlbumDescription.rejected, (state, action) => {

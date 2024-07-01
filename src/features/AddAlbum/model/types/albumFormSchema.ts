@@ -6,7 +6,5 @@ export interface AlbumFormSchema {
 	data: AlbumForm;
 	isLoading: boolean;
 	error?: string;
-	message?: string;
+	serverMessage?: string;
 }
-
-export type AlbumFormKey = keyof AlbumForm;
