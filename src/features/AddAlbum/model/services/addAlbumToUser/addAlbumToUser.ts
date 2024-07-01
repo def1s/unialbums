@@ -25,6 +25,8 @@ export const addAlbumToUser = createAsyncThunk<
 			return thunkAPI.rejectWithValue('Недопустимый ввод или пустое поле');
 		} else {
 			try {
+				// достаем локальное изображение по ссылке их слайса и преобразовываем
+				// для передачи на сервер
 				const { cover, ...otherFormFields } = albumForm;
 				const blobImg = await fetch(cover || '').then(res => res.blob());
 				formData.append('cover', blobImg);

@@ -2,7 +2,7 @@ import cls from './EditableAlbumDescription.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { AlbumDescription } from 'entities/Albums';
 import { useParams } from 'react-router-dom';
-import { useCallback, useEffect } from 'react';
+import { ChangeEvent, useCallback, useEffect } from 'react';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import {
 	fetchAlbumDescription
@@ -27,6 +27,7 @@ import { Notification, NotificationTheme } from 'shared/ui/Notification/Notifica
 import {
 	getAlbumDescriptionError
 } from '../../model/selectors/getAlbumDescriptionError/getAlbumDescriptionError';
+import { useImage } from 'shared/lib/hooks/useImage/useImage';
 
 interface EditableAlbumDescriptionProps {
     className?: string
@@ -45,6 +46,8 @@ export const EditableAlbumDescription = ({ className }: EditableAlbumDescription
 	const readonly = useSelector(getAlbumDescriptionReadonly);
 	const serverMessage = useSelector(getAlbumDescriptionMessage);
 
+	const { onCreateImage, onDeleteImage, localUrlImage } = useImage();
+
 	useEffect(() => {
 		dispatch(fetchAlbumDescription({ id }));
 	}, [dispatch, id]);
@@ -56,6 +59,20 @@ export const EditableAlbumDescription = ({ className }: EditableAlbumDescription
 	const onChangeArtist = useCallback((value: string) => {
 		dispatch(albumDescriptionActions.updateAlbumDescription({ artist: value }));
 	}, [dispatch]);
+
+	const onChangeCover = useCallback((value: string) => {
+		dispatch(albumDescriptionActions.updateAlbumDescription({ cover: value }));
+	}, [dispatch]);
+
+	const onAddCover = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+		onCreateImage(e);
+		onChangeCover(localUrlImage.current);
+	}, [localUrlImage, onChangeCover, onCreateImage]);
+
+	const onDeleteCover = useCallback(() => {
+		onDeleteImage();
+		onChangeCover('');
+	}, [onChangeCover, onDeleteImage]);
 
 	// уведомления
 	const notifications = (
@@ -88,6 +105,8 @@ export const EditableAlbumDescription = ({ className }: EditableAlbumDescription
 					readonly={readonly}
 					onChangeArtist={onChangeArtist}
 					onChangeTitle={onChangeTitle}
+					onAddCover={onAddCover}
+					onDeleteCover={onDeleteCover}
 				/>
 			</div>
 		</DynamicModuleLoader>

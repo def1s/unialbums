@@ -1,6 +1,6 @@
 import cls from './AlbumDescription.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
-import React, { memo, ReactNode, useMemo } from 'react';
+import React, { ChangeEvent, memo, ReactNode, useMemo } from 'react';
 import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
 import { Input, ThemeInput } from 'shared/ui/Input/Input';
 import { Album } from '../../model/types/album';
@@ -8,6 +8,7 @@ import { Loader } from 'shared/ui/Loader/Loader';
 import { Blur } from 'shared/ui/Blur/Blur';
 import { calculateRating } from 'shared/lib/calculateRating/calculateRating';
 import { RATING_ALBUMS_MULTIPLIER } from 'shared/const/global';
+import { InputFile } from 'shared/ui/InputFile/InputFile';
 
 interface AlbumDescriptionProps {
 	data?: Album;
@@ -16,6 +17,8 @@ interface AlbumDescriptionProps {
 	isLoading?: boolean;
 	onChangeTitle?: (value: string) => void;
 	onChangeArtist?: (value: string) => void;
+	onAddCover?: (file: ChangeEvent<HTMLInputElement>) => void;
+	onDeleteCover?: () => void;
 	EditFeature?: ReactNode;
 }
 
@@ -27,7 +30,9 @@ export const AlbumDescription = memo((props: AlbumDescriptionProps): React.React
 		isLoading,
 		EditFeature,
 		onChangeArtist,
-		onChangeTitle
+		onChangeTitle,
+		onAddCover,
+		onDeleteCover
 	} = props;
 
 	const rating = useMemo(() => calculateRating(
@@ -71,10 +76,15 @@ export const AlbumDescription = memo((props: AlbumDescriptionProps): React.React
 	} else {
 		return (
 			<div className={classNames(cls.AlbumDescription, {}, [className])}>
-				<div className={cls.cover}>
-					{/* Отображение обложки альбома */}
-					<img src={data?.cover} alt="Обложка альбома"/>
-				</div>
+				{/* Отображение обложки альбома */}
+				{/*<img src={data?.cover} alt="Обложка альбома"/>*/}
+				<InputFile
+					// className={cls.cover}
+					label={'Обложка'}
+					selectedFile={data?.cover}
+					onChange={onAddCover}
+					onRemove={onDeleteCover}
+				/>
 
 				<div className={cls.wrapper}>
 					<Input

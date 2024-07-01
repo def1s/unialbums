@@ -27,6 +27,10 @@ const initialReducers: ReducerList = {
 	albumForm: albumFormReducer
 };
 
+/*
+* Форма для добавления альбома от пользователя. Собирает данные и изображение, после чего отправляет их на сервер.
+* Не имеет валидации.
+* */
 export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 	const dispatch = useAppDispatch();
 
@@ -45,6 +49,8 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 		//eslint-disable-next-line
 	}, []);
 
+	// обработчики инпутов
+	// каждый обработчик изменяет свое поле
 	const onChangeCover = useCallback((cover: string) => {
 		dispatch(albumFormActions.setFieldValue({ cover: cover }));
 	}, [dispatch]);
@@ -73,6 +79,12 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 		dispatch(albumFormActions.setFieldValue({ tracksRating: +tracksRating }));
 	}, [dispatch]);
 
+	/*
+	* Для работы с изображениями использую кастомный хук.
+	* Хук предоставляет возможность создать локальную ссылку на изображение,
+	* чтобы ее можно было поместить в слайс.
+	* Также ссылку можно удалить, вместе с этим стерев изображение.
+	* */
 	const onCoverAdd = useCallback((e: ChangeEvent<HTMLInputElement>) => {
 		onCreateImage(e);
 		onChangeCover(localUrlImage.current);

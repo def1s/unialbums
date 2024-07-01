@@ -41,8 +41,10 @@ export const updateProfileData = createAsyncThunk<
 			try {
 				const { avatar, ...otherFormFields } = profileForm;
 
+				// если аватарки нет, то мы ее удаляем
 				if (avatar?.length === 0) {
 					formData.append('avatar', ' ');
+				// если аватарка из формы не совпала с аватаркой из данных, то она изменилась
 				} else if (avatar !== profileData?.avatar) {
 					const blobImg = await fetch(avatar || '').then(res => res.blob());
 					formData.append('avatar', blobImg);
