@@ -43,7 +43,7 @@ export const updateProfileData = createAsyncThunk<
 					thunkApi.dispatch(userActions.logout());
 				}
 
-				return thunkApi.rejectWithValue(error.response.message || 'Непредвиденная ошибка');
+				return thunkApi.rejectWithValue(error.response.data.message || 'Непредвиденная ошибка');
 			}
 		}
 	);
