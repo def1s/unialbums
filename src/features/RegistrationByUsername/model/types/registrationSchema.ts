@@ -8,6 +8,7 @@ export interface ValidateRegistrationErrors {
 export type ValidateRegistrationErrorsKeys = keyof ValidateRegistrationErrors;
 
 export interface RegistrationSchema {
+	email: string;
 	username: string;
 	firstName: string;
 	lastName: string;

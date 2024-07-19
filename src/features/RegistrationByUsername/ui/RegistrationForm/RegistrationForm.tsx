@@ -45,6 +45,9 @@ import {
 	getRegistrationValidateErrors
 } from '../../model/selectors/getRegistrationValidateErrors/getRegistrationValidateErrors';
 import { ValidateRegistrationErrorsKeys } from '../../model/types/registrationSchema';
+import {
+	getRegistrationEmail
+} from '../../model/selectors/getRegistrationEmail/getRegistrationEmail';
 
 interface RegistrationFormProps {
     className?: string;
@@ -56,6 +59,7 @@ const initialReducers: ReducerList = {
 
 export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 	const dispatch = useAppDispatch();
+	const email = useSelector(getRegistrationEmail);
 	const username = useSelector(getRegistrationUsername);
 	const firstName = useSelector(getRegistrationFirstName);
 	const lastName = useSelector(getRegistrationLastName);
@@ -73,6 +77,11 @@ export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 		username,
 		password
 	}), [firstName, lastName, password, username]);
+
+	//  TODO провадилировать поле с почтой
+	const onChangeEmail = useCallback((email: string) => {
+		dispatch(registrationActions.setEmail(email));
+	}, [dispatch]);
 
 	const onChangeUsername = useCallback((username: string) => {
 		const errors = validateRegistrationForm({ ...getDataForValidation(), username });
@@ -105,6 +114,7 @@ export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 	const onClickRegistration = () => {
 		if (isPasswordsEqual) {
 			dispatch(registration({
+				email,
 				username,
 				password,
 				firstName,
@@ -138,9 +148,19 @@ export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 
 				<Input
 					className={cls.input}
+					placeholder={'Почта'}
+					value={email}
+					onChange={onChangeEmail}
+					type={'email'}
+					required={true}
+				/>
+
+				<Input
+					className={cls.input}
 					placeholder={'Имя пользователя'}
 					value={username}
 					onChange={onChangeUsername}
+					required={true}
 					error={validateErrors?.INCORRECT_USERNAME ? validateErrorsTranslates.INCORRECT_USERNAME : undefined}
 				/>
 
@@ -166,6 +186,7 @@ export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 					value={password}
 					type={'password'}
 					onChange={onChangePassword}
+					required={true}
 					error={validateErrors?.INCORRECT_PASSWORD ? validateErrorsTranslates.INCORRECT_PASSWORD : undefined}
 				/>
 
@@ -174,6 +195,7 @@ export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 					placeholder={'Повторите пароль'}
 					value={repeatedPassword}
 					type={'password'}
+					required={true}
 					onChange={onChangeRepeatedPassword}
 				/>
 
