@@ -12,7 +12,7 @@ const meta: Meta<typeof HomePage> = {
 export default meta;
 type Story = StoryObj<typeof HomePage>;
 
-const mockedAlbums: ApiResponse<Album> = {
+const mockedAlbums: ApiResponse<Album[]> = {
 	data:
 		[
 			{
@@ -49,7 +49,7 @@ const mockedAlbums: ApiResponse<Album> = {
 	message: 'Ok'
 };
 
-const mockedEmptyAlbums: ApiResponse<undefined> = {
+const mockedEmptyAlbums: ApiResponse<[]> = {
 	data: [],
 	message: 'Empty'
 };

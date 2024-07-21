@@ -123,6 +123,7 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 			<form
 				className={classNames(cls.AlbumForm, {}, [className])}
 				onSubmit={(e) => onSubmit(e)}
+				encType={'multipart/form-data'}
 			>
 				{/* уведомления */}
 				{notifications}

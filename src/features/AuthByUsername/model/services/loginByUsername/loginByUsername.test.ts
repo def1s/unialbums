@@ -6,16 +6,14 @@ import { TestAsyncThunk } from 'shared/lib/tests/TestAsyncThunk/TestAsyncThunk';
 
 describe('loginByUsername', () => {
 	const response: ApiResponse<token> = {
-		data: [
-			{
-				accessToken: ''
-			}
-		],
+		data: {
+			accessToken: ''
+		},
 		message: ''
 	};
 
 	beforeEach(() => {
-		response.data[0].accessToken = '';
+		response.data.accessToken = '';
 		response.message = '';
 	});
 
@@ -42,7 +40,7 @@ describe('loginByUsername', () => {
 	// });
 
 	test('should be rejected (wrong token)', async () => {
-		response.data[0].accessToken = 'wrongToken';
+		response.data.accessToken = 'wrongToken';
 
 		const mock = new MockAdapter(axios);
 		mock.onPost(`${__API_URL__}/login`).reply(200, response);

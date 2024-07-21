@@ -1,9 +1,10 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 import { ACCESS_TOKEN_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
 import { ApiResponse, token } from 'shared/api/types/apiResponse';
 
 const axiosInstance = axios.create({
-	baseURL: __API_URL__
+	baseURL: __API_URL__,
+	withCredentials: true
 });
 
 axiosInstance.interceptors.request.use(config => {
@@ -19,25 +20,20 @@ axiosInstance.interceptors.response.use(response => {
 }, async error => {
 	const originalRequest = error.config;
 
-	if (error.response && error.response.status === 403 && !originalRequest._retry) {
+	if (error.response.status === 401 && !originalRequest._retry) {
 		originalRequest._retry = true;
 
 		try {
 			// попытка обновления токена
-			const refreshOptions: AxiosRequestConfig = {
-				method: 'GET',
-				url: `${__API_URL__}/refresh`,
-				withCredentials: true
-			};
-			const refreshResponse = await axios<ApiResponse<token>>(refreshOptions);
-			const updatedToken = refreshResponse.data.data[0].accessToken;
+			const refreshResponse = await axios.get<ApiResponse<token>>(`${__API_URL__}/refresh`, { withCredentials: true });
+			const updatedToken = refreshResponse.data.data.accessToken;
 			localStorage.setItem(ACCESS_TOKEN_LOCALSTORAGE_KEY, updatedToken);
 
 			// повторный запрос с обновленным токеном
 			originalRequest.headers.Authorization = `Bearer ${updatedToken}`;
 			return axiosInstance(originalRequest);
 		} catch (refreshError) {
-			console.log('Error refreshing access token: ', refreshError);
+			console.log('Ошибка обновления access токена: ', refreshError);
 			throw refreshError;
 		}
 	} else {

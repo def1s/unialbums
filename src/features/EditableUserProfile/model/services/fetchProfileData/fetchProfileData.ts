@@ -14,7 +14,7 @@ export const fetchProfileData = createAsyncThunk<Profile, void, { rejectValue: s
 				throw new Error('Что-то пошло не так');
 			}
 
-			return response.data.data[0];
+			return response.data.data;
 		} catch (error) {
 			if (error.response && error.response?.status === 403) {
 				thunkApi.dispatch(userActions.logout());
