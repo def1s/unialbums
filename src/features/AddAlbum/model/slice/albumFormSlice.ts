@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AlbumForm, AlbumFormSchema } from '../types/albumFormSchema';
 import { addAlbumToUser } from '../services/addAlbumToUser/addAlbumToUser';
+import { searchAlbumsSpotify } from '../services/searchAlbumsSpotify/searchAlbumsSpotify';
 
 const initialState: AlbumFormSchema = {
 	data: {
@@ -12,6 +13,7 @@ const initialState: AlbumFormSchema = {
 		tracksRating: 1,
 		bitsRating: 1,
 	},
+	isSearching: false,
 	isLoading: false
 };
 
@@ -40,6 +42,19 @@ const albumFormSlice = createSlice({
 
 		builder.addCase(addAlbumToUser.rejected, (state, action) => {
 			state.isLoading = false;
+			state.error = action.payload;
+		});
+
+		builder.addCase(searchAlbumsSpotify.pending, (state) => {
+			state.error = undefined;
+			state.isSearching = true;
+		});
+		builder.addCase(searchAlbumsSpotify.fulfilled, (state, action) => {
+			state.isSearching = false;
+			state.searchAlbums = action.payload;
+		});
+		builder.addCase(searchAlbumsSpotify.rejected, (state, action) => {
+			state.isSearching = false;
 			state.error = action.payload;
 		});
 	}

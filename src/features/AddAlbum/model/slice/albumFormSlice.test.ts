@@ -11,6 +11,7 @@ describe('albumFormSlice', () => {
 			tracksRating: 1,
 			bitsRating: 1,
 		},
+		isSearching: false,
 		isLoading: false,
 		error: undefined,
 		message: undefined,

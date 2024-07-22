@@ -41,7 +41,8 @@ export const updateAlbumDescription =
 			try {
 				const formData = await createFormData(albumForm, albumData);
 
-				const response = await axiosInstance.put<ApiResponse<undefined>>(`/albums/${id}`, formData);
+				const response =
+					await axiosInstance.put<ApiResponse<undefined>>(`/albums/${id}`, formData);
 
 				if (!response.data) {
 					throw new Error('Что-то пошло не так');
