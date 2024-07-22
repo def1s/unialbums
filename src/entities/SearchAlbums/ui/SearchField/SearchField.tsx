@@ -1,21 +1,27 @@
 import cls from './SearchField.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { SearchFieldItem } from '../../model/types/searchField';
+import { memo } from 'react';
 
 interface SearchFieldProps extends SearchFieldItem {
     className?: string;
+	onClick?: () => void;
 }
 
-export const SearchField = (props: SearchFieldProps) => {
+export const SearchField = memo((props: SearchFieldProps) => {
 	const {
 		className,
 		cover,
 		title,
-		artists
+		artists,
+		onClick
 	} = props;
-    
+
 	return (
-		<div className={classNames(cls.SearchField, {}, [className])}>
+		<div
+			className={classNames(cls.SearchField, {}, [className])}
+			onMouseDown={onClick}
+		>
 			<div className={cls.cover}>
 				<img
 					alt={'Картинка поискового запроса'}
@@ -27,4 +33,4 @@ export const SearchField = (props: SearchFieldProps) => {
 			<div className={cls.artists}>{artists}</div>
 		</div>
 	);
-};
+});

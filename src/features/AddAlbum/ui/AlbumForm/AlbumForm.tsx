@@ -21,6 +21,8 @@ import { useImage } from 'shared/lib/hooks/useImage/useImage';
 import { searchAlbumsSpotify } from '../../model/services/searchAlbumsSpotify/searchAlbumsSpotify';
 import { SearchList } from 'entities/SearchAlbums';
 import { getSearchAlbums } from '../../model/selectors/getSearchAlbums/getSearchAlbums';
+import { getSearchIsLoading } from '../../model/selectors/getSearchIsLoading/getSearchIsLoading';
+import { getAlbumSpotify } from '../../model/services/getAlbumSpotify/getAlbumSpotify';
 
 interface AlbumFormProps {
     className?: string
@@ -42,6 +44,7 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 	const error = useSelector(getAlbumFormError);
 	const serverMessage = useSelector(getAlbumFormServerMessage);
 	const searchAlbums = useSelector(getSearchAlbums);
+	const isSearching = useSelector(getSearchIsLoading);
 
 	const { localUrlImage, onCreateImage, onDeleteImage } = useImage();
 	const [isInputFocused, setIsInputFocused] = useState(false);
@@ -118,6 +121,10 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 		dispatch(addAlbumToUser());
 	};
 
+	const onClickAlbumFromSearch = useCallback((albumId: string) => {
+		dispatch(getAlbumSpotify({ albumId }));
+	}, [dispatch]);
+
 	// уведомления
 	const notifications = (
 		<>
@@ -179,7 +186,7 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 						/>
 
 						<div className={cls.suggestions}>
-							{isInputFocused && <SearchList items={searchAlbums}/>}
+							{isInputFocused && <SearchList items={searchAlbums} isLoading={isSearching} onClickItem={onClickAlbumFromSearch}/>}
 						</div>
 
 						<Input

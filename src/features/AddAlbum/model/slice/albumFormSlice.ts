@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AlbumForm, AlbumFormSchema } from '../types/albumFormSchema';
 import { addAlbumToUser } from '../services/addAlbumToUser/addAlbumToUser';
 import { searchAlbumsSpotify } from '../services/searchAlbumsSpotify/searchAlbumsSpotify';
+import { getAlbumSpotify } from 'features/AddAlbum/model/services/getAlbumSpotify/getAlbumSpotify';
 
 const initialState: AlbumFormSchema = {
 	data: {
@@ -29,22 +30,26 @@ const albumFormSlice = createSlice({
 		}
 	},
 	extraReducers: (builder) => {
+		/**
+		 * добавление альбома
+		 */
 		builder.addCase(addAlbumToUser.pending, (state) => {
 			state.error = undefined;
 			state.serverMessage = undefined;
 			state.isLoading = true;
 		});
-
 		builder.addCase(addAlbumToUser.fulfilled, (state, action) => {
 			state.isLoading = false;
 			state.serverMessage = action.payload.serverMessage;
 		});
-
 		builder.addCase(addAlbumToUser.rejected, (state, action) => {
 			state.isLoading = false;
 			state.error = action.payload;
 		});
 
+		/**
+		 * поиск альбома
+		 */
 		builder.addCase(searchAlbumsSpotify.pending, (state) => {
 			state.error = undefined;
 			state.isSearching = true;
@@ -54,7 +59,28 @@ const albumFormSlice = createSlice({
 			state.searchAlbums = action.payload;
 		});
 		builder.addCase(searchAlbumsSpotify.rejected, (state, action) => {
-			state.isSearching = false;
+			// payload не будет только если запрос был отменен вручную через abortController
+			if (action.payload) {
+				state.isSearching = false;
+			}
+			state.error = action.payload;
+		});
+
+		/**
+		 * получение информации об альбоме по клику на элемент поиска
+		 */
+		builder.addCase(getAlbumSpotify.pending, (state) => {
+			state.error = undefined;
+			state.isLoading = true;
+		});
+		builder.addCase(getAlbumSpotify.fulfilled, (state, action) => {
+			state.isLoading = false;
+			state.data.title = action.payload.title;
+			state.data.artist = action.payload.artists?.join(' ');
+			state.data.cover = action.payload.cover;
+		});
+		builder.addCase(getAlbumSpotify.rejected, (state, action) => {
+			state.isLoading = false;
 			state.error = action.payload;
 		});
 	}

@@ -6,6 +6,12 @@
 	align-items: center;
 	background-color: var(--light-bg-color);
 	padding: var(--small-padding);
+	cursor: pointer;
+
+	// TODO выбрать подходящий цвет и вынести в переменную
+	&:hover {
+		background-color: #a1a898;
+	}
 }
 
 .cover {
