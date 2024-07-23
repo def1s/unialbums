@@ -29,7 +29,7 @@ export const SearchField = memo((props: SearchFieldProps) => {
 				/>
 			</div>
 
-			<div className={cls.title}>{title}</div>
+			<div className={cls.title}>{title}</div>—
 			<div className={cls.artists}>{artists}</div>
 		</div>
 	);

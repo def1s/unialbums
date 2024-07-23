@@ -78,7 +78,7 @@ export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 		password
 	}), [firstName, lastName, password, username]);
 
-	//  TODO провадилировать поле с почтой
+	// TODO провадилировать поле с почтой
 	const onChangeEmail = useCallback((email: string) => {
 		dispatch(registrationActions.setEmail(email));
 	}, [dispatch]);

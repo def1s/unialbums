@@ -19,6 +19,7 @@
 	width: 30px;
 	background-color: var(--default-bg-color);
 	border-radius: var(--small-radius);
+	margin-right: var(--small-padding);
 
 	img {
 		height: 100%;
@@ -28,7 +29,7 @@
 
 .title {
 	font: var(--font-m);
-	margin-left: var(--small-padding);
+	margin-right: var(--small-padding);
 }
 
 .artists {

@@ -76,7 +76,7 @@ const albumFormSlice = createSlice({
 		builder.addCase(getAlbumSpotify.fulfilled, (state, action) => {
 			state.isLoading = false;
 			state.data.title = action.payload.title;
-			state.data.artist = action.payload.artists?.join(' ');
+			state.data.artist = action.payload.artists?.join(', ');
 			state.data.cover = action.payload.cover;
 		});
 		builder.addCase(getAlbumSpotify.rejected, (state, action) => {

@@ -51,9 +51,7 @@ export const SearchList = memo((props: SearchListProps) => {
                 </>
 			}
 
-			{
-				...list
-			}
+			{...list}
 		</div>
 	);
 });

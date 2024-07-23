@@ -35,6 +35,7 @@ const initialReducers: ReducerList = {
 /**
  * Форма для добавления альбома от пользователя. Собирает данные и изображение, после чего отправляет их на сервер.
  * Не имеет валидации.
+ * Во время ввода информации об альбоме показывает пользователю варианты из spotify api
  */
 export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 	const dispatch = useAppDispatch();
