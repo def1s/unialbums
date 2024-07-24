@@ -3,13 +3,13 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { memo, useCallback } from 'react';
 import { updateProfileData } from '../../model/services/updateProfileData/updateProfileData';
 import { userInitAuthData } from 'entities/User';
-import { EditControl } from 'entities/EditControl';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './EditProfile.module.scss';
 import { useSelector } from 'react-redux';
 import { getProfileReadonly } from '../../model/selectors/getProfileReadonly/getProfileReadonly';
 import { validateProfileData } from '../../model/services/validateProfileData/validateProfileData';
 import { getProfileForm } from '../../model/selectors/getProfileForm/getProfileForm';
+import { Button } from 'shared/ui/Button/Button';
 
 interface EditProfileProps {
     className?: string;
@@ -52,15 +52,38 @@ export const EditProfile = memo((props: EditProfileProps) => {
 		dispatch(profileActions.setReadonly(true));
 	}, [dispatch]);
 
-	return (
-		<div className={classNames(cls.EditProfile, {}, [className])}>
-			<EditControl
-				readonly={readonly}
-				onEdit={onEdit}
-				onSave={onSave}
-				onReset={onReset}
-				className={cls.editButtons}
-			/>
-		</div>
-	);
+	if (!readonly) {
+		return (
+			<div className={classNames(cls.EditProfile, {}, [className])}>
+				<div className={cls.buttonsWrapper}>
+					<Button
+						className={cls.button}
+						onClick={onSave}
+					>
+						Сохранить
+					</Button>
+
+					<Button
+						className={cls.button}
+						onClick={onReset}
+					>
+						Сбросить изменения
+					</Button>
+				</div>
+			</div>
+		);
+	} else {
+		return (
+			<div className={classNames(cls.EditProfile, {}, [className])}>
+				<div className={cls.buttonsWrapper}>
+					<Button
+						className={cls.button}
+						onClick={onEdit}
+					>
+						Редактировать
+					</Button>
+				</div>
+			</div>
+		);
+	}
 });

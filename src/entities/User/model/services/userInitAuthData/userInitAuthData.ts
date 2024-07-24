@@ -20,7 +20,7 @@ export const userInitAuthData = createAsyncThunk<User, void, { rejectValue: stri
 
 			return response.data.data;
 		} catch (error) {
-			if (error.response && error.response?.status === 403) {
+			if (error.response && error.response?.status === 401) {
 				thunkAPI.dispatch(userActions.logout());
 			}
 

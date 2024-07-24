@@ -12,7 +12,7 @@ export const fetchAlbumRating =
 	createAsyncThunk<IAlbumRating, FetchAlbumRatingProps, { rejectValue: string }>
 	(
 		'albumRating/fetchAlbumRating',
-		async ({ id }, thunkApi) => {
+		async ({ id }, thunkAPI) => {
 			try {
 				const response = await axiosInstance.get<ApiResponse<IAlbumRating>>(`/albums/rating/${id}`);
 
@@ -22,11 +22,11 @@ export const fetchAlbumRating =
 
 				return response.data.data;
 			} catch (error) {
-				if (error.response && error.response?.status === 403) {
-					thunkApi.dispatch(userActions.logout());
+				if (error.response && error.response?.status === 401) {
+					thunkAPI.dispatch(userActions.logout());
 				}
 
-				return thunkApi.rejectWithValue(error.response.data.message || 'Непредвиденная ошибка');
+				return thunkAPI.rejectWithValue(error.response.data.message || 'Непредвиденная ошибка');
 			}
 		}
 	);

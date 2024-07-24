@@ -8,10 +8,13 @@ const axiosInstance = axios.create({
 });
 
 let isRefreshing = false;
+// очередь для запросов, пока идет обновление access токена
 // eslint-disable-next-line
 let requestsQueue: any[] = [];
 
+// обработка всех запросов в очереди по итогу обновления access токена
 const processQueue = (error: unknown, token: string | null = null) => {
+	// если есть ошибка, то reject для всех запросов, токен не обновился
 	requestsQueue.forEach(prom => {
 		if (error) {
 			prom.reject(error);
@@ -20,6 +23,7 @@ const processQueue = (error: unknown, token: string | null = null) => {
 		}
 	});
 
+	// очищаем очередь
 	requestsQueue = [];
 };
 
@@ -37,6 +41,7 @@ axiosInstance.interceptors.response.use(response => {
 	const originalRequest = error.config;
 
 	if (error.response.status === 401 && !originalRequest._retry) {
+		// если в данный момент уже происходит обновление токена, то добавляем запрос в очередь на ожидание обновления
 		if (isRefreshing) {
 			return new Promise(function(resolve, reject) {
 				requestsQueue.push({ resolve, reject });
@@ -56,6 +61,11 @@ axiosInstance.interceptors.response.use(response => {
 				const refreshResponse = await axios.get<ApiResponse<token>>(`${__API_URL__}/refresh`, { withCredentials: true });
 				const updatedToken = refreshResponse.data.data.accessToken;
 				localStorage.setItem(ACCESS_TOKEN_LOCALSTORAGE_KEY, updatedToken);
+				/**
+				 * добавляем заголовок Authorization к объекту defaults.headers.common экземпляра axiosInstance.
+				 * это означает, что любой запрос, отправленный с использованием axiosInstance,
+				 * будет содержать этот заголовок по умолчанию, если явно не указано иное.
+				 */
 				axiosInstance.defaults.headers.common['Authorization'] = 'Bearer ' + updatedToken;
 				processQueue(null, updatedToken);
 				return axiosInstance(originalRequest);

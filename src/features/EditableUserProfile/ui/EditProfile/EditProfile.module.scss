@@ -2,7 +2,16 @@
     margin-top: var(--medium-padding);
 }
 
-.editButtons {
+.buttonsWrapper {
+    display: flex;
+    gap: var(--small-padding);
+    flex-direction: column;
+}
+
+.button {
+    padding: 10px;
+    display: block;
     width: 180px;
     margin-left: auto;
 }
+

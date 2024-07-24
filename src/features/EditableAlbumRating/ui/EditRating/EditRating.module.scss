@@ -1,5 +1,7 @@
-.EditDescription {
-
+.EditRating {
+	position: absolute;
+	right: var(--medium-padding);
+	bottom: var(--medium-padding);
 }
 
 .buttonsWrapper {
@@ -9,8 +11,8 @@
 }
 
 .button {
-	padding: 10px;
+	padding: 5px;
 	display: block;
-	width: 180px;
+	width: 130px;
 	margin-left: auto;
 }

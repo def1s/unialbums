@@ -1,4 +1,4 @@
-.EditableAlbumRating {
+.AlbumRating {
 	width: 300px;
 	height: 300px;
 	background-color: var(--default-bg-color-opacity);
@@ -7,8 +7,11 @@
 	border-color: rgb(39 39 39);
 	border-width: 1px;
 	margin-top: var(--medium-padding);
+	position: relative;
+	padding: var(--medium-padding);
 
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
@@ -23,4 +26,24 @@
 	justify-content: center;
 	align-items: center;
 	font: var(--font-xl);
+}
+
+.rangeSlidersWrapper {
+	width: 100%;
+}
+
+.sliderLabel {
+	display: block;
+	margin-bottom: 2px;
+	margin-top: 5px;
+	font-size: var(--font-size-m);
+	color: #fff;
+}
+
+.rangeSlider {
+	width: 100%;
+}
+
+.edit {
+	justify-content: start;
 }

@@ -2,7 +2,7 @@ import { IAlbumRating } from 'entities/Albums';
 
 export interface EditableAlbumRatingSchema {
 	data?: IAlbumRating;
-	// form?
+	ratingSliders?: IAlbumRating;
 	isLoading: boolean;
 	error?: string;
 	readonly: boolean;

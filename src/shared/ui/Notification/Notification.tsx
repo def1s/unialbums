@@ -15,6 +15,7 @@ interface NotificationProps {
 	theme?: NotificationTheme;
 }
 
+// TODO возможно стоит вынести уведомления на верхний слой для того, чтобы они не зависели ни от каких компонентов
 export const Notification = (props: NotificationProps) => {
 	const {
 		className,

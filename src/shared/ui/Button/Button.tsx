@@ -3,7 +3,8 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { ButtonHTMLAttributes, memo } from 'react';
 
 export enum ThemeButton {
-	LIGHT_BG = 'lightBg'
+	LIGHT_BG = 'lightBg',
+	RED = 'red'
 }
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>{

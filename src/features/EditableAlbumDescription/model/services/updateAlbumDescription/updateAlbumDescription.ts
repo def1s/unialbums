@@ -42,7 +42,7 @@ export const updateAlbumDescription =
 				const formData = await createFormData(albumForm, albumData);
 
 				const response =
-					await axiosInstance.put<ApiResponse<undefined>>(`/albums/${id}`, formData);
+					await axiosInstance.put<ApiResponse<undefined>>(`/albums/description/${id}`, formData);
 
 				if (!response.data) {
 					throw new Error('Что-то пошло не так');
@@ -50,7 +50,7 @@ export const updateAlbumDescription =
 
 				return { serverMessage: response.data.message };
 			} catch (error) {
-				if (error.response && error.response?.status === 403) {
+				if (error.response && error.response?.status === 401) {
 					thunkApi.dispatch(userActions.logout());
 				}
 

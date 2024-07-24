@@ -2,25 +2,24 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 import { ApiResponse } from 'shared/api/types/apiResponse';
 import { userActions } from 'entities/User';
-import { IAlbumDescription } from 'entities/Albums';
 
-interface FetchAlbumDescriptionProps {
+interface DeleteAlbumProps {
 	id?: string | number;
 }
 
-export const fetchAlbumDescription =
-	createAsyncThunk<IAlbumDescription, FetchAlbumDescriptionProps, { rejectValue: string }>
+export const deleteAlbum =
+	createAsyncThunk<string, DeleteAlbumProps, { rejectValue: string }>
 	(
-		'albumDescription/fetchAlbumDescription',
+		'albumDescription/deleteAlbum',
 		async ({ id }, thunkApi) => {
 			try {
-				const response = await axiosInstance.get<ApiResponse<IAlbumDescription>>(`/albums/description/${id}`);
+				const response = await axiosInstance.delete<ApiResponse<undefined>>(`/albums/${id}`);
 
 				if (!response.data) {
 					throw new Error('Что-то пошло не так');
 				}
 
-				return response.data.data;
+				return response.data.message;
 			} catch (error) {
 				if (error.response && error.response?.status === 401) {
 					thunkApi.dispatch(userActions.logout());
