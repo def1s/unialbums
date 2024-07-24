@@ -32,7 +32,7 @@
 
     //width: var(--sidebar-width);
     width: var(--sidebar-collapsed-width);
-    background-color: var(--light-bg-color);
+    background-color: var(--sidebar-bg-color);
     transition: 0.2s width ease;
     overflow: hidden; // чтобы текст не вылезал при появлении за блок
 }

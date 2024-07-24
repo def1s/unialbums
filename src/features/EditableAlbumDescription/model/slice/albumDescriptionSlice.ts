@@ -12,7 +12,8 @@ import {
 
 const initialState: EditableAlbumDescriptionSchema = {
 	isLoading: false,
-	readonly: true
+	readonly: true,
+	isEditable: false
 };
 
 const albumDescriptionSlice = createSlice({
@@ -39,7 +40,9 @@ const albumDescriptionSlice = createSlice({
 		});
 		builder.addCase(fetchAlbumDescription.fulfilled, (state, action) => {
 			state.isLoading = false;
-			state.data = action.payload;
+			const { isEditable, ...data } = action.payload;
+			state.data = data;
+			state.isEditable = !!isEditable;
 			state.form = action.payload;
 		});
 		builder.addCase(fetchAlbumDescription.rejected, (state, action) => {

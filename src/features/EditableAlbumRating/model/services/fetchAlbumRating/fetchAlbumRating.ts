@@ -2,19 +2,19 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 import { ApiResponse } from 'shared/api/types/apiResponse';
 import { userActions } from 'entities/User';
-import { IAlbumDescription } from 'entities/Albums';
+import { IAlbumRating } from 'entities/Albums';
 
-interface FetchAlbumDescriptionProps {
+interface FetchAlbumRatingProps {
 	id?: string | number;
 }
 
-export const fetchAlbumDescription =
-	createAsyncThunk<IAlbumDescription, FetchAlbumDescriptionProps, { rejectValue: string }>
+export const fetchAlbumRating =
+	createAsyncThunk<IAlbumRating, FetchAlbumRatingProps, { rejectValue: string }>
 	(
-		'albumDescription/fetchAlbumDescription',
+		'albumRating/fetchAlbumRating',
 		async ({ id }, thunkApi) => {
 			try {
-				const response = await axiosInstance.get<ApiResponse<IAlbumDescription>>(`/albums/description/${id}`);
+				const response = await axiosInstance.get<ApiResponse<IAlbumRating>>(`/albums/rating/${id}`);
 
 				if (!response.data) {
 					throw new Error('Что-то пошло не так');

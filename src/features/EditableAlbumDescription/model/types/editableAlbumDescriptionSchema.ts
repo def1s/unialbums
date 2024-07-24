@@ -1,10 +1,11 @@
-import { Album } from 'entities/Albums';
+import { IAlbumDescription } from 'entities/Albums';
 
 export interface EditableAlbumDescriptionSchema {
-	data?: Album;
-	form?: Album;
+	data?: IAlbumDescription;
+	form?: IAlbumDescription;
 	isLoading: boolean;
 	error?: string;
 	readonly: boolean;
+	isEditable: boolean;
 	serverMessage?: string;
 }

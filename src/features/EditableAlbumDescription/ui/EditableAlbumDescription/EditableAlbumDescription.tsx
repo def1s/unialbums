@@ -28,6 +28,9 @@ import {
 	getAlbumDescriptionError
 } from '../../model/selectors/getAlbumDescriptionError/getAlbumDescriptionError';
 import { useImage } from 'shared/lib/hooks/useImage/useImage';
+import {
+	getAlbumDescriptionIsEditable
+} from '../../model/selectors/getAlbumDescriptionIsEditable/getAlbumDescriptionIsEditable';
 
 /**
  * Свойства для компонента EditableAlbumDescription.
@@ -58,6 +61,7 @@ export const EditableAlbumDescription = ({ className }: EditableAlbumDescription
 	const error = useSelector(getAlbumDescriptionError);
 	const readonly = useSelector(getAlbumDescriptionReadonly);
 	const serverMessage = useSelector(getAlbumDescriptionServerMessage);
+	const isEditable = useSelector(getAlbumDescriptionIsEditable);
 
 	// Использую кастомный хук для работы с обложкой
 	const { onCreateImage, onDeleteImage, localUrlImage } = useImage();
@@ -144,7 +148,7 @@ export const EditableAlbumDescription = ({ className }: EditableAlbumDescription
 				<AlbumDescription
 					data={data}
 					isLoading={isLoading}
-					EditFeature={<EditDescription />}
+					EditFeature={isEditable ? <EditDescription/> : null}
 					readonly={readonly}
 					onChangeArtist={onChangeArtist}
 					onChangeTitle={onChangeTitle}
