@@ -7,6 +7,22 @@ const axiosInstance = axios.create({
 	withCredentials: true
 });
 
+let isRefreshing = false;
+// eslint-disable-next-line
+let requestsQueue: any[] = [];
+
+const processQueue = (error: unknown, token: string | null = null) => {
+	requestsQueue.forEach(prom => {
+		if (error) {
+			prom.reject(error);
+		} else {
+			prom.resolve(token);
+		}
+	});
+
+	requestsQueue = [];
+};
+
 axiosInstance.interceptors.request.use(config => {
 	const accessToken = localStorage.getItem(ACCESS_TOKEN_LOCALSTORAGE_KEY);
 	if (accessToken) {
@@ -17,28 +33,44 @@ axiosInstance.interceptors.request.use(config => {
 
 axiosInstance.interceptors.response.use(response => {
 	return response;
-}, async error => {
+}, error => {
 	const originalRequest = error.config;
 
 	if (error.response.status === 401 && !originalRequest._retry) {
-		originalRequest._retry = true;
-
-		try {
-			// попытка обновления токена
-			const refreshResponse = await axios.get<ApiResponse<token>>(`${__API_URL__}/refresh`, { withCredentials: true });
-			const updatedToken = refreshResponse.data.data.accessToken;
-			localStorage.setItem(ACCESS_TOKEN_LOCALSTORAGE_KEY, updatedToken);
-
-			// повторный запрос с обновленным токеном
-			originalRequest.headers.Authorization = `Bearer ${updatedToken}`;
-			return axiosInstance(originalRequest);
-		} catch (refreshError) {
-			console.log('Ошибка обновления access токена: ', refreshError);
-			throw refreshError;
+		if (isRefreshing) {
+			return new Promise(function(resolve, reject) {
+				requestsQueue.push({ resolve, reject });
+			}).then(token => {
+				originalRequest.headers.Authorization = 'Bearer ' + token;
+				return axiosInstance(originalRequest);
+			}).catch(err => {
+				return Promise.reject(err);
+			});
 		}
-	} else {
-		throw error;
+
+		originalRequest._retry = true;
+		isRefreshing = true;
+
+		const refreshToken = async () => {
+			try {
+				const refreshResponse = await axios.get<ApiResponse<token>>(`${__API_URL__}/refresh`, { withCredentials: true });
+				const updatedToken = refreshResponse.data.data.accessToken;
+				localStorage.setItem(ACCESS_TOKEN_LOCALSTORAGE_KEY, updatedToken);
+				axiosInstance.defaults.headers.common['Authorization'] = 'Bearer ' + updatedToken;
+				processQueue(null, updatedToken);
+				return axiosInstance(originalRequest);
+			} catch (refreshError) {
+				processQueue(refreshError, null);
+				return Promise.reject(refreshError);
+			} finally {
+				isRefreshing = false;
+			}
+		};
+
+		return refreshToken();
 	}
+
+	return Promise.reject(error);
 });
 
 export default axiosInstance;
