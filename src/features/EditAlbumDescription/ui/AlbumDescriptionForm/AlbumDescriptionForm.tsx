@@ -14,7 +14,7 @@ import { Loader } from 'shared/ui/Loader/Loader';
 import {
 	getAlbumDescriptionFormData,
 	getAlbumDescriptionFormError,
-	getAlbumDescriptionFormIsLoading
+	getAlbumDescriptionFormIsLoading, getAlbumDescriptionFormServerMessage
 } from '../../model/selectors/selectors';
 import { updateAlbumDescription } from '../../model/services/updateAlbumDescription/updateAlbumDescription';
 import { albumDescriptionFormActions, albumDescriptionFormReducer } from '../../model/slice/albumDescriptionFormSlice';
@@ -41,6 +41,7 @@ export const AlbumDescriptionForm = (props: AlbumDescriptionFormProps) => {
 	const formData = useSelector(getAlbumDescriptionFormData);
 	const isLoading = useSelector(getAlbumDescriptionFormIsLoading);
 	const error = useSelector(getAlbumDescriptionFormError);
+	const serverMessage = useSelector(getAlbumDescriptionFormServerMessage);
 
 	useEffect(() => {
 		if (albumData) {

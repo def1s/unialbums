@@ -10,7 +10,6 @@ import { Button } from 'shared/ui/Button/Button';
 import { Input } from 'shared/ui/Input/Input';
 import { InputFile } from 'shared/ui/InputFile/InputFile';
 import { Loader } from 'shared/ui/Loader/Loader';
-import { Notification, NotificationTheme } from 'shared/ui/Notification/Notification';
 import { RangeSlider } from 'shared/ui/RangeSlider/RangeSlider';
 import { getAlbumFormData } from '../../model/selectors/getAlbumFormData/getAlbumFormData';
 import { getAlbumFormError } from '../../model/selectors/getAlbumFormError/getAlbumFormError';
@@ -126,20 +125,21 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 		dispatch(getAlbumSpotify({ albumId }));
 	}, [dispatch]);
 
+	// TODO сделать уведомления
 	// уведомления
-	const notifications = (
-		<>
-			{
-				!isLoading && error &&
-                <Notification message={error} theme={NotificationTheme.ERROR}/>
-			}
-
-			{
-				!isLoading && !error && serverMessage &&
-                <Notification message={serverMessage} theme={NotificationTheme.SUCCESSFUL}/>
-			}
-		</>
-	);
+	// const notifications = (
+	// 	<>
+	// 		{
+	// 			!isLoading && error &&
+	//             <Notifications message={error} theme={NotificationTheme.ERROR}/>
+	// 		}
+	//
+	// 		{
+	// 			!isLoading && !error && serverMessage &&
+	//             <Notifications message={serverMessage} theme={NotificationTheme.SUCCESSFUL}/>
+	// 		}
+	// 	</>
+	// );
 
 	return (
 		<DynamicModuleLoader
@@ -151,8 +151,6 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 				onSubmit={(e) => onSubmit(e)}
 				encType={'multipart/form-data'}
 			>
-				{/* уведомления */}
-				{notifications}
 
 				{/* лоадер */}
 				{

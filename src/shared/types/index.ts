@@ -6,3 +6,5 @@ export {
 	IAlbumDescriptionForm,
 	IAlbumForm
 } from './albumTypes';
+
+export { INotification } from './notificationTypes';

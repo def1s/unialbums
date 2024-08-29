@@ -1,0 +1,18 @@
+.ToastNotification {
+	background-color: var(--default-bg-color);
+	color: #fff;
+	padding: var(--small-padding);
+	margin: var(--small-padding) 0;
+	border-radius: var(--small-radius);
+	position: relative;
+	max-width: 300px;
+	border: solid 1px;
+}
+
+.success {
+	border-color: var(--green-color);
+}
+
+.error {
+	border-color: var(--red-color);
+}

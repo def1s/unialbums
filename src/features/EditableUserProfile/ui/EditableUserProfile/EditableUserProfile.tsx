@@ -5,7 +5,6 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useImage } from 'shared/lib/hooks/useImage/useImage';
-import { Notification, NotificationTheme } from 'shared/ui/Notification/Notification';
 import { getProfileError } from '../../model/selectors/getProfileError/getProfileError';
 import { getProfileForm } from '../../model/selectors/getProfileForm/getProfileForm';
 import { getProfileFormServerMessage } from '../../model/selectors/getProfileFormServerMessage/getProfileFormServerMessage';
@@ -85,26 +84,24 @@ export const EditableUserProfile = memo(({ className }: EditableUserProfileProps
 	}, [onChangeAvatar, onDeleteImage]);
 
 	// уведомления
-	const notifications = (
-		<>
-			{
-				!isLoading && !error && serverMessage &&
-                <Notification message={serverMessage} theme={NotificationTheme.SUCCESSFUL}/>
-			}
-
-			{
-				!isLoading && error &&
-                <Notification message={error} theme={NotificationTheme.ERROR}/>
-			}
-		</>
-	);
+	// TODO сделать уведомления
+	// const notifications = (
+	// 	<>
+	// 		{
+	// 			!isLoading && !error && serverMessage &&
+	//             <Notifications message={serverMessage} theme={NotificationTheme.SUCCESSFUL}/>
+	// 		}
+	//
+	// 		{
+	// 			!isLoading && error &&
+	//             <Notifications message={error} theme={NotificationTheme.ERROR}/>
+	// 		}
+	// 	</>
+	// );
 
 	return (
 		<DynamicModuleLoader reducers={reducers} removeAfterUnmount>
 			<div className={classNames(cls.EditableUserProfile, {}, [className])}>
-				{/* уведомления */}
-				{notifications}
-
 				<ProfileCard
 					readonly={readonly}
 					data={formData}

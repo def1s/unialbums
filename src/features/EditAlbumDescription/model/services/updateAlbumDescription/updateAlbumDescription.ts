@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getAlbumDescriptionData } from 'entities/Albums/AlbumDescription';
+import { notificationActions } from 'entities/Notification';
 import { userActions } from 'entities/User';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 import { ApiResponse } from 'shared/api/types/apiResponse';
@@ -10,10 +11,6 @@ interface UpdateAlbumDescriptionProps {
 	id?: string | number;
 }
 
-interface UpdateAlbumDescriptionResponse {
-	serverMessage: string;
-}
-
 /**
  * Асинхронный thunk для обновления описания альбома.
  *
@@ -21,7 +18,7 @@ interface UpdateAlbumDescriptionResponse {
  * @returns {Promise<UpdateAlbumDescriptionResponse>} Ответ сервера с сообщением.
  */
 export const updateAlbumDescription =
-	createAsyncThunk<UpdateAlbumDescriptionResponse, UpdateAlbumDescriptionProps, { rejectValue: string }>(
+	createAsyncThunk<void, UpdateAlbumDescriptionProps>(
 		'editAlbumDescription/updateAlbumDescription',
 		async ({ id }, thunkApi) => {
 			// Получение формы альбома и данных альбома из состояния
@@ -44,13 +41,13 @@ export const updateAlbumDescription =
 					throw new Error('Что-то пошло не так');
 				}
 
-				return { serverMessage: response.data.message };
+				thunkApi.dispatch(notificationActions.addNotification({ message: response.data.message }));
 			} catch (error) {
 				if (error.response && error.response?.status === 401) {
 					thunkApi.dispatch(userActions.logout());
 				}
 
-				return thunkApi.rejectWithValue(error.response.data.message || 'Непредвиденная ошибка');
+				thunkApi.dispatch(notificationActions.addNotification({ message: error.response.data.message || 'Непредвиденная ошибка' }));
 			}
 		}
 	);

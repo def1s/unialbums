@@ -6,12 +6,14 @@ import { EditableUserProfileSchema } from 'features/EditableUserProfile';
 import { AlbumDescriptionFormSchema } from 'features/EditAlbumDescription';
 import { RegistrationSchema } from 'features/RegistrationByUsername';
 import { AlbumDescriptionSchema } from 'entities/Albums/AlbumDescription';
+import { NotificationSchema } from 'entities/Notification';
 import { UserSchema } from 'entities/User';
 // import { EditableAlbumRatingSchema } from 'features/EditableAlbumRating';
 
 export interface StateSchema {
 	user: UserSchema;
 	homePage: HomePageSchema;
+	notification: NotificationSchema;
 
 	// асинхронные редьюсеры
 	loginForm?: LoginSchema;
