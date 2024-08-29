@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import cls from './Notification.module.scss';
+// eslint-disable-next-line @conarti/feature-sliced/absolute-relative
 import { classNames } from 'shared/lib/classNames/classNames';
+// eslint-disable-next-line @conarti/feature-sliced/absolute-relative
 import { Portal } from 'shared/ui/Portal/Portal';
+import cls from './Notification.module.scss';
 
 export enum NotificationTheme {
 	PRIMARY = 'primary',

@@ -4,8 +4,6 @@ export const getAlbumDescriptionData = (state: StateSchema) => (state.albumDescr
 
 export const getAlbumDescriptionError = (state: StateSchema) => (state.albumDescription?.error);
 
-export const getAlbumDescriptionForm = (state: StateSchema) => (state.albumDescription?.form);
-
 export const getAlbumDescriptionIsEditable = (state: StateSchema) => (state.albumDescription?.isEditable || false);
 
 export const getAlbumDescriptionIsLoading = (state: StateSchema) => (state.albumDescription?.isLoading || false);

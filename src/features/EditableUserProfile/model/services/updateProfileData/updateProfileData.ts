@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { Profile } from 'entities/Profile';
+import { userActions } from 'entities/User';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 import { ApiResponse } from 'shared/api/types/apiResponse';
-import { userActions } from 'entities/User';
-import { getProfileForm } from '../../selectors/getProfileForm/getProfileForm';
 import { getProfileData } from '../../selectors/getProfileData/getProfileData';
-import { Profile } from 'entities/Profile';
+import { getProfileForm } from '../../selectors/getProfileForm/getProfileForm';
 
 interface UpdateProfileDataResult {
 	serverMessage: string;

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { IAlbum } from 'shared/types';
 import { AlbumDescription } from './AlbumDescription';
-import { IAlbum } from 'entities/Albums';
 
 const meta: Meta<typeof AlbumDescription> = {
 	title: 'entities/AlbumDescription',
@@ -23,14 +23,12 @@ type Story = StoryObj<typeof AlbumDescription>;
 
 export const Default: Story = {
 	args: {
-		data: album,
-		readonly: true
+		data: album
 	}
 };
 
 export const Changeable: Story = {
 	args: {
-		data: album,
-		readonly: false
+		data: album
 	}
 };

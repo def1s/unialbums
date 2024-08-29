@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-	AlbumDescriptionSchema
-} from '../types/albumDescriptionSchema';
+import { IAlbum } from 'shared/types';
+import { deleteAlbum } from '../services/deleteAlbum/deleteAlbum';
 import {
 	fetchAlbumDescription
 } from '../services/fetchAlbumDescription/fetchAlbumDescription';
-import { IAlbum } from 'entities/Albums';
-import { deleteAlbum } from '../services/deleteAlbum/deleteAlbum';
+import {
+	AlbumDescriptionSchema
+} from '../types/albumDescriptionSchema';
 
 const initialState: AlbumDescriptionSchema = {
 	isLoading: false,
@@ -22,13 +22,10 @@ const albumDescriptionSlice = createSlice({
 			state.readonly = action.payload;
 		},
 		updateAlbumDescription: (state, action: PayloadAction<IAlbum>) => {
-			state.form = {
-				...state.form,
+			state.data = {
+				...state.data,
 				...action.payload
 			};
-		},
-		resetForm: (state) => {
-			state.form = state.data;
 		}
 	},
 	extraReducers: (builder) => {
@@ -41,27 +38,11 @@ const albumDescriptionSlice = createSlice({
 			const { isEditable, ...data } = action.payload;
 			state.data = data;
 			state.isEditable = !!isEditable;
-			state.form = action.payload;
 		});
 		builder.addCase(fetchAlbumDescription.rejected, (state, action) => {
 			state.isLoading = false;
 			state.error = action.payload;
 		});
-
-		// builder.addCase(updateAlbumDescription.pending, (state) => {
-		// 	state.error = undefined;
-		// 	state.serverMessage = undefined;
-		// 	state.isLoading = true;
-		// });
-		// builder.addCase(updateAlbumDescription.fulfilled, (state, action) => {
-		// 	state.isLoading = false;
-		// 	state.serverMessage = action.payload.serverMessage;
-		// 	state.data = state.form;
-		// });
-		// builder.addCase(updateAlbumDescription.rejected, (state, action) => {
-		// 	state.isLoading = false;
-		// 	state.error = action.payload;
-		// });
 
 		builder.addCase(deleteAlbum.pending, (state) => {
 			state.error = undefined;

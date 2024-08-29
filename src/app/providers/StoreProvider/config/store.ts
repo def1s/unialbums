@@ -1,8 +1,8 @@
 import { configureStore, Reducer, ReducersMapObject } from '@reduxjs/toolkit';
-import { StateSchema } from './StateSchema';
+import { homePageReducer } from 'pages/HomePage';
 import { userReducer } from 'entities/User';
 import { createReducerManager } from './reducerManager';
-import { homePageReducer } from 'pages/HomePage';
+import { StateSchema } from './StateSchema';
 
 export const configureReduxStore = (
 	initialState?: StateSchema,

@@ -1,14 +1,14 @@
-import cls from './ProfileCard.module.scss';
-import { classNames } from 'shared/lib/classNames/classNames';
-import { Profile, ValidateProfileError, ValidateProfileErrorKeys } from '../../model/types/profile';
-import { ProfileField } from 'entities/Profile';
-import { Avatar } from 'shared/ui/Avatar/Avatar';
-import { Text } from 'shared/ui/Text/Text';
-import { Loader } from 'shared/ui/Loader/Loader';
 import { ChangeEvent, memo } from 'react';
-import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
+import { ProfileField } from 'entities/Profile';
 import DefaultAvatar from 'shared/assets/icons/default-avatar.svg';
+import { classNames } from 'shared/lib/classNames/classNames';
+import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
+import { Avatar } from 'shared/ui/Avatar/Avatar';
 import { InputFile, InputFileShape } from 'shared/ui/InputFile/InputFile';
+import { Loader } from 'shared/ui/Loader/Loader';
+import { Text } from 'shared/ui/Text/Text';
+import { Profile, ValidateProfileError, ValidateProfileErrorKeys } from '../../model/types/profile';
+import cls from './ProfileCard.module.scss';
 
 interface ProfileCardProps {
     className?: string;

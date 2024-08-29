@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { userActions } from 'entities/User';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 import { ApiResponse } from 'shared/api/types/apiResponse';
-import { userActions } from 'entities/User';
-import { IAlbumDescription } from 'entities/Albums';
+import { IAlbumDescription } from 'shared/types';
 
 interface FetchAlbumDescriptionProps {
 	id?: string | number;

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { SearchFieldItem } from 'entities/SearchAlbums';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 import { ApiResponse } from 'shared/api/types/apiResponse';
-import { SearchFieldItem } from 'entities/SearchAlbums';
 
 interface GetAlbumSpotifyProps {
 	albumId: string;

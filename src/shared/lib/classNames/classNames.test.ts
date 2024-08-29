@@ -1,3 +1,4 @@
+// eslint-disable-next-line @conarti/feature-sliced/absolute-relative
 import { classNames } from 'shared/lib/classNames/classNames';
 
 describe('classNames', () => {

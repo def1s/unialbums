@@ -1,15 +1,15 @@
-import { profileActions } from '../../model/slice/profileSlice';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { memo, useCallback } from 'react';
-import { updateProfileData } from '../../model/services/updateProfileData/updateProfileData';
+import { useSelector } from 'react-redux';
 import { userInitAuthData } from 'entities/User';
 import { classNames } from 'shared/lib/classNames/classNames';
-import cls from './EditProfile.module.scss';
-import { useSelector } from 'react-redux';
-import { getProfileReadonly } from '../../model/selectors/getProfileReadonly/getProfileReadonly';
-import { validateProfileData } from '../../model/services/validateProfileData/validateProfileData';
-import { getProfileForm } from '../../model/selectors/getProfileForm/getProfileForm';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { Button } from 'shared/ui/Button/Button';
+import { getProfileForm } from '../../model/selectors/getProfileForm/getProfileForm';
+import { getProfileReadonly } from '../../model/selectors/getProfileReadonly/getProfileReadonly';
+import { updateProfileData } from '../../model/services/updateProfileData/updateProfileData';
+import { validateProfileData } from '../../model/services/validateProfileData/validateProfileData';
+import { profileActions } from '../../model/slice/profileSlice';
+import cls from './EditProfile.module.scss';
 
 interface EditProfileProps {
     className?: string;

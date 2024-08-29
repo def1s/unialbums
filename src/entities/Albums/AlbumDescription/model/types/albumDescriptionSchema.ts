@@ -1,8 +1,7 @@
-import { IAlbumDescription } from 'entities/Albums';
+import { IAlbumDescription } from 'shared/types';
 
 export interface AlbumDescriptionSchema {
 	data?: IAlbumDescription;
-	form?: IAlbumDescription;
 	isLoading: boolean;
 	error?: string;
 	readonly: boolean;

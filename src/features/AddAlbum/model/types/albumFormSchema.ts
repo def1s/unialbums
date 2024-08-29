@@ -1,10 +1,8 @@
-import { IAlbum } from 'entities/Albums';
 import { SearchFieldItem } from 'entities/SearchAlbums';
-
-export type AlbumForm = Omit<IAlbum, 'albumId'>;
+import { IAlbumForm } from 'shared/types';
 
 export interface AlbumFormSchema {
-	data: AlbumForm;
+	data: IAlbumForm;
 	searchAlbums?: SearchFieldItem[];
 	isSearching: boolean;
 	isLoading: boolean;

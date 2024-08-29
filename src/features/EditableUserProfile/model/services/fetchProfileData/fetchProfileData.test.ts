@@ -1,9 +1,9 @@
-import { ApiResponse } from 'shared/api/types/apiResponse';
 import MockAdapter from 'axios-mock-adapter';
+import { Profile } from 'entities/Profile';
+import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
+import { ApiResponse } from 'shared/api/types/apiResponse';
 import { TestAsyncThunk } from 'shared/lib/tests/TestAsyncThunk/TestAsyncThunk';
 import { fetchProfileData } from './fetchProfileData';
-import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
-import { Profile } from 'entities/Profile';
 
 describe('userInitAuthData', () => {
 	const response: ApiResponse<Profile> = {

@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getAlbumFormData } from '../../selectors/getAlbumFormData/getAlbumFormData';
+import axios from 'axios';
+import { SearchFieldItem } from 'entities/SearchAlbums';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 import { ApiResponse } from 'shared/api/types/apiResponse';
-import { SearchFieldItem } from 'entities/SearchAlbums';
-import axios from 'axios';
+import { getAlbumFormData } from '../../selectors/getAlbumFormData/getAlbumFormData';
 
 interface SearchAlbumsSpotifyProps {
 	signal: AbortSignal

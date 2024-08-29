@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { HomePageSchema } from '../types/homePageSchema';
 import { getAlbumsByAccessToken } from '../services/getAlbumsByAccessToken/getAlbumsByAccessToken';
+import { HomePageSchema } from '../types/homePageSchema';
 
 const initialState: HomePageSchema = {
 	albums: [],

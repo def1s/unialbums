@@ -1,7 +1,8 @@
-import cls from './AlbumsGrid.module.scss';
-import { classNames } from 'shared/lib/classNames/classNames';
-import { IAlbum, AlbumCard } from 'entities/Albums';
 import React from 'react';
+import { classNames } from 'shared/lib/classNames/classNames';
+import { IAlbum } from 'shared/types';
+import { AlbumCard } from '../AlbumCard/AlbumCard';
+import cls from './AlbumsGrid.module.scss';
 
 interface AlbumsGridProps {
     className?: string;
@@ -9,6 +10,8 @@ interface AlbumsGridProps {
 }
 
 export const AlbumsGrid = ({ className, albums }: AlbumsGridProps) => {
+
+	// TODO перенести model в entities
 
 	return (
 		<div className={classNames(cls.AlbumsGrid, {}, [className])}>

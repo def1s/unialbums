@@ -1,16 +1,24 @@
-import cls from './AlbumDescriptionForm.module.scss';
+import React, { ChangeEvent, FormEvent, useCallback, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { albumDescriptionActions, getAlbumDescriptionData } from 'entities/Albums/AlbumDescription';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { Input } from 'shared/ui/Input/Input';
-import { InputFile } from 'shared/ui/InputFile/InputFile';
-import React, { ChangeEvent, useCallback, useEffect } from 'react';
+import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useImage } from 'shared/lib/hooks/useImage/useImage';
-import { getAlbumDescriptionData } from 'entities/Albums/AlbumDescription';
-import { useSelector } from 'react-redux';
-import { getAlbumDescriptionFormData } from 'features/EditAlbumDescription/model/selectors/selectors';
-import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { albumDescriptionFormActions, albumDescriptionFormReducer } from '../../model/slice/albumDescriptionFormSlice';
+import { Blur } from 'shared/ui/Blur/Blur';
 import { Button } from 'shared/ui/Button/Button';
+import { Input } from 'shared/ui/Input/Input';
+import { InputFile } from 'shared/ui/InputFile/InputFile';
+import { Loader } from 'shared/ui/Loader/Loader';
+import {
+	getAlbumDescriptionFormData,
+	getAlbumDescriptionFormError,
+	getAlbumDescriptionFormIsLoading
+} from '../../model/selectors/selectors';
+import { updateAlbumDescription } from '../../model/services/updateAlbumDescription/updateAlbumDescription';
+import { albumDescriptionFormActions, albumDescriptionFormReducer } from '../../model/slice/albumDescriptionFormSlice';
+import cls from './AlbumDescriptionForm.module.scss';
 
 interface AlbumDescriptionFormProps {
 	className?: string;
@@ -28,8 +36,11 @@ export const AlbumDescriptionForm = (props: AlbumDescriptionFormProps) => {
 	const dispatch = useAppDispatch();
 	const { localUrlImage, onCreateImage, onDeleteImage } = useImage();
 
+	const { id } = useParams();
 	const albumData = useSelector(getAlbumDescriptionData);
 	const formData = useSelector(getAlbumDescriptionFormData);
+	const isLoading = useSelector(getAlbumDescriptionFormIsLoading);
+	const error = useSelector(getAlbumDescriptionFormError);
 
 	useEffect(() => {
 		if (albumData) {
@@ -65,17 +76,33 @@ export const AlbumDescriptionForm = (props: AlbumDescriptionFormProps) => {
 		onChangeCover('');
 	}, [onChangeCover, onDeleteImage]);
 
-	// const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-	// 	e.preventDefault();
-	// 	dispatch(addAlbumToUser());
-	// };
+	const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		const result = await dispatch(updateAlbumDescription({ id }));
+
+		if (result.meta.requestStatus === 'fulfilled') {
+			dispatch(albumDescriptionActions.updateAlbumDescription(formData || {}));
+		}
+	};
 
 	return (
 		<DynamicModuleLoader
 			reducers={initialReducers}
 			removeAfterUnmount
 		>
-			<div className={classNames(cls.AlbumDescriptionForm, {}, [className])}>
+			<form
+				className={classNames(cls.AlbumDescriptionForm, {}, [className])}
+				onSubmit={onSubmit}
+			>
+				{
+					isLoading && !error && (
+						<>
+							<Loader/>
+							<Blur className={cls.blurBorder}/>
+						</>
+					)
+				}
+
 				<InputFile
 					onChange={onCoverAdd}
 					selectedFile={formData?.cover}
@@ -105,7 +132,7 @@ export const AlbumDescriptionForm = (props: AlbumDescriptionFormProps) => {
 				/>
 
 				<Button className={cls.submitBtn}>Сохранить изменения</Button>
-			</div>
+			</form>
 		</DynamicModuleLoader>
 	);
 };

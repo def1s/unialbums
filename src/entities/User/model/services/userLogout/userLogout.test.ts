@@ -1,8 +1,8 @@
+import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { TestAsyncThunk } from 'shared/lib/tests/TestAsyncThunk/TestAsyncThunk';
-import { userLogout } from './userLogout';
-import axios from 'axios';
 import { userActions } from '../../slice/userSlice';
+import { userLogout } from './userLogout';
 
 describe('userLogout', () => {
 	test('should dispatch userActions.logout() when receiving 200 status code', async () => {

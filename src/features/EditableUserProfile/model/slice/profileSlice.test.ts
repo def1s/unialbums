@@ -1,6 +1,6 @@
-import { profileReducer, profileActions } from './profileSlice';
 import { Profile } from 'entities/Profile';
 import { EditableUserProfileSchema } from '../types/editableUserProfileSchema';
+import { profileReducer, profileActions } from './profileSlice';
 
 describe('profile reducer', () => {
 	test('should handle setReadonly', () => {

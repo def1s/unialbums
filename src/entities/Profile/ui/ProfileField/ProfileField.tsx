@@ -1,7 +1,7 @@
-import cls from './ProfileField.module.scss';
+import { memo, useCallback } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Input, ThemeInput } from 'shared/ui/Input/Input';
-import { memo, useCallback } from 'react';
+import cls from './ProfileField.module.scss';
 
 interface ProfileFieldProps {
     className?: string;

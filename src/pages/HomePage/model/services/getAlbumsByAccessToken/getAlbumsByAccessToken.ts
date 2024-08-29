@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { IAlbum } from 'entities/Albums';
-import { ApiResponse } from 'shared/api/types/apiResponse';
 import { userActions } from 'entities/User';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
+import { ApiResponse } from 'shared/api/types/apiResponse';
+import { IAlbum } from 'shared/types';
 
 export const getAlbumsByAccessToken = createAsyncThunk<IAlbum[], void, { rejectValue: string }>(
 	'homePage/getAlbumsByAccessToken',

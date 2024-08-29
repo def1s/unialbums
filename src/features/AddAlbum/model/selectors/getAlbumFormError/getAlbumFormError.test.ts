@@ -1,5 +1,5 @@
-import { getAlbumFormError } from './getAlbumFormError';
 import { StateSchema } from 'app/providers/StoreProvider';
+import { getAlbumFormError } from './getAlbumFormError';
 
 describe('getAlbumFormError', () => {
 	test('should return album form error from the state', () => {

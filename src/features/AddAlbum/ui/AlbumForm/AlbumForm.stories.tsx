@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { AlbumForm } from './AlbumForm';
 import { StoreDecorator } from 'shared/config/storybook/StoreDecorator/StoreDecorator';
+import { AlbumForm } from './AlbumForm';
 
 const meta: Meta<typeof AlbumForm> = {
 	title: 'features/AlbumForm',

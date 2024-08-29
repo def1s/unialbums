@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ProfileCard } from './ProfileCard';
 import UserAvatar from 'shared/assets/storybook/avatar.jpg';
+import { ProfileCard } from './ProfileCard';
 
 const meta: Meta<typeof ProfileCard> = {
 	title: 'entities/ProfileCard',

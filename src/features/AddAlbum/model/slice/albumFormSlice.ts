@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AlbumForm, AlbumFormSchema } from '../types/albumFormSchema';
+import { IAlbumForm } from 'shared/types';
 import { addAlbumToUser } from '../services/addAlbumToUser/addAlbumToUser';
+import { getAlbumSpotify } from '../services/getAlbumSpotify/getAlbumSpotify';
 import { searchAlbumsSpotify } from '../services/searchAlbumsSpotify/searchAlbumsSpotify';
-import { getAlbumSpotify } from 'features/AddAlbum/model/services/getAlbumSpotify/getAlbumSpotify';
+import { AlbumFormSchema } from '../types/albumFormSchema';
 
 const initialState: AlbumFormSchema = {
 	data: {
@@ -22,7 +23,7 @@ const albumFormSlice = createSlice({
 	name: 'albumForm',
 	initialState,
 	reducers: {
-		setFieldValue: (state, action: PayloadAction<AlbumForm>) => {
+		setFieldValue: (state, action: PayloadAction<IAlbumForm>) => {
 			state.data = {
 				...state.data,
 				...action.payload

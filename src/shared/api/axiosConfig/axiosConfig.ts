@@ -1,6 +1,8 @@
 import axios from 'axios';
-import { ACCESS_TOKEN_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
+// eslint-disable-next-line @conarti/feature-sliced/absolute-relative
 import { ApiResponse, token } from 'shared/api/types/apiResponse';
+// eslint-disable-next-line @conarti/feature-sliced/absolute-relative
+import { ACCESS_TOKEN_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
 
 const axiosInstance = axios.create({
 	baseURL: __API_URL__,

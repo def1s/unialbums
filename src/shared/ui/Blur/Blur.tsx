@@ -1,6 +1,7 @@
-import cls from './Blur.module.scss';
-import { classNames } from 'shared/lib/classNames/classNames';
 import { memo } from 'react';
+// eslint-disable-next-line @conarti/feature-sliced/absolute-relative
+import { classNames } from 'shared/lib/classNames/classNames';
+import cls from './Blur.module.scss';
 
 interface BlurProps {
     className?: string

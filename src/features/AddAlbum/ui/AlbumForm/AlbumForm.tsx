@@ -1,28 +1,28 @@
-import cls from './AlbumForm.module.scss';
-import { classNames } from 'shared/lib/classNames/classNames';
-import { RangeSlider } from 'shared/ui/RangeSlider/RangeSlider';
-import { useSelector } from 'react-redux';
-import { Input } from 'shared/ui/Input/Input';
 import React, { ChangeEvent, FormEvent, memo, useCallback, useEffect, useRef, useState } from 'react';
-import { albumFormActions, albumFormReducer } from '../../model/slice/albumFormSlice';
-import { addAlbumToUser } from '../../model/services/addAlbumToUser/addAlbumToUser';
-import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { InputFile } from 'shared/ui/InputFile/InputFile';
-import { Button } from 'shared/ui/Button/Button';
-import { getAlbumFormIsLoading } from '../../model/selectors/getAlbumFormIsLoading/getAlbumFormIsLoading';
-import { getAlbumFormError } from '../../model/selectors/getAlbumFormError/getAlbumFormError';
-import { Loader } from 'shared/ui/Loader/Loader';
-import { Blur } from 'shared/ui/Blur/Blur';
-import { getAlbumFormServerMessage } from '../../model/selectors/getAlbumFormServerMessage/getAlbumFormServerMessage';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { getAlbumFormData } from '../../model/selectors/getAlbumFormData/getAlbumFormData';
-import { Notification, NotificationTheme } from 'shared/ui/Notification/Notification';
-import { useImage } from 'shared/lib/hooks/useImage/useImage';
-import { searchAlbumsSpotify } from '../../model/services/searchAlbumsSpotify/searchAlbumsSpotify';
+import { useSelector } from 'react-redux';
 import { SearchList } from 'entities/SearchAlbums';
+import { classNames } from 'shared/lib/classNames/classNames';
+import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useImage } from 'shared/lib/hooks/useImage/useImage';
+import { Blur } from 'shared/ui/Blur/Blur';
+import { Button } from 'shared/ui/Button/Button';
+import { Input } from 'shared/ui/Input/Input';
+import { InputFile } from 'shared/ui/InputFile/InputFile';
+import { Loader } from 'shared/ui/Loader/Loader';
+import { Notification, NotificationTheme } from 'shared/ui/Notification/Notification';
+import { RangeSlider } from 'shared/ui/RangeSlider/RangeSlider';
+import { getAlbumFormData } from '../../model/selectors/getAlbumFormData/getAlbumFormData';
+import { getAlbumFormError } from '../../model/selectors/getAlbumFormError/getAlbumFormError';
+import { getAlbumFormIsLoading } from '../../model/selectors/getAlbumFormIsLoading/getAlbumFormIsLoading';
+import { getAlbumFormServerMessage } from '../../model/selectors/getAlbumFormServerMessage/getAlbumFormServerMessage';
 import { getSearchAlbums } from '../../model/selectors/getSearchAlbums/getSearchAlbums';
 import { getSearchIsLoading } from '../../model/selectors/getSearchIsLoading/getSearchIsLoading';
+import { addAlbumToUser } from '../../model/services/addAlbumToUser/addAlbumToUser';
 import { getAlbumSpotify } from '../../model/services/getAlbumSpotify/getAlbumSpotify';
+import { searchAlbumsSpotify } from '../../model/services/searchAlbumsSpotify/searchAlbumsSpotify';
+import { albumFormActions, albumFormReducer } from '../../model/slice/albumFormSlice';
+import cls from './AlbumForm.module.scss';
 
 interface AlbumFormProps {
     className?: string

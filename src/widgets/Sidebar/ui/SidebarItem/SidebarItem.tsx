@@ -1,7 +1,7 @@
-import cls from '../Sidebar/Sidebar.module.scss';
+import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import { SidebarItemsType } from '../../model/items';
-import { memo } from 'react';
+import cls from '../Sidebar/Sidebar.module.scss';
 
 interface SidebarItemProps {
 	item: SidebarItemsType;

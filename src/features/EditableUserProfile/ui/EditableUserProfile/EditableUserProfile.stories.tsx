@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { EditableUserProfile } from './EditableUserProfile';
 import { rest } from 'msw';
 import avatar from 'shared/assets/storybook/avatar.jpg';
+import { EditableUserProfile } from './EditableUserProfile';
 
 const meta: Meta<typeof EditableUserProfile> = {
 	title: 'features/EditableUserProfile',

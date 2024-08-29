@@ -1,8 +1,8 @@
-import cls from './EditAlbumDescription.module.scss';
-import { classNames } from 'shared/lib/classNames/classNames';
 import { useCallback, useState } from 'react';
+import { classNames } from 'shared/lib/classNames/classNames';
 import { Button } from 'shared/ui/Button/Button';
-import { AlbumDescriptionModal } from 'features/EditAlbumDescription/ui/AlbumDescriptionModal/AlbumDescriptionModal';
+import { AlbumDescriptionModal } from '../AlbumDescriptionModal/AlbumDescriptionModal';
+import cls from './EditAlbumDescription.module.scss';
 
 interface EditAlbumDescriptionProps {
     className?: string;

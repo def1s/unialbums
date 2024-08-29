@@ -1,6 +1,6 @@
-import cls from './ProfilePage.module.scss';
+import { EditableUserProfile } from 'features/EditableUserProfile';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { EditableUserProfile } from 'features/EditableUserProfile/ui/EditableUserProfile/EditableUserProfile';
+import cls from './ProfilePage.module.scss';
 
 interface ProfilePageProps {
     className?: string

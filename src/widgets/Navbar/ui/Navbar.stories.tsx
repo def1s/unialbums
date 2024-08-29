@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Navbar } from './Navbar';
+// eslint-disable-next-line @conarti/feature-sliced/layers-slices
 import { StoreProvider } from 'app/providers/StoreProvider';
+import { Navbar } from './Navbar';
 
 const meta: Meta<typeof Navbar> = {
 	title: 'widgets/Navbar',

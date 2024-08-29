@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import { AlbumDescription } from './AlbumDescription';
 import { MemoryRouter } from 'react-router-dom';
-import { IAlbum } from 'entities/Albums';
+import { IAlbum } from 'shared/types';
+import { AlbumDescription } from './AlbumDescription';
 
 describe('AlbumDescription', () => {
 	test('render album title correctly', () => {

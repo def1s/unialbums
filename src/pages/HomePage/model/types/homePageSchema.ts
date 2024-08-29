@@ -1,4 +1,4 @@
-import { IAlbum } from 'entities/Albums';
+import { IAlbum } from 'shared/types';
 
 export interface HomePageSchema {
 	albums: IAlbum[];

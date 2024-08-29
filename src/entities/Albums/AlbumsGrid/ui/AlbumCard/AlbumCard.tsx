@@ -1,9 +1,9 @@
-import cls from './AlbumCard.module.scss';
-import { classNames } from 'shared/lib/classNames/classNames';
-import { Link } from 'react-router-dom';
 import React, { FC, memo } from 'react';
+import { Link } from 'react-router-dom';
+import { classNames } from 'shared/lib/classNames/classNames';
 import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
-import { IAlbum } from 'entities/Albums/AlbumDescription/model/types/album';
+import { IAlbum } from 'shared/types';
+import cls from './AlbumCard.module.scss';
 
 /**
  * Определение свойств для компонента AlbumCard

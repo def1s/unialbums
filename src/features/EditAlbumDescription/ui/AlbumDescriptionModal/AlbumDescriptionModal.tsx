@@ -1,7 +1,7 @@
-import cls from './AlbumDescriptionModal.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Modal } from 'shared/ui/Modal/Modal';
-import { AlbumDescriptionForm } from 'features/EditAlbumDescription/ui/AlbumDescriptionForm/AlbumDescriptionForm';
+import { AlbumDescriptionForm } from '../../ui/AlbumDescriptionForm/AlbumDescriptionForm';
+import cls from './AlbumDescriptionModal.module.scss';
 
 interface AlbumDescriptionModalProps {
     className?: string;

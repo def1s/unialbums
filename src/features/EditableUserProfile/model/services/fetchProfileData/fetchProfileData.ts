@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Profile } from 'entities/Profile/model/types/profile';
+import { Profile } from 'entities/Profile';
+import { userActions } from 'entities/User';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 import { ApiResponse } from 'shared/api/types/apiResponse';
-import { userActions } from 'entities/User';
 
 export const fetchProfileData = createAsyncThunk<Profile, void, { rejectValue: string }>(
 	'profile/fetchProfileData',

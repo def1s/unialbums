@@ -1,7 +1,7 @@
-import cls from './AlbumPage.module.scss';
-import { classNames } from 'shared/lib/classNames/classNames';
 import React from 'react';
-import { AlbumDetails } from 'widgets/AlbumDetails/ui/AlbumDetails';
+import { AlbumDetails } from 'widgets/AlbumDetails';
+import { classNames } from 'shared/lib/classNames/classNames';
+import cls from './AlbumPage.module.scss';
 
 interface AlbumPageProps {
     className?: string

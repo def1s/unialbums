@@ -1,6 +1,7 @@
-import cls from './Avatar.module.scss';
-import { classNames } from 'shared/lib/classNames/classNames';
 import { ImgHTMLAttributes, memo } from 'react';
+// eslint-disable-next-line @conarti/feature-sliced/absolute-relative
+import { classNames } from 'shared/lib/classNames/classNames';
+import cls from './Avatar.module.scss';
 
 export enum AvatarSize {
 	SMALL = 'small',

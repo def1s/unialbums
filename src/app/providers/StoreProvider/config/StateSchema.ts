@@ -1,12 +1,12 @@
-import { UserSchema } from 'entities/User';
-import { LoginSchema } from 'features/AuthByUsername';
-import { AlbumFormSchema } from 'features/AddAlbum';
 import { Action, EnhancedStore, Reducer, ReducersMapObject } from '@reduxjs/toolkit';
 import { HomePageSchema } from 'pages/HomePage';
+import { AlbumFormSchema } from 'features/AddAlbum';
+import { LoginSchema } from 'features/AuthByUsername';
 import { EditableUserProfileSchema } from 'features/EditableUserProfile';
-import { RegistrationSchema } from 'features/RegistrationByUsername';
 import { AlbumDescriptionFormSchema } from 'features/EditAlbumDescription';
+import { RegistrationSchema } from 'features/RegistrationByUsername';
 import { AlbumDescriptionSchema } from 'entities/Albums/AlbumDescription';
+import { UserSchema } from 'entities/User';
 // import { EditableAlbumRatingSchema } from 'features/EditableAlbumRating';
 
 export interface StateSchema {

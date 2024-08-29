@@ -1,37 +1,28 @@
-import cls from './RegistrationForm.module.scss';
+import { useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { Input } from 'shared/ui/Input/Input';
-import { Button } from 'shared/ui/Button/Button';
-import { registrationActions, registrationReducer } from '../../model/slice/registrationSlice';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { useSelector } from 'react-redux';
+import { Blur } from 'shared/ui/Blur/Blur';
+import { Button } from 'shared/ui/Button/Button';
+import { Input } from 'shared/ui/Input/Input';
+import { Loader } from 'shared/ui/Loader/Loader';
+import { Text, TextTheme } from 'shared/ui/Text/Text';
 import {
-	getRegistrationUsername
-} from '../../model/selectors/getRegistrationUsername/getRegistrationUsername';
+	getRegistrationEmail
+} from '../../model/selectors/getRegistrationEmail/getRegistrationEmail';
 import {
-	getRegistrationPassword
-} from '../../model/selectors/getRegistrationPassword/getRegistrationPassword';
+	getRegistrationError
+} from '../../model/selectors/getRegistrationError/getRegistrationError';
 import {
-	getRegistrationRepeatedPassword
-} from '../../model/selectors/getRegistrationRepeatedPassword/getRegistrationRepeatedPassword';
+	getRegistrationFirstName
+} from '../../model/selectors/getRegistrationFirstName/getRegistrationFirstName';
 import {
 	getRegistrationIsLoading
 } from '../../model/selectors/getRegistrationIsLoading/getRegistrationIsLoading';
 import {
-	getRegistrationError
-} from '../../model/selectors/getRegistrationError/getRegistrationError';
-import { useCallback } from 'react';
-import { Loader } from 'shared/ui/Loader/Loader';
-import { Blur } from 'shared/ui/Blur/Blur';
-import { Text, TextTheme } from 'shared/ui/Text/Text';
-import {
 	getRegistrationIsPasswordsEqual
 } from '../../model/selectors/getRegistrationIsPasswordsEqual/getRegistrationIsPasswordsEqual';
-import { registration } from '../../model/services/registration/registration';
-import {
-	getRegistrationFirstName
-} from '../../model/selectors/getRegistrationFirstName/getRegistrationFirstName';
 import {
 	getRegistrationLastName
 } from '../../model/selectors/getRegistrationLastName/getRegistrationLastName';
@@ -39,15 +30,24 @@ import {
 	getRegistrationMessage
 } from 	'../../model/selectors/getRegistrationMessage/getRegistrationMessage';
 import {
-	validateRegistrationForm
-} from '../../model/services/validateRegistrationForm/validateRegistrationForm';
+	getRegistrationPassword
+} from '../../model/selectors/getRegistrationPassword/getRegistrationPassword';
+import {
+	getRegistrationRepeatedPassword
+} from '../../model/selectors/getRegistrationRepeatedPassword/getRegistrationRepeatedPassword';
+import {
+	getRegistrationUsername
+} from '../../model/selectors/getRegistrationUsername/getRegistrationUsername';
 import {
 	getRegistrationValidateErrors
 } from '../../model/selectors/getRegistrationValidateErrors/getRegistrationValidateErrors';
-import { ValidateRegistrationErrorsKeys } from '../../model/types/registrationSchema';
+import { registration } from '../../model/services/registration/registration';
 import {
-	getRegistrationEmail
-} from '../../model/selectors/getRegistrationEmail/getRegistrationEmail';
+	validateRegistrationForm
+} from '../../model/services/validateRegistrationForm/validateRegistrationForm';
+import { registrationActions, registrationReducer } from '../../model/slice/registrationSlice';
+import { ValidateRegistrationErrorsKeys } from '../../model/types/registrationSchema';
+import cls from './RegistrationForm.module.scss';
 
 interface RegistrationFormProps {
     className?: string;

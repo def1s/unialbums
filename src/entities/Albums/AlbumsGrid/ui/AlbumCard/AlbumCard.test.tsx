@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import { AlbumCard } from './AlbumCard';
 import { MemoryRouter } from 'react-router-dom';
-import { IAlbum } from 'entities/Albums';
+import { IAlbum } from 'shared/types';
+import { AlbumCard } from './AlbumCard';
 
 describe('AlbumCard', () => {
 	it('normal album title', () => {

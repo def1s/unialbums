@@ -1,5 +1,5 @@
-import { getAlbumFormServerMessage } from './getAlbumFormServerMessage';
 import { StateSchema } from 'app/providers/StoreProvider';
+import { getAlbumFormServerMessage } from './getAlbumFormServerMessage';
 
 describe('getAlbumFormServerMessage', () => {
 	test('should return album form message from the state', () => {

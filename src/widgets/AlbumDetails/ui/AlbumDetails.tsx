@@ -1,19 +1,20 @@
-import cls from './AlbumDetails.module.scss';
-import { classNames } from 'shared/lib/classNames/classNames';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { EditAlbumDescription } from 'features/EditAlbumDescription';
 import {
+	AlbumDescription,
 	albumDescriptionReducer,
 	fetchAlbumDescription,
 	getAlbumDescriptionData,
 	getAlbumDescriptionIsEditable,
 	getAlbumDescriptionIsLoading,
 } from 'entities/Albums/AlbumDescription';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { AlbumDescription } from 'entities/Albums';
-import { EditAlbumDescription } from 'features/EditAlbumDescription/ui/EditAlbumDescription/EditAlbumDescription';
+import { classNames } from 'shared/lib/classNames/classNames';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import cls from './AlbumDetails.module.scss';
+
 interface AlbumDetailsProps {
     className?: string;
 }

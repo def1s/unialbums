@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ApiResponse } from 'shared/api/types/apiResponse';
 import { userActions } from 'entities/User';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
-import { getAlbumFormData } from 'features/AddAlbum/model/selectors/getAlbumFormData/getAlbumFormData';
-import { IAlbum } from 'entities/Albums';
+import { ApiResponse } from 'shared/api/types/apiResponse';
+import { IAlbum } from 'shared/types';
+import { getAlbumFormData } from '../../selectors/getAlbumFormData/getAlbumFormData';
 
 interface LoginByUsernameResult {
 	serverMessage: string;

@@ -1,24 +1,24 @@
-import cls from './EditableUserProfile.module.scss';
-import { classNames } from 'shared/lib/classNames/classNames';
-import { ProfileCard } from 'entities/Profile';
-import { useSelector } from 'react-redux';
-import { getProfileIsLoading } from '../../model/selectors/getProfileIsLoading/getProfileIsLoading';
-import { getProfileError } from '../../model/selectors/getProfileError/getProfileError';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
-import { getProfileReadonly } from '../../model/selectors/getProfileReadonly/getProfileReadonly';
 import { ChangeEvent, memo, useCallback, useEffect } from 'react';
-import { fetchProfileData } from '../../model/services/fetchProfileData/fetchProfileData';
+import { useSelector } from 'react-redux';
+import { ProfileCard } from 'entities/Profile';
+import { classNames } from 'shared/lib/classNames/classNames';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { profileActions, profileReducer } from '../../model/slice/profileSlice';
-import { EditProfile } from 'features/EditableUserProfile/ui/EditProfile/EditProfile';
-import { getProfileForm } from '../../model/selectors/getProfileForm/getProfileForm';
-import { getProfileFormServerMessage } from 'features/EditableUserProfile/model/selectors/getProfileFormServerMessage/getProfileFormServerMessage';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useImage } from 'shared/lib/hooks/useImage/useImage';
 import { Notification, NotificationTheme } from 'shared/ui/Notification/Notification';
+import { getProfileError } from '../../model/selectors/getProfileError/getProfileError';
+import { getProfileForm } from '../../model/selectors/getProfileForm/getProfileForm';
+import { getProfileFormServerMessage } from '../../model/selectors/getProfileFormServerMessage/getProfileFormServerMessage';
+import { getProfileIsLoading } from '../../model/selectors/getProfileIsLoading/getProfileIsLoading';
+import { getProfileReadonly } from '../../model/selectors/getProfileReadonly/getProfileReadonly';
 import {
 	getProfileValidateErrors
 } from '../../model/selectors/getProfileValidateErrors/getProfileValidateErrors';
-import { validateProfileData } from 'features/EditableUserProfile/model/services/validateProfileData/validateProfileData';
-import { useImage } from 'shared/lib/hooks/useImage/useImage';
+import { fetchProfileData } from '../../model/services/fetchProfileData/fetchProfileData';
+import { validateProfileData } from '../../model/services/validateProfileData/validateProfileData';
+import { profileActions, profileReducer } from '../../model/slice/profileSlice';
+import { EditProfile } from '../../ui/EditProfile/EditProfile';
+import cls from './EditableUserProfile.module.scss';
 
 interface EditableUserProfileProps {
     className?: string;

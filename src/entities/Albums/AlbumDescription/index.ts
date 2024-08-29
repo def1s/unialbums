@@ -14,7 +14,6 @@ export {
 } from './model/types/albumDescriptionSchema';
 
 export {
-	getAlbumDescriptionForm,
 	getAlbumDescriptionIsEditable,
 	getAlbumDescriptionReadonly,
 	getAlbumDescriptionData,
@@ -22,3 +21,5 @@ export {
 	getAlbumDescriptionServerMessage,
 	getAlbumDescriptionIsLoading
 } from './model/selectors/selectors';
+
+export { AlbumDescription } from './ui/AlbumDescription/AlbumDescription';

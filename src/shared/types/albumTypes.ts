@@ -5,6 +5,8 @@ export interface IAlbumDescription {
 	artist?: string;
 }
 
+export type IAlbumDescriptionForm = Omit<IAlbumDescription, 'isEditable'>;
+
 export interface IAlbumRating {
 	isEditable?: boolean;
 	bitsRating?: number;
@@ -19,4 +21,6 @@ export interface IAlbumBase {
 }
 
 export interface IAlbum extends IAlbumDescription, IAlbumRating, IAlbumBase {}
+
+export type IAlbumForm = Omit<IAlbum, 'albumId'>;
 

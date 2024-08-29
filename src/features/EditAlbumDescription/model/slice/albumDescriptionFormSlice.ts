@@ -1,5 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AlbumDescriptionFormSchema, IAlbumDescriptionForm } from '../types/albumDescriptionFormSchema';
+import { IAlbumDescriptionForm } from 'shared/types';
+import {
+	updateAlbumDescription
+} from '../services/updateAlbumDescription/updateAlbumDescription';
+import { AlbumDescriptionFormSchema } from '../types/albumDescriptionFormSchema';
 
 const initialState: AlbumDescriptionFormSchema = {
 	data: {
@@ -29,6 +33,20 @@ const albumDescriptionFormSlice = createSlice({
 		// 	state.form = state.data;
 		// }
 	},
+	extraReducers: builder => {
+		builder.addCase(updateAlbumDescription.pending, (state) => {
+			state.error = undefined;
+			state.isLoading = true;
+		});
+		builder.addCase(updateAlbumDescription.fulfilled, (state) => {
+			state.isLoading = false;
+			// logic
+		});
+		builder.addCase(updateAlbumDescription.rejected, (state, action) => {
+			state.isLoading = false;
+			state.error = action.payload;
+		});
+	}
 	// extraReducers: (builder) => {
 	// 	builder.addCase(fetchAlbumDescription.pending, (state) => {
 	// 		state.error = undefined;

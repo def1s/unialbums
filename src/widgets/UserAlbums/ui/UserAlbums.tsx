@@ -1,10 +1,10 @@
-import cls from './UserAlbums.module.scss';
-import { classNames } from 'shared/lib/classNames/classNames';
 import React, { memo } from 'react';
+import { AlbumsGrid } from 'entities/Albums/AlbumsGrid';
+import { classNames } from 'shared/lib/classNames/classNames';
+import { IAlbum } from 'shared/types';
 import { Loader } from 'shared/ui/Loader/Loader';
 import { Text, TextAlign, TextTheme } from 'shared/ui/Text/Text';
-import { AlbumsGrid } from 'entities/Albums/AlbumsGrid/ui/AlbumGrid/AlbumsGrid';
-import { IAlbum } from 'entities/Albums';
+import cls from './UserAlbums.module.scss';
 
 interface UserAlbumsProps {
 	albums: IAlbum[];

@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import './styles/index.scss';
+import { useSelector } from 'react-redux';
+// eslint-disable-next-line @conarti/feature-sliced/absolute-relative
 import { AppRouter } from 'app/providers/router';
 import { Navbar } from 'widgets/Navbar';
 import { Sidebar } from 'widgets/Sidebar';
-import { useSelector } from 'react-redux';
 import { getUserAuthData, getUserInited, userInitAuthData } from 'entities/User';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';

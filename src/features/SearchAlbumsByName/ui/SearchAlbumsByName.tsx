@@ -1,7 +1,7 @@
-import cls from './SearchAlbumsByName.module.scss';
-import { classNames } from 'shared/lib/classNames/classNames';
 import React from 'react';
+import { classNames } from 'shared/lib/classNames/classNames';
 import { Input } from 'shared/ui/Input/Input';
+import cls from './SearchAlbumsByName.module.scss';
 
 interface SearchAlbumsByNameProps {
     className?: string
