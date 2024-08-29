@@ -15,3 +15,10 @@
     color: white;
     border-radius: var(--small-radius);
 }
+
+.red {
+    background-color: var(--light-bg-color);
+    border-radius: var(--small-radius);
+    color: var(--red-color);
+    border: solid 1px var(--red-color);
+}

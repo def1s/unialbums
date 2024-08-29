@@ -3,16 +3,14 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import React, { ChangeEvent, memo, ReactNode, useMemo } from 'react';
 import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
 import { Input, ThemeInput } from 'shared/ui/Input/Input';
-import { Album } from '../../model/types/album';
+import { IAlbumDescription } from '../../model/types/album';
 import { Loader } from 'shared/ui/Loader/Loader';
 import { Blur } from 'shared/ui/Blur/Blur';
-import { calculateRating } from 'shared/lib/calculateRating/calculateRating';
-import { RATING_ALBUMS_MULTIPLIER } from 'shared/const/global';
 import { InputFile } from 'shared/ui/InputFile/InputFile';
 
 interface AlbumDescriptionProps {
 	/** Данные альбома, включающие название, исполнителя, обложку и рейтинги */
-	data?: Album;
+	data?: IAlbumDescription;
 	/** Дополнительный класс для кастомизации стилей компонента */
 	className?: string;
 	/** Флаг, указывающий, что поля компонента только для чтения */
@@ -50,14 +48,6 @@ export const AlbumDescription = memo((props: AlbumDescriptionProps): React.React
 		onDeleteCover
 	} = props;
 
-	const rating = useMemo(() => calculateRating(
-		RATING_ALBUMS_MULTIPLIER,
-		data?.tracksRating || 1,
-		data?.atmosphereRating || 1,
-		data?.bitsRating || 1,
-		data?.textRating || 1
-	), [data?.atmosphereRating, data?.bitsRating, data?.textRating, data?.tracksRating]);
-
 	if (isLoading) {
 		return (
 			<div className={classNames(cls.AlbumDescription, {}, [className])}>
@@ -80,7 +70,6 @@ export const AlbumDescription = memo((props: AlbumDescriptionProps): React.React
 					<div className={cls.title}>{textLengthValidation(data?.title || '', 25)}</div>
 					<div className={cls.artist}>{textLengthValidation(data?.artist || '', 25)}</div>
 					{/*<div className={cls.year}>{data.year}</div>*/}
-					<div className={cls.rating}>{rating}</div>
 				</div>
 
 				<div className={cls.editButtons}>

@@ -3,6 +3,7 @@ import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 import { ApiResponse } from 'shared/api/types/apiResponse';
 
 interface RegistrationProps {
+	email: string;
 	username: string;
 	password: string;
 	firstName: string;
@@ -18,7 +19,7 @@ export const registration = createAsyncThunk<RegistrationResult, RegistrationPro
 	async (registrationData, thunkApi) => {
 		try {
 			const response =
-				await axiosInstance.post<ApiResponse<undefined>>('/register', registrationData);
+				await axiosInstance.post<ApiResponse<undefined>>('/registration', registrationData);
 
 			if (!response.data) {
 				throw new Error('Что-то пошло не так');

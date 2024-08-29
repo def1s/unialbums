@@ -3,6 +3,7 @@ import { RegistrationSchema, ValidateRegistrationErrors } from '../types/registr
 import { registration } from '../services/registration/registration';
 
 const initialState: RegistrationSchema = {
+	email: '',
 	username: '',
 	firstName: '',
 	lastName: '',
@@ -16,6 +17,9 @@ const registrationSlice = createSlice({
 	name: 'registration',
 	initialState,
 	reducers: {
+		setEmail: (state, action: PayloadAction<string>) => {
+			state.email = action.payload;
+		},
 		setUsername: (state, action: PayloadAction<string>) => {
 			state.username = action.payload;
 		},

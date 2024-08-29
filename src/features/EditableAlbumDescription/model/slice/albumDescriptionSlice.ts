@@ -9,10 +9,12 @@ import { Album } from 'entities/Albums';
 import {
 	updateAlbumDescription
 } from '../services/updateAlbumDescription/updateAlbumDescription';
+import { deleteAlbum } from '../services/deleteAlbum/deleteAlbum';
 
 const initialState: EditableAlbumDescriptionSchema = {
 	isLoading: false,
-	readonly: true
+	readonly: true,
+	isEditable: false
 };
 
 const albumDescriptionSlice = createSlice({
@@ -39,7 +41,9 @@ const albumDescriptionSlice = createSlice({
 		});
 		builder.addCase(fetchAlbumDescription.fulfilled, (state, action) => {
 			state.isLoading = false;
-			state.data = action.payload;
+			const { isEditable, ...data } = action.payload;
+			state.data = data;
+			state.isEditable = !!isEditable;
 			state.form = action.payload;
 		});
 		builder.addCase(fetchAlbumDescription.rejected, (state, action) => {
@@ -58,6 +62,20 @@ const albumDescriptionSlice = createSlice({
 			state.data = state.form;
 		});
 		builder.addCase(updateAlbumDescription.rejected, (state, action) => {
+			state.isLoading = false;
+			state.error = action.payload;
+		});
+
+		builder.addCase(deleteAlbum.pending, (state) => {
+			state.error = undefined;
+			state.serverMessage = undefined;
+			state.isLoading = true;
+		});
+		builder.addCase(deleteAlbum.fulfilled, (state, action) => {
+			state.isLoading = false;
+			state.serverMessage = action.payload;
+		});
+		builder.addCase(deleteAlbum.rejected, (state, action) => {
 			state.isLoading = false;
 			state.error = action.payload;
 		});

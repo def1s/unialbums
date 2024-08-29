@@ -8,7 +8,7 @@ export const getAlbumsByAccessToken = createAsyncThunk<Album[], void, { rejectVa
 	'homePage/getAlbumsByAccessToken',
 	async (_, thunkAPI) => {
 		try {
-			const response = await axiosInstance.get<ApiResponse<Album>>('/albums/getByUserId');
+			const response = await axiosInstance.get<ApiResponse<Album[]>>('/albums/getByUserId');
 
 			if (!response.data) {
 				throw new Error('Что-то пошло не так');
@@ -16,7 +16,7 @@ export const getAlbumsByAccessToken = createAsyncThunk<Album[], void, { rejectVa
 
 			return response.data.data;
 		} catch (error) {
-			if (error.response && error.response?.status === 403) {
+			if (error.response && error.response?.status === 401) {
 				thunkAPI.dispatch(userActions.logout());
 			}
 

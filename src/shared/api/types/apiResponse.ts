@@ -1,5 +1,6 @@
+// TODO изменить струтуру данных, обязательный массив и сделать его опциональным
 export interface ApiResponse<T> {
-	data: T[];
+	data: T;
 	message: string;
 }
 

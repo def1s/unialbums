@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import React, { FC, memo } from 'react';
 import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
 import { Album } from '../../model/types/album';
-import { calculateRating } from 'shared/lib/calculateRating/calculateRating';
-import { RATING_ALBUMS_MULTIPLIER } from 'shared/const/global';
 
 /**
  * Определение свойств для компонента AlbumCard
@@ -32,19 +30,9 @@ export const AlbumCard: FC<AlbumCardProps> = memo((props: AlbumCardProps): React
 		title,
 		artist,
 		className,
-		bitsRating = 1,
-		textRating = 1,
-		tracksRating= 1,
-		atmosphereRating = 1
+		totalRating
 	} = props;
 
-	const rating = calculateRating(
-		RATING_ALBUMS_MULTIPLIER,
-		+tracksRating,
-		+atmosphereRating,
-		+bitsRating,
-		+textRating
-	);
 
 	return (
 		// Компонент Link используется для создания ссылки на страницу альбома
@@ -55,7 +43,7 @@ export const AlbumCard: FC<AlbumCardProps> = memo((props: AlbumCardProps): React
 			<div className={cls.title}>{textLengthValidation(title || '')}</div>
 			<div className={cls.artist}>{textLengthValidation(artist || '')}</div>
 			<div className={cls.divider}></div>
-			<div className={cls.rating}>{rating}</div>
+			<div className={cls.rating}>{totalRating}</div>
 		</Link>
 	);
 });

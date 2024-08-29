@@ -1,18 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios, { AxiosRequestConfig } from 'axios';
 import { userActions } from '../../slice/userSlice';
+import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 
 export const userLogout = createAsyncThunk<void, void, { rejectValue: string }>(
 	'user/userLogout',
 	async (_, thunkAPI) => {
 		try {
-			const options: AxiosRequestConfig = {
-				method: 'GET',
-				url: `${__API_URL__}/logout`,
-				withCredentials: true
-			};
-
-			await axios(options);
+			await axiosInstance.post('/logout');
 			thunkAPI.dispatch(userActions.logout());
 		} catch (error) {
 			return thunkAPI.rejectWithValue(

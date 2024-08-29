@@ -3,7 +3,7 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { RangeSlider } from 'shared/ui/RangeSlider/RangeSlider';
 import { useSelector } from 'react-redux';
 import { Input } from 'shared/ui/Input/Input';
-import React, { ChangeEvent, FormEvent, memo, useCallback, useEffect } from 'react';
+import React, { ChangeEvent, FormEvent, memo, useCallback, useEffect, useRef, useState } from 'react';
 import { albumFormActions, albumFormReducer } from '../../model/slice/albumFormSlice';
 import { addAlbumToUser } from '../../model/services/addAlbumToUser/addAlbumToUser';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
@@ -18,6 +18,11 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { getAlbumFormData } from '../../model/selectors/getAlbumFormData/getAlbumFormData';
 import { Notification, NotificationTheme } from 'shared/ui/Notification/Notification';
 import { useImage } from 'shared/lib/hooks/useImage/useImage';
+import { searchAlbumsSpotify } from '../../model/services/searchAlbumsSpotify/searchAlbumsSpotify';
+import { SearchList } from 'entities/SearchAlbums';
+import { getSearchAlbums } from '../../model/selectors/getSearchAlbums/getSearchAlbums';
+import { getSearchIsLoading } from '../../model/selectors/getSearchIsLoading/getSearchIsLoading';
+import { getAlbumSpotify } from '../../model/services/getAlbumSpotify/getAlbumSpotify';
 
 interface AlbumFormProps {
     className?: string
@@ -27,10 +32,11 @@ const initialReducers: ReducerList = {
 	albumForm: albumFormReducer
 };
 
-/*
-* Форма для добавления альбома от пользователя. Собирает данные и изображение, после чего отправляет их на сервер.
-* Не имеет валидации.
-* */
+/**
+ * Форма для добавления альбома от пользователя. Собирает данные и изображение, после чего отправляет их на сервер.
+ * Не имеет валидации.
+ * Во время ввода информации об альбоме показывает пользователю варианты из spotify api
+ */
 export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 	const dispatch = useAppDispatch();
 
@@ -38,8 +44,15 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 	const isLoading = useSelector(getAlbumFormIsLoading);
 	const error = useSelector(getAlbumFormError);
 	const serverMessage = useSelector(getAlbumFormServerMessage);
+	const searchAlbums = useSelector(getSearchAlbums);
+	const isSearching = useSelector(getSearchIsLoading);
 
 	const { localUrlImage, onCreateImage, onDeleteImage } = useImage();
+	const [isInputFocused, setIsInputFocused] = useState(false);
+	/**
+	 * для отмены запросов, когда не успел прийти предыдущий при поиске альбомов
+	 */
+	const searchAbortControllerRef = useRef<AbortController | null>(null);
 
 	// очищение URL после размонтирования компонента
 	useEffect(() => {
@@ -49,14 +62,23 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 		//eslint-disable-next-line
 	}, []);
 
-	// обработчики инпутов
-	// каждый обработчик изменяет свое поле
+	/**
+	 * обработчики инпутов
+	 * каждый обработчик изменяет свое поле
+	 */
 	const onChangeCover = useCallback((cover: string) => {
 		dispatch(albumFormActions.setFieldValue({ cover: cover }));
 	}, [dispatch]);
 
 	const onChangeTitle = useCallback((title: string) => {
+		if (searchAbortControllerRef.current) {
+			searchAbortControllerRef.current.abort();
+		}
+		searchAbortControllerRef.current = new AbortController();
+
 		dispatch(albumFormActions.setFieldValue({ title: title }));
+		// поиск альбомов через спотифай
+		dispatch(searchAlbumsSpotify(searchAbortControllerRef.current));
 	}, [dispatch]);
 
 	const onChangeArtist = useCallback((artist: string) => {
@@ -79,12 +101,12 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 		dispatch(albumFormActions.setFieldValue({ tracksRating: +tracksRating }));
 	}, [dispatch]);
 
-	/*
-	* Для работы с изображениями использую кастомный хук.
-	* Хук предоставляет возможность создать локальную ссылку на изображение,
-	* чтобы ее можно было поместить в слайс.
-	* Также ссылку можно удалить, вместе с этим стерев изображение.
-	* */
+	/**
+	 * Для работы с изображениями использую кастомный хук.
+	 * Хук предоставляет возможность создать локальную ссылку на изображение,
+	 * чтобы ее можно было поместить в слайс.
+	 * Также ссылку можно удалить, вместе с этим стерев изображение.
+	 */
 	const onCoverAdd = useCallback((e: ChangeEvent<HTMLInputElement>) => {
 		onCreateImage(e);
 		onChangeCover(localUrlImage.current);
@@ -99,6 +121,10 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 		e.preventDefault();
 		dispatch(addAlbumToUser());
 	};
+
+	const onClickAlbumFromSearch = useCallback((albumId: string) => {
+		dispatch(getAlbumSpotify({ albumId }));
+	}, [dispatch]);
 
 	// уведомления
 	const notifications = (
@@ -123,6 +149,7 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 			<form
 				className={classNames(cls.AlbumForm, {}, [className])}
 				onSubmit={(e) => onSubmit(e)}
+				encType={'multipart/form-data'}
 			>
 				{/* уведомления */}
 				{notifications}
@@ -153,8 +180,15 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 							onChange={onChangeTitle}
 							value={formData?.title}
 							placeholder='Название альбома'
+							onFocus={() => setIsInputFocused(true)}
+							onBlur={() => setIsInputFocused(false)}
+							style={isInputFocused ? { 'marginBottom': '0' } : undefined}
 							required
 						/>
+
+						<div className={cls.suggestions}>
+							{isInputFocused && <SearchList items={searchAlbums} isLoading={isSearching} onClickItem={onClickAlbumFromSearch}/>}
+						</div>
 
 						<Input
 							type="text"
@@ -163,6 +197,7 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 							onChange={onChangeArtist}
 							value={formData?.artist}
 							placeholder='Исполнитель'
+							style={isInputFocused ? { 'marginTop': 'var(--medium-padding)' } : undefined}
 							required
 						/>
 					</div>

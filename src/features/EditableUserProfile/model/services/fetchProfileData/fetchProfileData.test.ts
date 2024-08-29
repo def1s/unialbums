@@ -7,30 +7,28 @@ import { Profile } from 'entities/Profile';
 
 describe('userInitAuthData', () => {
 	const response: ApiResponse<Profile> = {
-		data: [
-			{
-				username: '',
-				avatar: '',
-				firstName: '',
-				lastName: ''
-			}
-		],
+		data: {
+			username: '',
+			avatar: '',
+			firstName: '',
+			lastName: ''
+		},
 		message: ''
 	};
 
 	beforeEach(() => {
-		response.data[0].username = '';
-		response.data[0].avatar = '';
-		response.data[0].firstName = '';
-		response.data[0].lastName = '';
+		response.data.username = '';
+		response.data.avatar = '';
+		response.data.firstName = '';
+		response.data.lastName = '';
 		response.message = '';
 	});
 
 	test('should return profile data when request is successful', async () => {
-		response.data[0].username = 'username';
-		response.data[0].avatar = 'avatar';
-		response.data[0].firstName = 'firstName';
-		response.data[0].lastName = 'lastName';
+		response.data.username = 'username';
+		response.data.avatar = 'avatar';
+		response.data.firstName = 'firstName';
+		response.data.lastName = 'lastName';
 		response.message = 'message';
 
 		const mock = new MockAdapter(axiosInstance);
@@ -40,7 +38,7 @@ describe('userInitAuthData', () => {
 		const result = await testAsyncThunk.callThunk();
 
 		expect(result.meta.requestStatus).toBe('fulfilled');
-		expect(result.payload).toEqual(response.data[0]);
+		expect(result.payload).toEqual(response.data);
 	});
 
 	test('should rejected', async () => {

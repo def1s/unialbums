@@ -1,0 +1,18 @@
+.EditRating {
+	position: absolute;
+	right: var(--medium-padding);
+	bottom: var(--medium-padding);
+}
+
+.buttonsWrapper {
+	display: flex;
+	gap: var(--small-padding);
+	flex-direction: column;
+}
+
+.button {
+	padding: 5px;
+	display: block;
+	width: 130px;
+	margin-left: auto;
+}

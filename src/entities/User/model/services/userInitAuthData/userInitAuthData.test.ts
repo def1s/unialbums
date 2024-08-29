@@ -7,18 +7,16 @@ import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 
 describe('userInitAuthData', () => {
 	const response: ApiResponse<User> = {
-		data: [
-			{
-				username: '',
-				avatar: ''
-			}
-		],
+		data: {
+			username: '',
+			avatar: ''
+		},
 		message: ''
 	};
 
 	beforeEach(() => {
-		response.data[0].username = 'username';
-		response.data[0].avatar = 'avatar';
+		response.data.username = 'username';
+		response.data.avatar = 'avatar';
 		response.message = '';
 	});
 
@@ -38,6 +36,6 @@ describe('userInitAuthData', () => {
 		const testAsyncThunk = new TestAsyncThunk(userInitAuthData);
 		const result = await testAsyncThunk.callThunk();
 
-		expect(result.payload).toEqual(response.data[0]);
+		expect(result.payload).toEqual(response.data);
 	});
 });
