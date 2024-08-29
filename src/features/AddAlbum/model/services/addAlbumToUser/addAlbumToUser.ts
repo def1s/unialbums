@@ -3,7 +3,7 @@ import { ApiResponse } from 'shared/api/types/apiResponse';
 import { userActions } from 'entities/User';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 import { getAlbumFormData } from 'features/AddAlbum/model/selectors/getAlbumFormData/getAlbumFormData';
-import { Album } from 'entities/Albums';
+import { IAlbum } from 'entities/Albums';
 
 interface LoginByUsernameResult {
 	serverMessage: string;
@@ -44,10 +44,10 @@ export const addAlbumToUser = createAsyncThunk<
 /**
  * Создает объект FormData для отправки на сервер.
  *
- * @param {Album} albumForm Форма альбома, содержащая обновленные данные.
+ * @param {IAlbum} albumForm Форма альбома, содержащая обновленные данные.
  * @returns {Promise<FormData>} Объект FormData для отправки на сервер.
  */
-const createFormData = async (albumForm: Album): Promise<FormData> => {
+const createFormData = async (albumForm: IAlbum): Promise<FormData> => {
 	const formData = new FormData();
 	// TODO Подумать, нет ли более простого решения
 	// достаем локальное изображение по ссылке из слайса и преобразовываем

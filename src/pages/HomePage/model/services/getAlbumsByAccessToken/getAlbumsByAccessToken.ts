@@ -1,14 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Album } from 'entities/Albums';
+import { IAlbum } from 'entities/Albums';
 import { ApiResponse } from 'shared/api/types/apiResponse';
 import { userActions } from 'entities/User';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 
-export const getAlbumsByAccessToken = createAsyncThunk<Album[], void, { rejectValue: string }>(
+export const getAlbumsByAccessToken = createAsyncThunk<IAlbum[], void, { rejectValue: string }>(
 	'homePage/getAlbumsByAccessToken',
 	async (_, thunkAPI) => {
 		try {
-			const response = await axiosInstance.get<ApiResponse<Album[]>>('/albums/getByUserId');
+			const response = await axiosInstance.get<ApiResponse<IAlbum[]>>('/albums/getByUserId');
 
 			if (!response.data) {
 				throw new Error('Что-то пошло не так');

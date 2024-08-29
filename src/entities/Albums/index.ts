@@ -1,4 +1,3 @@
-export { AlbumCard } from './ui/AlbumCard/AlbumCard';
-export { AlbumDescription } from './ui/AlbumDescription/AlbumDescription';
-export { AlbumRating } from './ui/AlbumRating/AlbumRating';
-export { Album, IAlbumDescription, IAlbumRating } from './model/types/album';
+export { AlbumCard } from 'entities/Albums/AlbumsGrid/ui/AlbumCard/AlbumCard';
+export { AlbumDescription } from 'entities/Albums/AlbumDescription/ui/AlbumDescription/AlbumDescription';
+export { IAlbum, IAlbumDescription, IAlbumRating } from 'entities/Albums/AlbumDescription/model/types/album';

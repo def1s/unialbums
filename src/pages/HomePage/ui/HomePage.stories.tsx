@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import HomePage from './HomePage';
 import { rest } from 'msw';
 import { ApiResponse } from 'shared/api/types/apiResponse';
-import { Album } from 'entities/Albums';
+import { IAlbum } from 'entities/Albums';
 
 const meta: Meta<typeof HomePage> = {
 	title: 'pages/HomePage',
@@ -12,7 +12,7 @@ const meta: Meta<typeof HomePage> = {
 export default meta;
 type Story = StoryObj<typeof HomePage>;
 
-const mockedAlbums: ApiResponse<Album[]> = {
+const mockedAlbums: ApiResponse<IAlbum[]> = {
 	data:
 		[
 			{

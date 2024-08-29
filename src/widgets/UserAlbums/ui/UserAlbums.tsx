@@ -3,11 +3,11 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import React, { memo } from 'react';
 import { Loader } from 'shared/ui/Loader/Loader';
 import { Text, TextAlign, TextTheme } from 'shared/ui/Text/Text';
-import { AlbumsGrid } from 'entities/Albums/ui/AlbumsGrid/AlbumsGrid';
-import { Album } from 'entities/Albums';
+import { AlbumsGrid } from 'entities/Albums/AlbumsGrid/ui/AlbumGrid/AlbumsGrid';
+import { IAlbum } from 'entities/Albums';
 
 interface UserAlbumsProps {
-	albums: Album[];
+	albums: IAlbum[];
 	isLoading?: boolean;
 	error?: string;
     className?: string

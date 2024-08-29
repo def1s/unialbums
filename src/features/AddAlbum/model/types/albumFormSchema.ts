@@ -1,7 +1,7 @@
-import { Album } from 'entities/Albums';
+import { IAlbum } from 'entities/Albums';
 import { SearchFieldItem } from 'entities/SearchAlbums';
 
-export type AlbumForm = Omit<Album, 'albumId'>;
+export type AlbumForm = Omit<IAlbum, 'albumId'>;
 
 export interface AlbumFormSchema {
 	data: AlbumForm;

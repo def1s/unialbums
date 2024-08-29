@@ -1,7 +1,7 @@
-import { Album } from 'entities/Albums';
+import { IAlbum } from 'entities/Albums';
 
 export interface HomePageSchema {
-	albums: Album[];
+	albums: IAlbum[];
 	isLoading: boolean;
 	error?: string;
 }
