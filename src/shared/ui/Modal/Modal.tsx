@@ -17,7 +17,7 @@ export const Modal = (props: ModalProps) => {
 		children,
 		className,
 		onClose,
-		isOpen
+		isOpen,
 	} = props;
 
 	const onClickContent = (e: MouseEvent) => {
@@ -30,7 +30,7 @@ export const Modal = (props: ModalProps) => {
 
 	return (
 		<Portal>
-			<div className={classNames(cls.Modal, { ...mods }, [className])}>
+			<div className={classNames(cls.Modal, mods, [className])}>
 				<div
 					className={cls.overlay}
 					onClick={onClose}
@@ -39,6 +39,7 @@ export const Modal = (props: ModalProps) => {
 						className={cls.content}
 						onClick={(e) => onClickContent(e)}
 					>
+						{<div className={cls.cross} onClick={onClose}></div>}
 						{children}
 					</div>
 				</div>

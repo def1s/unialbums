@@ -14,3 +14,13 @@
 	width: 180px;
 	margin-left: auto;
 }
+
+@media (width <= 650px) {
+	.buttonsWrapper {
+		width: 260px;
+	}
+
+	.button {
+		width: 100%;
+	}
+}

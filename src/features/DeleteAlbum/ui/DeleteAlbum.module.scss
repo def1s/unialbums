@@ -6,3 +6,9 @@
 	border: solid 1px;
 	border-color: var(--red-color);
 }
+
+@media (width <= 650px) {
+	.DeleteAlbum {
+		width: 100%;
+	}
+}
