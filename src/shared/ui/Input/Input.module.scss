@@ -1,27 +1,34 @@
 .Input {
     outline: none;
     display: block;
-    transition: background-color 0.3s ease; // Плавное изменение цвета фона при наведении
+    transition: background-color 0.3s ease, border-color 0.3s ease;
     border-style: solid;
     border-width: 1px;
     border-radius: var(--medium-radius);
     border-color: var(--light-bg-color);
-    padding: 0 10px;
+    padding: 12px 10px 0;
     color: #fff;
+    background-color: var(--default-bg-color-opacity);
 
     &:focus {
-        //background-color: var(--default-bg-color-opacity); // Изменение цвета фона при наведении
         background-color: var(--light-bg-color);
+        border-color: var(--light-bg-color);
     }
 
     &::placeholder {
-        color: rgb(255 255 255 / 50%); // Цвет плейсхолдера
+        color: rgb(255 255 255 / 50%);
+    }
+
+    &:not(:placeholder-shown) + .floatingLabel,
+    &:focus + .floatingLabel {
+        top: 0;
+        transform: translateY(50%);
+        left: 10px;
+        font-size: 12px;
     }
 }
 
 .lightBg {
-    // ширина и высота задается вручную для каждого случая
-    //background-color: var(--light-bg-color);
     background-color: var(--default-bg-color-opacity);
 }
 
@@ -57,4 +64,21 @@
     &:focus {
         background: none;
     }
+}
+
+.inputWrapper {
+    position: relative;
+    width: 100%;
+}
+
+.floatingLabel {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: var(--small-padding);
+    font-size: 16px;
+    //color: #fff;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: rgb(255 255 255 / 50%);
 }

@@ -120,7 +120,7 @@ export const AlbumDescriptionForm = memo((props: AlbumDescriptionFormProps) => {
 					className={cls.formInput}
 					onChange={onChangeTitle}
 					value={formData?.title}
-					placeholder='Название альбома'
+					label={'Название альбома'}
 					required
 				/>
 
@@ -130,7 +130,7 @@ export const AlbumDescriptionForm = memo((props: AlbumDescriptionFormProps) => {
 					className={cls.formInput}
 					onChange={onChangeArtist}
 					value={formData?.artist}
-					placeholder='Исполнитель'
+					label={'Исполнитель'}
 					required
 				/>
 

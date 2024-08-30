@@ -52,7 +52,6 @@ const registrationSlice = createSlice({
 		});
 		builder.addCase(registration.fulfilled, (state, action) => {
 			state.isLoading = false;
-			state.message = action.payload.message;
 		});
 		builder.addCase(registration.rejected, (state, action) => {
 			state.isLoading = false;

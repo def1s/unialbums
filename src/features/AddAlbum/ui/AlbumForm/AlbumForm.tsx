@@ -159,10 +159,10 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 							className={cls.formInput}
 							onChange={onChangeTitle}
 							value={formData?.title}
-							placeholder='Название альбома'
 							onFocus={() => setIsInputFocused(true)}
 							onBlur={() => setIsInputFocused(false)}
 							style={isInputFocused ? { 'marginBottom': '0' } : undefined}
+							label={'Название альбома'}
 							required
 						/>
 
@@ -176,8 +176,7 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 							className={cls.formInput}
 							onChange={onChangeArtist}
 							value={formData?.artist}
-							placeholder='Исполнитель'
-							style={isInputFocused ? { 'marginTop': 'var(--medium-padding)' } : undefined}
+							label={'Исполнитель'}
 							required
 						/>
 					</div>

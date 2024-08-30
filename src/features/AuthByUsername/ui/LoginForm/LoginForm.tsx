@@ -52,7 +52,7 @@ export const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
 			reducers={initialReducers}
 			removeAfterUnmount
 		>
-			<div className={classNames(cls.LoginForm, {}, [className])}>
+			<form className={classNames(cls.LoginForm, {}, [className])}>
 
 				{
 					isLoading && !error && (
@@ -65,14 +65,14 @@ export const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
 
 				<Input
 					className={cls.input}
-					placeholder={'Имя пользователя'}
+					label={'Имя пользователя'}
 					onChange={onChangeUsername}
 					value={username}
 					type='text'
 				/>
 				<Input
 					className={cls.input}
-					placeholder={'Пароль'}
+					label={'Пароль'}
 					onChange={onChangePassword}
 					value={password}
 					type='password'
@@ -87,7 +87,7 @@ export const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
 				>
 					Вход
 				</Button>
-			</div>
+			</form>
 		</DynamicModuleLoader>
 	);
 });

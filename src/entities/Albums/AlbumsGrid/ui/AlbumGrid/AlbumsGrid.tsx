@@ -11,7 +11,7 @@ interface AlbumsGridProps {
 
 export const AlbumsGrid = ({ className, albums }: AlbumsGridProps) => {
 
-	// TODO перенести model в entities
+	// TODO перенести сюда isLoading
 
 	return (
 		<div className={classNames(cls.AlbumsGrid, {}, [className])}>

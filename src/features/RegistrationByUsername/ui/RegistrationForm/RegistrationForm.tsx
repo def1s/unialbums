@@ -8,43 +8,25 @@ import { Button } from 'shared/ui/Button/Button';
 import { Input } from 'shared/ui/Input/Input';
 import { Loader } from 'shared/ui/Loader/Loader';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
-import {
-	getRegistrationEmail
-} from '../../model/selectors/getRegistrationEmail/getRegistrationEmail';
-import {
-	getRegistrationError
-} from '../../model/selectors/getRegistrationError/getRegistrationError';
-import {
-	getRegistrationFirstName
-} from '../../model/selectors/getRegistrationFirstName/getRegistrationFirstName';
-import {
-	getRegistrationIsLoading
-} from '../../model/selectors/getRegistrationIsLoading/getRegistrationIsLoading';
+import { getRegistrationEmail } from '../../model/selectors/getRegistrationEmail/getRegistrationEmail';
+import { getRegistrationError } from '../../model/selectors/getRegistrationError/getRegistrationError';
+import { getRegistrationFirstName } from '../../model/selectors/getRegistrationFirstName/getRegistrationFirstName';
+import { getRegistrationIsLoading } from '../../model/selectors/getRegistrationIsLoading/getRegistrationIsLoading';
 import {
 	getRegistrationIsPasswordsEqual
 } from '../../model/selectors/getRegistrationIsPasswordsEqual/getRegistrationIsPasswordsEqual';
-import {
-	getRegistrationLastName
-} from '../../model/selectors/getRegistrationLastName/getRegistrationLastName';
-import {
-	getRegistrationMessage
-} from 	'../../model/selectors/getRegistrationMessage/getRegistrationMessage';
-import {
-	getRegistrationPassword
-} from '../../model/selectors/getRegistrationPassword/getRegistrationPassword';
+import { getRegistrationLastName } from '../../model/selectors/getRegistrationLastName/getRegistrationLastName';
+import { getRegistrationMessage } from '../../model/selectors/getRegistrationMessage/getRegistrationMessage';
+import { getRegistrationPassword } from '../../model/selectors/getRegistrationPassword/getRegistrationPassword';
 import {
 	getRegistrationRepeatedPassword
 } from '../../model/selectors/getRegistrationRepeatedPassword/getRegistrationRepeatedPassword';
-import {
-	getRegistrationUsername
-} from '../../model/selectors/getRegistrationUsername/getRegistrationUsername';
+import { getRegistrationUsername } from '../../model/selectors/getRegistrationUsername/getRegistrationUsername';
 import {
 	getRegistrationValidateErrors
 } from '../../model/selectors/getRegistrationValidateErrors/getRegistrationValidateErrors';
 import { registration } from '../../model/services/registration/registration';
-import {
-	validateRegistrationForm
-} from '../../model/services/validateRegistrationForm/validateRegistrationForm';
+import { validateRegistrationForm } from '../../model/services/validateRegistrationForm/validateRegistrationForm';
 import { registrationActions, registrationReducer } from '../../model/slice/registrationSlice';
 import { ValidateRegistrationErrorsKeys } from '../../model/types/registrationSchema';
 import cls from './RegistrationForm.module.scss';
@@ -148,41 +130,42 @@ export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 
 				<Input
 					className={cls.input}
-					placeholder={'Почта'}
+					label={'Почта'}
 					value={email}
 					onChange={onChangeEmail}
 					type={'email'}
 					required={true}
 				/>
 
+				{validateErrors?.INCORRECT_USERNAME && <Text text={validateErrorsTranslates.INCORRECT_USERNAME} theme={TextTheme.ERROR}/>}
 				<Input
 					className={cls.input}
-					placeholder={'Имя пользователя'}
+					label={'Имя пользователя'}
 					value={username}
 					onChange={onChangeUsername}
 					required={true}
-					error={validateErrors?.INCORRECT_USERNAME ? validateErrorsTranslates.INCORRECT_USERNAME : undefined}
 				/>
 
+				{validateErrors?.INCORRECT_FIRSTNAME && <Text text={validateErrorsTranslates.INCORRECT_FIRSTNAME} theme={TextTheme.ERROR}/>}
 				<Input
 					className={cls.input}
-					placeholder={'Имя'}
+					label={'Имя'}
 					value={firstName}
 					onChange={onChangeFirstName}
-					error={validateErrors?.INCORRECT_FIRSTNAME ? validateErrorsTranslates.INCORRECT_FIRSTNAME : undefined}
 				/>
 
+				{validateErrors?.INCORRECT_LASTNAME && <Text text={validateErrorsTranslates.INCORRECT_LASTNAME} theme={TextTheme.ERROR}/>}
 				<Input
 					className={cls.input}
-					placeholder={'Фамилия'}
+					label={'Фамилия'}
 					value={lastName}
 					onChange={onChangeLastName}
-					error={validateErrors?.INCORRECT_LASTNAME ? validateErrorsTranslates.INCORRECT_LASTNAME : undefined}
 				/>
 
+				{validateErrors?.INCORRECT_PASSWORD && <Text text={validateErrorsTranslates.INCORRECT_PASSWORD} theme={TextTheme.ERROR}/>}
 				<Input
 					className={cls.input}
-					placeholder={'Пароль'}
+					label={'Пароль'}
 					value={password}
 					type={'password'}
 					onChange={onChangePassword}
@@ -192,7 +175,7 @@ export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 
 				<Input
 					className={cls.input}
-					placeholder={'Повторите пароль'}
+					label={'Повторите пароль'}
 					value={repeatedPassword}
 					type={'password'}
 					required={true}

@@ -18,9 +18,6 @@ const albumDescriptionSlice = createSlice({
 	name: 'albumDescription',
 	initialState,
 	reducers: {
-		setReadonly: (state, action: PayloadAction<boolean>) => {
-			state.readonly = action.payload;
-		},
 		updateAlbumDescription: (state, action: PayloadAction<IAlbum>) => {
 			state.data = {
 				...state.data,

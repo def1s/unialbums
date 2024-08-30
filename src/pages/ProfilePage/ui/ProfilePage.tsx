@@ -1,4 +1,4 @@
-import { EditableUserProfile } from 'features/EditableUserProfile';
+import { PersonalProfileDetails } from 'widgets/PersonalProfileDetails';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './ProfilePage.module.scss';
 
@@ -10,7 +10,7 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
 
 	return (
 		<div className={classNames(cls.ProfilePage, {}, [className])}>
-			<EditableUserProfile/>
+			<PersonalProfileDetails/>
 		</div>
 	);
 };

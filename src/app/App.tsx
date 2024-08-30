@@ -20,8 +20,6 @@ const App = () => {
 		document.body.style.backgroundImage = `url(${__MINIO_URL__}/bg.png)`;
 	}, [dispatch]);
 
-	// TODO Добавить isLoading и error в схему пользователя для уведомления пользователя о инициализации приложения
-
 	return (
 		<div className='App'>
 			<div className={classNames('', { 'content-page': !!user })}>
