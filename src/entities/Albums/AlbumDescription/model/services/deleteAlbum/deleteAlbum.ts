@@ -7,6 +7,7 @@ interface DeleteAlbumProps {
 	id?: string | number;
 }
 
+// TODO перенести в фичи
 export const deleteAlbum =
 	createAsyncThunk<string, DeleteAlbumProps, { rejectValue: string }>
 	(

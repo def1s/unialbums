@@ -1,6 +1,6 @@
 import { IAlbum } from 'shared/types';
 
-export interface HomePageSchema {
+export interface AlbumsGridSchema {
 	albums: IAlbum[];
 	isLoading: boolean;
 	error?: string;

@@ -32,12 +32,12 @@ export const Error: Story = {
 	]
 };
 
-export const Successful: Story = {
-	decorators: [
-		StoreDecorator({
-			albumForm: {
-				serverMessage: 'Все прошло успешно'
-			}
-		})
-	]
-};
+// export const Successful: Story = {
+// 	decorators: [
+// 		StoreDecorator({
+// 			albumForm: {
+// 				serverMessage: 'Все прошло успешно'
+// 			}
+// 		})
+// 	]
+// };

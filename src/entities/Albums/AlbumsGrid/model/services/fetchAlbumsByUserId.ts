@@ -4,11 +4,11 @@ import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 import { ApiResponse } from 'shared/api/types/apiResponse';
 import { IAlbum } from 'shared/types';
 
-export const getAlbumsByAccessToken = createAsyncThunk<IAlbum[], void, { rejectValue: string }>(
-	'homePage/getAlbumsByAccessToken',
-	async (_, thunkAPI) => {
+export const fetchAlbumsByUserId = createAsyncThunk<IAlbum[], number, { rejectValue: string }>(
+	'homePage/fetchAlbumsByUserId',
+	async (id, thunkAPI) => {
 		try {
-			const response = await axiosInstance.get<ApiResponse<IAlbum[]>>('/albums/getByUserId');
+			const response = await axiosInstance.get<ApiResponse<IAlbum[]>>('/albums/getByUserId/' + id);
 
 			if (!response.data) {
 				throw new Error('Что-то пошло не так');

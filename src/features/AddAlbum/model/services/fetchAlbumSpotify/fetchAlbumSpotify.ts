@@ -7,12 +7,12 @@ interface GetAlbumSpotifyProps {
 	albumId: string;
 }
 
-export const getAlbumSpotify = createAsyncThunk<
+export const fetchAlbumSpotify = createAsyncThunk<
 	SearchFieldItem,
 	GetAlbumSpotifyProps,
 	{ rejectValue: string }
 >(
-	'albumForm/getAlbumSpotify',
+	'albumForm/fetchAlbumSpotify',
 	async ({ albumId }, thunkAPI) => {
 		try {
 			const response =

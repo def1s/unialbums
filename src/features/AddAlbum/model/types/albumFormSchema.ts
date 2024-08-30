@@ -7,5 +7,4 @@ export interface AlbumFormSchema {
 	isSearching: boolean;
 	isLoading: boolean;
 	error?: string;
-	serverMessage?: string;
 }

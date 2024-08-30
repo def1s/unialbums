@@ -23,8 +23,7 @@ Login.decorators = [
 						username: 'username'
 					},
 					_inited: false
-				},
-				homePage: undefined
+				}
 			}}
 		>
 			<Story/>

@@ -1,18 +1,17 @@
 import { Action, EnhancedStore, Reducer, ReducersMapObject } from '@reduxjs/toolkit';
-import { HomePageSchema } from 'pages/HomePage';
 import { AlbumFormSchema } from 'features/AddAlbum';
 import { LoginSchema } from 'features/AuthByUsername';
 import { EditableUserProfileSchema } from 'features/EditableUserProfile';
 import { AlbumDescriptionFormSchema } from 'features/EditAlbumDescription';
 import { RegistrationSchema } from 'features/RegistrationByUsername';
 import { AlbumDescriptionSchema } from 'entities/Albums/AlbumDescription';
+import { AlbumsGridSchema } from 'entities/Albums/AlbumsGrid';
 import { NotificationSchema } from 'entities/Notification';
 import { UserSchema } from 'entities/User';
 // import { EditableAlbumRatingSchema } from 'features/EditableAlbumRating';
 
 export interface StateSchema {
 	user: UserSchema;
-	homePage: HomePageSchema;
 	notification: NotificationSchema;
 
 	// асинхронные редьюсеры
@@ -23,6 +22,7 @@ export interface StateSchema {
 	albumDescription?: AlbumDescriptionSchema;
 	// albumRating?: EditableAlbumRatingSchema;
 	albumDescriptionForm?: AlbumDescriptionFormSchema;
+	albumsGrid?: AlbumsGridSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;

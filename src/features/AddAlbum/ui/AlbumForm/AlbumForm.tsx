@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FormEvent, memo, useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { fetchAlbumSpotify } from 'features/AddAlbum/model/services/fetchAlbumSpotify/fetchAlbumSpotify';
 import { SearchList } from 'entities/SearchAlbums';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
@@ -14,11 +15,9 @@ import { RangeSlider } from 'shared/ui/RangeSlider/RangeSlider';
 import { getAlbumFormData } from '../../model/selectors/getAlbumFormData/getAlbumFormData';
 import { getAlbumFormError } from '../../model/selectors/getAlbumFormError/getAlbumFormError';
 import { getAlbumFormIsLoading } from '../../model/selectors/getAlbumFormIsLoading/getAlbumFormIsLoading';
-import { getAlbumFormServerMessage } from '../../model/selectors/getAlbumFormServerMessage/getAlbumFormServerMessage';
 import { getSearchAlbums } from '../../model/selectors/getSearchAlbums/getSearchAlbums';
 import { getSearchIsLoading } from '../../model/selectors/getSearchIsLoading/getSearchIsLoading';
 import { addAlbumToUser } from '../../model/services/addAlbumToUser/addAlbumToUser';
-import { getAlbumSpotify } from '../../model/services/getAlbumSpotify/getAlbumSpotify';
 import { searchAlbumsSpotify } from '../../model/services/searchAlbumsSpotify/searchAlbumsSpotify';
 import { albumFormActions, albumFormReducer } from '../../model/slice/albumFormSlice';
 import cls from './AlbumForm.module.scss';
@@ -42,7 +41,6 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 	const formData = useSelector(getAlbumFormData);
 	const isLoading = useSelector(getAlbumFormIsLoading);
 	const error = useSelector(getAlbumFormError);
-	const serverMessage = useSelector(getAlbumFormServerMessage);
 	const searchAlbums = useSelector(getSearchAlbums);
 	const isSearching = useSelector(getSearchIsLoading);
 
@@ -122,24 +120,8 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 	};
 
 	const onClickAlbumFromSearch = useCallback((albumId: string) => {
-		dispatch(getAlbumSpotify({ albumId }));
+		dispatch(fetchAlbumSpotify({ albumId }));
 	}, [dispatch]);
-
-	// TODO сделать уведомления
-	// уведомления
-	// const notifications = (
-	// 	<>
-	// 		{
-	// 			!isLoading && error &&
-	//             <Notifications message={error} theme={NotificationTheme.ERROR}/>
-	// 		}
-	//
-	// 		{
-	// 			!isLoading && !error && serverMessage &&
-	//             <Notifications message={serverMessage} theme={NotificationTheme.SUCCESSFUL}/>
-	// 		}
-	// 	</>
-	// );
 
 	return (
 		<DynamicModuleLoader
