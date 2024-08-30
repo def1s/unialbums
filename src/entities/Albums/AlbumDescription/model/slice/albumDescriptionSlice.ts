@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IAlbum } from 'shared/types';
-import { deleteAlbum } from '../services/deleteAlbum/deleteAlbum';
 import {
 	fetchAlbumDescription
 } from '../services/fetchAlbumDescription/fetchAlbumDescription';
@@ -37,20 +36,6 @@ const albumDescriptionSlice = createSlice({
 			state.isEditable = !!isEditable;
 		});
 		builder.addCase(fetchAlbumDescription.rejected, (state, action) => {
-			state.isLoading = false;
-			state.error = action.payload;
-		});
-
-		builder.addCase(deleteAlbum.pending, (state) => {
-			state.error = undefined;
-			state.serverMessage = undefined;
-			state.isLoading = true;
-		});
-		builder.addCase(deleteAlbum.fulfilled, (state, action) => {
-			state.isLoading = false;
-			state.serverMessage = action.payload;
-		});
-		builder.addCase(deleteAlbum.rejected, (state, action) => {
 			state.isLoading = false;
 			state.error = action.payload;
 		});

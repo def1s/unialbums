@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { DeleteAlbum } from 'features/DeleteAlbum';
 import { EditAlbumDescription } from 'features/EditAlbumDescription';
 import {
 	AlbumDescription,
@@ -49,6 +50,7 @@ export const AlbumDetails = (props: AlbumDetailsProps) => {
 					data={data}
 					isLoading={isLoading}
 					EditFeature={isEditable ? <EditAlbumDescription/> : null}
+					DeleteFeature={isEditable ? <DeleteAlbum albumId={id || '-1'}/> : null}
 				/>
 			</div>
 		</DynamicModuleLoader>

@@ -15,6 +15,7 @@ interface AlbumDescriptionProps {
 	isLoading?: boolean;
 	/** Дополнительный функционал редактирования, передаваемый как дочерний элемент */
 	EditFeature?: ReactNode;
+	DeleteFeature?: ReactNode;
 }
 
 /**
@@ -29,6 +30,7 @@ export const AlbumDescription = memo((props: AlbumDescriptionProps): React.React
 		className,
 		isLoading,
 		EditFeature,
+		DeleteFeature
 	} = props;
 
 	if (isLoading) {
@@ -56,6 +58,7 @@ export const AlbumDescription = memo((props: AlbumDescriptionProps): React.React
 
 			<div className={cls.editButtons}>
 				{EditFeature}
+				{DeleteFeature}
 			</div>
 		</div>
 	);

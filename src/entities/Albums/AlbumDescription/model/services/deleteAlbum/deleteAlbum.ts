@@ -11,7 +11,7 @@ interface DeleteAlbumProps {
 export const deleteAlbum =
 	createAsyncThunk<string, DeleteAlbumProps, { rejectValue: string }>
 	(
-		'albumDescription/deleteAlbum',
+		'albumDescription/deleteUserAlbum',
 		async ({ id }, thunkApi) => {
 			try {
 				const response = await axiosInstance.delete<ApiResponse<undefined>>(`/albums/${id}`);
