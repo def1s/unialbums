@@ -28,8 +28,6 @@ export const Notifications = (props: NotificationsProps) => {
 		}
 	}, [dispatch, notifications]);
 
-	console.log(notifications);
-
 	return (
 		<div className={classNames(cls.Notifications, {}, [className])}>
 			{notifications.map(({ message, theme }, index) => (

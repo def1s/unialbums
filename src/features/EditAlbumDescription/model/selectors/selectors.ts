@@ -5,5 +5,3 @@ export const getAlbumDescriptionFormData = (state: StateSchema) => state.albumDe
 export const getAlbumDescriptionFormIsLoading = (state: StateSchema) => state.albumDescriptionForm?.isLoading || false;
 
 export const getAlbumDescriptionFormError = (state: StateSchema) => state.albumDescriptionForm?.error;
-
-export const getAlbumDescriptionFormServerMessage = (state: StateSchema) => state.albumDescriptionForm?.serverMessage;

@@ -1,7 +1,7 @@
-import React, { ChangeEvent, FormEvent, useCallback, useEffect } from 'react';
+import React, { ChangeEvent, FormEvent, memo, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { albumDescriptionActions, getAlbumDescriptionData } from 'entities/Albums/AlbumDescription';
+import { getAlbumDescriptionData } from 'entities/Albums/AlbumDescription';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
@@ -14,7 +14,7 @@ import { Loader } from 'shared/ui/Loader/Loader';
 import {
 	getAlbumDescriptionFormData,
 	getAlbumDescriptionFormError,
-	getAlbumDescriptionFormIsLoading, getAlbumDescriptionFormServerMessage
+	getAlbumDescriptionFormIsLoading,
 } from '../../model/selectors/selectors';
 import { updateAlbumDescription } from '../../model/services/updateAlbumDescription/updateAlbumDescription';
 import { albumDescriptionFormActions, albumDescriptionFormReducer } from '../../model/slice/albumDescriptionFormSlice';
@@ -28,7 +28,7 @@ const initialReducers: ReducerList = {
 	albumDescriptionForm: albumDescriptionFormReducer
 };
 
-export const AlbumDescriptionForm = (props: AlbumDescriptionFormProps) => {
+export const AlbumDescriptionForm = memo((props: AlbumDescriptionFormProps) => {
 	const {
 		className
 	} = props;
@@ -41,8 +41,10 @@ export const AlbumDescriptionForm = (props: AlbumDescriptionFormProps) => {
 	const formData = useSelector(getAlbumDescriptionFormData);
 	const isLoading = useSelector(getAlbumDescriptionFormIsLoading);
 	const error = useSelector(getAlbumDescriptionFormError);
-	const serverMessage = useSelector(getAlbumDescriptionFormServerMessage);
 
+	/**
+	 * Инициализация данных формы по текущим данным описания альбома
+	 */
 	useEffect(() => {
 		if (albumData) {
 			dispatch(albumDescriptionFormActions.initAlbumDescriptionForm(albumData));
@@ -77,13 +79,13 @@ export const AlbumDescriptionForm = (props: AlbumDescriptionFormProps) => {
 		onChangeCover('');
 	}, [onChangeCover, onDeleteImage]);
 
-	const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+	/**
+	 * Обновление данных альбома.
+	 * Данные в форме и все статусы ставятся непосредственно внутри async thunk updateAlbumDescription.
+	 */
+	const onSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		const result = await dispatch(updateAlbumDescription({ id }));
-
-		if (result.meta.requestStatus === 'fulfilled') {
-			dispatch(albumDescriptionActions.updateAlbumDescription(formData || {}));
-		}
+		dispatch(updateAlbumDescription({ id }));
 	};
 
 	return (
@@ -136,4 +138,4 @@ export const AlbumDescriptionForm = (props: AlbumDescriptionFormProps) => {
 			</form>
 		</DynamicModuleLoader>
 	);
-};
+});

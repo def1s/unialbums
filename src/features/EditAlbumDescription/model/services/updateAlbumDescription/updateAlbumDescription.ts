@@ -1,10 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getAlbumDescriptionData } from 'entities/Albums/AlbumDescription';
+import { albumDescriptionActions, getAlbumDescriptionData } from 'entities/Albums/AlbumDescription';
 import { notificationActions } from 'entities/Notification';
 import { userActions } from 'entities/User';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 import { ApiResponse } from 'shared/api/types/apiResponse';
 import { IAlbumDescription } from 'shared/types';
+import { NotificationTypes } from 'shared/types/notificationTypes';
 import { getAlbumDescriptionFormData } from '../../selectors/selectors';
 
 interface UpdateAlbumDescriptionProps {
@@ -13,9 +14,11 @@ interface UpdateAlbumDescriptionProps {
 
 /**
  * Асинхронный thunk для обновления описания альбома.
+ * Описание хранится в entities -> albumDescription -> model
+ * Thunk отвечает за обновление данных, выставление новых данных в albumDescription,
+ * а также отправку уведомлений пользователю.
  *
  * @param {UpdateAlbumDescriptionProps} props Свойства, содержащие идентификатор альбома.
- * @returns {Promise<UpdateAlbumDescriptionResponse>} Ответ сервера с сообщением.
  */
 export const updateAlbumDescription =
 	createAsyncThunk<void, UpdateAlbumDescriptionProps>(
@@ -28,7 +31,8 @@ export const updateAlbumDescription =
 			const albumData = getAlbumDescriptionData(thunkApi.getState());
 
 			if (!albumForm) {
-				return thunkApi.rejectWithValue('Некорректно заполнены данные');
+				thunkApi.dispatch(notificationActions.addNotification({ message: 'Некорректно заполнены данные', theme: NotificationTypes.ERROR }));
+				return;
 			}
 
 			try {
@@ -42,6 +46,7 @@ export const updateAlbumDescription =
 				}
 
 				thunkApi.dispatch(notificationActions.addNotification({ message: response.data.message }));
+				thunkApi.dispatch(albumDescriptionActions.updateAlbumDescription(albumForm));
 			} catch (error) {
 				if (error.response && error.response?.status === 401) {
 					thunkApi.dispatch(userActions.logout());
