@@ -3,6 +3,8 @@
 	background-color: var(--light-bg-color);
 	position: absolute;
 	z-index: 10;
+	margin-top: var(--small-padding);
+	border-radius: var(--medium-radius);
 }
 
 .plugHeight {

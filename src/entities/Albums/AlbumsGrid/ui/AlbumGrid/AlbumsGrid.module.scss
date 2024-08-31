@@ -3,7 +3,6 @@
     min-height: 300px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    padding-top: var(--medium-padding);
     gap: var(--small-padding);
 
     @media (width >= 400px) {

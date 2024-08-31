@@ -10,7 +10,17 @@
 
 	// TODO выбрать подходящий цвет и вынести в переменную
 	&:hover {
-		background-color: #a1a898;
+		background-color: #656865;
+	}
+
+	&:first-child {
+		border-top-right-radius: var(--medium-radius);
+		border-top-left-radius: var(--medium-radius);
+	}
+
+	&:last-child {
+		border-bottom-right-radius: var(--medium-radius);
+		border-bottom-left-radius: var(--medium-radius);
 	}
 }
 
