@@ -7,8 +7,6 @@ export {
 	fetchAlbumDescription
 } from './model/services/fetchAlbumDescription/fetchAlbumDescription';
 
-export { deleteAlbum } from './model/services/deleteAlbum/deleteAlbum';
-
 export {
 	AlbumDescriptionSchema
 } from './model/types/albumDescriptionSchema';

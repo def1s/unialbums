@@ -1,6 +1,5 @@
 import React, { ChangeEvent, FormEvent, memo, useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { fetchAlbumSpotify } from 'features/AddAlbum/model/services/fetchAlbumSpotify/fetchAlbumSpotify';
 import { SearchList } from 'entities/SearchAlbums';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
@@ -18,6 +17,7 @@ import { getAlbumFormIsLoading } from '../../model/selectors/getAlbumFormIsLoadi
 import { getSearchAlbums } from '../../model/selectors/getSearchAlbums/getSearchAlbums';
 import { getSearchIsLoading } from '../../model/selectors/getSearchIsLoading/getSearchIsLoading';
 import { addAlbumToUser } from '../../model/services/addAlbumToUser/addAlbumToUser';
+import { fetchAlbumSpotify } from '../../model/services/fetchAlbumSpotify/fetchAlbumSpotify';
 import { searchAlbumsSpotify } from '../../model/services/searchAlbumsSpotify/searchAlbumsSpotify';
 import { albumFormActions, albumFormReducer } from '../../model/slice/albumFormSlice';
 import cls from './AlbumForm.module.scss';

@@ -23,14 +23,14 @@ export const Default: Story = {
 	}
 };
 
-export const Changeable: Story = {
-	args: {
-		data: user
-	}
-};
-
 export const Loading: Story = {
 	args: {
 		isLoading: true
+	}
+};
+
+export const Error: Story = {
+	args: {
+		error: 'Текст ошибки'
 	}
 };

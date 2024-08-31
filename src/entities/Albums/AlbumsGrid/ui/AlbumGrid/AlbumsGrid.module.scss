@@ -17,3 +17,10 @@
         grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
     }
 }
+
+.message {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}

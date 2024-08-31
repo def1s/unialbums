@@ -2,7 +2,7 @@ export { albumRatingActions, albumRatingReducer } from './model/slice/albumRatin
 
 export { AlbumRatingSchema } from './model/types/albumRatingSchema';
 
-export { getAlbumRatingRating } from './model/selectors/selectors';
+export { getAlbumRatingRating, getAlbumRatingIsLoading, getAlbumRatingError } from './model/selectors/selectors';
 
 export { AlbumRating } from './ui/AlbumRating';
 

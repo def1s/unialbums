@@ -7,7 +7,7 @@ import {
 	AlbumDescription,
 	albumDescriptionReducer,
 	fetchAlbumDescription,
-	getAlbumDescriptionData,
+	getAlbumDescriptionData, getAlbumDescriptionError,
 	getAlbumDescriptionIsEditable,
 	getAlbumDescriptionIsLoading,
 } from 'entities/Albums/AlbumDescription';
@@ -35,6 +35,7 @@ export const AlbumDescriptionCard = (props: AlbumDescriptionCardProps) => {
 	const data = useSelector(getAlbumDescriptionData);
 	const isLoading = useSelector(getAlbumDescriptionIsLoading);
 	const isEditable = useSelector(getAlbumDescriptionIsEditable);
+	const error = useSelector(getAlbumDescriptionError);
 
 	useEffect(() => {
 		if (id) {
@@ -51,6 +52,7 @@ export const AlbumDescriptionCard = (props: AlbumDescriptionCardProps) => {
 				<AlbumDescription
 					data={data}
 					isLoading={isLoading}
+					error={error}
 					EditFeature={isEditable ? <EditAlbumDescription/> : null}
 					DeleteFeature={isEditable ? <DeleteAlbum albumId={id || '-1'}/> : null}
 				/>

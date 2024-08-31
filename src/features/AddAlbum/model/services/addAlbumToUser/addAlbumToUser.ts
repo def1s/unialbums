@@ -9,8 +9,7 @@ import { getAlbumFormData } from '../../selectors/getAlbumFormData/getAlbumFormD
 
 export const addAlbumToUser = createAsyncThunk<
 	void,
-	void,
-	{ rejectValue: string }
+	void
 >(
 	'albumForm/addAlbumToUser',
 	async (_, thunkAPI) => {
@@ -19,7 +18,10 @@ export const addAlbumToUser = createAsyncThunk<
 		const albumForm = getAlbumFormData(thunkAPI.getState());
 
 		if (!albumForm) {
-			return thunkAPI.rejectWithValue('Недопустимый ввод или пустое поле');
+			thunkAPI.dispatch(notificationActions.addNotification({
+				message: 'Недопустимый ввод или пустое поле',
+				theme: NotificationTypes.ERROR
+			}));
 		} else {
 			try {
 				const formData = await createFormData(albumForm);
@@ -33,12 +35,12 @@ export const addAlbumToUser = createAsyncThunk<
 					thunkAPI.dispatch(userActions.logout());
 				}
 
+				const errorMessage = error.response.data.message || 'Непредвиденная ошибка';
+
 				thunkAPI.dispatch(notificationActions.addNotification({
-					message: error.response.data.message || 'Непредвиденная ошибка',
+					message: errorMessage,
 					theme: NotificationTypes.ERROR
 				}));
-
-				return thunkAPI.rejectWithValue(error.response.data.message || 'Непредвиденная ошибка');
 			}
 		}
 	}

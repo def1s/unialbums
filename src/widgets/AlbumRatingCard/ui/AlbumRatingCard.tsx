@@ -2,7 +2,13 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { EditAlbumRating } from 'features/EditAlbumRating';
-import { AlbumRating, albumRatingReducer, getAlbumRatingRating } from 'entities/Albums/AlbumRating';
+import {
+	AlbumRating,
+	albumRatingReducer,
+	getAlbumRatingError,
+	getAlbumRatingIsLoading,
+	getAlbumRatingRating
+} from 'entities/Albums/AlbumRating';
 import { fetchAlbumRating } from 'entities/Albums/AlbumRating';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
@@ -26,6 +32,8 @@ export const AlbumRatingCard = (props: AlbumRatingCardProps) => {
 	const dispatch = useAppDispatch();
 
 	const ratingData = useSelector(getAlbumRatingRating);
+	const isLoading = useSelector(getAlbumRatingIsLoading);
+	const error = useSelector(getAlbumRatingError);
 
 	useEffect(() => {
 		if (id) {
@@ -41,6 +49,8 @@ export const AlbumRatingCard = (props: AlbumRatingCardProps) => {
 			<div className={classNames(cls.AlbumRatingCard, {}, [className])}>
 				<AlbumRating
 					data={ratingData}
+					isLoading={isLoading}
+					error={error}
 					EditFeature={<EditAlbumRating/>}
 				/>
 			</div>

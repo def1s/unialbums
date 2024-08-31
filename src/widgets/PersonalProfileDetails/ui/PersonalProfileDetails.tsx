@@ -4,6 +4,7 @@ import { EditPersonalProfile } from 'features/EditPersonalProfile';
 import {
 	fetchPersonalProfileData,
 	getPersonalProfileData,
+	getPersonalProfileError,
 	PersonalProfileCard,
 	personalProfileReducer
 } from 'entities/PersonalProfile';
@@ -30,6 +31,7 @@ export const PersonalProfileDetails = (props: PersonalProfileDetailsProps) => {
 
 	const data = useSelector(getPersonalProfileData);
 	const isLoading = useSelector(getPersonalProfileIsLoading);
+	const error = useSelector(getPersonalProfileError);
 
 	useEffect(() => {
 		dispatch(fetchPersonalProfileData());
@@ -45,6 +47,7 @@ export const PersonalProfileDetails = (props: PersonalProfileDetailsProps) => {
 				<PersonalProfileCard
 					data={data}
 					isLoading={isLoading}
+					error={error}
 					EditFeature={<EditPersonalProfile/>}
 				/>
 

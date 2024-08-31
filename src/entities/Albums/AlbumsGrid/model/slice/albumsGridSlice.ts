@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchAlbumsByAccessToken } from '../services/fetchAlbumsByAccessToken';
-import { fetchAlbumsByUserId } from '../services/fetchAlbumsByUserId';
+import { fetchAlbumsByAccessToken } from '../services/fetchAlbumsByAccessToken/fetchAlbumsByAccessToken';
+import { fetchAlbumsByUserId } from '../services/fetchAlbumsByUserId/fetchAlbumsByUserId';
 import { AlbumsGridSchema } from '../types/albumsGridSchema';
 
 const initialState: AlbumsGridSchema = {
@@ -17,12 +17,10 @@ const albumsGridSlice = createSlice({
 			state.error = undefined;
 			state.isLoading = true;
 		});
-
 		builder.addCase(fetchAlbumsByUserId.fulfilled, (state, action) => {
 			state.isLoading = false;
 			state.albums = action.payload;
 		});
-
 		builder.addCase(fetchAlbumsByUserId.rejected, (state, action) => {
 			state.isLoading = false;
 			state.error = action.payload;
@@ -32,12 +30,10 @@ const albumsGridSlice = createSlice({
 			state.error = undefined;
 			state.isLoading = true;
 		});
-
 		builder.addCase(fetchAlbumsByAccessToken.fulfilled, (state, action) => {
 			state.isLoading = false;
 			state.albums = action.payload;
 		});
-
 		builder.addCase(fetchAlbumsByAccessToken.rejected, (state, action) => {
 			state.isLoading = false;
 			state.error = action.payload;

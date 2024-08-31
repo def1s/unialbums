@@ -38,12 +38,11 @@ const albumFormSlice = createSlice({
 			state.error = undefined;
 			state.isLoading = true;
 		});
-		builder.addCase(addAlbumToUser.fulfilled, (state, action) => {
+		builder.addCase(addAlbumToUser.fulfilled, (state) => {
 			state.isLoading = false;
 		});
-		builder.addCase(addAlbumToUser.rejected, (state, action) => {
+		builder.addCase(addAlbumToUser.rejected, (state) => {
 			state.isLoading = false;
-			state.error = action.payload;
 		});
 
 		/**
@@ -78,9 +77,8 @@ const albumFormSlice = createSlice({
 			state.data.artist = action.payload.artists?.join(', ');
 			state.data.cover = action.payload.cover;
 		});
-		builder.addCase(fetchAlbumSpotify.rejected, (state, action) => {
+		builder.addCase(fetchAlbumSpotify.rejected, (state) => {
 			state.isLoading = false;
-			state.error = action.payload;
 		});
 	}
 });

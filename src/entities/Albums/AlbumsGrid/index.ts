@@ -8,5 +8,5 @@ export { AlbumsGridSchema } from './model/types/albumsGridSchema';
 
 export { getAlbumsGridIsLoading, getAlbumsGridError, getAlbumsGridAlbums } from './model/selectors/selectors';
 
-export { fetchAlbumsByUserId } from './model/services/fetchAlbumsByUserId';
-export { fetchAlbumsByAccessToken } from './model/services/fetchAlbumsByAccessToken';
+export { fetchAlbumsByUserId } from './model/services/fetchAlbumsByUserId/fetchAlbumsByUserId';
+export { fetchAlbumsByAccessToken } from './model/services/fetchAlbumsByAccessToken/fetchAlbumsByAccessToken';

@@ -32,21 +32,6 @@ const personalProfileSlice = createSlice({
 				state.isLoading = false;
 				state.error = action.payload;
 			});
-
-		// .addCase(updateProfileData.pending, (state) => {
-		// 	state.validateErrors = undefined;
-		// 	state.serverMessage = undefined;
-		// 	state.isLoading = true;
-		// })
-		// .addCase(updateProfileData.fulfilled, (state, action) => {
-		// 	state.isLoading = false;
-		// 	state.serverMessage = action.payload.serverMessage;
-		// 	state.data = state.form;
-		// })
-		// .addCase(updateProfileData.rejected, (state, action) => {
-		// 	state.isLoading = false;
-		// 	state.error = action.payload;
-		// });
 	}
 });
 

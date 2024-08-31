@@ -10,6 +10,7 @@ interface SearchListProps {
     className?: string;
 	items: SearchFieldItem[];
 	isLoading?: boolean;
+	error?: string;
 	onClickItem?: (albumId: string) => void;
 }
 
@@ -20,6 +21,9 @@ export const SearchList = memo((props: SearchListProps) => {
 		isLoading,
 		onClickItem
 	} = props;
+
+	// TODO добавить ошибку и как-то обработать
+	// пока для этого компонента не придумал красивое решение
 
 	const onClick = useCallback((albumId = '') => {
 		if (onClickItem) {
@@ -45,10 +49,10 @@ export const SearchList = memo((props: SearchListProps) => {
 		>
 			{
 				isLoading &&
-                <>
-                	<Loader/>
-                	<Blur/>
-                </>
+				<>
+					<Loader/>
+					<Blur/>
+				</>
 			}
 
 			{...list}

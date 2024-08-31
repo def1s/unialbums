@@ -10,12 +10,7 @@ const meta: Meta<typeof AlbumDescription> = {
 const album: IAlbum = {
 	cover: 'https://example.com/cover.jpg',
 	title: 'Album Title',
-	artist: 'Artist Name',
-	albumId: 1,
-	tracksRating: 1,
-	textRating: 1,
-	bitsRating: 1,
-	atmosphereRating: 1
+	artist: 'Artist Name'
 };
 
 export default meta;
@@ -27,8 +22,17 @@ export const Default: Story = {
 	}
 };
 
-export const Changeable: Story = {
+export const Loading: Story = {
 	args: {
-		data: album
+		data: album,
+		isLoading: true
 	}
 };
+
+export const Error: Story = {
+	args: {
+		data: album,
+		error: 'Что-то пошло не так'
+	}
+};
+

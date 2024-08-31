@@ -1,11 +1,11 @@
-import { memo, ReactNode } from 'react';
+import React, { memo, ReactNode } from 'react';
 import DefaultAvatar from 'shared/assets/icons/default-avatar.svg';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
 import { IProfile } from 'shared/types';
 import { Avatar } from 'shared/ui/Avatar/Avatar';
 import { Loader } from 'shared/ui/Loader/Loader';
-import { Text } from 'shared/ui/Text/Text';
+import { Text, TextAlign, TextTheme } from 'shared/ui/Text/Text';
 import { ValidateProfileError, ValidateProfileErrorKeys } from '../../model/types/personalProfile';
 import { PersonalProfileField } from '../PersonalProfileField/PersonalProfileField';
 import cls from './PersonalProfileCard.module.scss';
@@ -14,6 +14,7 @@ interface PersonalProfileCardProps {
     className?: string;
 	data?: IProfile;
 	isLoading?: boolean;
+	error?: string;
 	validateErrors?: ValidateProfileError;
 	EditFeature?: ReactNode;
 }
@@ -23,11 +24,12 @@ export const PersonalProfileCard = memo((props: PersonalProfileCardProps) => {
 		className,
 		data,
 		isLoading,
+		error,
 		validateErrors,
 		EditFeature
 	} = props;
 
-	// ошибки
+	// TODO прописать валидацию
 	const validateErrorsTranslates: Record<ValidateProfileErrorKeys, string> = {
 		INCORRECT_FIRSTNAME: 'Некорректно заполнено имя',
 		INCORRECT_LASTNAME: 'Некорректно заполнена фамилия',
@@ -42,16 +44,22 @@ export const PersonalProfileCard = memo((props: PersonalProfileCardProps) => {
 		);
 	}
 
-	const renderAvatar = () => {
-		if (data?.avatar) {
-			return (
-				<Avatar
-					src={data?.avatar}
+	if (error) {
+		return (
+			<div className={classNames(cls.ProfileCard, {}, [className])}>
+				<Text
+					className={cls.error}
+					title={'Произошла ошибка!'}
+					text={error}
+					theme={TextTheme.ERROR}
+					align={TextAlign.CENTER}
 				/>
-			);
-		} else {
-			return <DefaultAvatar className={cls.avatar}/>;
-		}
+			</div>
+		);
+	}
+
+	const renderAvatar = () => {
+		return data?.avatar ? <Avatar src={data?.avatar}/> : <DefaultAvatar className={cls.avatar}/>;
 	};
 
 	return (
