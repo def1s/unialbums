@@ -1,24 +1,36 @@
-import { UserSchema } from 'entities/User';
-import { LoginSchema } from 'features/AuthByUsername';
-import { AlbumFormSchema } from 'features/AddAlbum';
 import { Action, EnhancedStore, Reducer, ReducersMapObject } from '@reduxjs/toolkit';
-import { HomePageSchema } from 'pages/HomePage';
-import { EditableUserProfileSchema } from 'features/EditableUserProfile';
+import { AlbumFormSchema } from 'features/AddAlbum';
+import { LoginSchema } from 'features/AuthByUsername';
+import { AlbumDescriptionFormSchema } from 'features/EditAlbumDescription';
+import { AlbumRatingFormSchema } from 'features/EditAlbumRating';
+import { PersonalProfileFormSchema } from 'features/EditPersonalProfile';
 import { RegistrationSchema } from 'features/RegistrationByUsername';
-import { EditableAlbumDescriptionSchema } from 'features/EditableAlbumDescription';
-import { EditableAlbumRatingSchema } from 'features/EditableAlbumRating';
+import { AlbumDescriptionSchema } from 'entities/Albums/AlbumDescription';
+import { AlbumRatingSchema } from 'entities/Albums/AlbumRating';
+import { AlbumsGridSchema } from 'entities/Albums/AlbumsGrid';
+import { NotificationSchema } from 'entities/Notification';
+import { PersonalProfileSchema } from 'entities/PersonalProfile';
+import { UserSchema } from 'entities/User';
 
 export interface StateSchema {
 	user: UserSchema;
-	homePage: HomePageSchema;
+	notification: NotificationSchema;
 
 	// асинхронные редьюсеры
 	loginForm?: LoginSchema;
 	albumForm?: AlbumFormSchema;
-	profile?: EditableUserProfileSchema;
 	registrationForm?: RegistrationSchema;
-	albumDescription?: EditableAlbumDescriptionSchema;
-	albumRating?: EditableAlbumRatingSchema;
+
+	albumDescription?: AlbumDescriptionSchema;
+	albumDescriptionForm?: AlbumDescriptionFormSchema;
+
+	albumsGrid?: AlbumsGridSchema;
+
+	personalProfile?: PersonalProfileSchema;
+	personalProfileForm?: PersonalProfileFormSchema
+	
+	albumRating?: AlbumRatingSchema;
+	albumRatingForm?: AlbumRatingFormSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;

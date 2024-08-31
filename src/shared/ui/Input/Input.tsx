@@ -1,33 +1,27 @@
-import cls from './Input.module.scss';
-import { classNames } from 'shared/lib/classNames/classNames';
 import { ChangeEvent, InputHTMLAttributes, memo } from 'react';
+// eslint-disable-next-line @conarti/feature-sliced/absolute-relative
+import { classNames } from 'shared/lib/classNames/classNames';
+import cls from './Input.module.scss';
 
 type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>;
-
-export enum ThemeInput {
-	LIGHT_BG = 'lightBg',
-	ONLY_BORDER = 'onlyBorder',
-	ONLY_BOTTOM_BORDER = 'onlyBottomBorder'
-}
 
 interface InputProps extends HTMLInputProps {
 	className?: string;
 	value?: string | number;
 	onChange?: (value: string) => void;
-	theme?: ThemeInput;
 	readonly?: boolean;
 	error?: string;
+	label?: string;
 }
-
 
 export const Input = memo((props: InputProps) => {
 	const {
 		className,
 		value,
 		onChange,
-		theme = ThemeInput.LIGHT_BG,
 		readonly,
 		error,
+		label,
 		...otherProps
 	} = props;
 
@@ -35,27 +29,23 @@ export const Input = memo((props: InputProps) => {
 		onChange?.(e.target.value);
 	};
 
-	const additional = [
-		className,
-		cls[theme]
-	];
-
 	const mods: Record<string, boolean | undefined> = {
 		[cls.readonly]: readonly,
 		[cls.error]: !!error?.length
 	};
 
 	return (
-		<>
-			{error && <div className={cls.errorMessage}>{error}</div>}
+		<div className={classNames(cls.inputWrapper, {}, [className])}>
 			<input
-				className={classNames(cls.Input, mods, additional)}
+				className={classNames(cls.Input, mods, [className])}
 				value={value}
 				onChange={(e) => onHandleChange(e)}
 				readOnly={readonly}
+				placeholder=" "
 				{...otherProps}
-			>
-			</input>
-		</>
+			/>
+			<label className={cls.floatingLabel}>{label}</label>
+			{/*{error && <div className={cls.errorMessage}>{error}</div>}*/}
+		</div>
 	);
 });

@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AlbumForm, AlbumFormSchema } from '../types/albumFormSchema';
+import { IAlbumForm } from 'shared/types';
 import { addAlbumToUser } from '../services/addAlbumToUser/addAlbumToUser';
+import { fetchAlbumSpotify } from '../services/fetchAlbumSpotify/fetchAlbumSpotify';
 import { searchAlbumsSpotify } from '../services/searchAlbumsSpotify/searchAlbumsSpotify';
-import { getAlbumSpotify } from 'features/AddAlbum/model/services/getAlbumSpotify/getAlbumSpotify';
+import { AlbumFormSchema } from '../types/albumFormSchema';
 
 const initialState: AlbumFormSchema = {
 	data: {
@@ -22,7 +23,7 @@ const albumFormSlice = createSlice({
 	name: 'albumForm',
 	initialState,
 	reducers: {
-		setFieldValue: (state, action: PayloadAction<AlbumForm>) => {
+		setFieldValue: (state, action: PayloadAction<IAlbumForm>) => {
 			state.data = {
 				...state.data,
 				...action.payload
@@ -35,12 +36,10 @@ const albumFormSlice = createSlice({
 		 */
 		builder.addCase(addAlbumToUser.pending, (state) => {
 			state.error = undefined;
-			state.serverMessage = undefined;
 			state.isLoading = true;
 		});
 		builder.addCase(addAlbumToUser.fulfilled, (state, action) => {
 			state.isLoading = false;
-			state.serverMessage = action.payload.serverMessage;
 		});
 		builder.addCase(addAlbumToUser.rejected, (state, action) => {
 			state.isLoading = false;
@@ -69,17 +68,17 @@ const albumFormSlice = createSlice({
 		/**
 		 * получение информации об альбоме по клику на элемент поиска
 		 */
-		builder.addCase(getAlbumSpotify.pending, (state) => {
+		builder.addCase(fetchAlbumSpotify.pending, (state) => {
 			state.error = undefined;
 			state.isLoading = true;
 		});
-		builder.addCase(getAlbumSpotify.fulfilled, (state, action) => {
+		builder.addCase(fetchAlbumSpotify.fulfilled, (state, action) => {
 			state.isLoading = false;
 			state.data.title = action.payload.title;
 			state.data.artist = action.payload.artists?.join(', ');
 			state.data.cover = action.payload.cover;
 		});
-		builder.addCase(getAlbumSpotify.rejected, (state, action) => {
+		builder.addCase(fetchAlbumSpotify.rejected, (state, action) => {
 			state.isLoading = false;
 			state.error = action.payload;
 		});

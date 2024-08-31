@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Avatar, AvatarSize } from './Avatar';
+// eslint-disable-next-line @conarti/feature-sliced/absolute-relative
 import AvatarIcon from 'shared/assets/storybook/avatar.jpg';
+import { Avatar, AvatarSize } from './Avatar';
 
 const meta: Meta<typeof Avatar> = {
 	title: 'shared/Avatar',

@@ -1,4 +1,4 @@
-import { userActions, userReducer, UserSchema } from 'entities/User';
+import { userActions, userReducer, UserSchema } from '../../../User';
 
 describe('userSlice', () => {
 	test('test logout', () => {

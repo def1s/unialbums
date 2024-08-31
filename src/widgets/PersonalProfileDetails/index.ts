@@ -1,0 +1,1 @@
+export { PersonalProfileDetails } from './ui/PersonalProfileDetails';

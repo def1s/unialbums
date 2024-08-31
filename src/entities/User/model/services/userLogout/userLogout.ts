@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { userActions } from '../../slice/userSlice';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
+import { userActions } from '../../slice/userSlice';
 
 export const userLogout = createAsyncThunk<void, void, { rejectValue: string }>(
 	'user/userLogout',

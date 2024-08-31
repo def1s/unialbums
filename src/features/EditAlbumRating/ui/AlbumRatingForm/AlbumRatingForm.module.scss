@@ -1,0 +1,23 @@
+.AlbumRatingForm {
+	width: 500px;
+	height: 400px;
+	padding: var(--medium-padding);
+	display: flex;
+	flex-direction: column;
+}
+
+.sliderLabel {
+	color: #fff;
+	font: var(--font-l);
+}
+
+.rangeSlider {
+	margin-bottom: var(--medium-padding);
+}
+
+.submitBtn {
+	height: 40px;
+	width: 200px;
+	margin: 0 auto;
+	margin-top: var(--medium-padding);
+}

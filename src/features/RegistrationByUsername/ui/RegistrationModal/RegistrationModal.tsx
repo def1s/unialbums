@@ -1,7 +1,7 @@
-import cls from './RegistrationModal.module.scss';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Modal } from 'shared/ui/Modal/Modal';
 import { RegistrationForm } from '../RegistrationForm/RegistrationForm';
+import cls from './RegistrationModal.module.scss';
 
 interface RegistrationModalProps {
     className?: string;

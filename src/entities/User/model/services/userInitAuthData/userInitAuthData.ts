@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { userActions } from '../../slice/userSlice';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 import { ApiResponse } from 'shared/api/types/apiResponse';
+import { userActions } from '../../slice/userSlice';
 import { User } from '../../types/user';
 
 // при инициализации будет использоваться токен, который автоматически приписывает к каждому запросу axiosInstance

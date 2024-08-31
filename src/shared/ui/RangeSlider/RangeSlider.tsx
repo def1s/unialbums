@@ -1,6 +1,7 @@
-import cls from './RangeSlider.module.scss';
-import { classNames } from 'shared/lib/classNames/classNames';
 import { ChangeEvent, InputHTMLAttributes, memo } from 'react';
+// eslint-disable-next-line @conarti/feature-sliced/absolute-relative
+import { classNames } from 'shared/lib/classNames/classNames';
+import cls from './RangeSlider.module.scss';
 
 type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>;
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import HomeIcon from 'shared/assets/icons/home.svg';
 import AddAlbumIcon from 'shared/assets/icons/addAlbum.svg';
+import HomeIcon from 'shared/assets/icons/home.svg';
 import { RoutesPaths } from 'shared/config/routerConfig/routerConfig';
 
 export interface SidebarItemsType {

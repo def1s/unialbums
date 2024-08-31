@@ -1,9 +1,8 @@
-import cls from './Sidebar.module.scss';
-import { classNames } from 'shared/lib/classNames/classNames';
-import { sidebarItemsList } from 'widgets/Sidebar/model/items';
-import { SidebarItem } from 'widgets/Sidebar/ui/SidebarItem/SidebarItem';
 import { memo, useCallback, useState } from 'react';
-import { Button } from 'shared/ui/Button/Button';
+import { classNames } from 'shared/lib/classNames/classNames';
+import { sidebarItemsList } from '../../model/items';
+import { SidebarItem } from '../SidebarItem/SidebarItem';
+import cls from './Sidebar.module.scss';
 
 interface SidebarProps {
     className?: string

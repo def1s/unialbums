@@ -1,0 +1,16 @@
+.PersonalProfileDetails {
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+@media (width <= 960px) {
+	.PersonalProfileDetails {
+		width: 500px;
+	}
+}
+
+@media (width <= 580px) {
+	.PersonalProfileDetails {
+		width: 300px;
+	}
+}

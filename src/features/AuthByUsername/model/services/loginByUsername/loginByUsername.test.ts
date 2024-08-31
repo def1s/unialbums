@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { ApiResponse, token } from 'shared/api/types/apiResponse';
-import { loginByUsername } from './loginByUsername';
 import MockAdapter from 'axios-mock-adapter';
+import { ApiResponse, token } from 'shared/api/types/apiResponse';
 import { TestAsyncThunk } from 'shared/lib/tests/TestAsyncThunk/TestAsyncThunk';
+import { loginByUsername } from './loginByUsername';
 
 describe('loginByUsername', () => {
 	const response: ApiResponse<token> = {

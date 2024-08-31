@@ -1,16 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ApiResponse } from 'shared/api/types/apiResponse';
+import { notificationActions } from 'entities/Notification';
 import { userActions } from 'entities/User';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
-import { getAlbumFormData } from 'features/AddAlbum/model/selectors/getAlbumFormData/getAlbumFormData';
-import { Album } from 'entities/Albums';
-
-interface LoginByUsernameResult {
-	serverMessage: string;
-}
+import { ApiResponse } from 'shared/api/types/apiResponse';
+import { IAlbum } from 'shared/types';
+import { NotificationTypes } from 'shared/types/notificationTypes';
+import { getAlbumFormData } from '../../selectors/getAlbumFormData/getAlbumFormData';
 
 export const addAlbumToUser = createAsyncThunk<
-	LoginByUsernameResult,
+	void,
 	void,
 	{ rejectValue: string }
 >(
@@ -29,11 +27,16 @@ export const addAlbumToUser = createAsyncThunk<
 				const response =
 					await axiosInstance.post<ApiResponse<null>>('/albums/create', formData);
 
-				return { serverMessage: response.data.message };
+				thunkAPI.dispatch(notificationActions.addNotification({ message: response.data.message }));
 			} catch (error) {
 				if (error.response && error.response?.status === 401) {
 					thunkAPI.dispatch(userActions.logout());
 				}
+
+				thunkAPI.dispatch(notificationActions.addNotification({
+					message: error.response.data.message || 'Непредвиденная ошибка',
+					theme: NotificationTypes.ERROR
+				}));
 
 				return thunkAPI.rejectWithValue(error.response.data.message || 'Непредвиденная ошибка');
 			}
@@ -44,10 +47,10 @@ export const addAlbumToUser = createAsyncThunk<
 /**
  * Создает объект FormData для отправки на сервер.
  *
- * @param {Album} albumForm Форма альбома, содержащая обновленные данные.
+ * @param {IAlbum} albumForm Форма альбома, содержащая обновленные данные.
  * @returns {Promise<FormData>} Объект FormData для отправки на сервер.
  */
-const createFormData = async (albumForm: Album): Promise<FormData> => {
+const createFormData = async (albumForm: IAlbum): Promise<FormData> => {
 	const formData = new FormData();
 	// TODO Подумать, нет ли более простого решения
 	// достаем локальное изображение по ссылке из слайса и преобразовываем

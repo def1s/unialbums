@@ -1,7 +1,7 @@
-import cls from './SearchField.module.scss';
+import { memo } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { SearchFieldItem } from '../../model/types/searchField';
-import { memo } from 'react';
+import cls from './SearchField.module.scss';
 
 interface SearchFieldProps extends SearchFieldItem {
     className?: string;

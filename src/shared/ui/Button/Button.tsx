@@ -1,6 +1,7 @@
-import cls from './Button.module.scss';
-import { classNames } from 'shared/lib/classNames/classNames';
 import { ButtonHTMLAttributes, memo } from 'react';
+// eslint-disable-next-line @conarti/feature-sliced/absolute-relative
+import { classNames } from 'shared/lib/classNames/classNames';
+import cls from './Button.module.scss';
 
 export enum ThemeButton {
 	LIGHT_BG = 'lightBg',

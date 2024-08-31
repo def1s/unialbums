@@ -1,0 +1,1 @@
+export { AlbumDescriptionCard } from './ui/AlbumDescriptionCard';

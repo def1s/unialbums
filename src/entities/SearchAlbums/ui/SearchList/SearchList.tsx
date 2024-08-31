@@ -1,10 +1,10 @@
-import cls from './SearchList.module.scss';
-import { classNames } from 'shared/lib/classNames/classNames';
-import { SearchField } from '../SearchField/SearchField';
-import { SearchFieldItem } from '../../model/types/searchField';
-import { Loader } from 'shared/ui/Loader/Loader';
-import { Blur } from 'shared/ui/Blur/Blur';
 import { memo, useCallback } from 'react';
+import { classNames } from 'shared/lib/classNames/classNames';
+import { Blur } from 'shared/ui/Blur/Blur';
+import { Loader } from 'shared/ui/Loader/Loader';
+import { SearchFieldItem } from '../../model/types/searchField';
+import { SearchField } from '../SearchField/SearchField';
+import cls from './SearchList.module.scss';
 
 interface SearchListProps {
     className?: string;

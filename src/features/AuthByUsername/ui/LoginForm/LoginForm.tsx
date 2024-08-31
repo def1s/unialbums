@@ -1,20 +1,20 @@
-import cls from './LoginForm.module.scss';
-import { classNames } from 'shared/lib/classNames/classNames';
-import { useSelector } from 'react-redux';
-import { loginActions, loginReducer } from '../../model/slice/loginSlice';
 import { memo, useCallback } from 'react';
-import { loginByUsername } from '../../model/services/loginByUsername/loginByUsername';
-import { Input } from 'shared/ui/Input/Input';
+import { useSelector } from 'react-redux';
+import { classNames } from 'shared/lib/classNames/classNames';
+import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { Blur } from 'shared/ui/Blur/Blur';
 import { Button } from 'shared/ui/Button/Button';
+import { Input } from 'shared/ui/Input/Input';
 import { Loader } from 'shared/ui/Loader/Loader';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
-import { getLoginUsername } from '../../model/selectors/getLoginUsername/getLoginUsername';
-import { getLoginPassword } from '../../model/selectors/getLoginPassword/getLoginPassword';
-import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';
 import { getLoginError } from '../../model/selectors/getLoginError/getLoginError';
-import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { Blur } from 'shared/ui/Blur/Blur';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';
+import { getLoginPassword } from '../../model/selectors/getLoginPassword/getLoginPassword';
+import { getLoginUsername } from '../../model/selectors/getLoginUsername/getLoginUsername';
+import { loginByUsername } from '../../model/services/loginByUsername/loginByUsername';
+import { loginActions, loginReducer } from '../../model/slice/loginSlice';
+import cls from './LoginForm.module.scss';
 
 interface LoginFormProps {
     className?: string;
@@ -52,7 +52,7 @@ export const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
 			reducers={initialReducers}
 			removeAfterUnmount
 		>
-			<div className={classNames(cls.LoginForm, {}, [className])}>
+			<form className={classNames(cls.LoginForm, {}, [className])}>
 
 				{
 					isLoading && !error && (
@@ -65,14 +65,14 @@ export const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
 
 				<Input
 					className={cls.input}
-					placeholder={'Имя пользователя'}
+					label={'Имя пользователя'}
 					onChange={onChangeUsername}
 					value={username}
 					type='text'
 				/>
 				<Input
 					className={cls.input}
-					placeholder={'Пароль'}
+					label={'Пароль'}
 					onChange={onChangePassword}
 					value={password}
 					type='password'
@@ -87,7 +87,7 @@ export const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
 				>
 					Вход
 				</Button>
-			</div>
+			</form>
 		</DynamicModuleLoader>
 	);
 });

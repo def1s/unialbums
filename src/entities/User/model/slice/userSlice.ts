@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { UserSchema } from '../../model/types/user';
 import { ACCESS_TOKEN_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
+import { UserSchema } from '../../model/types/user';
 import { userInitAuthData } from '../services/userInitAuthData/userInitAuthData';
 
 const initialState: UserSchema = {
