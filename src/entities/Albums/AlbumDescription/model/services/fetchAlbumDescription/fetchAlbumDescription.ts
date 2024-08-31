@@ -4,15 +4,11 @@ import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
 import { ApiResponse } from 'shared/api/types/apiResponse';
 import { IAlbumDescription } from 'shared/types';
 
-interface FetchAlbumDescriptionProps {
-	id?: string | number;
-}
-
 export const fetchAlbumDescription =
-	createAsyncThunk<IAlbumDescription, FetchAlbumDescriptionProps, { rejectValue: string }>
+	createAsyncThunk<IAlbumDescription, string, { rejectValue: string }>
 	(
 		'albumDescription/fetchAlbumDescription',
-		async ({ id }, thunkApi) => {
+		async (id, thunkApi) => {
 			try {
 				const response = await axiosInstance.get<ApiResponse<IAlbumDescription>>(`/albums/description/${id}`);
 

@@ -2,9 +2,11 @@ import { Action, EnhancedStore, Reducer, ReducersMapObject } from '@reduxjs/tool
 import { AlbumFormSchema } from 'features/AddAlbum';
 import { LoginSchema } from 'features/AuthByUsername';
 import { AlbumDescriptionFormSchema } from 'features/EditAlbumDescription';
+import { AlbumRatingFormSchema } from 'features/EditAlbumRating';
 import { PersonalProfileFormSchema } from 'features/EditPersonalProfile';
 import { RegistrationSchema } from 'features/RegistrationByUsername';
 import { AlbumDescriptionSchema } from 'entities/Albums/AlbumDescription';
+import { AlbumRatingSchema } from 'entities/Albums/AlbumRating';
 import { AlbumsGridSchema } from 'entities/Albums/AlbumsGrid';
 import { NotificationSchema } from 'entities/Notification';
 import { PersonalProfileSchema } from 'entities/PersonalProfile';
@@ -26,6 +28,9 @@ export interface StateSchema {
 
 	personalProfile?: PersonalProfileSchema;
 	personalProfileForm?: PersonalProfileFormSchema
+	
+	albumRating?: AlbumRatingSchema;
+	albumRatingForm?: AlbumRatingFormSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;

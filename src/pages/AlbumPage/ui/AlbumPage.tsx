@@ -1,5 +1,6 @@
 import React from 'react';
-import { AlbumDetails } from 'widgets/AlbumDetails';
+import { AlbumDescriptionCard } from 'widgets/AlbumDescriptionCard';
+import { AlbumRatingCard } from 'widgets/AlbumRatingCard';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './AlbumPage.module.scss';
 
@@ -11,9 +12,8 @@ const AlbumPage = ({ className }: AlbumPageProps) => {
 
 	return (
 		<div className={classNames(cls.AlbumPage, {}, [className])}>
-			{/*<EditAlbumDescription/>*/}
-			{/*<EditableAlbumRating/>*/}
-			<AlbumDetails/>
+			<AlbumDescriptionCard/>
+			<AlbumRatingCard/>
 		</div>
 	);
 };

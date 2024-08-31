@@ -14,9 +14,9 @@ import {
 import { classNames } from 'shared/lib/classNames/classNames';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
-import cls from './AlbumDetails.module.scss';
+import cls from './AlbumDescriptionCard.module.scss';
 
-interface AlbumDetailsProps {
+interface AlbumDescriptionCardProps {
     className?: string;
 }
 
@@ -24,7 +24,7 @@ const initialReducers: ReducerList = {
 	albumDescription: albumDescriptionReducer
 };
 
-export const AlbumDetails = (props: AlbumDetailsProps) => {
+export const AlbumDescriptionCard = (props: AlbumDescriptionCardProps) => {
 	const {
 		className
 	} = props;
@@ -37,7 +37,9 @@ export const AlbumDetails = (props: AlbumDetailsProps) => {
 	const isEditable = useSelector(getAlbumDescriptionIsEditable);
 
 	useEffect(() => {
-		dispatch(fetchAlbumDescription({ id }));
+		if (id) {
+			dispatch(fetchAlbumDescription(id));
+		}
 	}, [dispatch, id]);
 
 	return (
