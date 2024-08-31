@@ -34,7 +34,9 @@ export const AlbumRating = (props: AlbumRatingProps) => {
 		<div className={classNames(cls.AlbumRating, {}, [className])}>
 			<div className={cls.totalRating}>{data?.totalRating}</div>
 
-			{EditFeature}
+			<div className={cls.editBtn}>
+				{EditFeature}
+			</div>
 		</div>
 	);
 };

@@ -27,3 +27,9 @@
 	align-items: center;
 	font: var(--font-xl);
 }
+
+.editBtn {
+	position: absolute;
+	right: var(--medium-padding);
+	bottom: var(--medium-padding);
+}

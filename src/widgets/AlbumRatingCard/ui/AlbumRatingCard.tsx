@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { EditAlbumRating } from 'features/EditAlbumRating';
 import { AlbumRating, albumRatingReducer, getAlbumRatingRating } from 'entities/Albums/AlbumRating';
 import { fetchAlbumRating } from 'entities/Albums/AlbumRating';
 import { classNames } from 'shared/lib/classNames/classNames';
@@ -40,6 +41,7 @@ export const AlbumRatingCard = (props: AlbumRatingCardProps) => {
 			<div className={classNames(cls.AlbumRatingCard, {}, [className])}>
 				<AlbumRating
 					data={ratingData}
+					EditFeature={<EditAlbumRating/>}
 				/>
 			</div>
 		</DynamicModuleLoader>

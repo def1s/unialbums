@@ -8,10 +8,6 @@ import { IAlbumDescription } from 'shared/types';
 import { NotificationTypes } from 'shared/types/notificationTypes';
 import { getAlbumDescriptionFormData } from '../../selectors/selectors';
 
-interface UpdateAlbumDescriptionProps {
-	id?: string | number;
-}
-
 /**
  * Асинхронный thunk для обновления описания альбома.
  * Описание хранится в entities -> albumDescription -> model
@@ -21,9 +17,9 @@ interface UpdateAlbumDescriptionProps {
  * @param {UpdateAlbumDescriptionProps} props Свойства, содержащие идентификатор альбома.
  */
 export const updateAlbumDescription =
-	createAsyncThunk<void, UpdateAlbumDescriptionProps>(
+	createAsyncThunk<void, string>(
 		'editAlbumDescription/updateAlbumDescription',
-		async ({ id }, thunkApi) => {
+		async (id, thunkApi) => {
 			// Получение формы альбома и данных альбома из состояния
 			// @ts-expect-error отсутствует типизация для thunk
 			const albumForm = getAlbumDescriptionFormData(thunkApi.getState());

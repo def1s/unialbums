@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AlbumRatingSchema } from 'entities/Albums/AlbumRating';
 import { IAlbumRating } from 'shared/types';
+import { updateAlbumRating } from '../services/updateAlbumRating/updateAlbumRating';
 
 const initialState: AlbumRatingSchema = {
 	ratings: {
@@ -30,18 +31,18 @@ const albumRatingFormSlice = createSlice({
 			};
 		}
 	},
-	// extraReducers: builder => {
-	// 	builder.addCase(updateAlbumDescription.pending, (state) => {
-	// 		state.error = undefined;
-	// 		state.isLoading = true;
-	// 	});
-	// 	builder.addCase(updateAlbumDescription.fulfilled, (state) => {
-	// 		state.isLoading = false;
-	// 	});
-	// 	builder.addCase(updateAlbumDescription.rejected, (state) => {
-	// 		state.isLoading = false;
-	// 	});
-	// }
+	extraReducers: builder => {
+		builder.addCase(updateAlbumRating.pending, (state) => {
+			state.error = undefined;
+			state.isLoading = true;
+		});
+		builder.addCase(updateAlbumRating.fulfilled, (state) => {
+			state.isLoading = false;
+		});
+		builder.addCase(updateAlbumRating.rejected, (state) => {
+			state.isLoading = false;
+		});
+	}
 });
 
 export const { actions: albumRatingFormActions } = albumRatingFormSlice;

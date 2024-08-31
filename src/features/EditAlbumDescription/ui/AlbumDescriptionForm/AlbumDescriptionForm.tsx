@@ -85,7 +85,7 @@ export const AlbumDescriptionForm = memo((props: AlbumDescriptionFormProps) => {
 	 */
 	const onSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		dispatch(updateAlbumDescription({ id }));
+		dispatch(updateAlbumDescription(id || ''));
 	};
 
 	return (
