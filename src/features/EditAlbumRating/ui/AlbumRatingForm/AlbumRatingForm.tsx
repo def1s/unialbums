@@ -67,49 +67,58 @@ export const AlbumRatingForm = (props: AlbumRatingFormProps) => {
 				className={classNames(cls.AlbumRatingForm, {}, [className])}
 				onSubmit={onSubmit}
 			>
-				<label className={cls.sliderLabel}>Биты: {formRating?.bitsRating}</label>
-				<RangeSlider
-					className={cls.rangeSlider}
-					value={formRating?.bitsRating || 1}
-					defaultValue={1}
-					min={1}
-					max={10}
-					name={'bitsRating'}
-					onChange={onChangeBitsRating}
-				/>
+				<div className={cls.sliderWrapper}>
+					<label className={cls.sliderLabel}>Биты: {formRating?.bitsRating}</label>
 
-				<label className={cls.sliderLabel}>Атмосфера: {formRating?.atmosphereRating}</label>
-				<RangeSlider
-					className={cls.rangeSlider}
-					value={formRating?.atmosphereRating || 1}
-					defaultValue={1}
-					min={1}
-					max={10}
-					name={'atmosphereRating'}
-					onChange={onChangeAtmosphereRating}
-				/>
+					<RangeSlider
+						className={cls.rangeSlider}
+						value={formRating?.bitsRating || 1}
+						defaultValue={1}
+						min={1}
+						max={10}
+						name={'bitsRating'}
+						onChange={onChangeBitsRating}
+					/>
+				</div>
 
-				<label className={cls.sliderLabel}>Текста: {formRating?.textRating}</label>
-				<RangeSlider
-					className={cls.rangeSlider}
-					value={formRating?.textRating || 1}
-					defaultValue={1}
-					min={1}
-					max={10}
-					name={'textRating'}
-					onChange={onChangeTextRating}
-				/>
+				<div className={cls.sliderWrapper}>
+					<label className={cls.sliderLabel}>Атмосфера: {formRating?.atmosphereRating}</label>
+					<RangeSlider
+						className={cls.rangeSlider}
+						value={formRating?.atmosphereRating || 1}
+						defaultValue={1}
+						min={1}
+						max={10}
+						name={'atmosphereRating'}
+						onChange={onChangeAtmosphereRating}
+					/>
+				</div>
 
-				<label className={cls.sliderLabel}>Треки: {formRating?.tracksRating}</label>
-				<RangeSlider
-					className={cls.rangeSlider}
-					value={formRating?.tracksRating || 1}
-					defaultValue={1}
-					min={1}
-					max={10}
-					name={'tracksRating'}
-					onChange={onChangeTracksRating}
-				/>
+				<div className={cls.sliderWrapper}>
+					<label className={cls.sliderLabel}>Текста: {formRating?.textRating}</label>
+					<RangeSlider
+						className={cls.rangeSlider}
+						value={formRating?.textRating || 1}
+						defaultValue={1}
+						min={1}
+						max={10}
+						name={'textRating'}
+						onChange={onChangeTextRating}
+					/>
+				</div>
+
+				<div className={cls.sliderWrapper}>
+					<label className={cls.sliderLabel}>Треки: {formRating?.tracksRating}</label>
+					<RangeSlider
+						className={cls.rangeSlider}
+						value={formRating?.tracksRating || 1}
+						defaultValue={1}
+						min={1}
+						max={10}
+						name={'tracksRating'}
+						onChange={onChangeTracksRating}
+					/>
+				</div>
 
 				<Button className={cls.submitBtn}>Сохранить</Button>
 			</form>
