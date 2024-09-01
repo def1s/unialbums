@@ -1,3 +1,16 @@
+.floatingLabel {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: var(--small-padding);
+    font-size: 16px;
+
+    //color: #fff;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: rgb(255 255 255 / 50%);
+}
+
 .Input {
     outline: none;
     display: block;
@@ -69,17 +82,4 @@
 .inputWrapper {
     position: relative;
     width: 100%;
-}
-
-.floatingLabel {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: var(--small-padding);
-    font-size: 16px;
-
-    //color: #fff;
-    pointer-events: none;
-    transition: all 0.3s ease;
-    color: rgb(255 255 255 / 50%);
 }
