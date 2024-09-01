@@ -11,7 +11,7 @@
 ### Ссылки
 
 * [Backend](https://github.com/def1s/unialbums-backend)
-* [Deploy](http://89.111.172.174/home)
+* [Deploy](http://unialbums.ru)
 
 ----
 
