@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useCallback, useEffect } from 'react';
+import React, { ChangeEvent, FormEvent, memo, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { getPersonalProfileData } from 'entities/PersonalProfile';
 import { classNames } from 'shared/lib/classNames/classNames';
@@ -25,7 +25,7 @@ const initialReducers: ReducerList = {
 	personalProfileForm: personalProfileFormReducer
 };
 
-export const PersonalProfileForm = (props: PersonalProfileFormProps) => {
+export const PersonalProfileForm = memo((props: PersonalProfileFormProps) => {
 	const {
 		className
 	} = props;
@@ -122,4 +122,4 @@ export const PersonalProfileForm = (props: PersonalProfileFormProps) => {
 			</form>
 		</DynamicModuleLoader>
 	);
-};
+});

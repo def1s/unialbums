@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { DeleteAlbum } from 'features/DeleteAlbum';
@@ -7,7 +7,8 @@ import {
 	AlbumDescription,
 	albumDescriptionReducer,
 	fetchAlbumDescription,
-	getAlbumDescriptionData, getAlbumDescriptionError,
+	getAlbumDescriptionData,
+	getAlbumDescriptionError,
 	getAlbumDescriptionIsEditable,
 	getAlbumDescriptionIsLoading,
 } from 'entities/Albums/AlbumDescription';
@@ -24,7 +25,7 @@ const initialReducers: ReducerList = {
 	albumDescription: albumDescriptionReducer
 };
 
-export const AlbumDescriptionCard = (props: AlbumDescriptionCardProps) => {
+export const AlbumDescriptionCard = memo((props: AlbumDescriptionCardProps) => {
 	const {
 		className
 	} = props;
@@ -59,4 +60,4 @@ export const AlbumDescriptionCard = (props: AlbumDescriptionCardProps) => {
 			</div>
 		</DynamicModuleLoader>
 	);
-};
+});

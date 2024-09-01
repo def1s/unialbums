@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { EditAlbumRating } from 'features/EditAlbumRating';
@@ -23,7 +23,7 @@ const reducersList: ReducerList = {
 	albumRating: albumRatingReducer
 };
 
-export const AlbumRatingCard = (props: AlbumRatingCardProps) => {
+export const AlbumRatingCard = memo((props: AlbumRatingCardProps) => {
 	const {
 		className
 	} = props;
@@ -40,7 +40,7 @@ export const AlbumRatingCard = (props: AlbumRatingCardProps) => {
 			dispatch(fetchAlbumRating(id));
 		}
 	}, [dispatch, id]);
-    
+
 	return (
 		<DynamicModuleLoader
 			reducers={reducersList}
@@ -56,4 +56,4 @@ export const AlbumRatingCard = (props: AlbumRatingCardProps) => {
 			</div>
 		</DynamicModuleLoader>
 	);
-};
+});

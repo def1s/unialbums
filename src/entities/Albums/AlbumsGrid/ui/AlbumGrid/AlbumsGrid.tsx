@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { IAlbum } from 'shared/types';
 import { Loader } from 'shared/ui/Loader/Loader';
@@ -13,7 +13,7 @@ interface AlbumsGridProps {
 	error?: string;
 }
 
-export const AlbumsGrid = (props: AlbumsGridProps) => {
+export const AlbumsGrid = memo((props: AlbumsGridProps) => {
 	const {
 		className,
 		albums,
@@ -60,4 +60,4 @@ export const AlbumsGrid = (props: AlbumsGridProps) => {
 			{renderContent()}
 		</div>
 	);
-};
+});

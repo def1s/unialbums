@@ -1,13 +1,15 @@
-import { FormEvent, useCallback, useEffect } from 'react';
+import React, { FormEvent, memo, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getAlbumRatingRating } from 'entities/Albums/AlbumRating';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { Blur } from 'shared/ui/Blur/Blur';
 import { Button } from 'shared/ui/Button/Button';
+import { Loader } from 'shared/ui/Loader/Loader';
 import { RangeSlider } from 'shared/ui/RangeSlider/RangeSlider';
-import { getAlbumRatingFormRating } from '../../model/selectors/selectors';
+import { getAlbumRatingFormIsLoading, getAlbumRatingFormRating } from '../../model/selectors/selectors';
 import { updateAlbumRating } from '../../model/services/updateAlbumRating/updateAlbumRating';
 import { albumRatingFormActions, albumRatingFormReducer } from '../../model/slice/albumRatingFormSlice';
 import cls from './AlbumRatingForm.module.scss';
@@ -20,7 +22,7 @@ const initialReducers: ReducerList = {
 	albumRatingForm: albumRatingFormReducer
 };
 
-export const AlbumRatingForm = (props: AlbumRatingFormProps) => {
+export const AlbumRatingForm = memo((props: AlbumRatingFormProps) => {
 	const {
 		className
 	} = props;
@@ -30,6 +32,7 @@ export const AlbumRatingForm = (props: AlbumRatingFormProps) => {
 
 	const formRating = useSelector(getAlbumRatingFormRating);
 	const dataRating = useSelector(getAlbumRatingRating);
+	const isLoading = useSelector(getAlbumRatingFormIsLoading);
 
 	useEffect(() => {
 		if (dataRating) {
@@ -67,6 +70,15 @@ export const AlbumRatingForm = (props: AlbumRatingFormProps) => {
 				className={classNames(cls.AlbumRatingForm, {}, [className])}
 				onSubmit={onSubmit}
 			>
+				{
+					isLoading && (
+						<>
+							<Loader/>
+							<Blur className={cls.blurBorder}/>
+						</>
+					)
+				}
+
 				<div className={cls.sliderWrapper}>
 					<label className={cls.sliderLabel}>Биты: {formRating?.bitsRating}</label>
 
@@ -124,4 +136,4 @@ export const AlbumRatingForm = (props: AlbumRatingFormProps) => {
 			</form>
 		</DynamicModuleLoader>
 	);
-};
+});

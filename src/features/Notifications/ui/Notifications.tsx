@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { getNotifications, notificationActions } from 'entities/Notification';
 import { classNames } from 'shared/lib/classNames/classNames';
@@ -10,7 +10,7 @@ interface NotificationsProps {
     className?: string;
 }
 
-export const Notifications = (props: NotificationsProps) => {
+export const Notifications = memo((props: NotificationsProps) => {
 	const {
 		className
 	} = props;
@@ -35,4 +35,4 @@ export const Notifications = (props: NotificationsProps) => {
 			))}
 		</div>
 	);
-};
+});

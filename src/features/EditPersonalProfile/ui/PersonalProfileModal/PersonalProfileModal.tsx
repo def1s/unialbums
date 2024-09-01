@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Modal } from 'shared/ui/Modal/Modal';
 import { PersonalProfileForm } from '../PersonalProfileForm/PersonalProfileForm';
 
@@ -7,12 +8,12 @@ interface PersonalProfileModalProps {
 	onClose: () => void;
 }
 
-export const PersonalProfileModal = (props: PersonalProfileModalProps) => {
+export const PersonalProfileModal = memo((props: PersonalProfileModalProps) => {
 	const {
 		isOpen,
 		onClose
 	} = props;
-    
+
 	return (
 		<Modal
 			isOpen={isOpen}
@@ -21,4 +22,4 @@ export const PersonalProfileModal = (props: PersonalProfileModalProps) => {
 			<PersonalProfileForm/>
 		</Modal>
 	);
-};
+});

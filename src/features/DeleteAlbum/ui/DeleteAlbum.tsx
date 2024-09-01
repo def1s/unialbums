@@ -26,7 +26,7 @@ export const DeleteAlbum = (props: DeleteAlbumProps) => {
 		if (result.meta.requestStatus === 'fulfilled') {
 			navigate('/home');
 		}
-	}, [dispatch, albumId]);
+	}, [dispatch, albumId, navigate]);
 
 	return (
 		<Button

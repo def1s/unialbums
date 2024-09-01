@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import { getUserAuthData } from 'entities/User';
 import DefaultAvatar from 'shared/assets/icons/default-avatar.svg';
@@ -9,7 +10,7 @@ interface UserCardProps {
     className?: string;
 }
 
-export const UserCard = (props: UserCardProps) => {
+export const UserCard = memo((props: UserCardProps) => {
 	const {
 		className
 	} = props;
@@ -28,11 +29,11 @@ export const UserCard = (props: UserCardProps) => {
 			return <DefaultAvatar className={cls.defaultAvatar} />;
 		}
 	};
-    
+
 	return (
 		<div className={classNames(cls.UserCard, {}, [className])}>
 			{renderAvatar()}
 			<div className={cls.username}>Привет, {userData?.username}!</div>
 		</div>
 	);
-};
+});

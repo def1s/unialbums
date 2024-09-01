@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Button } from 'shared/ui/Button/Button';
 import { AlbumRatingModal } from '../AlbumRatingModal/AlbumRatingModal';
@@ -8,7 +8,7 @@ interface EditAlbumRatingProps {
     className?: string;
 }
 
-export const EditAlbumRating = (props: EditAlbumRatingProps) => {
+export const EditAlbumRating = memo((props: EditAlbumRatingProps) => {
 	const {
 		className
 	} = props;
@@ -22,7 +22,7 @@ export const EditAlbumRating = (props: EditAlbumRatingProps) => {
 	const onCloseEditModal = useCallback(() => {
 		setIsEditAlbumRatingModal(false);
 	}, []);
-    
+
 	return (
 		<div className={classNames(cls.EditAlbumRating, {}, [className])}>
 			<Button
@@ -34,11 +34,11 @@ export const EditAlbumRating = (props: EditAlbumRatingProps) => {
 
 			{
 				isEditAlbumRatingModal &&
-					<AlbumRatingModal
-						isOpen={isEditAlbumRatingModal}
-						onClose={onCloseEditModal}
-					/>
+                <AlbumRatingModal
+                	isOpen={isEditAlbumRatingModal}
+                	onClose={onCloseEditModal}
+                />
 			}
 		</div>
 	);
-};
+});

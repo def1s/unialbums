@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Modal } from 'shared/ui/Modal/Modal';
 import { AlbumDescriptionForm } from '../../ui/AlbumDescriptionForm/AlbumDescriptionForm';
@@ -9,13 +10,13 @@ interface AlbumDescriptionModalProps {
 	onClose: () => void;
 }
 
-export const AlbumDescriptionModal = (props: AlbumDescriptionModalProps) => {
+export const AlbumDescriptionModal = memo((props: AlbumDescriptionModalProps) => {
 	const {
 		className,
 		isOpen,
 		onClose
 	} = props;
-    
+
 	return (
 		<Modal
 			className={classNames(cls.AlbumDescriptionModal, {}, [className])}
@@ -25,4 +26,4 @@ export const AlbumDescriptionModal = (props: AlbumDescriptionModalProps) => {
 			<AlbumDescriptionForm/>
 		</Modal>
 	);
-};
+});

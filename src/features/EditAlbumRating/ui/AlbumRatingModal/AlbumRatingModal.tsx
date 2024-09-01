@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Modal } from 'shared/ui/Modal/Modal';
 import { AlbumRatingForm } from '../AlbumRatingForm/AlbumRatingForm';
@@ -9,13 +10,13 @@ interface AlbumRatingModalProps {
 	onClose: () => void;
 }
 
-export const AlbumRatingModal = (props: AlbumRatingModalProps) => {
+export const AlbumRatingModal = memo((props: AlbumRatingModalProps) => {
 	const {
 		className,
 		isOpen,
 		onClose
 	} = props;
-    
+
 	return (
 		<Modal
 			className={classNames(cls.AlbumRatingModal, {}, [className])}
@@ -25,4 +26,4 @@ export const AlbumRatingModal = (props: AlbumRatingModalProps) => {
 			<AlbumRatingForm/>
 		</Modal>
 	);
-};
+});

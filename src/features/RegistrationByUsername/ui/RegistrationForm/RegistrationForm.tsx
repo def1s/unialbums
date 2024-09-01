@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
@@ -39,7 +39,7 @@ const initialReducers: ReducerList = {
 	registrationForm: registrationReducer
 };
 
-export const RegistrationForm = ({ className }: RegistrationFormProps) => {
+export const RegistrationForm = memo(({ className }: RegistrationFormProps) => {
 	const dispatch = useAppDispatch();
 	const email = useSelector(getRegistrationEmail);
 	const username = useSelector(getRegistrationUsername);
@@ -203,4 +203,4 @@ export const RegistrationForm = ({ className }: RegistrationFormProps) => {
 			</div>
 		</DynamicModuleLoader>
 	);
-};
+});

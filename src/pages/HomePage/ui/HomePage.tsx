@@ -15,7 +15,7 @@ const HomePage = ({ className }: HomePageProps) => {
 		<div className={classNames(cls.HomePage, {}, [className])}>
 			<div className={cls.wrapper}>
 				<UserCard/>
-				<PlugCard title={'Сайт находится в разработке.'} text={'Так что на этом месте только текст и заглушка...'}/>
+				<PlugCard title={'Приложение находится в разработке.'} text={'Позже на этом месте будет что-то интересное...'}/>
 			</div>
 			<UserAlbums className={cls.userAlbums}/>
 		</div>

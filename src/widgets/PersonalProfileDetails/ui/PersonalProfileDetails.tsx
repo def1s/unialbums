@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { EditPersonalProfile } from 'features/EditPersonalProfile';
 import {
@@ -22,7 +22,7 @@ const initialReducers: ReducerList = {
 	personalProfile: personalProfileReducer
 };
 
-export const PersonalProfileDetails = (props: PersonalProfileDetailsProps) => {
+export const PersonalProfileDetails = memo((props: PersonalProfileDetailsProps) => {
 	const {
 		className
 	} = props;
@@ -36,7 +36,7 @@ export const PersonalProfileDetails = (props: PersonalProfileDetailsProps) => {
 	useEffect(() => {
 		dispatch(fetchPersonalProfileData());
 	}, [dispatch]);
-    
+
 	return (
 		<DynamicModuleLoader
 			reducers={initialReducers}
@@ -54,4 +54,4 @@ export const PersonalProfileDetails = (props: PersonalProfileDetailsProps) => {
 			</div>
 		</DynamicModuleLoader>
 	);
-};
+});
