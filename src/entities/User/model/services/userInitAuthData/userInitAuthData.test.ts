@@ -31,7 +31,7 @@ describe('userInitAuthData', () => {
 	});
 	test('should return user data when request is successful', async () => {
 		const mock = new MockAdapter(axiosInstance);
-		mock.onGet(`${__API_URL__}/users/getUserInfo`).reply(200, response);
+		mock.onGet(`${__API_URL__}/initUser`).reply(200, response);
 
 		const testAsyncThunk = new TestAsyncThunk(userInitAuthData);
 		const result = await testAsyncThunk.callThunk();

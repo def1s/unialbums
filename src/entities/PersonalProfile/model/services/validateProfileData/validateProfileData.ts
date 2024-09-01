@@ -11,7 +11,6 @@ export const validateProfileData = (data?: IProfile) => {
 	}
 
 	const {
-		avatar,
 		lastName,
 		firstName,
 		username

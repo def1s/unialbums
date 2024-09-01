@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchPersonalProfileData } from 'entities/PersonalProfile/model/services/fetchPersonalProfileData/fetchPersonalProfileData';
 import { IProfile } from 'shared/types';
+import { fetchPersonalProfileData } from '../services/fetchPersonalProfileData/fetchPersonalProfileData';
 import { PersonalProfileSchema } from '../types/personalProfile';
 
 const initialState: PersonalProfileSchema = {

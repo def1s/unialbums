@@ -14,6 +14,8 @@ export const loginByUsername = createAsyncThunk<void, LoginByUsernameProps, { re
 		try {
 			const response = await axiosInstance.post<ApiResponse<token>>('/loginByUsername', authData);
 
+			console.log('RESPONSE' + response);
+
 			if (!response.data) {
 				throw new Error('Что-то пошло не так');
 			}

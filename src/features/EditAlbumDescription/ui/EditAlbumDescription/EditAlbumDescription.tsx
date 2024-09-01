@@ -32,10 +32,10 @@ export const EditAlbumDescription = memo(({ className }: EditAlbumDescriptionPro
 
 			{
 				isEditAlbumDescriptionModal &&
-                <AlbumDescriptionModal
-                	isOpen={isEditAlbumDescriptionModal}
-                	onClose={onCloseEditModal}
-                />
+				<AlbumDescriptionModal
+					isOpen={isEditAlbumDescriptionModal}
+					onClose={onCloseEditModal}
+				/>
 			}
 		</div>
 	);

@@ -50,7 +50,7 @@ const registrationSlice = createSlice({
 			state.message = undefined;
 			state.isLoading = true;
 		});
-		builder.addCase(registration.fulfilled, (state, action) => {
+		builder.addCase(registration.fulfilled, (state) => {
 			state.isLoading = false;
 		});
 		builder.addCase(registration.rejected, (state, action) => {

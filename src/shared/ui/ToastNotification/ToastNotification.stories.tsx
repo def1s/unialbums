@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+// eslint-disable-next-line @conarti/feature-sliced/absolute-relative
 import { NotificationTypes } from 'shared/types/notificationTypes';
 import { ToastNotification } from './ToastNotification';
 

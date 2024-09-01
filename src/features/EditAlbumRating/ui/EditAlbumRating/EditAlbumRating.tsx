@@ -34,10 +34,10 @@ export const EditAlbumRating = memo((props: EditAlbumRatingProps) => {
 
 			{
 				isEditAlbumRatingModal &&
-                <AlbumRatingModal
-                	isOpen={isEditAlbumRatingModal}
-                	onClose={onCloseEditModal}
-                />
+				<AlbumRatingModal
+					isOpen={isEditAlbumRatingModal}
+					onClose={onCloseEditModal}
+				/>
 			}
 		</div>
 	);

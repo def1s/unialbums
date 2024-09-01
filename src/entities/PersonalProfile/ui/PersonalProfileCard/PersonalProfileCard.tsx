@@ -25,11 +25,13 @@ export const PersonalProfileCard = memo((props: PersonalProfileCardProps) => {
 		data,
 		isLoading,
 		error,
+		// eslint-disable-next-line
 		validateErrors,
 		EditFeature
 	} = props;
 
 	// TODO прописать валидацию
+	// eslint-disable-next-line
 	const validateErrorsTranslates: Record<ValidateProfileErrorKeys, string> = {
 		INCORRECT_FIRSTNAME: 'Некорректно заполнено имя',
 		INCORRECT_LASTNAME: 'Некорректно заполнена фамилия',
