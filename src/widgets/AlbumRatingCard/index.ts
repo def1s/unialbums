@@ -1,0 +1,1 @@
+export { AlbumRatingCard } from './ui/AlbumRatingCard';

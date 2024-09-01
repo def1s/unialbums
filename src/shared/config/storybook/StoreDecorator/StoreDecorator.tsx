@@ -1,9 +1,10 @@
 import { StoryFn } from '@storybook/react';
 import { StateSchema, StoreProvider } from 'app/providers/StoreProvider';
-import { loginReducer } from 'features/AuthByUsername/model/slice/loginSlice';
-import { ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { albumFormReducer } from 'features/AddAlbum';
+import { loginReducer } from 'features/AuthByUsername';
 import { registrationReducer } from 'features/RegistrationByUsername';
+// eslint-disable-next-line @conarti/feature-sliced/absolute-relative
+import { ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 
 const defaultAsyncReducers: ReducerList = {
 	loginForm: loginReducer,

@@ -18,7 +18,6 @@
     align-items: center;
     background: var(--light-bg-color);
     color: #fff;
-    border-radius: var(--medium-radius);
     cursor: pointer;
     width: 200px;
     height: 200px;
@@ -56,4 +55,23 @@
     font-size: 14px;
     line-height: 18px;
     text-align: center;
+}
+
+.square {
+    border-radius: var(--medium-radius);
+}
+
+.circle {
+    border-radius: 100%;
+
+    .removeButton {
+        top: auto;
+        bottom: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 30px;
+        height: 30px;
+        background-color: #fff;
+        color: #000;
+    }
 }

@@ -1,0 +1,15 @@
+.wrapper {
+	display: flex;
+	margin-top: var(--large-padding);
+	gap: var(--small-padding);
+}
+
+.userAlbums {
+	margin-top: var(--large-padding);
+}
+
+@media (width <= 550px) {
+	.wrapper {
+		flex-direction: column;
+	}
+}

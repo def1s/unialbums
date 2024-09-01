@@ -1,8 +1,8 @@
 import { configureStore, Reducer, ReducersMapObject } from '@reduxjs/toolkit';
-import { StateSchema } from './StateSchema';
+import { notificationReducer } from 'entities/Notification';
 import { userReducer } from 'entities/User';
 import { createReducerManager } from './reducerManager';
-import { homePageReducer } from 'pages/HomePage';
+import { StateSchema } from './StateSchema';
 
 export const configureReduxStore = (
 	initialState?: StateSchema,
@@ -11,7 +11,7 @@ export const configureReduxStore = (
 	const rootReducers: ReducersMapObject<StateSchema> = {
 		...asyncReducers,
 		user: userReducer,
-		homePage: homePageReducer
+		notification: notificationReducer,
 	};
 
 	const reducerManager = createReducerManager(rootReducers);
@@ -29,4 +29,4 @@ export const configureReduxStore = (
 	return store;
 };
 
-export type AppDispatch =  ReturnType<typeof configureReduxStore>['dispatch'];
+export type AppDispatch = ReturnType<typeof configureReduxStore>['dispatch'];

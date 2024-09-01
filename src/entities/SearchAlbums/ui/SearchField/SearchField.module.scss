@@ -1,0 +1,47 @@
+.SearchField {
+	width: 100%;
+	height: 50px;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	background-color: var(--light-bg-color);
+	padding: var(--small-padding);
+	cursor: pointer;
+
+	// TODO выбрать подходящий цвет и вынести в переменную
+	&:hover {
+		background-color: #656865;
+	}
+
+	&:first-child {
+		border-top-right-radius: var(--medium-radius);
+		border-top-left-radius: var(--medium-radius);
+	}
+
+	&:last-child {
+		border-bottom-right-radius: var(--medium-radius);
+		border-bottom-left-radius: var(--medium-radius);
+	}
+}
+
+.cover {
+	height: 30px;
+	width: 30px;
+	background-color: var(--default-bg-color);
+	border-radius: var(--small-radius);
+	margin-right: var(--small-padding);
+
+	img {
+		height: 100%;
+		border-radius: var(--small-radius);
+	}
+}
+
+.title {
+	font: var(--font-m);
+	margin-right: var(--small-padding);
+}
+
+.artists {
+	margin-left: var(--small-padding);
+}

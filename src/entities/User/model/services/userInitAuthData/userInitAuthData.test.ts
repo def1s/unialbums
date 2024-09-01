@@ -1,24 +1,22 @@
-import { ApiResponse } from 'shared/api/types/apiResponse';
 import MockAdapter from 'axios-mock-adapter';
-import { TestAsyncThunk } from 'shared/lib/tests/TestAsyncThunk/TestAsyncThunk';
-import { userInitAuthData } from './userInitAuthData';
-import { User } from '../../types/user';
 import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
+import { ApiResponse } from 'shared/api/types/apiResponse';
+import { TestAsyncThunk } from 'shared/lib/tests/TestAsyncThunk/TestAsyncThunk';
+import { User } from '../../types/user';
+import { userInitAuthData } from './userInitAuthData';
 
 describe('userInitAuthData', () => {
 	const response: ApiResponse<User> = {
-		data: [
-			{
-				username: '',
-				avatar: ''
-			}
-		],
+		data: {
+			username: '',
+			avatar: ''
+		},
 		message: ''
 	};
 
 	beforeEach(() => {
-		response.data[0].username = 'username';
-		response.data[0].avatar = 'avatar';
+		response.data.username = 'username';
+		response.data.avatar = 'avatar';
 		response.message = '';
 	});
 
@@ -33,11 +31,11 @@ describe('userInitAuthData', () => {
 	});
 	test('should return user data when request is successful', async () => {
 		const mock = new MockAdapter(axiosInstance);
-		mock.onGet(`${__API_URL__}/users/getUserInfo`).reply(200, response);
+		mock.onGet(`${__API_URL__}/initUser`).reply(200, response);
 
 		const testAsyncThunk = new TestAsyncThunk(userInitAuthData);
 		const result = await testAsyncThunk.callThunk();
 
-		expect(result.payload).toEqual(response.data[0]);
+		expect(result.payload).toEqual(response.data);
 	});
 });

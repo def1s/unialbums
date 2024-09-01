@@ -1,6 +1,6 @@
-import cls from './AddAlbumPage.module.scss';
-import { classNames } from 'shared/lib/classNames/classNames';
 import { AlbumForm } from 'features/AddAlbum';
+import { classNames } from 'shared/lib/classNames/classNames';
+import cls from './AddAlbumPage.module.scss';
 
 interface AddAlbumPageProps {
     className?: string

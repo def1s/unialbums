@@ -1,0 +1,1 @@
+export { DeleteAlbum } from './ui/DeleteAlbum';

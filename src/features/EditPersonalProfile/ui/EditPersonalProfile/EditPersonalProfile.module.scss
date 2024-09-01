@@ -1,0 +1,10 @@
+.button {
+	width: 150px;
+	height: 40px;
+}
+
+@media (width <= 960px) {
+	.button {
+		width: 100%;
+	}
+}

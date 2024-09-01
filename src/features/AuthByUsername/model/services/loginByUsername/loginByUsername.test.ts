@@ -1,21 +1,20 @@
 import axios from 'axios';
-import { ApiResponse, token } from 'shared/api/types/apiResponse';
-import { loginByUsername } from './loginByUsername';
 import MockAdapter from 'axios-mock-adapter';
+import axiosInstance from 'shared/api/axiosConfig/axiosConfig';
+import { ApiResponse, token } from 'shared/api/types/apiResponse';
 import { TestAsyncThunk } from 'shared/lib/tests/TestAsyncThunk/TestAsyncThunk';
+import { loginByUsername } from './loginByUsername';
 
 describe('loginByUsername', () => {
 	const response: ApiResponse<token> = {
-		data: [
-			{
-				accessToken: ''
-			}
-		],
+		data: {
+			accessToken: ''
+		},
 		message: ''
 	};
 
 	beforeEach(() => {
-		response.data[0].accessToken = '';
+		response.data.accessToken = '';
 		response.message = '';
 	});
 
@@ -42,39 +41,37 @@ describe('loginByUsername', () => {
 	// });
 
 	test('should be rejected (wrong token)', async () => {
-		response.data[0].accessToken = 'wrongToken';
+		response.data.accessToken = 'wrongToken';
 
 		const mock = new MockAdapter(axios);
-		mock.onPost(`${__API_URL__}/login`).reply(200, response);
+		mock.onPost(`${__API_URL__}/loginByUsername`).reply(200, response);
 
 
 		const testAsyncThunk = new TestAsyncThunk(loginByUsername);
 		const result = await testAsyncThunk.callThunk({ username: '123', password: '123' });
 
-		// expect(testAsyncThunk.dispatch).not.toHaveBeenCalledWith(userActions.setAuthData());
-		expect(result.meta.requestStatus).toBe('fulfilled');
+		expect(result.meta.requestStatus).toBe('rejected');
 	});
 
 	test('should be rejected (error login)', async () => {
 		const mock = new MockAdapter(axios);
-		mock.onPost(`${__API_URL__}/login`).reply(404, response);
+		mock.onPost(`${__API_URL__}/loginByUsername`).reply(400, response);
 
 		const testAsyncThunk = new TestAsyncThunk(loginByUsername);
 		const result = await testAsyncThunk.callThunk({ username: '123', password: '123' });
 
-		// expect(testAsyncThunk.dispatch).not.toHaveBeenCalledWith(userActions.setAuthData());
 		expect(result.meta.requestStatus).toBe('rejected');
 	});
 
+	// тест не работает, как-то связано с моками
 	test('should return error message', async () => {
 		response.message = 'Error message';
-		const mock = new MockAdapter(axios);
-		mock.onPost(`${__API_URL__}/login`).reply(403, response);
+		const mock = new MockAdapter(axiosInstance);
+		mock.onPost(`${__API_URL__}/loginByUsername`).reply(400, response);
 
 		const testAsyncThunk = new TestAsyncThunk(loginByUsername);
 		const result = await testAsyncThunk.callThunk({ username: '123', password: '123' });
 
-		// expect(testAsyncThunk.dispatch).not.toHaveBeenCalledWith(userActions.setAuthData());
 		expect(result.meta.requestStatus).toBe('rejected');
 		expect(result.payload).toBe('Error message');
 	});

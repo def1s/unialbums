@@ -1,0 +1,10 @@
+.PlugCard {
+	height: 250px;
+	background-color: var(--default-bg-color-opacity);
+	border-radius: var(--medium-radius);
+	display: flex;
+	justify-content: left;
+	align-items: end;
+	padding: var(--medium-padding);
+	flex: 1;
+}

@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RegistrationSchema } from '../types/registrationSchema';
-import { registration } from 'features/RegistrationByUsername/model/services/registration/registration';
+import { registration } from '../services/registration/registration';
+import { RegistrationSchema, ValidateRegistrationErrors } from '../types/registrationSchema';
 
 const initialState: RegistrationSchema = {
+	email: '',
 	username: '',
 	firstName: '',
 	lastName: '',
@@ -16,6 +17,9 @@ const registrationSlice = createSlice({
 	name: 'registration',
 	initialState,
 	reducers: {
+		setEmail: (state, action: PayloadAction<string>) => {
+			state.email = action.payload;
+		},
 		setUsername: (state, action: PayloadAction<string>) => {
 			state.username = action.payload;
 		},
@@ -35,6 +39,9 @@ const registrationSlice = createSlice({
 		setRepeatedPassword: (state, action: PayloadAction<string>) => {
 			state.isPasswordsEqual = state.password === action.payload;
 			state.repeatedPassword = action.payload;
+		},
+		setValidateErrors: (state, action: PayloadAction<ValidateRegistrationErrors>) => {
+			state.validateErrors = action.payload;
 		}
 	},
 	extraReducers: builder => {
@@ -43,9 +50,8 @@ const registrationSlice = createSlice({
 			state.message = undefined;
 			state.isLoading = true;
 		});
-		builder.addCase(registration.fulfilled, (state, action) => {
+		builder.addCase(registration.fulfilled, (state) => {
 			state.isLoading = false;
-			state.message = action.payload.message;
 		});
 		builder.addCase(registration.rejected, (state, action) => {
 			state.isLoading = false;

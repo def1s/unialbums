@@ -1,0 +1,22 @@
+.AlbumDescriptionForm {
+	width: 500px;
+	height: 500px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	padding: var(--medium-padding);
+}
+
+.submitBtn {
+	padding: var(--small-padding);
+}
+
+.blurBorder {
+	border-radius: var(--medium-radius);
+}
+
+.formInput {
+	width: 100%;
+	height: 60px;
+}

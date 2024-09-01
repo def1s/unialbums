@@ -1,22 +1,26 @@
-import cls from './AlbumForm.module.scss';
-import { classNames } from 'shared/lib/classNames/classNames';
-import { RangeSlider } from 'shared/ui/RangeSlider/RangeSlider';
+import React, { ChangeEvent, FormEvent, memo, useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Input } from 'shared/ui/Input/Input';
-import React, { ChangeEvent, FormEvent, memo, useCallback, useEffect, useRef } from 'react';
-import { albumFormActions, albumFormReducer } from '../../model/slice/albumFormSlice';
-import { addAlbumToUser } from '../../model/services/addAlbumToUser/addAlbumToUser';
+import { SearchList } from 'entities/SearchAlbums';
+import { classNames } from 'shared/lib/classNames/classNames';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { InputFile } from 'shared/ui/InputFile/InputFile';
-import { Button } from 'shared/ui/Button/Button';
-import { getAlbumFormIsLoading } from '../../model/selectors/getAlbumFormIsLoading/getAlbumFormIsLoading';
-import { getAlbumFormError } from '../../model/selectors/getAlbumFormError/getAlbumFormError';
-import { Loader } from 'shared/ui/Loader/Loader';
-import { Blur } from 'shared/ui/Blur/Blur';
-import { getAlbumFormMessage } from '../../model/selectors/getAlbumFormMessage/getAlbumFormMessage';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useImage } from 'shared/lib/hooks/useImage/useImage';
+import { Blur } from 'shared/ui/Blur/Blur';
+import { Button } from 'shared/ui/Button/Button';
+import { Input } from 'shared/ui/Input/Input';
+import { InputFile } from 'shared/ui/InputFile/InputFile';
+import { Loader } from 'shared/ui/Loader/Loader';
+import { RangeSlider } from 'shared/ui/RangeSlider/RangeSlider';
 import { getAlbumFormData } from '../../model/selectors/getAlbumFormData/getAlbumFormData';
-import { Notification, NotificationTheme } from 'shared/ui/Notification/Notification';
+import { getAlbumFormError } from '../../model/selectors/getAlbumFormError/getAlbumFormError';
+import { getAlbumFormIsLoading } from '../../model/selectors/getAlbumFormIsLoading/getAlbumFormIsLoading';
+import { getSearchAlbums } from '../../model/selectors/getSearchAlbums/getSearchAlbums';
+import { getSearchIsLoading } from '../../model/selectors/getSearchIsLoading/getSearchIsLoading';
+import { addAlbumToUser } from '../../model/services/addAlbumToUser/addAlbumToUser';
+import { fetchAlbumSpotify } from '../../model/services/fetchAlbumSpotify/fetchAlbumSpotify';
+import { searchAlbumsSpotify } from '../../model/services/searchAlbumsSpotify/searchAlbumsSpotify';
+import { albumFormActions, albumFormReducer } from '../../model/slice/albumFormSlice';
+import cls from './AlbumForm.module.scss';
 
 interface AlbumFormProps {
     className?: string
@@ -26,29 +30,52 @@ const initialReducers: ReducerList = {
 	albumForm: albumFormReducer
 };
 
+/**
+ * Форма для добавления альбома от пользователя. Собирает данные и изображение, после чего отправляет их на сервер.
+ * Не имеет валидации.
+ * Во время ввода информации об альбоме показывает пользователю варианты из spotify api
+ */
 export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 	const dispatch = useAppDispatch();
 
 	const formData = useSelector(getAlbumFormData);
 	const isLoading = useSelector(getAlbumFormIsLoading);
 	const error = useSelector(getAlbumFormError);
-	const serverMessage = useSelector(getAlbumFormMessage);
+	const searchAlbums = useSelector(getSearchAlbums);
+	const isSearching = useSelector(getSearchIsLoading);
 
-	const localUrlImage = useRef('');
+	const { localUrlImage, onCreateImage, onDeleteImage } = useImage();
+	const [isInputFocused, setIsInputFocused] = useState(false);
+	/**
+	 * для отмены запросов, когда не успел прийти предыдущий при поиске альбомов
+	 */
+	const searchAbortControllerRef = useRef<AbortController | null>(null);
 
 	// очищение URL после размонтирования компонента
 	useEffect(() => {
 		return () => {
-			URL.revokeObjectURL(localUrlImage.current);
+			onDeleteImage();
 		};
+		//eslint-disable-next-line
 	}, []);
 
+	/**
+	 * обработчики инпутов
+	 * каждый обработчик изменяет свое поле
+	 */
 	const onChangeCover = useCallback((cover: string) => {
 		dispatch(albumFormActions.setFieldValue({ cover: cover }));
 	}, [dispatch]);
 
 	const onChangeTitle = useCallback((title: string) => {
+		if (searchAbortControllerRef.current) {
+			searchAbortControllerRef.current.abort();
+		}
+		searchAbortControllerRef.current = new AbortController();
+
 		dispatch(albumFormActions.setFieldValue({ title: title }));
+		// поиск альбомов через спотифай
+		dispatch(searchAlbumsSpotify(searchAbortControllerRef.current));
 	}, [dispatch]);
 
 	const onChangeArtist = useCallback((artist: string) => {
@@ -71,41 +98,30 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 		dispatch(albumFormActions.setFieldValue({ tracksRating: +tracksRating }));
 	}, [dispatch]);
 
+	/**
+	 * Для работы с изображениями использую кастомный хук.
+	 * Хук предоставляет возможность создать локальную ссылку на изображение,
+	 * чтобы ее можно было поместить в слайс.
+	 * Также ссылку можно удалить, вместе с этим стерев изображение.
+	 */
 	const onCoverAdd = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-		e.preventDefault();
-		const { files } = e.target;
-
-		if (files) {
-			localUrlImage.current = window.URL.createObjectURL(files[0]);
-			onChangeCover(localUrlImage.current);
-		}
-	}, [onChangeCover]);
+		onCreateImage(e);
+		onChangeCover(localUrlImage.current);
+	}, [localUrlImage, onChangeCover, onCreateImage]);
 
 	const onCoverDelete = useCallback(() => {
-		URL.revokeObjectURL(localUrlImage.current);
-		localUrlImage.current = '';
+		onDeleteImage();
 		onChangeCover('');
-	}, [onChangeCover]);
+	}, [onChangeCover, onDeleteImage]);
 
 	const onSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		dispatch(addAlbumToUser());
 	};
 
-	// уведомления
-	const notifications = (
-		<>
-			{
-				!isLoading && error &&
-                <Notification message={error} theme={NotificationTheme.ERROR}/>
-			}
-
-			{
-				!isLoading && !error && serverMessage &&
-                <Notification message={serverMessage} theme={NotificationTheme.SUCCESSFUL}/>
-			}
-		</>
-	);
+	const onClickAlbumFromSearch = useCallback((albumId: string) => {
+		dispatch(fetchAlbumSpotify({ albumId }));
+	}, [dispatch]);
 
 	return (
 		<DynamicModuleLoader
@@ -115,9 +131,8 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 			<form
 				className={classNames(cls.AlbumForm, {}, [className])}
 				onSubmit={(e) => onSubmit(e)}
+				encType={'multipart/form-data'}
 			>
-				{/* уведомления */}
-				{notifications}
 
 				{/* лоадер */}
 				{
@@ -134,6 +149,7 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 						onChange={onCoverAdd}
 						selectedFile={formData?.cover}
 						onRemove={onCoverDelete}
+						className={cls.cover}
 						label='Обложка'
 					/>
 					<div className={cls.descriptionWrapper}>
@@ -143,9 +159,16 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 							className={cls.formInput}
 							onChange={onChangeTitle}
 							value={formData?.title}
-							placeholder='Название альбома'
+							onFocus={() => setIsInputFocused(true)}
+							onBlur={() => setIsInputFocused(false)}
+							style={isInputFocused ? { 'marginBottom': '0' } : undefined}
+							label={'Название альбома'}
 							required
 						/>
+
+						<div className={cls.suggestions}>
+							{isInputFocused && <SearchList items={searchAlbums} isLoading={isSearching} onClickItem={onClickAlbumFromSearch}/>}
+						</div>
 
 						<Input
 							type="text"
@@ -153,7 +176,7 @@ export const AlbumForm = memo(({ className }: AlbumFormProps) => {
 							className={cls.formInput}
 							onChange={onChangeArtist}
 							value={formData?.artist}
-							placeholder='Исполнитель'
+							label={'Исполнитель'}
 							required
 						/>
 					</div>

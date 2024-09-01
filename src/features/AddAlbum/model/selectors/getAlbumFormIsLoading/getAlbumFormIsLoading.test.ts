@@ -1,5 +1,5 @@
-import { getAlbumFormIsLoading } from './getAlbumFormIsLoading';
 import { StateSchema } from 'app/providers/StoreProvider';
+import { getAlbumFormIsLoading } from './getAlbumFormIsLoading';
 
 describe('getAlbumFormIsLoading', () => {
 	test('should return true if album form is loading', () => {

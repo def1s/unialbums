@@ -34,6 +34,7 @@
     --default-bg-color: rgb(26 26 26);
     --default-bg-color-opacity: rgb(26 26 26 / 60%);
     --light-bg-color: rgb(41 40 44);
+    --sidebar-bg-color: rgb(34 33 33);
     --red-color: rgb(172 22 22);
     --green-color: rgb(75 216 76);
 
@@ -46,4 +47,6 @@
     --modal-z-index: 10;
     --sidebar-z-index: 5;
     --blur-z-index: 15;
+    --sidebar-toggle-button-z-index: 4;
+    --notification-z-index: 20;
 }

@@ -1,17 +1,16 @@
-import cls from './Navbar.module.scss';
-import { classNames } from 'shared/lib/classNames/classNames';
 import React, { memo, useState } from 'react';
-import { SearchAlbumsByName } from 'features/SearchAlbumsByName';
-import { LoginModal } from 'features/AuthByUsername';
 import { useSelector } from 'react-redux';
-import { getUserAuthData, userInitAuthData } from 'entities/User';
-import { Button } from 'shared/ui/Button/Button';
-import DefaultAvatar from 'shared/assets/icons/default-avatar.svg';
 import { Link } from 'react-router-dom';
-import { Text } from 'shared/ui/Text/Text';
+import { LoginModal } from 'features/AuthByUsername';
 import { RegistrationModal } from 'features/RegistrationByUsername';
-import { userLogout } from 'entities/User/model/services/userLogout/userLogout';
+import { getUserAuthData, userInitAuthData } from 'entities/User';
+import { userLogout } from 'entities/User';
+import DefaultAvatar from 'shared/assets/icons/default-avatar.svg';
+import { classNames } from 'shared/lib/classNames/classNames';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { Button } from 'shared/ui/Button/Button';
+import { Text } from 'shared/ui/Text/Text';
+import cls from './Navbar.module.scss';
 
 interface NavbarProps {
     className?: string
@@ -108,7 +107,7 @@ export const Navbar = memo(({ className }: NavbarProps) => {
 					<span className={cls.username}>{user.username}</span>
 					<Button className={cls.button} onClick={onLogout}>Выйти</Button>
 				</div>
-				<SearchAlbumsByName/>
+				{/*<SearchAlbumsByName/>*/}
 			</header>
 		);
 	}

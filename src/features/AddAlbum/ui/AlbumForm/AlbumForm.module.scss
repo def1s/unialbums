@@ -17,7 +17,8 @@
 .descriptionWrapper {
     margin-left: var(--medium-padding);
     display: flex;
-    gap: var(--medium-padding);
+
+    //gap: var(--medium-padding);
     flex-direction: column;
     flex: 1;
 }
@@ -46,10 +47,36 @@
 
 .formInput {
     width: 100%;
-    height: 40px;
+    height: 60px;
+
+    //margin-bottom: var(--medium-padding);
 }
 
 .formSubmit {
     width: 100%;
     height: 40px;
+}
+
+.suggestions {
+    position: relative;
+    margin-bottom: var(--medium-padding);
+}
+
+@media (width <= 540px) {
+    .info {
+        flex-direction: column;
+    }
+
+    .descriptionWrapper {
+        margin-left: 0;
+        margin-top: var(--medium-padding);
+    }
+
+    .cover {
+        margin: 0 auto;
+    }
+
+    .ratingWrapper {
+        flex-direction: column;
+    }
 }

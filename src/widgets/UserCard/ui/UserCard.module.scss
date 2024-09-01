@@ -1,0 +1,38 @@
+.UserCard {
+	width: 250px;
+	height: 250px;
+	background-color: var(--default-bg-color-opacity);
+	border-radius: var(--medium-radius);
+	padding: var(--medium-padding);
+	display: flex;
+	flex-direction: column;
+}
+
+.avatar {
+	margin-top: auto;
+}
+
+.username {
+	margin-top: var(--medium-padding);
+	font: var(--font-l);
+	color: #fff;
+}
+
+.defaultAvatar {
+	width: 100px;
+	height: 100px;
+	margin-top: auto;
+}
+
+@media (width <= 550px) {
+	.UserCard {
+		width: 100%;
+		height: 150px;
+		flex-direction: row;
+	}
+
+	.username {
+		margin-top: auto;
+		margin-left: var(--medium-padding);
+	}
+}

@@ -1,5 +1,5 @@
-import { getAlbumFormData } from './getAlbumFormData';
 import { StateSchema } from 'app/providers/StoreProvider';
+import { getAlbumFormData } from './getAlbumFormData';
 
 describe('getAlbumFormData', () => {
 	test('should return album data from the state', () => {

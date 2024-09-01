@@ -4,6 +4,9 @@
 
 body {
     font-family: var(--font-family-main);
+    background-position: top left;
+    background-repeat: no-repeat no-repeat;
+    background-size: contain;
     background-color: var(--app-bg-color);
 }
 
@@ -23,4 +26,10 @@ body {
 
 .welcome-page {
     padding: 0 var(--medium-padding);
+}
+
+@media (width <= 1020px) {
+   .content-page {
+       padding: 0 var(--medium-padding) 0 var(--medium-padding);
+   }
 }

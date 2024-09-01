@@ -1,5 +1,5 @@
-import { BuildOptions } from './types/config';
 import { buildScssLoader } from './loaders/buildScssLoader';
+import { BuildOptions } from './types/config';
 
 
 export const BuildLoaders = ({ isDev }: BuildOptions) => {

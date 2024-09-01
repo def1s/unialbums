@@ -1,7 +1,8 @@
-import cls from './RegistrationModal.module.scss';
+import { memo } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Modal } from 'shared/ui/Modal/Modal';
 import { RegistrationForm } from '../RegistrationForm/RegistrationForm';
+import cls from './RegistrationModal.module.scss';
 
 interface RegistrationModalProps {
     className?: string;
@@ -9,7 +10,7 @@ interface RegistrationModalProps {
 	onClose: () => void;
 }
 
-export const RegistrationModal = ({ className, isOpen, onClose }: RegistrationModalProps) => {
+export const RegistrationModal = memo(({ className, isOpen, onClose }: RegistrationModalProps) => {
 
 	return (
 		<Modal
@@ -20,4 +21,4 @@ export const RegistrationModal = ({ className, isOpen, onClose }: RegistrationMo
 			<RegistrationForm/>
 		</Modal>
 	);
-};
+});

@@ -1,14 +1,14 @@
-import { LoginForm } from '../LoginForm/LoginForm';
-import { Modal } from 'shared/ui/Modal/Modal';
-import { classNames } from 'shared/lib/classNames/classNames';
-import cls from './LoginModal.module.scss';
 import { memo } from 'react';
+import { classNames } from 'shared/lib/classNames/classNames';
+import { Modal } from 'shared/ui/Modal/Modal';
+import { LoginForm } from '../LoginForm/LoginForm';
+import cls from './LoginModal.module.scss';
 
 interface LoginModalProps {
     className?: string
 	isOpen: boolean;
 	onClose: () => void;
-	onSuccess: () => void;
+	onSuccess: () => void; // если успешно - закроет модалку и обновит данные пользователя по полученному токену
 }
 
 export const LoginModal = memo((props: LoginModalProps) => {

@@ -1,0 +1,14 @@
+.DeleteAlbum {
+	padding: 10px;
+	display: block;
+	width: 180px;
+	margin-top: var(--small-padding);
+	border: solid 1px;
+	border-color: var(--red-color);
+}
+
+@media (width <= 650px) {
+	.DeleteAlbum {
+		width: 100%;
+	}
+}
