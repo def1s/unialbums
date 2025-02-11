@@ -5,7 +5,7 @@ import { IAlbum } from 'shared/types';
 import HomePage from './HomePage';
 
 const meta: Meta<typeof HomePage> = {
-	title: 'pages/HomePage',
+	title: 'pages/CartPage',
 	component: HomePage,
 };
 

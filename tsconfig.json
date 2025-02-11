@@ -13,7 +13,7 @@
 		"paths": {
 			"*": ["./src/*"]
 		},
-		"strict": true,
+		"strict": false,
 		"useUnknownInCatchVariables": false
 	},
 	"ts-node": {

@@ -1,7 +1,5 @@
 import React from 'react';
-import { PlugCard } from 'widgets/PlugCard';
-import { UserAlbums } from 'widgets/UserAlbums';
-import { UserCard } from 'widgets/UserCard';
+import { AlbumCategories } from 'widgets/AlbumCategories';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './HomePage.module.scss';
 
@@ -14,10 +12,10 @@ const HomePage = ({ className }: HomePageProps) => {
 	return (
 		<div className={classNames(cls.HomePage, {}, [className])}>
 			<div className={cls.wrapper}>
-				<UserCard/>
-				<PlugCard title={'Приложение находится в разработке.'} text={'Позже на этом месте будет что-то интересное...'}/>
+				Альбомы по категориям
 			</div>
-			<UserAlbums className={cls.userAlbums}/>
+			{/*<CartAlbums className={cls.userAlbums}/>*/}
+			<AlbumCategories />
 		</div>
 	);
 };

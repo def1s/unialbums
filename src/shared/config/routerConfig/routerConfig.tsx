@@ -1,6 +1,8 @@
 import { RouteProps } from 'react-router-dom';
 import { AddAlbumPage } from 'pages/AddAlbumPage';
 import { AlbumPage } from 'pages/AlbumPage';
+import { CartPage } from 'pages/CartPage';
+import { CategoryPage } from 'pages/CategoryPage';
 import { HomePage } from 'pages/HomePage';
 import { ProfilePage } from 'pages/ProfilePage';
 import { WelcomePage } from 'pages/WelcomePage';
@@ -16,6 +18,8 @@ export enum Routes {
 	ALBUM = 'album',
 	ADD_ALBUM = 'addAlbum',
 	PROFILE = 'profile',
+	CATEGORY = 'category',
+	CART = 'cart',
 	// последний
 	NOT_FOUND = 'notFound'
 }
@@ -27,6 +31,8 @@ export const RoutesPaths: Record<Routes, string> = {
 	[Routes.ALBUM]: '/albums/:id',
 	[Routes.ADD_ALBUM]: '/addAlbum',
 	[Routes.PROFILE]: '/profile',
+	[Routes.CATEGORY]: '/category/:category',
+	[Routes.CART]: '/cart',
 	// последний
 	[Routes.NOT_FOUND]: '*'
 };
@@ -55,6 +61,16 @@ export const routerConfig: Record<Routes, AppRoutesProps> = {
 	[Routes.PROFILE]: {
 		path: RoutesPaths.profile,
 		element: <ProfilePage/>,
+		authOnly: true
+	},
+	[Routes.CATEGORY]: {
+		path: RoutesPaths.category,
+		element: <CategoryPage/>,
+		authOnly: true
+	},
+	[Routes.CART]: {
+		path: RoutesPaths.cart,
+		element: <CartPage/>,
 		authOnly: true
 	},
 	[Routes.NOT_FOUND]: {

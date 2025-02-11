@@ -1,5 +1,5 @@
 import React from 'react';
-import AddAlbumIcon from 'shared/assets/icons/addAlbum.svg';
+import CartIcon from 'shared/assets/icons/cart.svg';
 import HomeIcon from 'shared/assets/icons/home.svg';
 import { RoutesPaths } from 'shared/config/routerConfig/routerConfig';
 
@@ -16,8 +16,8 @@ export const sidebarItemsList: SidebarItemsType[] = [
 		text: 'Главная'
 	},
 	{
-		Icon: AddAlbumIcon,
-		path: RoutesPaths.addAlbum,
-		text: '+ альбом'
+		Icon: CartIcon,
+		path: RoutesPaths.cart,
+		text: 'Корзина'
 	}
 ];

@@ -1,47 +1,38 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo } from 'react';
 import {
 	AlbumsGrid,
 	albumsGridReducer,
 } from 'entities/Albums/AlbumsGrid';
+import { useAlbumsCart } from 'entities/Cart';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { DynamicModuleLoader, ReducerList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import { fetchAlbumsByCategory } from '../api/fetchAlbumsByCategory';
-import cls from './UserAlbums.module.scss';
+import cls from './CartAlbums.module.scss';
 
 interface UserAlbumsProps {
 	userId?: number;
     className?: string;
-	category?: string;
 }
 
 const initialReducer: ReducerList = {
 	albumsGrid: albumsGridReducer
 };
 
-export const UserAlbums = memo((props: UserAlbumsProps) => {
+export const CartAlbums = memo((props: UserAlbumsProps) => {
 	const {
 		className,
-		category
 	} = props;
 
-	const [albums, setAlbums] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
-
-	useEffect(() => {
-		fetchAlbumsByCategory(category).then((res) => {
-			setAlbums(res);
-			setIsLoading(false);
-		});
-	}, [category]);
+	const { cartContent } = useAlbumsCart('');
 
 	return (
 		<DynamicModuleLoader reducers={initialReducer} removeAfterUnmount>
 			<div className={classNames(cls.UserAlbums, {}, [className])}>
 
 				<AlbumsGrid
-					albums={albums}
-					isLoading={isLoading}
+					albums={cartContent}
+					isLoading={false}
 					error={''}
+					isCart={true}
 				/>
 
 			</div>

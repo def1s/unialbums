@@ -44,7 +44,7 @@ describe('AlbumCard', () => {
 	// 		artist: 'Artist Name',
 	// 		rating: 5
 	// 	};
-	// 	render(<MemoryRouter><AlbumCard {...props} /></MemoryRouter>);
+	// 	render(<MemoryRouter><CategoryCard {...props} /></MemoryRouter>);
 	// 	expect(screen.getByText('5')).toBeInTheDocument();
 	// });
 

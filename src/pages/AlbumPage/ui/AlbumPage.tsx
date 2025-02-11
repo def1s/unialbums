@@ -13,7 +13,6 @@ const AlbumPage = ({ className }: AlbumPageProps) => {
 	return (
 		<div className={classNames(cls.AlbumPage, {}, [className])}>
 			<AlbumDescriptionCard/>
-			<AlbumRatingCard/>
 		</div>
 	);
 };

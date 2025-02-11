@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { AlbumCard } from './AlbumCard';
 
 const meta: Meta<typeof AlbumCard> = {
-	title: 'entities/AlbumCard',
+	title: 'entities/CategoryCard',
 	component: AlbumCard
 };
 

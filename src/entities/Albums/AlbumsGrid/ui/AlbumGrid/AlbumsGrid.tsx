@@ -11,6 +11,7 @@ interface AlbumsGridProps {
 	albums?: IAlbum[];
 	isLoading?: boolean;
 	error?: string;
+	isCart?: boolean;
 }
 
 export const AlbumsGrid = memo((props: AlbumsGridProps) => {
@@ -18,7 +19,8 @@ export const AlbumsGrid = memo((props: AlbumsGridProps) => {
 		className,
 		albums,
 		isLoading,
-		error
+		error,
+		isCart
 	} = props;
 
 	const renderContent = () => {
@@ -37,8 +39,8 @@ export const AlbumsGrid = memo((props: AlbumsGridProps) => {
 		} else if (!albums || !albums.length) {
 			return (
 				<Text
-					title="У вас нет ни одного альбома!"
-					text="Вы можете добавить их в специальной форме в сайдбаре"
+					title={isCart ? 'Корзина пуста' : 'В этой категории нет ни одного альбома!'}
+					text={isCart ? 'Сначала добавьте пластинки' : 'Подождите, когда администратор добавит новые пластинки'}
 					align={TextAlign.CENTER}
 					className={cls.message}
 				/>

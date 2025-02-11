@@ -1,4 +1,6 @@
-import React, { memo, ReactNode } from 'react';
+import React, { memo, MouseEvent, MouseEventHandler, ReactNode } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAlbumsCart } from 'entities/Cart';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { textLengthValidation } from 'shared/lib/textLengthValidator/textLengthValidator';
 import { IAlbumDescription } from 'shared/types';
@@ -35,6 +37,18 @@ export const AlbumDescription = memo((props: AlbumDescriptionProps): React.React
 		EditFeature,
 		DeleteFeature
 	} = props;
+	const { id } = useParams();
+	const { isInCart, AddToCart, RemoveFromCart } = useAlbumsCart(id);
+
+	const handleClickCart = (event: MouseEvent) => {
+		event.stopPropagation();
+
+		if (isInCart) {
+			RemoveFromCart();
+		} else {
+			AddToCart();
+		}
+	};
 
 	const renderContent = () => {
 		if (isLoading) {
@@ -70,8 +84,9 @@ export const AlbumDescription = memo((props: AlbumDescriptionProps): React.React
 					</div>
 
 					<div className={cls.editButtons}>
-						{EditFeature}
-						{DeleteFeature}
+						<button onClick={handleClickCart} className={cls.cartButton}>
+							{ !isInCart ? 'В корзину' : 'Убрать из корзины' }
+						</button>
 					</div>
 				</>
 			);

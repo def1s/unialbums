@@ -1,0 +1,39 @@
+.wrapper {
+	position: relative;
+	display: flex;
+	margin-top: var(--large-padding);
+	gap: var(--small-padding);
+	color: white;
+	font-size: 28px;
+	margin-bottom: 20px;
+}
+
+.userAlbums {
+	margin-top: var(--large-padding);
+}
+
+.footer {
+	position: absolute;
+	width: 1020px;
+	height: 100px;
+	bottom: 0;
+	background-color: var(--default-bg-color);
+	padding: 20px;
+}
+
+.orderButton {
+	border: none;
+	border-radius: 8px;
+	background-color: #fff;
+	padding: 5px;
+	width: 200px;
+	text-align: center;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+@media (width <= 550px) {
+	.wrapper {
+		flex-direction: column;
+	}
+}

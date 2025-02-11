@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { UserAlbums } from './UserAlbums';
 
 const meta: Meta<typeof UserAlbums> = {
-	title: 'widgets/UserAlbums',
+	title: 'widgets/AlbumCategories',
 	component: UserAlbums
 };
 
