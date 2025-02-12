@@ -32,7 +32,7 @@ const WelcomePage: FC<WelcomePageProps> = (props) => {
 				</div>
 
 				<div className={cls.element}>
-					<div className={cls.description}>Лучшее место для хранения ваших воспоминаний</div>
+					<div className={cls.description}>Купи пластинку своей мечты</div>
 				</div>
 			</div>
 
