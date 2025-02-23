@@ -3,6 +3,8 @@ export interface IAlbumDescription {
 	cover?: string;
 	title?: string;
 	artist?: string;
+	price?: number;
+	isSold?: boolean;
 }
 
 export type IAlbumDescriptionForm = Omit<IAlbumDescription, 'isEditable'>;

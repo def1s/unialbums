@@ -34,6 +34,9 @@ export const CartPage = ({ className }: HomePageProps) => {
 				{!!cartContent.length && <button className={cls.orderButton} onClick={handleOrder}>
 					Оформить заказ
 				</button>}
+				<div className={cls.price}>
+					Всего: {cartContent?.reduce((acc, item) => acc + item.price, 0)}$
+				</div>
 			</div>
 		</div>
 	);

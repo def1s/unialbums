@@ -31,6 +31,8 @@ export const AlbumCard: FC<AlbumCardProps> = memo((props: AlbumCardProps): React
 		cover,
 		title,
 		artist,
+		price,
+		isSold,
 		className
 	} = props;
 	const { isInCart, AddToCart, RemoveFromCart } = useAlbumsCart(albumId.toString());
@@ -58,9 +60,15 @@ export const AlbumCard: FC<AlbumCardProps> = memo((props: AlbumCardProps): React
 			<div className={cls.title}>{textLengthValidation(title || '')}</div>
 			<div className={cls.artist}>{textLengthValidation(artist || '')}</div>
 			<div className={cls.divider}></div>
-			<button className={cls.cartButton} onClick={handleClickCart}>
-				{ !isInCart ? 'В корзину' : 'Убрать из корзины' }
-			</button>
+			{!isSold &&
+				<>
+					<div className={cls.cost}>{price ?? 400}$</div>
+					<button className={cls.cartButton} onClick={handleClickCart}>
+						{!isInCart ? 'В корзину' : 'Убрать из корзины'}
+					</button>
+				</>
+			}
+			{isSold && <div className={cls.sold}> Продано </div> }
 		</div>
 	);
 });

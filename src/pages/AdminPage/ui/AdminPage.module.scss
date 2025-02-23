@@ -1,0 +1,27 @@
+.wrapper {
+	position: relative;
+	display: flex;
+	margin-top: var(--large-padding);
+	gap: var(--small-padding);
+	color: white;
+	font-size: 28px;
+	margin-bottom: 20px;
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.sells {
+	color: #fff;
+	display: flex;
+	justify-content: space-between;
+}
+
+@media (width <= 550px) {
+	.wrapper {
+		flex-direction: column;
+	}
+}

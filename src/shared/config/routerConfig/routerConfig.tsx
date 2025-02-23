@@ -1,5 +1,6 @@
 import { RouteProps } from 'react-router-dom';
 import { AddAlbumPage } from 'pages/AddAlbumPage';
+import { AdminPage } from 'pages/AdminPage';
 import { AlbumPage } from 'pages/AlbumPage';
 import { CartPage } from 'pages/CartPage';
 import { CategoryPage } from 'pages/CategoryPage';
@@ -20,6 +21,7 @@ export enum Routes {
 	PROFILE = 'profile',
 	CATEGORY = 'category',
 	CART = 'cart',
+	ADMIN = 'admin',
 	// последний
 	NOT_FOUND = 'notFound'
 }
@@ -33,6 +35,7 @@ export const RoutesPaths: Record<Routes, string> = {
 	[Routes.PROFILE]: '/profile',
 	[Routes.CATEGORY]: '/category/:category',
 	[Routes.CART]: '/cart',
+	[Routes.ADMIN]: '/admin',
 	// последний
 	[Routes.NOT_FOUND]: '*'
 };
@@ -71,6 +74,11 @@ export const routerConfig: Record<Routes, AppRoutesProps> = {
 	[Routes.CART]: {
 		path: RoutesPaths.cart,
 		element: <CartPage/>,
+		authOnly: true
+	},
+	[Routes.ADMIN]: {
+		path: RoutesPaths.admin,
+		element: <AdminPage/>,
 		authOnly: true
 	},
 	[Routes.NOT_FOUND]: {

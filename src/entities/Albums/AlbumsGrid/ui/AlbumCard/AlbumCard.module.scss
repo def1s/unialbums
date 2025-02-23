@@ -39,6 +39,22 @@
     margin-bottom: 5px;
 }
 
+.cost {
+    font-size: 22px;
+    color: #fff;
+    text-align: center;
+    margin: 5px 0 8px 0;
+}
+
+.sold {
+    font-size: 22px;
+    color: #fff;
+    opacity: 0.6;
+    text-align: center;
+    margin: 8px 0 5px 0;
+    flex: 1;
+}
+
 .rating {
     border-radius: 100%;
     width: 33px;

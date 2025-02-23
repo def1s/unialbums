@@ -80,14 +80,15 @@ export const AlbumDescription = memo((props: AlbumDescriptionProps): React.React
 					<div className={cls.wrapper}>
 						<div className={cls.title}>{textLengthValidation(data?.title || '', 40)}</div>
 						<div className={cls.artist}>{textLengthValidation(data?.artist || '', 40)}</div>
-						{/*<div className={cls.year}>{data.year}</div>*/}
+						{!data?.isSold && <div className={cls.price}>{data?.price ?? 400}$</div>}
+						{data?.isSold && <div className={cls.sold}>Продано</div>}
 					</div>
 
-					<div className={cls.editButtons}>
+					{!data?.isSold && <div className={cls.editButtons}>
 						<button onClick={handleClickCart} className={cls.cartButton}>
 							{ !isInCart ? 'В корзину' : 'Убрать из корзины' }
 						</button>
-					</div>
+					</div>}
 				</>
 			);
 		}
