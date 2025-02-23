@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx webpack serve --env port=3000 apiUrl=http://172.20.10.3:8081/api",
+    "start": "npx webpack serve --env port=3000 apiUrl=http://localhost:8081/api",
     "build:prod": "npx webpack build --env mode=production",
     "build:dev": "npx webpack build --env mode=development",
     "linter:ts": "eslint \"**/*.{ts,tsx}\"",
